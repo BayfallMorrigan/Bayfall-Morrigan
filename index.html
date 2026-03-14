@@ -171,7 +171,6 @@ header {
 .statement {
   display: grid;
   grid-template-columns: 1.25fr 0.75fr;
-  border-bottom: 1px solid var(--rule);
 }
 
 .statement-inner {
@@ -223,6 +222,8 @@ header {
   overflow: hidden;
   background: var(--black);
   min-height: 400px;
+  line-height: 0;
+  font-size: 0;
 }
 
 .statement-photo img {
@@ -233,6 +234,7 @@ header {
   display: block;
   opacity: 0.88;
   filter: grayscale(10%);
+  vertical-align: bottom;
 }
 
 /* MODEL */
