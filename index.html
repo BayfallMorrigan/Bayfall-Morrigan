@@ -782,8 +782,9 @@ footer {
   .model-item:last-child { border-bottom: none; padding-bottom: 0; }
 
   .structures { padding: 88px 32px; }
-  .structure-row { grid-template-columns: 60px 1fr 1fr; gap: 32px; }
-  .structure-row > div:last-child { grid-column: 2 / 4; }
+  .structure-row { grid-template-columns: 1fr; gap: 28px; padding: 48px 0; }
+  .structure-row > div:last-child { grid-column: auto; }
+  .structure-index { display: none; }
 
   .capital { padding: 88px 32px; }
   .capital-grid { grid-template-columns: 1fr; }
@@ -818,8 +819,6 @@ footer {
 
   .model { padding: 60px 20px; }
   .structures { padding: 60px 20px; }
-  .structure-row { grid-template-columns: 1fr; gap: 24px; padding: 48px 0; }
-  .structure-index { display: none; }
 
   .capital { padding: 60px 20px; }
   .legal { padding: 60px 20px; }
