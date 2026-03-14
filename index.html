@@ -700,6 +700,72 @@ footer {
   border-color: rgba(255,255,255,0.3);
 }
 
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  z-index: 200;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: rgba(255,255,255,0.6);
+  transition: transform 0.3s, opacity 0.3s;
+  transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 64px;
+  left: 0; right: 0;
+  background: var(--black);
+  border-bottom: 1px solid var(--rule-dk);
+  flex-direction: column;
+  padding: 24px 20px 32px;
+  gap: 0;
+  z-index: 99;
+  transform: translateY(-8px);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.mobile-menu.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu a {
+  font-family: var(--body);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule-dk);
+  transition: color 0.2s;
+}
+
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: var(--white); }
+
 /* TABLET */
 @media (max-width: 960px) {
   header { padding: 0 32px; }
@@ -738,9 +804,9 @@ footer {
 
   header { padding: 0 20px; height: 64px; }
   .logo-img { width: 108px; }
-  .header-right { gap: 20px; }
-  .header-right a { font-size: 10px; letter-spacing: 0.1em; }
-
+  .hamburger { display: flex; }
+  .header-right { display: none; }
+  .mobile-menu { display: flex; }
   .hero { padding: 0 20px 52px; }
   .hero-headline { font-size: clamp(42px, 11vw, 64px); }
   .hero-sub { font-size: 14px; max-width: 100%; }
@@ -777,7 +843,31 @@ footer {
     <a href="discoverypage.html">Discovery Form</a>
     <a href="#contact">Contact</a>
   </nav>
+  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </header>
+
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="#structures" onclick="closeMenu()">Structures</a>
+  <a href="#capital" onclick="closeMenu()">Capital Model</a>
+  <a href="#legal" onclick="closeMenu()">Legal Framework</a>
+  <a href="discoverypage.html">Discovery Form</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</nav>
+
+<script>
+function toggleMenu() {
+  const btn = document.getElementById('hamburger');
+  const menu = document.getElementById('mobile-menu');
+  btn.classList.toggle('open');
+  menu.classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+</script>
 
 <!-- HERO -->
 <section class="hero">
