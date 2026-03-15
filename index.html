@@ -205,16 +205,16 @@ header {
 .statement-pull em { font-style: italic; }
 
 .statement-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 44px;
+  display: block;
+  max-width: 640px;
 }
 
 .statement-body p {
   font-family: var(--body);
-  font-size: 15px;
+  font-size: 17px;
   color: var(--black);
   line-height: 2;
+  opacity: 0.8;
 }
 
 .statement-photo {
@@ -467,15 +467,18 @@ header {
 }
 
 .capital-item {
-  padding-right: 56px;
-  margin-right: 56px;
+  padding: 0 52px;
   border-right: 1px solid var(--rule);
+  text-align: center;
+}
+
+.capital-item:first-child {
+  padding-left: 0;
 }
 
 .capital-item:last-child {
   border-right: none;
   padding-right: 0;
-  margin-right: 0;
 }
 
 .capital-item-heading {
@@ -483,17 +486,18 @@ header {
   font-size: 24px;
   font-weight: 400;
   font-style: italic;
-  line-height: 1.25;
+  line-height: 1.3;
   color: var(--black);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   letter-spacing: 0.01em;
 }
 
 .capital-item-text {
   font-family: var(--body);
-  font-size: 16px;
+  font-size: 15px;
   color: var(--black);
   line-height: 2;
+  opacity: 0.75;
 }
 
 /* LEGAL */
@@ -519,8 +523,8 @@ header {
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.01em;
-  margin-bottom: 64px;
-  padding-bottom: 64px;
+  margin-bottom: 48px;
+  padding-bottom: 48px;
   border-bottom: 1px solid var(--rule);
   text-align: center;
   max-width: 760px;
@@ -529,18 +533,18 @@ header {
 }
 
 .legal-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  max-width: 1100px;
+  display: block;
+  max-width: 680px;
   margin: 0 auto;
+  text-align: center;
 }
 
 .legal-text {
   font-family: var(--body);
-  font-size: 16px;
+  font-size: 17px;
   color: var(--black);
   line-height: 2;
+  opacity: 0.8;
 }
 
 /* CONTACT */
@@ -887,8 +891,7 @@ function closeMenu() {
     <p class="statement-label">We Represent</p>
     <h2 class="statement-pull">Fixed-term account structures for private lenders.<br><em>Built by everyday people, for everyday people.</em></h2>
     <div class="statement-body">
-      <p>Bayfall Morrigan is a private capital management firm developing proprietary cash management systems designed to put private lenders in control of unique opportunities.</p>
-      <p>These systems are powered by capital we acquire through high-yield fixed-term accounts, giving everyday lenders access to capital management advantages typically reserved for institutions. With a history of consistently outperforming our commitments, our approach prioritizes reliability, transparency, and long-term results.</p>
+      <p>Bayfall Morrigan is a private capital management firm developing proprietary cash management systems designed to put private lenders in control of unique opportunities. These systems are powered by capital we acquire through high-yield fixed-term accounts, giving everyday lenders access to capital management advantages typically reserved for institutions. With a history of consistently outperforming our commitments, our approach prioritizes reliability, transparency, and long-term results.</p>
     </div>
   </div>
   <div class="statement-photo">
@@ -989,10 +992,9 @@ function closeMenu() {
 <!-- LEGAL -->
 <section class="legal" id="legal">
   <p class="legal-label">Legal Framework</p>
-  <h2 class="legal-heading">Fixed-term account structures.<br><em>Private loans, not securities.</em></h2>
+  <h2 class="legal-heading">Fixed obligations.<br><em>Honored without exception</em></h2>
   <div class="legal-grid">
-    <p class="legal-text">Capital received through our fixed-term account structures constitutes a private loan, not an investment. Each agreement specifies a fixed principal, a fixed yield, and a fixed maturity. The return is contractually owed regardless of firm performance, which means the instruments do not satisfy the conditions courts use to classify something as a security under federal law. There is no shared enterprise, no variable return tied to our efforts, and no participation in firm upside.</p>
-    <p class="legal-text">Michigan's lending licensing requirements attach to the party extending credit, not to the borrower. We receive funds. We do not lend them to others. No lending license applies. Every lender receives complete written disclosure of these characterizations before committing capital.</p>
+    <p class="legal-text">Capital received through our fixed-term account structures constitutes a private loan, not an investment. Each agreement specifies a fixed principal, a fixed yield, and a fixed maturity. The return is contractually owed regardless of firm performance, which means the instruments do not satisfy the conditions courts use to classify something as a security under federal law. There is no shared enterprise, no variable return tied to our efforts, and no participation in firm upside. Michigan's lending licensing requirements attach to the party extending credit, not to the borrower. We receive funds. We do not lend them to others. No lending license applies. Every lender receives complete written disclosure of these characterizations before committing capital.</p>
   </div>
 </section>
 
@@ -1002,8 +1004,8 @@ function closeMenu() {
     <p class="contact-label">Get in Touch</p>
     <h2 class="contact-heading">Inquiries are<br><em>handled directly.</em></h2>
     <p class="contact-info-line">Email</p>
-    <p class="contact-info-value"><a href="/cdn-cgi/l/email-protection#63000c0d170200172301021a05020f0f0e0c11110a04020d4d000c0e"><span class="__cf_email__" data-cfemail="cba8a4a5bfaaa8bf8ba9aab2adaaa7a7a6a4b9b9a2acaaa5e5a8a4a6">[email&#160;protected]</span></a></p>
-    <p class="contact-info-value"><a href="/cdn-cgi/l/email-protection#6f0d0e16090e030302001d1d06080e012f001a1b03000004410c0002"><span class="__cf_email__" data-cfemail="c8aaa9b1aea9a4a4a5a7babaa1afa9a688a7bdbca4a7a7a3e6aba7a5">[email&#160;protected]</span></a></p>
+    <p class="contact-info-value"><a href="mailto:contact@bayfallmorrigan.com">contact@bayfallmorrigan.com</a></p>
+    <p class="contact-info-value"><a href="mailto:bayfallmorrigan@outlook.com">bayfallmorrigan@outlook.com</a></p>
     <p class="contact-info-line">Based In</p>
     <p class="contact-info-value">United States</p>
     <p class="contact-info-line">Availability</p>
