@@ -709,6 +709,22 @@ footer {
   .bridge { grid-template-columns: 1fr; gap: 40px; padding: 72px 28px; }
 
   footer { padding: 28px; flex-direction: column; gap: 16px; text-align: center; }
+
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.37);
+    z-index: 0;
+  }
+
+  .hero-eyebrow,
+  .hero-headline,
+  .hero-sub,
+  .hero-rule {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 </style>
