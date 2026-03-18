@@ -58,18 +58,16 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 0 64px;
-  height: 72px;
+  height: 80px;
 }
 
-.logo {
-  font-family: var(--display);
-  font-size: 13px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: rgba(240,237,232,0.45);
-  text-decoration: none;
-  font-weight: 400;
+.logo-img {
+  height: auto;
+  width: 140px;
+  display: block;
+  filter: invert(1) brightness(0.7);
 }
+
 
 .back-link {
   font-family: var(--body);
@@ -251,7 +249,7 @@ header {
 <body>
 
 <header>
-  <a class="logo" href="index.html">Bayfall Morrigan</a>
+  <a href="index.html"><img class="logo-img" src="logopng.png" alt="Bayfall Morrigan"></a>
   <a class="back-link" href="index.html">← Return to Site</a>
 </header>
 
