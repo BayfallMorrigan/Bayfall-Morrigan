@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Login — Bayfall Morrigan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAQnXLhSakCEkxj1exootPp1PWJM1H0SMc",
+    authDomain: "capital-desk-cf621.firebaseapp.com",
+    databaseURL: "https://capital-desk-cf621-default-rtdb.firebaseio.com",
+    projectId: "capital-desk-cf621",
+    storageBucket: "capital-desk-cf621.firebasestorage.app",
+    messagingSenderId: "41185413591",
+    appId: "1:41185413591:web:f1e1aeb84e23080d0e2392"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db   = firebase.database();
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:   #080808;
+  --white:   #f0ede8;
+  --mid:     #7a7670;
+  --dim:     #3a3830;
+  --rule:    #1a1a1a;
+  --rule2:   #2a2824;
+  --gold:    #8a6a2a;
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --body:    'EB Garamond', Georgia, serif;
+}
+
+html, body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.8;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HEADER ── */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: var(--black);
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 64px;
+  height: 72px;
+}
+
+.logo {
+  font-family: var(--display);
+  font-size: 13px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(240,237,232,0.45);
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.back-link {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  text-decoration: none;
+  transition: color 0.25s;
+}
+
+.back-link:hover { color: rgba(255,255,255,0.6); }
+
+/* ── PAGE ── */
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 72px 24px 60px;
+}
+
+/* ── LOGIN CARD ── */
+.login-wrap {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.login-mark {
+  font-family: var(--display);
+  font-size: 13px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(240,237,232,0.4);
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.login-rule {
+  width: 32px;
+  height: 1px;
+  background: var(--rule2);
+  margin: 20px auto;
+}
+
+.login-heading {
+  font-family: var(--display);
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 300;
+  color: var(--white);
+  letter-spacing: 0.02em;
+  text-align: center;
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+
+.login-heading em { font-style: italic; }
+
+.login-sub {
+  font-family: var(--body);
+  font-size: 13px;
+  color: var(--mid);
+  text-align: center;
+  font-style: italic;
+  letter-spacing: 0.06em;
+  margin-bottom: 44px;
+}
+
+/* ── FORM ── */
+.form-fields {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-bottom: 32px;
+}
+
+.field-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-label {
+  font-family: var(--body);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
+
+.field-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--rule2);
+  padding: 10px 0;
+  font-family: var(--body);
+  font-size: 16px;
+  color: var(--white);
+  outline: none;
+  width: 100%;
+  transition: border-color 0.25s;
+  -webkit-appearance: none;
+}
+
+.field-input:focus { border-color: var(--dim); }
+
+.field-input::placeholder { color: var(--rule2); }
+
+/* ── SUBMIT ── */
+.login-btn {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--rule2);
+  padding: 13px;
+  font-family: var(--display);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(240,237,232,0.55);
+  cursor: pointer;
+  transition: all 0.25s;
+  margin-top: 4px;
+}
+
+.login-btn:hover {
+  border-color: var(--dim);
+  color: var(--white);
+}
+
+.login-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ── ERROR ── */
+.error-msg {
+  font-family: var(--body);
+  font-size: 12px;
+  color: #8a4a4a;
+  letter-spacing: 0.08em;
+  font-style: italic;
+  text-align: center;
+  min-height: 18px;
+  margin-top: 16px;
+}
+
+/* ── LOADING ── */
+.loading-msg {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-align: center;
+  margin-top: 16px;
+  min-height: 18px;
+}
+
+/* ── FOOTER NOTE ── */
+.login-note {
+  margin-top: 48px;
+  font-family: var(--body);
+  font-size: 11px;
+  color: #2a2824;
+  text-align: center;
+  letter-spacing: 0.06em;
+  font-style: italic;
+  line-height: 1.7;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">Bayfall Morrigan</a>
+  <a class="back-link" href="index.html">← Return to Site</a>
+</header>
+
+<div class="page">
+  <div class="login-wrap">
+    <div class="login-mark">Bayfall Morrigan</div>
+    <div class="login-rule"></div>
+    <div class="login-heading">Private Client <em>Access</em></div>
+    <div class="login-sub">Enter your credentials to view your account</div>
+
+    <div class="form-fields">
+      <div class="field-wrap">
+        <div class="field-label">Email Address</div>
+        <input class="field-input" type="email" id="emailInput" placeholder="your@email.com" autocomplete="email">
+      </div>
+      <div class="field-wrap">
+        <div class="field-label">Password</div>
+        <input class="field-input" type="password" id="passwordInput" placeholder="· · · · · · · ·" autocomplete="current-password" onkeydown="if(event.key==='Enter')handleLogin()">
+      </div>
+    </div>
+
+    <button class="login-btn" id="loginBtn" onclick="handleLogin()">Enter</button>
+    <div class="error-msg" id="errorMsg"></div>
+    <div class="loading-msg" id="loadingMsg"></div>
+
+    <div class="login-note">
+      Credentials are assigned upon contract execution.<br>
+      Contact us if you require access assistance.
+    </div>
+  </div>
+</div>
+
+<script>
+// ── UID → client dashboard page mapping ──
+// Add each client's UID and their dashboard filename here
+const CLIENT_PAGES = {
+  'yNdpQ4uPxxZEWgE0rYndvlSwYX13': 'account-sienna-defoe.html',
+  // 'CONNOR_UID_HERE': 'account-connor-marks.html',
+  // 'GERALD_UID_HERE': 'account-gerald-ronan.html',
+};
+
+async function handleLogin() {
+  const email    = document.getElementById('emailInput').value.trim();
+  const password = document.getElementById('passwordInput').value;
+  const btn      = document.getElementById('loginBtn');
+  const errorEl  = document.getElementById('errorMsg');
+  const loadEl   = document.getElementById('loadingMsg');
+
+  errorEl.textContent  = '';
+  loadEl.textContent   = '';
+
+  if (!email || !password) {
+    errorEl.textContent = 'Please enter your email and password.';
+    return;
+  }
+
+  btn.disabled = true;
+  loadEl.textContent = 'Verifying credentials...';
+
+  try {
+    const result = await auth.signInWithEmailAndPassword(email, password);
+    const uid = result.user.uid;
+    const page = CLIENT_PAGES[uid];
+
+    if (page) {
+      loadEl.textContent = 'Access granted. Redirecting...';
+      setTimeout(() => { window.location.href = page; }, 800);
+    } else {
+      await auth.signOut();
+      errorEl.textContent = 'Account not found. Please contact us.';
+      btn.disabled = false;
+      loadEl.textContent = '';
+    }
+  } catch (err) {
+    btn.disabled = false;
+    loadEl.textContent = '';
+    if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
+      errorEl.textContent = 'Incorrect email or password.';
+    } else if (err.code === 'auth/too-many-requests') {
+      errorEl.textContent = 'Too many attempts. Please try again later.';
+    } else {
+      errorEl.textContent = 'An error occurred. Please try again.';
+    }
+  }
+}
+
+// If already logged in, redirect immediately
+auth.onAuthStateChanged(user => {
+  if (user) {
+    const page = CLIENT_PAGES[user.uid];
+    if (page) window.location.href = page;
+  }
+});
+</script>
+</body>
+</html>
