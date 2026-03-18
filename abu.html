@@ -1109,7 +1109,10 @@ function renderTransactions(txns) {
     return;
   }
 
-  const list = Object.values(txns).sort((a, b) => new Date(b.date) - new Date(a.date));
+  const now = new Date();
+  const list = Object.values(txns)
+    .filter(t => new Date(t.date + 'T12:00:00') <= now)
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
   el.innerHTML = list.map(t => `
     <div class="txn-row">
       <div class="txn-date">${fmtDate(t.date)}</div>
