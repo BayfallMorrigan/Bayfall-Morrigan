@@ -64,18 +64,16 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 0 64px;
-  height: 72px;
+  height: 80px;
 }
 
-.logo {
-  font-family: var(--display);
-  font-size: 13px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: rgba(240,237,232,0.55);
-  text-decoration: none;
-  font-weight: 400;
+.logo-img {
+  height: auto;
+  width: 140px;
+  display: block;
+  filter: invert(1) brightness(0.7);
 }
+
 
 .header-right {
   display: flex;
@@ -539,7 +537,7 @@ footer {
 <body>
 
 <header>
-  <a class="logo" href="index.html">Bayfall Morrigan</a>
+  <a href="index.html"><img class="logo-img" src="logopng.png" alt="Bayfall Morrigan"></a>
   <div class="header-right">
     <a href="index.html">Home</a>
     <a class="active">My Account</a>
