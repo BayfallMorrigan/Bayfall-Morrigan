@@ -167,6 +167,52 @@ header {
 }
 
 .status-badge.phase2 { color: #9a7aaa; border-color: var(--violet); }
+.status-badge.inactive { color: #aa7a3a; border-color: #6a4a1a; }
+
+/* ── INACTIVE BANNER ── */
+.inactive-banner {
+  background: rgba(138,90,30,0.08);
+  border-bottom: 1px solid #3a2810;
+  padding: 20px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.inactive-title {
+  font-family: var(--display);
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  color: #c8922a;
+  margin-bottom: 4px;
+}
+.inactive-sub {
+  font-family: var(--body);
+  font-size: 13px;
+  color: var(--mid);
+  font-style: italic;
+}
+.inactive-amount {
+  text-align: right;
+}
+.inactive-amount-val {
+  font-family: var(--display);
+  font-size: 28px;
+  color: #c8922a;
+  letter-spacing: 0.02em;
+}
+.inactive-amount-label {
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-top: 2px;
+}
+.frozen-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border: 1px solid var(--rule2);
+}
 
 .last-updated {
   font-family: var(--body);
@@ -550,6 +596,96 @@ auth.onAuthStateChanged(user => {
 });
 
 // ── Build dashboard ──────────────────────────────────────
+function buildInactiveDashboard(d, today) {
+  const frozenDate    = d.frozenDate ? new Date(d.frozenDate + 'T12:00:00') : null;
+  const weeklyDeposit = d.phase1.weeklyDeposit;
+  const frozenBalance = d.frozenBalance || d.phase1.finalBalance;
+  const frozenYield   = d.frozenYield || d.phase1.buildYieldEarned;
+  const totalDeposited = d.totalDepositedActual || d.phase1.totalDeposited;
+
+  // Calculate missed deposits from frozen date to today
+  const daysMissed   = frozenDate ? Math.max(0, Math.round((today - frozenDate) / 86400000)) : 0;
+  const weeksMissed  = Math.floor(daysMissed / 7);
+  const amountBehind = weeksMissed * weeklyDeposit;
+
+  const page = document.getElementById('mainPage');
+  page.innerHTML = `
+    <div class="acct-header">
+      <div>
+        <div class="acct-eyebrow">Account Build-Up Program</div>
+        <div class="acct-name">${d.clientName.split(' ')[0]} <em>${d.clientName.split(' ').slice(1).join(' ')}</em></div>
+        <div class="acct-meta">Program started ${fmtDate(d.phase1.startDate)} &nbsp;·&nbsp; Two-Phase Contract</div>
+      </div>
+      <div class="acct-status">
+        <div class="status-badge inactive">Inactive</div>
+        <div class="last-updated">As of ${today.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
+      </div>
+    </div>
+
+    <div class="inactive-banner">
+      <div>
+        <div class="inactive-title">Account Inactive — Deposits Paused</div>
+        <div class="inactive-sub">Last deposit received ${fmtDate(d.lastDepositDate)} &nbsp;·&nbsp; Account frozen ${fmtDate(d.frozenDate)} &nbsp;·&nbsp; ${weeksMissed} weekly deposits missed</div>
+      </div>
+      <div class="inactive-amount">
+        <div class="inactive-amount-val">${fmt(amountBehind)}</div>
+        <div class="inactive-amount-label">Outstanding at ${fmt(weeklyDeposit)} / week</div>
+      </div>
+    </div>
+
+    <div class="stats-section">
+      <div class="stats-section-label">Account Summary — Frozen State</div>
+      <div class="stat-grid frozen-stat-grid">
+        <div class="stat-cell">
+          <div class="stat-label">Total Deposited</div>
+          <div class="stat-value">${fmt(totalDeposited)}</div>
+          <div class="stat-sub">actual contributions</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-label">Yield Earned</div>
+          <div class="stat-value green">${fmt(frozenYield)}</div>
+          <div class="stat-sub">while active</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-label">Frozen Balance</div>
+          <div class="stat-value">${fmt(frozenBalance)}</div>
+          <div class="stat-sub">as of ${fmtDate(d.frozenDate)}</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-label">Target Balance</div>
+          <div class="stat-value dim">${fmt(d.phase1.targetBalance)}</div>
+          <div class="stat-sub">${fmt(d.phase1.targetBalance - frozenBalance)} remaining to target</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-label">Weekly Deposit</div>
+          <div class="stat-value gold">${fmt(weeklyDeposit)}</div>
+          <div class="stat-sub">required to resume</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="txn-section">
+      <div class="txn-section-label">Transaction History</div>
+      <div id="txnList"></div>
+    </div>
+
+    <footer>
+      <div class="footer-mark">Bayfall Morrigan</div>
+      <div class="footer-note">This account statement is for informational purposes only.</div>
+      <a class="logout-link" id="footerSignOut">Sign Out</a>
+    </footer>
+  `;
+
+  document.getElementById('footerSignOut').addEventListener('click', () => {
+    auth.signOut().then(() => window.location.href = 'login.html');
+  });
+
+  renderTransactions(d.transactions);
+
+  document.getElementById('loadingScreen').style.display = 'none';
+  document.getElementById('pageContent') && (document.getElementById('pageContent').style.display = 'block');
+}
+
 function buildDashboard(d) {
   const today       = new Date();
   const p1Start     = new Date(d.phase1.startDate + 'T12:00:00');
@@ -557,6 +693,14 @@ function buildDashboard(d) {
   const p2MatDate   = new Date(d.phase2.lockMaturityDate + 'T12:00:00');
 
   const weeksElapsed = weeksBetween(p1Start, today);
+  const isInactive   = d.status === 'inactive';
+
+  // Handle inactive accounts separately
+  if (isInactive) {
+    buildInactiveDashboard(d, today);
+    return;
+  }
+
   const inPhase1     = today < p1MatDate;
   const inPhase2     = !inPhase1 && today < p2MatDate;
   const complete     = today >= p2MatDate;
