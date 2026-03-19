@@ -553,7 +553,8 @@ footer {
   .logo-img { width: 108px; }
   .header-right { gap: 20px; }
   .page { padding-top: 64px; }
-  .acct-header { padding: 28px 20px 20px; }
+  .acct-header { padding: 28px 20px 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .acct-status { align-items: flex-start; }
   .acct-name { font-size: clamp(22px, 7vw, 34px); }
   .stats-section { padding: 20px 20px; }
   .stat-grid { grid-template-columns: repeat(2, 1fr); }
@@ -566,18 +567,96 @@ footer {
   .txn-row { grid-template-columns: 100px 1fr 110px; gap: 12px; }
   footer { padding: 16px 20px; flex-direction: column; gap: 8px; text-align: center; }
 }
+
+/* ── HAMBURGER ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  z-index: 200;
+  flex-shrink: 0;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: rgba(255,255,255,0.6);
+  transition: transform 0.3s, opacity 0.3s;
+  transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 64px;
+  left: 0; right: 0;
+  background: var(--black);
+  border-bottom: 1px solid var(--rule);
+  flex-direction: column;
+  padding: 20px 20px 28px;
+  gap: 0;
+  z-index: 99;
+  transform: translateY(-8px);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  pointer-events: none;
+}
+.mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+.mobile-menu a {
+  font-family: var(--body);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+  transition: color 0.2s;
+  cursor: pointer;
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: var(--white); }
+
+@media (max-width: 600px) {
+  .hamburger { display: flex; }
+  .header-right { display: none; }
+  .mobile-menu { display: flex; }
+  .acct-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .acct-status { align-items: flex-start; }
+  .phase-banner { padding: 12px 20px; }
+  .phase-tab { padding: 10px 16px; font-size: 8px; }
+}
 </style>
 </head>
 <body>
 
 <header>
   <a href="index.html"><img class="logo-img" src="logopng.png" alt="Bayfall Morrigan"></a>
+<button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
   <div class="header-right">
     <a href="index.html">Home</a>
     <a class="active">My Account</a>
     <a class="logout-link" id="signOutBtn">Sign Out</a>
   </div>
 </header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a onclick="closeMenu()">My Account</a>
+  <a id="mobileSignOut" onclick="closeMenu()">Sign Out</a>
+</div>
 
 <div class="page" id="mainPage">
   <div class="loading-screen" id="loadingScreen">Loading account data...</div>
