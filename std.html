@@ -460,6 +460,8 @@ footer {
   header { padding: 0 20px; height: 64px; }
   .logo-img { width: 108px; }
   .header-right { gap: 20px; }
+  .acct-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .acct-status { align-items: flex-start; }
   .page { padding-top: 64px; }
   .acct-header { padding: 28px 20px 20px; }
   .acct-name { font-size: clamp(22px, 7vw, 34px); }
@@ -548,8 +550,8 @@ footer {
     <span></span><span></span><span></span>
   </button>
   <div class="header-right">
-    <a href="/">Home</a>
-    <a href="/account" class="active">My Account</a>
+    <a href="index.html">Home</a>
+    <a class="active">My Account</a>
     <a class="logout-link" id="signOutBtn" style="cursor:pointer">Sign Out</a>
   </div>
 </header>
