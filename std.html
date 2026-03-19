@@ -536,7 +536,7 @@ footer {
 }
 .maturity-stat-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1px;
   background: var(--rule2);
   border: 1px solid var(--rule2);
@@ -944,7 +944,7 @@ function renderMaturitySection(d) {
   const principal  = d.principal;
   const totalYield = d.totalYield;
   const finalBal   = d.maturityValue;
-  const returnPct  = ((totalYield / d.depositAmount) * 100).toFixed(1);
+  const returnPct  = ((totalYield / principal) * 100).toFixed(1);
   const origFee    = d.origFee || 0;
 
   el.innerHTML = `
@@ -971,7 +971,12 @@ function renderMaturitySection(d) {
         <div class="maturity-stat-cell">
           <div class="stat-label">Final Payout</div>
           <div class="stat-value gold">${fmt(finalBal)}</div>
-          <div class="stat-sub">${returnPct}% return on initial deposit</div>
+          <div class="stat-sub">principal + total yield</div>
+        </div>
+        <div class="maturity-stat-cell">
+          <div class="stat-label">Return on Deposit</div>
+          <div class="stat-value gold">${returnPct}%</div>
+          <div class="stat-sub">growth on principal</div>
         </div>
       </div>
 
