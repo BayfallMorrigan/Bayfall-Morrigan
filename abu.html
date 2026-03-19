@@ -564,7 +564,9 @@ footer {
   .charts-section { grid-template-columns: 1fr; }
   .chart-panel { padding: 24px 20px; }
   .txn-section { padding: 24px 20px; }
-  .txn-row { grid-template-columns: 100px 1fr 110px; gap: 12px; }
+  .txn-row { grid-template-columns: 90px 1fr; gap: 8px 12px; }
+  .txn-amt { grid-column: 2; text-align: left; }
+  .chart-wrap { height: 200px; }
   footer { padding: 16px 20px; flex-direction: column; gap: 8px; text-align: center; }
 }
 
@@ -720,19 +722,19 @@ footer {
 <body>
 
 <header>
-  <a href="index.html"><img class="logo-img" src="logopng.png" alt="Bayfall Morrigan"></a>
-<button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+  <a href="https://www.bayfallmorrigan.com"><img class="logo-img" src="logopng.png" alt="Bayfall Morrigan"></a>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
   <div class="header-right">
-    <a href="index.html">Home</a>
+    <a href="https://www.bayfallmorrigan.com">Home</a>
     <a class="active">My Account</a>
     <a class="logout-link" id="signOutBtn">Sign Out</a>
   </div>
 </header>
 
 <div class="mobile-menu" id="mobile-menu">
-  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="https://www.bayfallmorrigan.com" onclick="closeMenu()">Home</a>
   <a onclick="closeMenu()">My Account</a>
   <a id="mobileSignOut" onclick="closeMenu()">Sign Out</a>
 </div>
@@ -766,6 +768,18 @@ const TT = {
 document.getElementById('signOutBtn').addEventListener('click', () => {
   auth.signOut().then(() => window.location.href = 'login.html');
 });
+document.getElementById('mobileSignOut').addEventListener('click', () => {
+  auth.signOut().then(() => window.location.href = 'login.html');
+});
+
+function toggleMenu() {
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+}
 
 // ── Auth guard + data load ───────────────────────────────
 auth.onAuthStateChanged(user => {
