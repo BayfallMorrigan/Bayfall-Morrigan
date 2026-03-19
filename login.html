@@ -244,6 +244,22 @@ header {
   font-style: italic;
   line-height: 1.7;
 }
+
+/* ── TABLET ── */
+@media (max-width: 960px) {
+  header { padding: 0 32px; }
+  .page { padding: 80px 24px 60px; }
+}
+
+/* ── MOBILE ── */
+@media (max-width: 600px) {
+  header { padding: 0 20px; height: 64px; }
+  .logo-img { width: 108px; }
+  .back-link { display: none; }
+  .page { padding: 72px 20px 48px; }
+  .login-wrap { max-width: 100%; }
+  .login-heading { font-size: clamp(24px, 8vw, 34px); }
+}
 </style>
 </head>
 <body>
