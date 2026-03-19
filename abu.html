@@ -803,7 +803,7 @@ function buildDashboard(d) {
   const p1MatDate   = new Date(d.phase1.phase1MaturityDate + 'T12:00:00');
   const p2MatDate   = new Date(d.phase2.lockMaturityDate + 'T12:00:00');
 
-  const weeksElapsed = weeksBetween(p1Start, today);
+  const weeksElapsed = Math.min(weeksBetween(p1Start, today) + 1, d.phase1.weeksToTarget);
   const isInactive   = d.status === 'inactive';
 
   // Handle inactive accounts separately
