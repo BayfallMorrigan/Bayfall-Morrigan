@@ -810,6 +810,33 @@ auth.onAuthStateChanged(user => {
   }).catch(() => { document.getElementById('loadingScreen').textContent = 'Error loading account.'; });
 });
 
+function rebuildChartData(d) {
+  const stored    = d.weeklyChartData;
+  const principal = d.principal;
+  const termMonths = d.termMonths;
+  const labels    = stored.labels;
+  const totalWeeks = labels.length - 1;
+
+  // Use override maturity value if present, otherwise fall back to stored totalYield
+  const overrideMatVal = d.maturityValueOverride
+    ? d.maturityValueOverride
+    : (principal + (d.totalYield || 0));
+
+  // Back-calculate effective monthly rate from the authoritative maturity value
+  const effectiveMonthlyRate = Math.pow(overrideMatVal / principal, 1 / termMonths) - 1;
+  const weeksPerMonth = totalWeeks / termMonths;
+
+  const principalArr = labels.map(() => principal);
+  const yieldArr = labels.map((_, i) => {
+    const monthsCompleted = Math.floor(i / weeksPerMonth);
+    if (monthsCompleted === 0) return 0;
+    const balance = principal * Math.pow(1 + effectiveMonthlyRate, monthsCompleted);
+    return parseFloat((balance - principal).toFixed(2));
+  });
+
+  return { labels, principal: principalArr, yieldLayer: yieldArr };
+}
+
 function buildDashboard(d) {
   const today      = new Date();
   const startDate  = new Date(d.startDate + 'T12:00:00');
@@ -856,9 +883,10 @@ function buildDashboard(d) {
   document.getElementById('donut-pct').textContent          = liveReturn + '%';
 
   // Charts — slice to weeks elapsed so the area chart stops at today
-  const allLabels = d.weeklyChartData.labels;
-  const allPrinc  = d.weeklyChartData.principal;
-  const allYld    = d.weeklyChartData.yieldLayer;
+  const chartData  = rebuildChartData(d);
+  const allLabels  = chartData.labels;
+  const allPrinc   = chartData.principal;
+  const allYld     = chartData.yieldLayer;
 
   // Find the last week index that has a non-zero yield value (i.e. has compounded)
   // and cap at the week corresponding to today
@@ -871,6 +899,11 @@ function buildDashboard(d) {
   const labels   = allLabels.slice(0, cutoff);
   const princArr = allPrinc.slice(0, cutoff);
   const yldArr   = allYld.slice(0, cutoff);
+
+  // Force last point to match live stats exactly so chart and cards are always in sync
+  if (yldArr.length > 0) {
+    yldArr[yldArr.length - 1] = parseFloat(liveYield.toFixed(2));
+  }
 
   const areaCtx = document.getElementById('areaChart').getContext('2d');
   new Chart(areaCtx, {
@@ -1012,10 +1045,11 @@ function renderMaturitySection(d) {
     </div>
   `;
 
-  // Full-term area chart using existing weeklyChartData
-  const labels   = d.weeklyChartData.labels;
-  const princArr = d.weeklyChartData.principal;
-  const yldArr   = d.weeklyChartData.yieldLayer;
+  // Full-term area chart — rebuilt from override so maturity chart matches contract values
+  const chartData = rebuildChartData(d);
+  const labels   = chartData.labels;
+  const princArr = chartData.principal;
+  const yldArr   = chartData.yieldLayer;
 
   const areaCtx = document.getElementById('matAreaChart').getContext('2d');
   new Chart(areaCtx, {
