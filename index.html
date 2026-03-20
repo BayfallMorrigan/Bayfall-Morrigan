@@ -1007,6 +1007,98 @@ footer {
 
   footer { padding: 20px; gap: 10px; }
 }
+/* SYSTEM BRIDGE */
+.sys-bridge {
+  background: var(--white);
+  border-bottom: 1px solid var(--rule);
+  padding: 80px 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  align-items: center;
+}
+
+.sys-bridge-left {
+  padding-right: 80px;
+  border-right: 1px solid var(--rule);
+}
+
+.sys-bridge-label {
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.sys-bridge-heading {
+  font-family: var(--display);
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: 0.01em;
+  color: var(--black);
+}
+
+.sys-bridge-heading em { font-style: italic; }
+
+.sys-bridge-right {
+  padding-left: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.sys-bridge-text {
+  font-family: var(--body);
+  font-size: 16px;
+  color: var(--black);
+  line-height: 2;
+  opacity: 0.7;
+  max-width: 480px;
+}
+
+.sys-bridge-link {
+  display: inline-block;
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+  border: 1px solid rgba(8,8,8,0.4);
+  padding: 14px 40px;
+  transition: border-color 0.25s, background 0.25s, color 0.25s;
+  align-self: flex-start;
+}
+
+.sys-bridge-link:hover {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+}
+
+@media (max-width: 960px) {
+  .sys-bridge {
+    grid-template-columns: 1fr;
+    padding: 72px 32px;
+    gap: 48px;
+  }
+  .sys-bridge-left {
+    padding-right: 0;
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 48px;
+  }
+  .sys-bridge-right { padding-left: 0; }
+}
+
+@media (max-width: 600px) {
+  .sys-bridge { padding: 60px 20px; }
+}
+
 </style>
 </head>
 <body>
@@ -1098,6 +1190,18 @@ function closeMenu() {
     </div>
   </div>
 </section>
+
+<!-- SYSTEM BRIDGE -->
+<div class="sys-bridge">
+  <div class="sys-bridge-left">
+    <span class="sys-bridge-label">Proprietary Systems</span>
+    <h2 class="sys-bridge-heading">The engine<br><em>behind the obligation.</em></h2>
+  </div>
+  <div class="sys-bridge-right">
+    <p class="sys-bridge-text">Our fixed obligations are made possible by proprietary capital management systems developed and operated entirely in-house. Built thesis-first, validated through continuous live data collection, and stress-tested across tens of thousands of simulated scenarios. The architecture behind what we do is documented in full.</p>
+    <a href="proprietarycapitalmanagementsystemsindex.html" class="sys-bridge-link">Read about our system development</a>
+  </div>
+</div>
 
 <!-- STRUCTURES -->
 <section class="structures" id="structures">
@@ -1520,7 +1624,7 @@ function closeMenu() {
   <a href="discoverypage.html" class="footer-link">Discovery Form</a>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // FAQ ACCORDION
 function toggleFaq(btn) {
   const item = btn.closest('.faq-item');
