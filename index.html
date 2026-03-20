@@ -514,37 +514,208 @@ header {
   text-transform: uppercase;
   color: var(--black);
   margin-bottom: 24px;
-  text-align: center;
 }
 
 .legal-heading {
   font-family: var(--display);
-  font-size: clamp(28px, 3vw, 44px);
+  font-size: clamp(32px, 3.5vw, 52px);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.01em;
-  margin-bottom: 48px;
-  padding-bottom: 48px;
+  margin-bottom: 64px;
+  padding-bottom: 64px;
   border-bottom: 1px solid var(--rule);
-  text-align: center;
-  max-width: 760px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .legal-grid {
-  display: block;
-  max-width: 680px;
-  margin: 0 auto;
-  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 64px;
+  max-width: 1100px;
 }
 
 .legal-text {
   font-family: var(--body);
-  font-size: 17px;
+  font-size: 16px;
   color: var(--black);
   line-height: 2;
-  opacity: 0.8;
+  opacity: 0.75;
+}
+
+.legal-text + .legal-text {
+  padding-left: 64px;
+  border-left: 1px solid var(--rule);
+}
+
+/* FAQ */
+.faq {
+  background: var(--black);
+  padding: 96px 64px;
+  border-bottom: 1px solid var(--rule-dk);
+}
+
+.faq-header {
+  margin-bottom: 72px;
+  padding-bottom: 64px;
+  border-bottom: 1px solid var(--rule-dk);
+}
+
+.faq-label {
+  font-family: var(--body);
+  font-size: 13px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 24px;
+}
+
+.faq-heading {
+  font-family: var(--display);
+  font-size: clamp(32px, 3.5vw, 52px);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  color: var(--white);
+}
+
+.faq-heading em { font-style: italic; }
+
+.faq-intro {
+  font-family: var(--body);
+  font-size: 15px;
+  color: rgba(255,255,255,0.4);
+  line-height: 2;
+  align-self: end;
+}
+
+.faq-list {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.faq-category-label {
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.22);
+  margin-bottom: 0;
+  margin-top: 56px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule-dk);
+}
+
+.faq-category-label:first-child { margin-top: 0; }
+
+.faq-item {
+  border-bottom: 1px solid var(--rule-dk);
+}
+
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 28px 0;
+  text-align: left;
+}
+
+.faq-question-text {
+  font-family: var(--display);
+  font-size: clamp(17px, 1.6vw, 22px);
+  font-weight: 400;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+  transition: color 0.25s;
+}
+
+.faq-question:hover .faq-question-text {
+  color: var(--white);
+}
+
+.faq-icon {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  position: relative;
+}
+
+.faq-icon::before,
+.faq-icon::after {
+  content: '';
+  position: absolute;
+  background: rgba(255,255,255,0.35);
+  transition: transform 0.3s ease, opacity 0.3s ease, background 0.25s;
+}
+
+.faq-icon::before {
+  width: 12px; height: 1px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.faq-icon::after {
+  width: 1px; height: 12px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.faq-question:hover .faq-icon::before,
+.faq-question:hover .faq-icon::after {
+  background: rgba(255,255,255,0.65);
+}
+
+.faq-item.open .faq-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+  opacity: 0;
+}
+
+.faq-item.open .faq-question-text {
+  color: var(--white);
+}
+
+.faq-answer {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.4s ease;
+}
+
+.faq-answer-inner {
+  padding: 0 0 36px;
+}
+
+.faq-subheader {
+  font-family: var(--display);
+  font-size: 15px;
+  font-style: italic;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 16px;
+  letter-spacing: 0.01em;
+}
+
+.faq-answer-inner p {
+  font-family: var(--body);
+  font-size: 16px;
+  color: rgba(255,255,255,0.55);
+  line-height: 2;
+  margin-bottom: 16px;
+}
+
+.faq-answer-inner p:last-child { margin-bottom: 0; }
+
+@media (max-width: 960px) {
+  .faq { padding: 88px 32px; }
+  .faq-header { grid-template-columns: 1fr; gap: 24px; }
+}
+
+@media (max-width: 600px) {
+  .faq { padding: 60px 20px; }
+  .faq-question { padding: 22px 0; }
 }
 
 /* CONTACT */
@@ -798,7 +969,8 @@ footer {
   .capital-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
 
   .legal { padding: 88px 32px; }
-  .legal-grid { text-align: left; }
+  .legal-grid { grid-template-columns: 1fr; gap: 32px; }
+  .legal-text + .legal-text { padding-left: 0; border-left: none; border-top: 1px solid var(--rule); padding-top: 32px; }
 
   .contact { grid-template-columns: 1fr; gap: 60px; padding: 88px 32px; }
 
@@ -1000,7 +1172,313 @@ function closeMenu() {
   <p class="legal-label">Legal Framework</p>
   <h2 class="legal-heading">Fixed obligations.<br><em>Honored without exception</em></h2>
   <div class="legal-grid">
-    <p class="legal-text">Capital received through our fixed-term account structures constitutes a private loan, not an investment. Each agreement specifies a fixed principal, a fixed yield, and a fixed maturity. The return is contractually owed regardless of firm performance, which means the instruments do not satisfy the conditions courts use to classify something as a security under federal law. There is no shared enterprise, no variable return tied to our efforts, and no participation in firm upside. Michigan's lending licensing requirements attach to the party extending credit, not to the borrower. We receive funds. We do not lend them to others. No lending license applies. Every lender receives complete written disclosure of these characterizations before committing capital.</p>
+    <p class="legal-text">Capital received through our fixed-term account structures constitutes a private loan, not an investment. Each agreement specifies a fixed principal, a fixed yield, and a fixed maturity. The return is contractually owed regardless of firm performance, which means the instruments do not satisfy the conditions courts use to classify something as a security under federal law. There is no shared enterprise, no variable return tied to our efforts, and no participation in firm upside.</p>
+    <p class="legal-text">Michigan's lending licensing requirements attach to the party extending credit, not to the borrower. We receive funds. We do not lend them to others. No lending license applies. Every lender receives complete written disclosure of these characterizations before committing capital.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="faq-header">
+    <p class="faq-label">Frequently Asked</p>
+    <h2 class="faq-heading">Questions,<br><em>answered directly.</em></h2>
+  </div>
+
+  <div class="faq-list">
+
+    <p class="faq-category-label">Account Structures</p>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">Is there a minimum or maximum deposit amount?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">There is no fixed minimum or maximum.</p>
+          <p>The range we work within is dynamic, and it evolves with our systems. What we can say is that our systems are specifically engineered for lower-denomination capital. That is not a limitation, it is the design. Precision execution at this scale is where our edge is cleanest, and the diminishing returns effect at higher capital levels reflects that architecture rather than contradicts it.</p>
+          <p>On the lower end, the math needs to make sense for both sides. A very small allocation over a very short term produces a yield that is neither meaningful to the lender nor operationally worth structuring. If capital or duration falls below a threshold where the arrangement creates real value, we will say so directly and suggest a configuration that does.</p>
+          <p>If you are uncertain whether your intended allocation and preferred term are a fit, the discovery form is the right starting point.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">What happens if I need to exit before my term ends?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">Fixed-term means fixed.</p>
+          <p>Our account structures do not carry early exit provisions. This is not a policy choice, it is a structural and legal reality of how the instruments are designed. When capital is committed, it is committed for the duration of the selected term. At maturity, principal and yield are returned in full as agreed.</p>
+          <p>The absence of an exit mechanism is part of what makes the structure function. Fixed durations allow us to plan deployment with precision and honor obligations on schedule. They also preserve the legal character of the arrangement. The moment early or on-demand redemption enters the picture, the instrument begins to resemble a deposit product and with that comes an entirely different regulatory framework. Our structures are deliberately designed to avoid that territory, and the fixed term is central to that design.</p>
+          <p>Lenders who may need access to their capital before the term concludes should factor that into which structure and term length they select before committing.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">How does the compounding actually work, what does "every 28 days" mean in practice?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">Yield compounds every 28 days against your outstanding balance.</p>
+          <p>When an account is opened and the initial deposit is received, a seven-day settlement period begins. During this window, capital is being allocated into our systems. Once settlement concludes, the account enters its active compounding cycle.</p>
+          <p>Every 28 days from that point, yield is calculated as a percentage of the account's current outstanding balance and added directly to it. That updated balance then becomes the basis for the next cycle. Each compounding event increases the balance the following yield calculation is applied against, which is what produces the accelerating growth curve over longer terms and why the 12-month structure produces returns that are disproportionately larger than a simple annualization of the 3-month rate would suggest.</p>
+          <p>The 28-day cycle is not arbitrary. It is designed around operational efficiency, predictable intervals make capital allocation, deployment planning, and obligation scheduling more precise across the full lender base.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">How do I send funds to open my account?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">All capital transfers are handled exclusively by wire.</p>
+          <p>We do not work with third-party payment platforms on either end of the relationship. Once a contract structure has been agreed upon and signatures are in place, an instruction email is sent outlining exactly how to complete the required deposit corresponding to your selected structure. Every detail needed to execute the transfer correctly is provided in that communication. Nothing is left to assumption.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">How and when do I receive my money at maturity?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">The same mechanism works in reverse.</p>
+          <p>In the period leading up to your maturity date, we will be in contact with instructions for providing your withdrawal details, and the return transfer is executed by wire directly to your account. Throughout the life of your contract, we maintain periodic communication with all active lenders, typically on a bi-weekly basis. Maturity is never an event that catches anyone off guard. There is always an established channel, and the process on the way out is as structured and deliberate as it was on the way in.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">Can I hold more than one account at a time?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">Multiple accounts are permitted, but rarely the right move.</p>
+          <p>Nothing in our structure prevents a lender from holding more than one account simultaneously. That said, our two structures are designed to cover the full spectrum of how a lender might want to engage with us. The standard structure is built for capital that is available, deployable, and ready to go to work. The build-up program is built for lenders who want to reach a meaningful allocation over time. Together, they account for virtually every situation a lender will find themselves in.</p>
+          <p>Opening multiple accounts in parallel rarely produces an outcome that a single well-configured account would not achieve more cleanly. If you are unsure which structure or term is the right fit for your situation, the discovery form is the place to start. We would rather help you get the configuration right the first time than manage unnecessary complexity on either side.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">Is the origination fee refundable?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">The origination fee is not refundable, but it is not always present.</p>
+          <p>Whether a contract carries an origination fee is entirely discretionary on our end and varies with the current operating period. It is not a permanent fixture of every structure we offer. When it does apply, it is deducted once at inception from the deposited amount before the term begins.</p>
+          <p>The reason it exists at all comes down to risk discipline. Our systems carry redundant layers of protection, and every active account operates against a 100% coverage ratio at all times. That standard does not waver. When applied, the origination fee is simply an additional margin of operational padding, a direct source of discretionary capital that reinforces the buffer we maintain around our obligations. It is not a revenue mechanism. It is a risk mechanism. And like every other variable in how we structure our agreements, it is applied deliberately and only when it serves that purpose.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">How does the Build-Up Program transition into a standard loan?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">The build-up phase ends. A higher-yield loan begins.</p>
+          <p>From the moment an account build-up program is opened, the terms of what follows are already established. A target balance is set, and the lender makes weekly contributions toward it. Throughout the accumulation phase, a monthly yield compounds against the growing balance on the same 28-day cycle as the standard structure, at a proportionally smaller rate that reflects the staged nature of the phase.</p>
+          <p>Once weekly deposits and compounded yield bring the account to its target balance, the accumulation phase closes and the account transitions automatically into its second phase: a fixed-term loan structured identically to our standard private high-yield loan, but carrying an enhanced yield rate above what a standard contract for the same term would offer. That enhancement is the reward for the accumulation period. A lender who builds up to a target balance and enters a six-month phase two, for example, would receive a monthly yield rate meaningfully above the standard six-month rate for the full duration of that term.</p>
+          <p>Both the phase two term length and the enhanced yield rate are agreed upon before the accumulation phase begins. Nothing is renegotiated at the transition point. The outcome is defined from the outset.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">Can I adjust my contribution amount or target balance mid-program?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">Amendments are possible, but they follow a formal process.</p>
+          <p>Once a build-up program is underway, the contribution amount and target balance can be revised through a contract amendment. This is not available on the standard structure, once a standard account is open, the terms are fixed and no additional capital can be added to it. The build-up program is different by design, and we recognize that a lender's circumstances can shift over the course of an accumulation period.</p>
+          <p>That said, any mid-program amendment is a formal request, not a unilateral adjustment. The lender initiates the request, and we review and either accept or decline the proposed changes. Amendments of this nature will typically carry yield adjustments and may affect the agreed phase two terms. Nothing changes without both parties signing off on the revised structure.</p>
+          <p>If your circumstances change and you want to explore an amendment, the right move is to bring it to us directly. We will tell you honestly what is and is not workable.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="faq-category-label">Risk & Protection</p>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">Are my funds insured?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">Federally and externally, not currently.</p>
+          <p>There is no government or third-party insurance program attached to these arrangements at this time. That is disclosed to every lender before any contract is executed. External contingency infrastructure is part of our forward growth roadmap and will be introduced as the firm scales.</p>
+          <p>What covers your obligation right now is the firm's internal coverage ratio. No contract is executed unless the firm already holds capital exceeding the total of every outstanding obligation and the one it is about to take on. That ratio typically runs between 200% and 300%. The floor is 100% and it is non-negotiable. If that condition is not met, the contract does not get signed.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">What happens to my obligation if the system underperforms?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">Nothing. The two are not connected.</p>
+          <p>Your contractual obligation is fixed at execution and owed unconditionally. It does not reference system performance, it does not adjust for market conditions, and it does not change for any reason that occurs after the contract is signed. What the systems produce internally is entirely separate from what we owe you. We could have the worst operational period in the firm's history and your maturity payout would not move by a single dollar.</p>
+          <p>This is not a reassurance. It is the legal structure of the arrangement. The obligation exists independently of the engine behind it.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">What makes this a loan and not an investment?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">The nature of the return. That is the entire distinction.</p>
+          <p>When you make an investment, you do not know what you will get back. You can model it, project it, average it, but the return is contingent. It moves with the performance of whatever you are invested in. If that asset performs poorly, your capital reflects that. Principal is at risk because the outcome is variable by design.</p>
+          <p>A loan is not that. A loan has a fixed return established at the moment it is made. The amount coming back, the yield it carries, and the date it is due are all settled before any capital moves. That is the structure we operate under. Every lender who enters an arrangement with us knows exactly what they will receive and exactly when. Nothing that happens between execution and maturity changes that figure.</p>
+          <p>All loans carry a theoretical risk of default. That is true of a private loan, a corporate bond, and a 10-year Treasury. What we have built internally through our coverage ratios and the standards we hold before executing any contract is a structure designed to make that theoretical risk as remote as our systems can make it. But we will not pretend the word default does not exist. We would rather acknowledge it honestly and show you what we have done about it.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="faq-category-label">Legal & Regulatory</p>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">Are you registered with the Securities and Exchange Commission?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">No. And we are not required to be.</p>
+          <p>We do not sell securities, investment contracts, or any instrument that would require registration with the SEC or any other federal regulatory body. There are federal laws that govern how we operate and we abide by them. But registration is a requirement that attaches to a specific category of activity. What we do does not fall into that category.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">Why are you not required to be registered with the Securities and Exchange Commission?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">Because what we offer is not a security under the controlling federal standard.</p>
+          <p>The governing legal test for whether an instrument constitutes a security was established in SEC v. W.J. Howey Co., 328 U.S. 293 (1946). Under Howey, an instrument is an investment contract and therefore a security only if it satisfies all four of the following conditions: an investment of money, in a common enterprise, with an expectation of profits, derived from the efforts of others. The failure of any single condition is enough. Our fixed-term account structures fail three of them.</p>
+          <p>Lenders enter our arrangements with a fixed, contractually defined return. There is no expectation of profit in the entrepreneurial sense. There is no variable upside, no participation in firm performance. The yield does not move regardless of what our systems produce or what markets do. That severs the third condition entirely. The return is also owed unconditionally as a fixed debt obligation, with no dependence on anything we do after execution, severing the fourth. And because every contract is individually negotiated, documented, and settled, with no lender sharing in another's risk or return, the common enterprise requirement fails as well.</p>
+          <p>Our arrangements are not securities by virtue of what they actually are. That is a substantive legal position, not a technicality.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">Why don't you need a license to do this?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">Because licensing requirements attach to the party extending credit. We are not that party.</p>
+          <p>Michigan's lending licensing framework governs entities that make loans to others. We receive funds from private individuals and incur a fixed contractual obligation to return principal and yield at maturity. That makes us the borrower in every arrangement we enter. No licensing requirement attaches to a borrower by virtue of receiving private loans.</p>
+          <p>The same logic applies to investment advisory regulation. We do not manage assets on behalf of clients, do not provide investment advisory services, and do not hold discretionary authority over anyone's funds. The regulatory frameworks that govern those activities simply do not reach what we do.</p>
+          <p>The deeper question some lenders ask is whether these arrangements constitute securities, which would trigger an entirely different regulatory framework. Our position is that they do not, and that position is grounded in the substantive design of the instruments themselves. The legal character of the arrangement is that of a private loan. That is not a label we apply for convenience. It is what the structure actually is.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">How is yield income treated for tax purposes?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">It is interest income, reported the same way as any other.</p>
+          <p>The yield earned through your contract is treated as interest income for federal tax purposes. That is the same category as interest from a savings account or a bond. At the close of the tax year, you will receive a 1099-INT reflecting the amount earned. That figure gets reported on your return and is taxed at your ordinary income rate. Hand it to your accountant or enter it into your tax software. There is nothing unusual about how it is handled.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="faq-category-label">The Systems</p>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">Is the trading automated or does it involve manual decisions?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">Every decision is algorithmic. Execution may involve a human hand. The decision never does.</p>
+          <p>Our systems are deterministic and rule-based. Every capital allocation that occurs is the output of an algorithm, a set of conditions that either are or are not met. There is no discretion involved in that process. No gut call, no manual override, no interpretation. If the conditions are present, the system identifies the action. If they are not, nothing happens.</p>
+          <p>In some cases the final execution step involves a human operator carrying out what the system has already decided. That is a mechanical function, not a decision-making one. The judgment lives entirely in the algorithm.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">What markets and hours does the system operate in?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">For data security reasons, we do not disclose the specifics.</p>
+          <p>What we can say is that our systems are built around an ethos of short and controlled market exposure. Positions exist for a defined segment of the trading day and for no longer than the conditions that created them remain valid. Roughly 90% of the time, capital sits in a neutral state: not exposed, not deployed, not at risk. It moves only when a precise set of conditions defined by our deterministic system have been confirmed.</p>
+          <p>The specifics of what those conditions are, where they appear, and when during the day they occur are proprietary. That information stays internal.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="faq-category-label">Getting Started</p>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">Who is eligible to become a lender?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">Anyone. Though we reserve the right to decline.</p>
+          <p>There are no formal eligibility requirements to enter a fixed-term account structure with us. We do not screen by income, net worth, or background. If you have capital you want to put to work and a genuine interest in what we offer, the door is open.</p>
+          <p>That said, we reserve the right to decline any contract we choose not to execute, for any reason, without obligation to explain. That discretion exists on both sides of the table. You choose whether to lend to us. We choose whether to accept.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">How do I get started?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">Begin with the discovery form.</p>
+          <p>Navigate to the Account Discovery section, complete the form, and leave your contact information. A member of our team will reach out directly. From there, everything moves through us.</p>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1042,7 +1520,22 @@ function closeMenu() {
   <a href="discoverypage.html" class="footer-link">Discovery Form</a>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// FAQ ACCORDION
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const answer = item.querySelector('.faq-answer');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => {
+    el.classList.remove('open');
+    el.querySelector('.faq-answer').style.maxHeight = '0';
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
+}
+
 function toggleMenu() {
   const btn = document.getElementById('hamburger');
   const menu = document.getElementById('mobile-menu');
