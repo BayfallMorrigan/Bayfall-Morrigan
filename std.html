@@ -473,9 +473,10 @@ footer {
   .acct-header { padding: 28px 20px 20px; }
   .acct-name { font-size: clamp(22px, 7vw, 34px); }
   .stats-section { padding: 20px 20px; }
-  .stat-grid { grid-template-columns: repeat(2, 1fr); }
-  .stat-grid.cols-6 { grid-template-columns: repeat(2, 1fr); }
-  .stat-grid.cols-5 { grid-template-columns: repeat(2, 1fr); }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); align-items: start; }
+  .stat-grid.cols-6 { grid-template-columns: repeat(2, 1fr); align-items: start; }
+  .stat-grid.cols-5 { grid-template-columns: repeat(2, 1fr); align-items: start; }
+  .stat-grid .stat-cell:last-child { grid-column: 1 / -1; border-right: none; }
   .stat-cell { padding: 16px 14px; }
   .charts-section { grid-template-columns: 1fr; }
   .chart-panel { padding: 24px 20px; }
