@@ -329,6 +329,7 @@ header {
   font-size: 22px;
   color: var(--gold-lt);
   letter-spacing: 0.02em;
+  line-height: 1.1;
 }
 
 .progress-track {
@@ -561,7 +562,8 @@ footer {
   .stat-grid { grid-template-columns: repeat(2, 1fr); }
   .stat-grid.cols-6 { grid-template-columns: repeat(2, 1fr); }
   .stat-grid.cols-5 { grid-template-columns: repeat(2, 1fr); }
-  .stat-cell { padding: 16px 14px; }
+  .stat-cell { padding: 16px 14px; text-align: center; gap: 3px; }
+  .progress-track { display: none; }
   .charts-section { grid-template-columns: 1fr; }
   .chart-panel { padding: 24px 20px; }
   .txn-section { padding: 24px 20px; }
@@ -569,6 +571,12 @@ footer {
   .txn-amt { grid-column: 2; text-align: left; }
   .chart-wrap { height: 200px; }
   footer { padding: 16px 20px; flex-direction: column; gap: 8px; text-align: center; }
+
+  /* Phase tab stacking */
+  .phase-sep { display: none; }
+  .phase-main { display: block; }
+  .phase-sub { display: block; padding-left: 0.7em; }
+  .phase-tab { text-align: center; flex: 1; }
 }
 
 /* ── MATURITY SECTION ── */
@@ -646,7 +654,8 @@ footer {
 @media (max-width: 600px) {
   .maturity-section { padding: 20px 20px; }
   .maturity-stat-row { grid-template-columns: repeat(2, 1fr); }
-  .maturity-stat-cell:last-child { grid-column: 1 / -1; }
+  .maturity-stat-cell { text-align: center; }
+  .maturity-stat-cell:last-child { grid-column: 1 / -1; align-items: center; text-align: center; }
   .maturity-chart-panel { padding: 20px 16px 24px; }
 }
 
@@ -982,8 +991,8 @@ function buildDashboard(d) {
     </div>
 
     <div class="phase-banner">
-      <div class="${p1TabClass}">Phase I &nbsp;·&nbsp; Build-Up ${!inPhase1 ? '✓' : ''}</div>
-      <div class="${p2TabClass}">Phase II &nbsp;·&nbsp; Lock Contract ${complete ? '✓' : ''}</div>
+      <div class="${p1TabClass}"><span class="phase-main">Phase I</span><span class="phase-sep"> &nbsp;·&nbsp; </span><span class="phase-sub">Build-Up${!inPhase1 ? ' ✓' : ''}</span></div>
+      <div class="${p2TabClass}"><span class="phase-main">Phase II</span><span class="phase-sep"> &nbsp;·&nbsp; </span><span class="phase-sub">Lock Contract${complete ? ' ✓' : ''}</span></div>
     </div>
 
     ${inPhase1 ? buildPhase1Stats(d, weeksElapsed, depositsToDate, yieldToDate, currentBalance, p1Progress, daysToP1) : ''}
