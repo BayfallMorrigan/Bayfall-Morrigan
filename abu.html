@@ -564,6 +564,7 @@ footer {
   .stat-grid.cols-5 { grid-template-columns: repeat(2, 1fr); }
   .stat-cell { padding: 16px 14px; text-align: center; gap: 3px; }
   .progress-track { display: none; }
+  .progress-pct { line-height: 1.1; }
   .charts-section { grid-template-columns: 1fr; }
   .chart-panel { padding: 24px 20px; }
   .chart-panel-donut { display: flex; flex-direction: column; align-items: center; text-align: center; }
@@ -578,6 +579,10 @@ footer {
   .phase-main { display: block; }
   .phase-sub { display: block; }
   .phase-tab { text-align: center; flex: 1; }
+
+  /* Inactive banner */
+  .inactive-banner { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px 20px; }
+  .inactive-amount { text-align: left; }
 }
 
 /* ── MATURITY SECTION ── */
@@ -840,7 +845,9 @@ function buildInactiveDashboard(d, today) {
     <div class="inactive-banner">
       <div>
         <div class="inactive-title">Account Inactive — Deposits Paused</div>
-        <div class="inactive-sub">Last deposit received ${fmtDate(d.lastDepositDate)} &nbsp;·&nbsp; Account frozen ${fmtDate(d.frozenDate)} &nbsp;·&nbsp; ${weeksMissed} weekly deposits missed</div>
+        <div class="inactive-sub">Last deposit received ${fmtDate(d.lastDepositDate)}</div>
+        <div class="inactive-sub">Account frozen ${fmtDate(d.frozenDate)}</div>
+        <div class="inactive-sub">${weeksMissed} weekly deposits missed</div>
       </div>
       <div class="inactive-amount">
         <div class="inactive-amount-val">${fmt(amountBehind)}</div>
