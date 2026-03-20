@@ -566,6 +566,7 @@ footer {
   .progress-track { display: none; }
   .charts-section { grid-template-columns: 1fr; }
   .chart-panel { padding: 24px 20px; }
+  .chart-panel-donut { display: flex; flex-direction: column; align-items: center; text-align: center; }
   .txn-section { padding: 24px 20px; }
   .txn-row { grid-template-columns: 90px 1fr; gap: 8px 12px; }
   .txn-amt { grid-column: 2; text-align: left; }
@@ -1005,7 +1006,7 @@ function buildDashboard(d) {
         <div class="chart-wrap"><canvas id="mainChart"></canvas></div>
         <div class="legend" id="mainLegend"></div>
       </div>
-      <div class="chart-panel" style="border-left:1px solid var(--rule2)">
+      <div class="chart-panel chart-panel-donut" style="border-left:1px solid var(--rule2)">
         <div class="chart-panel-label">${inPhase1 ? 'Build Phase Composition' : 'Full Capital Breakdown'}</div>
         <div class="chart-panel-sub">${inPhase1 ? 'Deposits vs yield earned so far' : 'Complete origin of your current balance'}</div>
         <div class="half-donut-wrap">
