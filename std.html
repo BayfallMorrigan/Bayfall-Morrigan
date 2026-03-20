@@ -449,6 +449,72 @@ footer {
 
 .logout-link:hover { color: var(--off); }
 
+/* MOBILE PROGRESS STRIP */
+.mobile-progress-strip {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  header { padding: 0 20px; height: 64px; }
+  .logo-img { width: 108px; }
+  .header-right { gap: 20px; }
+  .acct-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .acct-status { align-items: flex-start; }
+  .page { padding-top: 64px; }
+  .acct-header { padding: 28px 20px 20px; }
+  .acct-name { font-size: clamp(22px, 7vw, 34px); }
+  .stats-section { padding: 20px 20px; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat-grid.cols-6 { grid-template-columns: repeat(2, 1fr); }
+  .stat-grid.cols-5 { grid-template-columns: repeat(2, 1fr); }
+  .stat-cell { padding: 16px 14px; text-align: center; }
+  .stat-cell.term-progress-cell { display: none; }
+  .charts-section { grid-template-columns: 1fr; }
+  .chart-panel { padding: 24px 20px; }
+  .txn-section { padding: 24px 20px; }
+  .txn-row { grid-template-columns: 90px 1fr; gap: 8px 12px; }
+  .txn-amt { grid-column: 2; text-align: left; }
+  .chart-wrap { height: 200px; }
+  footer { padding: 16px 20px; flex-direction: column; gap: 8px; text-align: center; }
+
+  .mobile-progress-strip {
+    display: block;
+    padding: 16px 20px 24px;
+    margin-bottom: 16px;
+    border: 1px solid var(--rule2);
+    text-align: center;
+  }
+  .mobile-progress-label {
+    font-family: var(--body);
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 8px;
+  }
+  .mobile-progress-strip .progress-pct {
+    font-family: var(--display);
+    font-size: 32px;
+    color: var(--gold-lt);
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .mobile-progress-strip .progress-track {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+  .mobile-progress-sub {
+    font-family: var(--body);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-top: 10px;
+    display: block;
+  }
+}
+
 /* ── TABLET ── */
 @media (max-width: 960px) {
   header { padding: 0 32px; }
@@ -476,8 +542,7 @@ footer {
   .stat-grid { grid-template-columns: repeat(2, 1fr); align-items: start; }
   .stat-grid.cols-6 { grid-template-columns: repeat(2, 1fr); align-items: start; }
   .stat-grid.cols-5 { grid-template-columns: repeat(2, 1fr); align-items: start; }
-  .stat-grid .stat-cell:last-child { grid-column: 1 / -1; border-right: none; }
-  .stat-cell { padding: 16px 14px; }
+  .stat-cell { padding: 16px 14px; text-align: center; }
   .charts-section { grid-template-columns: 1fr; }
   .chart-panel { padding: 24px 20px; }
   .txn-section { padding: 24px 20px; }
@@ -667,6 +732,17 @@ footer {
   <!-- STATS -->
   <div class="stats-section">
     <div class="stats-section-label">Account Status — Today</div>
+
+    <!-- MOBILE ONLY: Term Progress strip -->
+    <div class="mobile-progress-strip">
+      <div class="mobile-progress-label">Term Progress</div>
+      <div class="progress-pct" id="pct-display-mobile">—</div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill-mobile" style="width:0%"></div>
+      </div>
+      <div class="mobile-progress-sub" id="s-progress-sub-mobile">—</div>
+    </div>
+
     <div class="stat-grid">
 
       <div class="stat-cell">
@@ -684,7 +760,7 @@ footer {
         <div class="stat-value" id="s-live-return">—</div>
         <div class="stat-sub">on initial deposit</div>
       </div>
-      <div class="stat-cell">
+      <div class="stat-cell term-progress-cell">
         <div class="stat-label">Term Progress</div>
         <div class="progress-pct" id="pct-display">—</div>
         <div class="progress-wrap">
@@ -875,6 +951,11 @@ function buildDashboard(d) {
   document.getElementById('pct-display').textContent        = progress.toFixed(1) + '%';
   document.getElementById('progress-fill').style.width      = progress + '%';
   document.getElementById('s-progress-sub').textContent     = monthsLeft + ' months remaining';
+
+  // Mobile progress strip — mirrors the same values
+  document.getElementById('pct-display-mobile').textContent    = progress.toFixed(1) + '%';
+  document.getElementById('progress-fill-mobile').style.width  = progress + '%';
+  document.getElementById('s-progress-sub-mobile').textContent = monthsLeft + ' months remaining';
   document.getElementById('s-fee-sub').textContent          = d.origFee > 0 ? 'after ' + d.origFeeRate + '% origination fee' : 'full deposit at work';
   document.getElementById('s-principal').textContent        = fmt(d.principal);
   document.getElementById('s-maturity').textContent         = fmtDate(d.maturityDate);
