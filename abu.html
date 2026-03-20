@@ -1218,16 +1218,16 @@ function renderCharts(d, inPhase1, inPhase2, depositsToDate, yieldToDate, p2Yiel
       type: 'doughnut',
       data: {
         datasets: [{
-          data: [depositsToDate, yieldToDate, depositsToDate + yieldToDate],
-          backgroundColor: ['rgba(138,106,42,0.75)', 'rgba(74,122,90,0.75)', 'rgba(0,0,0,0)'],
-          borderColor: ['#0d0c0a','#0d0c0a','rgba(0,0,0,0)'],
+          data: [depositsToDate, yieldToDate],
+          backgroundColor: ['rgba(138,106,42,0.75)', 'rgba(74,122,90,0.75)'],
+          borderColor: ['#0d0c0a','#0d0c0a'],
           borderWidth: 2,
         }]
       },
       options: {
         responsive: true, maintainAspectRatio: false,
         circumference: 180, rotation: -90, cutout: '72%',
-        plugins: { legend: { display: false }, tooltip: { ...TT, filter: i => i.dataIndex < 2, callbacks: { label: ctx => ' $'+ctx.parsed.toLocaleString() } } }
+        plugins: { legend: { display: false }, tooltip: { ...TT, callbacks: { label: ctx => ' $'+ctx.parsed.toLocaleString() } } }
       }
     });
 
@@ -1277,16 +1277,16 @@ function renderCharts(d, inPhase1, inPhase2, depositsToDate, yieldToDate, p2Yiel
       type: 'doughnut',
       data: {
         datasets: [{
-          data: [totalDep, buildYield, currentLockYield, totalDep + buildYield + currentLockYield],
-          backgroundColor: ['rgba(138,106,42,0.75)','rgba(74,122,90,0.75)','rgba(122,90,138,0.75)','rgba(0,0,0,0)'],
-          borderColor: ['#0d0c0a','#0d0c0a','#0d0c0a','rgba(0,0,0,0)'],
+          data: [totalDep, buildYield, currentLockYield],
+          backgroundColor: ['rgba(138,106,42,0.75)','rgba(74,122,90,0.75)','rgba(122,90,138,0.75)'],
+          borderColor: ['#0d0c0a','#0d0c0a','#0d0c0a'],
           borderWidth: 2,
         }]
       },
       options: {
         responsive: true, maintainAspectRatio: false,
         circumference: 180, rotation: -90, cutout: '72%',
-        plugins: { legend: { display: false }, tooltip: { ...TT, filter: i => i.dataIndex < 3, callbacks: { label: ctx => ' $'+ctx.parsed.toLocaleString() } } }
+        plugins: { legend: { display: false }, tooltip: { ...TT, callbacks: { label: ctx => ' $'+ctx.parsed.toLocaleString() } } }
       }
     });
 
