@@ -823,7 +823,7 @@ function buildInactiveDashboard(d, today) {
   const frozenYield   = d.frozenYield || d.phase1.buildYieldEarned;
   const totalDeposited = d.totalDepositedActual || d.phase1.totalDeposited;
 
-  const frozenReturnPct = totalDeposited > 0 ? (frozenYield / totalDeposited * 100).toFixed(1) : '0.0';
+  const frozenReturnPct = totalDeposited > 0 ? (frozenYield / totalDeposited * 100).toFixed(2) : '0.00';
   const daysMissed   = frozenDate ? Math.max(0, Math.round((today - frozenDate) / 86400000)) : 0;
   const weeksMissed  = Math.floor(daysMissed / 7);
   const amountBehind = weeksMissed * weeklyDeposit;
