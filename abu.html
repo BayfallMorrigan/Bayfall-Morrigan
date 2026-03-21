@@ -209,7 +209,7 @@ header {
 }
 .frozen-stat-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   border: 1px solid var(--rule2);
 }
 
@@ -823,7 +823,7 @@ function buildInactiveDashboard(d, today) {
   const frozenYield   = d.frozenYield || d.phase1.buildYieldEarned;
   const totalDeposited = d.totalDepositedActual || d.phase1.totalDeposited;
 
-  // Calculate missed deposits from frozen date to today
+  const frozenReturnPct = totalDeposited > 0 ? (frozenYield / totalDeposited * 100).toFixed(1) : '0.0';
   const daysMissed   = frozenDate ? Math.max(0, Math.round((today - frozenDate) / 86400000)) : 0;
   const weeksMissed  = Math.floor(daysMissed / 7);
   const amountBehind = weeksMissed * weeklyDeposit;
@@ -882,6 +882,11 @@ function buildInactiveDashboard(d, today) {
           <div class="stat-label">Weekly Deposit</div>
           <div class="stat-value gold">${fmt(weeklyDeposit)}</div>
           <div class="stat-sub">required to resume</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-label">Return on Deposited Capital</div>
+          <div class="stat-value gold">${frozenReturnPct}%</div>
+          <div class="stat-sub">yield vs. contributions</div>
         </div>
       </div>
     </div>
