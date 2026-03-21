@@ -3,12 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Account Overview — Bayfall Morrigan</title>
-<link rel="icon" type="image/png" href="favicon.png">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<title>Contract Manager — Bayfall Morrigan</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script>
   const firebaseConfig = {
@@ -21,1471 +18,989 @@
     appId: "1:667656292083:web:0238cc4046fe8acd3c1986"
   };
   firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-  const db   = firebase.database();
+  const db = firebase.database();
 </script>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  --black:   #080808;
-  --bg:      #0d0c0a;
-  --surface: #161512;
-  --white:   #f0ede8;
-  --off:     #c8c4bc;
-  --mid:     #7a7670;
-  --dim:     #3a3830;
-  --rule:    #1e1c18;
-  --rule2:   #2a2824;
-  --gold:    #8a6a2a;
-  --gold-lt: #b8922a;
-  --green:   #4a7a5a;
-  --violet:  #7a5a8a;
-  --display: 'Cormorant Garamond', Georgia, serif;
-  --body:    'EB Garamond', Georgia, serif;
-}
-
-html, body {
-  background: var(--black);
-  color: var(--white);
-  font-family: var(--body);
-  font-size: 17px;
-  line-height: 1.8;
-  -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
-}
-
-header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  background: var(--black);
-  border-bottom: 1px solid var(--rule);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 64px;
-  height: 80px;
-}
-
-.logo-img {
-  height: auto;
-  width: 140px;
-  display: block;
-  filter: invert(1) brightness(0.7);
-}
-
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-}
-
-.header-right a {
-  font-family: var(--body);
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
-  text-decoration: none;
-  transition: color 0.25s;
-  cursor: pointer;
-}
-
-.header-right a:hover { color: rgba(255,255,255,0.7); }
-.header-right a.active { color: rgba(240,237,232,0.55); border-bottom: 1px solid var(--dim); padding-bottom: 2px; }
-
-.page { padding-top: 72px; min-height: 100vh; }
-
-/* ── LOADING STATE ── */
-.loading-screen {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 72px);
-  font-family: var(--body);
-  font-size: 11px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--dim);
-}
-
-/* ── ACCOUNT HEADER ── */
-.acct-header {
-  padding: 52px 64px 40px;
-  border-bottom: 1px solid var(--rule);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
-.acct-eyebrow {
-  font-family: var(--body);
-  font-size: 10px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--mid);
-  margin-bottom: 12px;
-}
-
-.acct-name {
-  font-family: var(--display);
-  font-size: clamp(28px, 3vw, 42px);
-  font-weight: 300;
-  color: var(--white);
-  letter-spacing: 0.02em;
-  line-height: 1.1;
-}
-
-.acct-name em { font-style: italic; }
-
-.acct-meta {
-  font-family: var(--body);
-  font-size: 13px;
-  color: var(--mid);
-  margin-top: 10px;
-  letter-spacing: 0.08em;
-}
-
-.acct-status {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-}
-
-.status-badge {
-  font-family: var(--body);
-  font-size: 9px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--gold-lt);
-  border: 1px solid var(--gold);
-  padding: 5px 14px;
-}
-
-.status-badge.phase2 { color: #9a7aaa; border-color: var(--violet); }
-.status-badge.inactive { color: #aa7a3a; border-color: #6a4a1a; }
-
-/* ── INACTIVE BANNER ── */
-.inactive-banner {
-  background: rgba(138,90,30,0.08);
-  border-bottom: 1px solid #3a2810;
-  padding: 20px 64px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.inactive-title {
-  font-family: var(--display);
-  font-size: 15px;
-  letter-spacing: 0.1em;
-  color: #c8922a;
-  margin-bottom: 4px;
-}
-.inactive-sub {
-  font-family: var(--body);
-  font-size: 13px;
-  color: var(--mid);
-  font-style: italic;
-}
-.inactive-amount {
-  text-align: right;
-}
-.inactive-amount-val {
-  font-family: var(--display);
-  font-size: 28px;
-  color: #c8922a;
-  letter-spacing: 0.02em;
-}
-.inactive-amount-label {
-  font-family: var(--body);
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--mid);
-  margin-top: 2px;
-}
-.frozen-stat-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  border: 1px solid var(--rule2);
-}
-
-.last-updated {
-  font-family: var(--body);
-  font-size: 11px;
-  color: var(--mid);
-  letter-spacing: 0.1em;
-  font-style: italic;
-}
-
-/* ── PHASE INDICATOR ── */
-.phase-banner {
-  padding: 16px 64px;
-  border-bottom: 1px solid var(--rule);
-  display: flex;
-  gap: 0;
-  overflow-x: auto;
-}
-
-.phase-tab {
-  font-family: var(--body);
-  font-size: 9px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--dim);
-  padding: 8px 20px;
-  border: 1px solid var(--rule2);
-  margin-right: -1px;
-}
-
-.phase-tab.active {
-  color: var(--gold-lt);
-  border-color: var(--gold);
-  background: rgba(138,106,42,0.06);
-  z-index: 1;
-}
-
-.phase-tab.complete {
-  color: #6aaa7a;
-  border-color: #2a4a3a;
-}
-
-.phase-tab.phase2-active {
-  color: #9a7aaa;
-  border-color: var(--violet);
-  background: rgba(122,90,138,0.06);
-  z-index: 1;
-}
-
-/* ── STAT GRID ── */
-.stats-section {
-  padding: 40px 64px;
-  border-bottom: 1px solid var(--rule);
-}
-
-.stats-section-label {
-  font-family: var(--body);
-  font-size: 9px;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--mid);
-  margin-bottom: 24px;
-}
-
-.stat-grid {
-  display: grid;
-  border: 1px solid var(--rule2);
-}
-
-.stat-grid.cols-6 { grid-template-columns: repeat(6, 1fr); }
-.stat-grid.cols-5 { grid-template-columns: repeat(5, 1fr); }
-
-.stat-cell {
-  padding: 24px 20px;
-  border-right: 1px solid var(--rule2);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.stat-cell:last-child { border-right: none; }
-
-.stat-label {
-  font-family: var(--body);
-  font-size: 9px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--mid);
-  line-height: 1.4;
-}
-
-.stat-value {
-  font-family: var(--display);
-  font-size: 22px;
-  font-weight: 400;
-  color: var(--white);
-  letter-spacing: 0.02em;
-  line-height: 1.1;
-}
-
-.stat-value.gold  { color: var(--gold-lt); }
-.stat-value.green { color: #6aaa7a; }
-.stat-value.violet { color: #9a7aaa; }
-.stat-value.dim   { color: var(--off); font-size: 18px; }
-
-.stat-sub {
-  font-family: var(--body);
-  font-size: 11px;
-  color: var(--mid);
-  font-style: italic;
-}
-
-/* ── PROGRESS BAR ── */
-.progress-pct {
-  font-family: var(--display);
-  font-size: 22px;
-  color: var(--gold-lt);
-  letter-spacing: 0.02em;
-  line-height: 1.1;
-}
-
-.progress-track {
-  height: 2px;
-  background: var(--dim);
-  width: 100%;
-  margin: 6px 0;
-}
-
-.progress-fill {
-  height: 2px;
-  background: var(--gold);
-  transition: width 1s ease;
-}
-
-/* ── CHARTS SECTION ── */
-.charts-section {
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 1px;
-  background: var(--rule);
-  border-bottom: 1px solid var(--rule);
-}
-
-.chart-panel {
-  background: var(--bg);
-  padding: 36px 32px;
-}
-
-.chart-panel-label {
-  font-family: var(--body);
-  font-size: 9px;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--mid);
-  margin-bottom: 6px;
-}
-
-.chart-panel-sub {
-  font-family: var(--body);
-  font-size: 13px;
-  color: var(--dim);
-  font-style: italic;
-  margin-bottom: 28px;
-}
-
-.chart-wrap { position: relative; height: 260px; }
-
-.half-donut-wrap {
-  position: relative;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.donut-center {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  pointer-events: none;
-}
-
-.donut-pct {
-  font-family: var(--display);
-  font-size: 28px;
-  font-weight: 300;
-  color: var(--white);
-  letter-spacing: 0.02em;
-  line-height: 1;
-}
-
-.donut-label {
-  font-family: var(--body);
-  font-size: 9px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--mid);
-  margin-top: 6px;
-}
-
-.legend {
-  display: flex;
-  gap: 16px;
-  margin-top: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--body);
-  font-size: 12px;
-  color: var(--mid);
-  letter-spacing: 0.1em;
-}
-
-.legend-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-/* ── TRANSACTION HISTORY ── */
-.txn-section { padding: 48px 64px; }
-
-.txn-section-label {
-  font-family: var(--body);
-  font-size: 9px;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--mid);
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--rule2);
-}
-
-.txn-row {
-  display: grid;
-  grid-template-columns: 120px 1fr 140px;
-  align-items: center;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--rule);
-  gap: 24px;
-}
-
-.txn-row:last-child { border-bottom: none; }
-
-.txn-date {
-  font-family: var(--body);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  color: var(--mid);
-  text-transform: uppercase;
-}
-
-.txn-desc {
-  font-family: var(--body);
-  font-size: 15px;
-  color: var(--off);
-  font-style: italic;
-}
-
-.txn-amt {
-  font-family: var(--display);
-  font-size: 16px;
-  letter-spacing: 0.04em;
-  text-align: right;
-}
-
-.txn-amt.credit { color: #6aaa7a; }
-.txn-amt.debit  { color: #aa6a6a; }
-.txn-amt.neutral { color: var(--mid); }
-
-.txn-empty {
-  font-family: var(--body);
-  font-size: 13px;
-  color: var(--dim);
-  font-style: italic;
-  padding: 20px 0;
-}
-
-/* ── FOOTER ── */
-footer {
-  border-top: 1px solid var(--rule);
-  padding: 24px 64px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.footer-mark {
-  font-family: var(--display);
-  font-size: 11px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--dim);
-}
-
-.footer-note {
-  font-family: var(--body);
-  font-size: 11px;
-  color: var(--dim);
-  font-style: italic;
-  letter-spacing: 0.06em;
-}
-
-.logout-link {
-  font-family: var(--body);
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--mid);
-  text-decoration: none;
-  cursor: pointer;
-  border-bottom: 1px solid var(--rule2);
-  padding-bottom: 2px;
-  transition: color 0.2s;
-}
-
-.logout-link:hover { color: var(--off); }
-
-/* ── TABLET ── */
-@media (max-width: 960px) {
-  header { padding: 0 32px; }
-  .acct-header { padding: 40px 32px 28px; flex-direction: column; align-items: flex-start; gap: 16px; }
-  .stats-section { padding: 28px 32px; }
-  .stat-grid { grid-template-columns: repeat(3, 1fr); }
-  .stat-grid.cols-6 { grid-template-columns: repeat(3, 1fr); }
-  .stat-grid.cols-5 { grid-template-columns: repeat(3, 1fr); }
-  .charts-section { grid-template-columns: 1fr; }
-  .txn-section { padding: 32px 32px; }
-  footer { padding: 20px 32px; }
-}
-
-/* ── MOBILE ── */
-@media (max-width: 600px) {
-  header { padding: 0 20px; height: 64px; }
-  .logo-img { width: 108px; }
-  .header-right { gap: 20px; }
-  .page { padding-top: 64px; }
-  .acct-header { padding: 28px 20px 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
-  .acct-status { align-items: flex-start; }
-  .acct-name { font-size: clamp(22px, 7vw, 34px); }
-  .stats-section { padding: 20px 20px; }
-  .stat-grid { grid-template-columns: repeat(2, 1fr); }
-  .stat-grid.cols-6 { grid-template-columns: repeat(2, 1fr); }
-  .stat-grid.cols-5 { grid-template-columns: repeat(2, 1fr); }
-  .stat-cell { padding: 16px 14px; text-align: center; gap: 3px; }
-  .progress-track { display: none; }
-  .progress-pct { line-height: 1.1; }
-  .charts-section { grid-template-columns: 1fr; }
-  .chart-panel { padding: 24px 20px; }
-  .chart-panel-donut { display: flex; flex-direction: column; align-items: center; text-align: center; }
-  .txn-section { padding: 24px 20px; }
-  .txn-row { grid-template-columns: 90px 1fr; gap: 8px 12px; }
-  .txn-amt { grid-column: 2; text-align: left; }
-  .chart-wrap { height: 200px; }
-  footer { padding: 16px 20px; flex-direction: column; gap: 8px; text-align: center; }
-
-  /* Phase tab stacking */
-  .phase-sep { display: none; }
-  .phase-main { display: block; }
-  .phase-sub { display: block; }
-  .phase-tab { text-align: center; flex: 1; }
-
-  /* Inactive banner */
-  .inactive-banner { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px 20px; }
-  .inactive-amount { text-align: left; }
-}
-
-/* ── MATURITY SECTION ── */
-.maturity-section {
-  padding: 48px 64px;
-  border-bottom: 1px solid var(--rule);
-  background: rgba(138,106,42,0.03);
-}
-.maturity-section-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 28px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--rule2);
-}
-.maturity-eyebrow {
-  font-family: var(--body);
-  font-size: 9px;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--gold-lt);
-  margin-bottom: 6px;
-}
-.maturity-title {
-  font-family: var(--display);
-  font-size: 22px;
-  font-weight: 300;
-  color: var(--white);
-  letter-spacing: 0.04em;
-}
-.maturity-title em { font-style: italic; }
-.maturity-date-badge {
-  font-family: var(--body);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gold-lt);
-  border: 1px solid rgba(138,106,42,0.4);
-  padding: 5px 14px;
-}
-.maturity-charts {
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 1px;
-  background: var(--rule2);
-  border: 1px solid var(--rule2);
-  margin-top: 28px;
-}
-.maturity-chart-panel {
-  background: var(--bg);
-  padding: 28px 28px 32px;
-}
-.maturity-stat-row {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1px;
-  background: var(--rule2);
-  border: 1px solid var(--rule2);
-  margin-bottom: 0;
-}
-.maturity-stat-cell {
-  background: var(--bg);
-  padding: 20px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-@media (max-width: 960px) {
-  .maturity-section { padding: 28px 32px; }
-  .maturity-charts { grid-template-columns: 1fr; }
-  .maturity-stat-row { grid-template-columns: repeat(2, 1fr); }
-  .maturity-stat-cell:last-child { grid-column: 1 / -1; }
-}
-@media (max-width: 600px) {
-  .maturity-section { padding: 20px 20px; }
-  .maturity-stat-row { grid-template-columns: repeat(2, 1fr); }
-  .maturity-stat-cell { text-align: center; }
-  .maturity-stat-cell:last-child { grid-column: 1 / -1; align-items: center; text-align: center; }
-  .maturity-chart-panel { padding: 20px 16px 24px; }
-}
-
-/* ── HAMBURGER ── */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  width: 36px;
-  height: 36px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 4px;
-  z-index: 200;
-  flex-shrink: 0;
-}
-.hamburger span {
-  display: block;
-  width: 22px;
-  height: 1px;
-  background: rgba(255,255,255,0.6);
-  transition: transform 0.3s, opacity 0.3s;
-  transform-origin: center;
-}
-.hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-.mobile-menu {
-  display: none;
-  position: fixed;
-  top: 64px;
-  left: 0; right: 0;
-  background: var(--black);
-  border-bottom: 1px solid var(--rule);
-  flex-direction: column;
-  padding: 20px 20px 28px;
-  gap: 0;
-  z-index: 99;
-  transform: translateY(-8px);
-  opacity: 0;
-  transition: transform 0.25s ease, opacity 0.25s ease;
-  pointer-events: none;
-}
-.mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-.mobile-menu a {
-  font-family: var(--body);
-  font-size: 13px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.55);
-  text-decoration: none;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--rule);
-  transition: color 0.2s;
-  cursor: pointer;
-}
-.mobile-menu a:last-child { border-bottom: none; }
-.mobile-menu a:hover { color: var(--white); }
-
-@media (max-width: 600px) {
-  .hamburger { display: flex; }
-  .header-right { display: none; }
-  .mobile-menu { display: flex; }
-  .acct-header { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .acct-status { align-items: flex-start; }
-  .phase-banner { padding: 12px 20px; }
-  .phase-tab { padding: 10px 16px; font-size: 8px; }
-}
+  --bg: #f5f3ee;
+  --paper: #faf9f6;
+  --ink: #1a1714;
+  --ink2: #3d3830;
+  --muted: #8c8577;
+  --border: #ddd9d0;
+  --border2: #c8c3b8;
+  --green: #1d6b3e;
+  --green-light: #e8f5ee;
+  --red: #8b1a1a;
+  --red-light: #f9eaea;
+  --gold: #8b6914;
+  --gold-light: #f7f0e0;
+  --blue: #14508b;
+  --blue-light: #e0eaf7;
+  --amber: #b45309;
+  --amber-light: #fef3c7;
+  --violet: #6b3fa0;
+  --violet-light: #f3eeff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Mono',monospace;display:flex;flex-direction:column}
+
+/* TOPBAR */
+.topbar{background:var(--ink);color:var(--bg);display:flex;align-items:stretch;height:52px;flex-shrink:0}
+.topbar-logo{display:flex;align-items:center;padding:0 24px;border-right:1px solid #3d3830;font-family:'Syne',sans-serif;font-weight:800;font-size:15px;letter-spacing:2px;text-transform:uppercase;flex-shrink:0;flex-direction:column;justify-content:center}
+.topbar-logo .sub{font-size:9px;letter-spacing:3px;color:#8c8577;font-weight:400}
+.topbar-stats{display:flex;align-items:center;flex:1;padding:0 8px}
+.ts-divider{width:1px;background:#3d3830;height:28px;flex-shrink:0;margin:0 4px}
+.cap-stat{display:flex;flex-direction:column;justify-content:center;padding:0 16px}
+.cap-stat label{font-size:8px;letter-spacing:2px;color:#8c8577;white-space:nowrap}
+.cap-stat .val{font-family:'Syne';font-size:14px;font-weight:700;white-space:nowrap}
+.val.green{color:#4caf50}.val.gold{color:#ffc107}.val.blue{color:#64b5f6}.val.red{color:#ef5350}
+.topbar-actions{display:flex;align-items:center;gap:8px;padding:0 16px;border-left:1px solid #3d3830;flex-shrink:0}
+.tbtn{padding:6px 14px;font-family:'IBM Plex Mono';font-size:10px;letter-spacing:1px;cursor:pointer;border:1px solid #3d3830;background:transparent;color:#8c8577;border-radius:3px;transition:all .15s;text-transform:uppercase}
+.tbtn:hover{border-color:#8c8577;color:var(--bg)}
+.tbtn.primary{background:var(--bg);color:var(--ink);border-color:var(--bg)}
+
+/* WORKSPACE */
+.workspace{display:grid;grid-template-columns:300px 1fr 420px;flex:1;overflow:hidden}
+
+/* PANELS */
+.panel{border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;background:var(--paper)}
+.panel-header{padding:14px 18px 12px;border-bottom:1px solid var(--border);flex-shrink:0}
+.panel-title{font-family:'Syne';font-weight:700;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.panel-sub{font-size:9px;color:var(--muted);letter-spacing:1px}
+.panel-body{flex:1;overflow-y:auto;padding:14px 16px}
+
+/* CLIENT LIST */
+.client-card{background:var(--bg);border:1px solid var(--border);border-radius:3px;padding:10px 12px;margin-bottom:6px;cursor:pointer;transition:all .15s}
+.client-card:hover{border-color:var(--border2)}
+.client-card.selected{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+.cc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.cc-name{font-family:'Syne';font-weight:700;font-size:12px}
+.cc-badge{font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:10px}
+.cc-badge.standard{background:var(--blue-light);color:var(--blue)}
+.cc-badge.abu{background:var(--violet-light);color:var(--violet)}
+.cc-badge.inactive{background:var(--amber-light);color:var(--amber)}
+.cc-meta{font-size:9px;color:var(--muted)}
+.add-client-btns{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px}
+.add-btn-type{padding:8px;text-align:center;font-size:9px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--muted);border-radius:3px;transition:all .15s;font-family:'IBM Plex Mono'}
+.add-btn-type:hover{border-color:var(--ink);color:var(--ink)}
+.add-btn-type.std-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+.add-btn-type.abu-btn:hover{border-color:var(--violet);color:var(--violet);background:var(--violet-light)}
+
+/* MAIN AREA — contract view/editor */
+.main-area{display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+.main-header{padding:14px 20px;border-bottom:1px solid var(--border);background:var(--paper);flex-shrink:0;display:flex;justify-content:space-between;align-items:center}
+.main-title{font-family:'Syne';font-weight:800;font-size:13px;letter-spacing:2px;text-transform:uppercase}
+.main-actions{display:flex;gap:6px}
+.main-body{flex:1;overflow-y:auto;padding:20px}
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--muted);gap:8px}
+.empty-icon{font-size:28px;opacity:.3}
+.empty-text{font-size:9px;letter-spacing:2px;text-transform:uppercase}
+
+/* FORM SECTIONS */
+.form-section{margin-bottom:20px}
+.form-section-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-grid.cols3{grid-template-columns:1fr 1fr 1fr}
+.form-grid.cols1{grid-template-columns:1fr}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.field input,.field select{width:100%;background:var(--paper);border:1px solid var(--border);border-radius:3px;padding:7px 9px;font-family:'IBM Plex Mono';font-size:12px;color:var(--ink);outline:none;transition:border .15s}
+.field input:focus,.field select:focus{border-color:var(--ink2)}
+.field .hint{font-size:9px;color:var(--muted);font-style:italic}
+.calc-preview{background:var(--paper);border:1px solid var(--border);border-radius:3px;padding:12px;margin-top:8px}
+.calc-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid var(--border)}
+.calc-row:last-child{border-bottom:none}
+.calc-label{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.calc-val{font-family:'Syne';font-size:13px;font-weight:700}
+.calc-val.green{color:var(--green)}.calc-val.gold{color:var(--gold)}.calc-val.blue{color:var(--blue)}.calc-val.violet{color:var(--violet)}
+
+/* STATUS SELECTOR */
+.status-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:4px}
+.status-opt{padding:6px 4px;text-align:center;font-size:8px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--muted);border-radius:3px;transition:all .15s;font-family:'IBM Plex Mono'}
+.status-opt.active[data-s="active"]{background:var(--green-light);border-color:var(--green);color:var(--green)}
+.status-opt.active[data-s="inactive"]{background:var(--amber-light);border-color:var(--amber);color:var(--amber)}
+.status-opt.active[data-s="complete"]{background:var(--blue-light);border-color:var(--blue);color:var(--blue)}
+
+/* SAVE / ACTION BUTTONS */
+.save-btn{padding:9px 20px;background:var(--ink);color:var(--bg);border:none;font-family:'IBM Plex Mono';font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:background .15s}
+.save-btn:hover{background:var(--ink2)}
+.danger-btn{padding:9px 16px;background:transparent;color:var(--red);border:1px solid var(--red-light);font-family:'IBM Plex Mono';font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:all .15s}
+.danger-btn:hover{background:var(--red-light)}
+.cancel-btn{padding:9px 16px;background:transparent;color:var(--muted);border:1px solid var(--border);font-family:'IBM Plex Mono';font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:3px}
+.cancel-btn:hover{border-color:var(--ink2);color:var(--ink)}
+
+/* TRANSACTION PANEL */
+.txn-panel{display:flex;flex-direction:column;overflow:hidden;border-left:1px solid var(--border);background:var(--paper)}
+.txn-header{padding:14px 18px 12px;border-bottom:1px solid var(--border);flex-shrink:0}
+.txn-add-form{padding:12px 16px;border-bottom:1px solid var(--border);flex-shrink:0;display:flex;flex-direction:column;gap:8px}
+.txn-list{flex:1;overflow-y:auto;padding:10px 14px}
+.txn-row{display:grid;grid-template-columns:90px 1fr 80px 24px;gap:6px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
+.txn-row:last-child{border-bottom:none}
+.txn-date{font-size:10px;color:var(--muted);letter-spacing:.5px}
+.txn-desc{font-size:11px;color:var(--ink2)}
+.txn-amt{font-family:'Syne';font-size:12px;font-weight:700;text-align:right}
+.txn-amt.credit{color:var(--green)}.txn-amt.debit{color:var(--red)}.txn-amt.neutral{color:var(--muted)}
+.txn-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;padding:0;transition:color .15s;font-family:'IBM Plex Mono'}
+.txn-del:hover{color:var(--red)}
+.txn-empty{font-size:10px;color:var(--muted);font-style:italic;padding:12px 0}
+.txn-type-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px}
+.txn-type-opt{padding:5px;text-align:center;font-size:8px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--muted);border-radius:3px;font-family:'IBM Plex Mono';transition:all .15s}
+.txn-type-opt.active[data-t="credit"]{background:var(--green-light);border-color:var(--green);color:var(--green)}
+.txn-type-opt.active[data-t="debit"]{background:var(--red-light);border-color:var(--red);color:var(--red)}
+.txn-type-opt.active[data-t="neutral"]{background:var(--bg);border-color:var(--border2);color:var(--muted)}
+.add-txn-btn{width:100%;padding:7px;background:var(--ink);color:var(--bg);border:none;font-family:'IBM Plex Mono';font-size:9px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:3px}
+.add-txn-btn:hover{background:var(--ink2)}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;right:20px;background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:3px;font-size:10px;letter-spacing:1px;text-transform:uppercase;z-index:999;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+
+
+
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
 </style>
 </head>
 <body>
 
-<header>
-  <a href="https://www.bayfallmorrigan.com"><img class="logo-img" src="logopng.png" alt="Bayfall Morrigan"></a>
-  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-  <div class="header-right">
-    <a href="https://www.bayfallmorrigan.com">Home</a>
-    <a class="active">My Account</a>
-    <a class="logout-link" id="signOutBtn">Sign Out</a>
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-logo">BAYFALL MORRIGAN<div class="sub">CONTRACT MANAGER</div></div>
+  <div class="topbar-stats">
+    <div class="cap-stat"><label>Total Clients</label><div class="val blue" id="stat-total">—</div></div>
+    <div class="ts-divider"></div>
+    <div class="cap-stat"><label>Active</label><div class="val green" id="stat-active">—</div></div>
+    <div class="ts-divider"></div>
+    <div class="cap-stat"><label>Inactive</label><div class="val gold" id="stat-inactive">—</div></div>
+    <div class="ts-divider"></div>
+    <div class="cap-stat"><label>Standard</label><div class="val blue" id="stat-std">—</div></div>
+    <div class="ts-divider"></div>
+    <div class="cap-stat"><label>ABU</label><div class="val" id="stat-abu" style="color:#9c7ad4">—</div></div>
+    <div class="ts-divider"></div>
+    <div class="cap-stat"><label>Firebase</label><div class="val" id="conn-status" style="color:#8c8577">—</div></div>
   </div>
-</header>
-
-<div class="mobile-menu" id="mobile-menu">
-  <a href="https://www.bayfallmorrigan.com" onclick="closeMenu()">Home</a>
-  <a onclick="closeMenu()">My Account</a>
-  <a id="mobileSignOut" onclick="closeMenu()">Sign Out</a>
 </div>
 
-<div class="page" id="mainPage">
-  <div class="loading-screen" id="loadingScreen">Loading account data...</div>
+<!-- WORKSPACE -->
+<div class="workspace">
+
+  <!-- LEFT: CLIENT LIST -->
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-title">Clients</div>
+      <div class="panel-sub">Select to view or edit</div>
+    </div>
+    <div class="panel-body">
+      <div class="add-client-btns">
+        <div class="add-btn-type std-btn" onclick="startNewContract('standard')">+ Standard</div>
+        <div class="add-btn-type abu-btn" onclick="startNewContract('abu')">+ ABU</div>
+      </div>
+      <div id="client-list"></div>
+    </div>
+  </div>
+
+  <!-- CENTER: CONTRACT EDITOR -->
+  <div class="main-area">
+    <div class="main-header">
+      <div class="main-title" id="main-title">Select a Client</div>
+      <div class="main-actions" id="main-actions"></div>
+    </div>
+    <div class="main-body" id="main-body">
+      <div class="empty-state">
+        <div class="empty-icon">◈</div>
+        <div class="empty-text">Select a client or create new</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: TRANSACTIONS -->
+  <div class="txn-panel">
+    <div class="txn-header">
+      <div class="panel-title">Transaction History</div>
+      <div class="panel-sub" id="txn-client-name">No client selected</div>
+    </div>
+    <div class="txn-add-form" id="txn-add-form" style="display:none">
+      <div class="field">
+        <label>Date</label>
+        <input type="date" id="txn-date">
+      </div>
+      <div class="field">
+        <label>Description</label>
+        <input type="text" id="txn-desc" placeholder="Weekly contribution...">
+      </div>
+      <div class="field">
+        <label>Amount ($)</label>
+        <input type="number" id="txn-amount" placeholder="0.00" min="0" step="0.01">
+      </div>
+      <div class="field">
+        <label>Type</label>
+        <div class="txn-type-row">
+          <div class="txn-type-opt active" data-t="credit" onclick="selectTxnType(this)">Credit</div>
+          <div class="txn-type-opt" data-t="debit" onclick="selectTxnType(this)">Debit</div>
+          <div class="txn-type-opt" data-t="neutral" onclick="selectTxnType(this)">Neutral</div>
+        </div>
+      </div>
+      <button class="add-txn-btn" onclick="addTransaction()">Add Transaction</button>
+    </div>
+    <div class="txn-list" id="txn-list">
+      <div class="txn-empty">No client selected.</div>
+    </div>
+  </div>
+
 </div>
+
+<div class="toast" id="toast"></div>
 
 <script>
-// ── Helpers ──────────────────────────────────────────────
-const fmt = n => '$' + Number(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
-const fmtDate = s => {
-  if (!s) return '—';
-  const d = new Date(s + 'T12:00:00');
-  return d.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
-};
-const daysBetween = (a, b) => Math.round((b - a) / 86400000);
-const weeksBetween = (a, b) => Math.max(0, Math.floor(daysBetween(a, b) / 7));
+// ══════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════
+let clients = {};
+let selectedKey = null;
+let selectedTxnType = 'credit';
+let isNewContract = false;
+let newContractType = null;
 
-const TT = {
-  backgroundColor: '#161512',
-  borderColor: '#2a2824',
-  borderWidth: 1,
-  titleColor: '#7a7670',
-  bodyColor: '#f0ede8',
-  titleFont: { family: "'EB Garamond', serif", size: 10 },
-  bodyFont: { family: "'Cormorant Garamond', serif", size: 14 },
-};
-
-// ── Sign out ─────────────────────────────────────────────
-document.getElementById('signOutBtn').addEventListener('click', () => {
-  auth.signOut().then(() => window.location.href = 'login.html');
-});
-document.getElementById('mobileSignOut').addEventListener('click', () => {
-  auth.signOut().then(() => window.location.href = 'login.html');
-});
-
-function toggleMenu() {
-  document.getElementById('hamburger').classList.toggle('open');
-  document.getElementById('mobile-menu').classList.toggle('open');
-}
-function closeMenu() {
-  document.getElementById('hamburger').classList.remove('open');
-  document.getElementById('mobile-menu').classList.remove('open');
-}
-
-// ── Auth guard + data load ───────────────────────────────
-auth.onAuthStateChanged(user => {
-  if (!user) {
-    window.location.href = 'login.html';
-    return;
-  }
-  db.ref('clients').orderByChild('uid').equalTo(user.uid).once('value').then(snap => {
-    const data = snap.val();
-    if (!data) {
-      document.getElementById('loadingScreen').textContent = 'Account not found.';
-      return;
-    }
-    buildDashboard(Object.values(data)[0]);
-  }).catch(() => {
-    document.getElementById('loadingScreen').textContent = 'Error loading account. Please try again.';
+// ══════════════════════════════════════════
+// FIREBASE
+// ══════════════════════════════════════════
+function initDB(){
+  setConnStatus('connecting');
+  db.ref('clients').on('value', snap => {
+    setConnStatus('connected');
+    clients = snap.val() || {};
+    renderClientList();
+    updateStats();
+    if(selectedKey && clients[selectedKey]) renderContractView(selectedKey);
+  }, err => {
+    setConnStatus('error');
+    const el = document.getElementById('client-list');
+    if(el) el.innerHTML = `<div style="padding:12px;font-size:10px;color:var(--red);line-height:1.6"><strong>Firebase error</strong><br>${err.code}<br><span style="color:var(--muted)">${err.message}</span></div>`;
+    toast('Firebase: ' + err.code);
   });
-});
-
-// ── Build dashboard ──────────────────────────────────────
-function buildInactiveDashboard(d, today) {
-  const frozenDate    = d.frozenDate ? new Date(d.frozenDate + 'T12:00:00') : null;
-  const weeklyDeposit = d.phase1.weeklyDeposit;
-  const frozenBalance = d.frozenBalance || d.phase1.finalBalance;
-  const frozenYield   = d.frozenYield || d.phase1.buildYieldEarned;
-  const totalDeposited = d.totalDepositedActual || d.phase1.totalDeposited;
-
-  const frozenReturnPct = totalDeposited > 0 ? (frozenYield / totalDeposited * 100).toFixed(2) : '0.00';
-  const daysMissed   = frozenDate ? Math.max(0, Math.round((today - frozenDate) / 86400000)) : 0;
-  const weeksMissed  = Math.floor(daysMissed / 7);
-  const amountBehind = weeksMissed * weeklyDeposit;
-
-  const page = document.getElementById('mainPage');
-  page.innerHTML = `
-    <div class="acct-header">
-      <div>
-        <div class="acct-eyebrow">Account Build-Up Program</div>
-        <div class="acct-name">${d.clientName.split(' ')[0]} <em>${d.clientName.split(' ').slice(1).join(' ')}</em></div>
-        <div class="acct-meta">Program started ${fmtDate(d.phase1.startDate)} &nbsp;·&nbsp; Two-Phase Contract</div>
-      </div>
-      <div class="acct-status">
-        <div class="status-badge inactive">Inactive</div>
-        <div class="last-updated">As of ${today.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
-      </div>
-    </div>
-
-    <div class="inactive-banner">
-      <div>
-        <div class="inactive-title">Account Inactive — Deposits Paused</div>
-        <div class="inactive-sub">Last deposit received ${fmtDate(d.lastDepositDate)}</div>
-        <div class="inactive-sub">Account frozen ${fmtDate(d.frozenDate)}</div>
-        <div class="inactive-sub">${weeksMissed} weekly deposits missed</div>
-      </div>
-      <div class="inactive-amount">
-        <div class="inactive-amount-val">${fmt(amountBehind)}</div>
-        <div class="inactive-amount-label">Outstanding at ${fmt(weeklyDeposit)} / week</div>
-      </div>
-    </div>
-
-    <div class="stats-section">
-      <div class="stats-section-label">Account Summary — Frozen State</div>
-      <div class="stat-grid frozen-stat-grid">
-        <div class="stat-cell">
-          <div class="stat-label">Total Deposited</div>
-          <div class="stat-value">${fmt(totalDeposited)}</div>
-          <div class="stat-sub">actual contributions</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Yield Earned</div>
-          <div class="stat-value green">${fmt(frozenYield)}</div>
-          <div class="stat-sub">while active</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Frozen Balance</div>
-          <div class="stat-value">${fmt(frozenBalance)}</div>
-          <div class="stat-sub">as of ${fmtDate(d.frozenDate)}</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Target Balance</div>
-          <div class="stat-value dim">${fmt(d.phase1.targetBalance)}</div>
-          <div class="stat-sub">${fmt(d.phase1.targetBalance - frozenBalance)} remaining to target</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Weekly Deposit</div>
-          <div class="stat-value gold">${fmt(weeklyDeposit)}</div>
-          <div class="stat-sub">required to resume</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Principal Return</div>
-          <div class="stat-value gold">${frozenReturnPct}%</div>
-          <div class="stat-sub">yield vs. contributions</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="txn-section">
-      <div class="txn-section-label">Transaction History</div>
-      <div id="txnList"></div>
-    </div>
-
-    <footer>
-      <div class="footer-mark">Bayfall Morrigan</div>
-      <div class="footer-note">This account statement is for informational purposes only.</div>
-      <a class="logout-link" id="footerSignOut">Sign Out</a>
-    </footer>
-  `;
-
-  document.getElementById('footerSignOut').addEventListener('click', () => {
-    auth.signOut().then(() => window.location.href = 'login.html');
-  });
-
-  renderTransactions(d.transactions);
-
-  document.getElementById('loadingScreen').style.display = 'none';
-  document.getElementById('pageContent') && (document.getElementById('pageContent').style.display = 'block');
 }
 
-function buildDashboard(d) {
-  const today       = new Date();
-  const p1Start     = new Date(d.phase1.startDate + 'T12:00:00');
-  const p1MatDate   = new Date(d.phase1.phase1MaturityDate + 'T12:00:00');
-  const p2MatDate   = new Date(d.phase2.lockMaturityDate + 'T12:00:00');
-
-  const weeksElapsed = Math.min(weeksBetween(p1Start, today) + 1, d.phase1.weeksToTarget);
-  const isInactive   = d.status === 'inactive';
-
-  // Handle inactive accounts separately
-  if (isInactive) {
-    buildInactiveDashboard(d, today);
-    return;
-  }
-
-  const inPhase1     = today < p1MatDate;
-  const inPhase2     = !inPhase1 && today < p2MatDate;
-  const complete     = today >= p2MatDate;
-
-  // ── Calculate live values ──
-  const p1Weeks      = d.phase1.weeksToTarget;
-  const p1Progress   = inPhase1 ? Math.min(weeksElapsed / p1Weeks * 100, 100) : 100;
-
-  // Deposits so far (weekly * weeks, capped at total)
-  const depositsToDate = inPhase1
-    ? Math.min(weeksElapsed * d.phase1.weeklyDeposit, d.phase1.totalDeposited)
-    : d.phase1.totalDeposited;
-
-  // Yield to date in phase 1 — interpolate from chart data
-  let yieldToDate = 0;
-  if (d.weeklyChartData && d.weeklyChartData.yieldLayer) {
-    const yl = d.weeklyChartData.yieldLayer;
-    const idx = Math.min(weeksElapsed, yl.length - 1);
-    yieldToDate = yl[idx] || 0;
-  }
-
-  const currentBalance = inPhase1
-    ? depositsToDate + yieldToDate
-    : d.phase1.finalBalance;
-
-  // Phase 2 live yield
-  let p2YieldToDate = 0;
-  let p2Balance = d.phase1.finalBalance;
-  if (!inPhase1) {
-    const p2Start   = new Date(d.phase2.lockStartDate + 'T12:00:00');
-    const daysIn    = Math.max(0, daysBetween(p2Start, today));
-    const monthsIn  = daysIn / 30.44;
-    const monthRate = d.phase2.lockYieldRateMonthly / 100;
-    p2Balance = d.phase1.finalBalance * Math.pow(1 + monthRate, monthsIn);
-    p2YieldToDate = p2Balance - d.phase1.finalBalance;
-  }
-
-  // Phase 2 progress
-  const p2TotalDays   = daysBetween(new Date(d.phase2.lockStartDate + 'T12:00:00'), p2MatDate);
-  const p2DaysElapsed = inPhase2 ? daysBetween(new Date(d.phase2.lockStartDate + 'T12:00:00'), today) : p2TotalDays;
-  const p2Progress    = Math.min(p2DaysElapsed / p2TotalDays * 100, 100);
-
-  // Days/months remaining
-  const daysToP1 = Math.max(0, daysBetween(today, p1MatDate));
-  const daysToP2 = Math.max(0, daysBetween(today, p2MatDate));
-
-  // Return on deposit
-  const totalInvested = d.phase1.totalDeposited;
-  const currentReturn = inPhase1
-    ? (yieldToDate / totalInvested * 100)
-    : ((p2YieldToDate + d.phase1.buildYieldEarned) / totalInvested * 100);
-
-  // ── Status badge ──
-  const statusText  = complete ? 'Complete' : inPhase1 ? 'Phase I — Active' : 'Phase II — Active';
-  const statusClass = inPhase2 ? 'status-badge phase2' : 'status-badge';
-
-  // ── Phase tabs ──
-  const p1TabClass = inPhase1 ? 'phase-tab active' : 'phase-tab complete';
-  const p2TabClass = complete ? 'phase-tab complete' : inPhase2 ? 'phase-tab phase2-active' : 'phase-tab';
-
-  // ── Build HTML ──
-  const page = document.getElementById('mainPage');
-  page.innerHTML = `
-    <div class="acct-header">
-      <div>
-        <div class="acct-eyebrow">Account Build-Up Program</div>
-        <div class="acct-name">${d.clientName.split(' ')[0]} <em>${d.clientName.split(' ').slice(1).join(' ')}</em></div>
-        <div class="acct-meta">Program started ${fmtDate(d.phase1.startDate)} &nbsp;·&nbsp; Two-Phase Contract</div>
-      </div>
-      <div class="acct-status">
-        <div class="${statusClass}">${statusText}</div>
-        <div class="last-updated">As of ${today.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
-      </div>
-    </div>
-
-    <div class="phase-banner">
-      <div class="${p1TabClass}"><span class="phase-main">Phase I</span><span class="phase-sep"> &nbsp;·&nbsp; </span><span class="phase-sub">Build-Up${!inPhase1 ? ' ✓' : ''}</span></div>
-      <div class="${p2TabClass}"><span class="phase-main">Phase II</span><span class="phase-sep"> &nbsp;·&nbsp; </span><span class="phase-sub">Lock Contract${complete ? ' ✓' : ''}</span></div>
-    </div>
-
-    ${inPhase1 ? buildPhase1Stats(d, weeksElapsed, depositsToDate, yieldToDate, currentBalance, p1Progress, daysToP1) : ''}
-    ${!inPhase1 ? buildPhase2Stats(d, p2Balance, p2YieldToDate, p2Progress, daysToP2) : ''}
-
-    <div class="charts-section">
-      <div class="chart-panel">
-        <div class="chart-panel-label">${inPhase1 ? 'Balance vs Target — Weekly' : 'Capital Origin — Lock Period'}</div>
-        <div class="chart-panel-sub">${inPhase1 ? 'Weekly deposits building toward target balance' : 'Deposits, build yield, and lock yield growing each month'}</div>
-        <div class="chart-wrap"><canvas id="mainChart"></canvas></div>
-        <div class="legend" id="mainLegend"></div>
-      </div>
-      <div class="chart-panel chart-panel-donut" style="border-left:1px solid var(--rule2)">
-        <div class="chart-panel-label">${inPhase1 ? 'Build Phase Composition' : 'Full Capital Breakdown'}</div>
-        <div class="chart-panel-sub">${inPhase1 ? 'Deposits vs yield earned so far' : 'Complete origin of your current balance'}</div>
-        <div class="half-donut-wrap">
-          <canvas id="donutChart"></canvas>
-          <div class="donut-center">
-            <div class="donut-pct" id="donutVal">${currentReturn.toFixed(1)}%</div>
-            <div class="donut-label">${inPhase1 ? 'Build Return' : 'Total Return'}</div>
-          </div>
-        </div>
-        <div class="legend" id="donutLegend"></div>
-      </div>
-    </div>
-
-    <div id="maturitySection"></div>
-
-    <div class="txn-section">
-      <div class="txn-section-label">Transaction History</div>
-      <div id="txnList"></div>
-    </div>
-
-    <footer>
-      <div class="footer-mark">Bayfall Morrigan</div>
-      <div class="footer-note">This account statement is for informational purposes only.</div>
-      <a class="logout-link" id="footerSignOut">Sign Out</a>
-    </footer>
-  `;
-
-  document.getElementById('footerSignOut').addEventListener('click', () => {
-    auth.signOut().then(() => window.location.href = 'login.html');
-  });
-
-  // ── Render charts ──
-  renderCharts(d, inPhase1, inPhase2, depositsToDate, yieldToDate, p2YieldToDate, weeksElapsed);
-
-  // ── Render maturity section ──
-  renderMaturitySection(d);
-
-  // ── Render transactions ──
-  renderTransactions(d.transactions);
+// ══════════════════════════════════════════
+// UTILS
+// ══════════════════════════════════════════
+const fmt = n => '$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmtDate = s => { if(!s) return '—'; const d=new Date(s+'T12:00:00'); return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); };
+const round2 = n => Math.round(n*100)/100;
+function slugify(name){ return name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
+function addMonths(dateStr, n){ const d=new Date(dateStr+'T12:00:00'); d.setDate(d.getDate()+n*28); return d.toISOString().split('T')[0]; }
+function addDays(dateStr, n){ const d=new Date(dateStr+'T12:00:00'); d.setDate(d.getDate()+n); return d.toISOString().split('T')[0]; }
+function setDefaultDates(){
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('txn-date').value = today;
 }
 
-// ── Phase 1 stats block ──────────────────────────────────
-function buildPhase1Stats(d, weeksElapsed, depositsToDate, yieldToDate, currentBalance, p1Progress, daysToP1) {
-  const monthsLeft = (daysToP1 / 30.44).toFixed(1);
-  return `
-    <div class="stats-section">
-      <div class="stats-section-label">Phase I — Build-Up Summary</div>
-      <div class="stat-grid cols-6">
-        <div class="stat-cell">
-          <div class="stat-label">Target Balance</div>
-          <div class="stat-value">${fmt(d.phase1.targetBalance)}</div>
-          <div class="stat-sub">program target</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Deposited to Date</div>
-          <div class="stat-value gold">${fmt(depositsToDate)}</div>
-          <div class="stat-sub">${fmt(d.phase1.weeklyDeposit)} / week</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Yield Earned</div>
-          <div class="stat-value green">${fmt(yieldToDate)}</div>
-          <div class="stat-sub">${d.phase1.buildYieldRateMonthly}% monthly rate</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Current Balance</div>
-          <div class="stat-value">${fmt(currentBalance)}</div>
-          <div class="stat-sub">deposits + yield</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Build Progress</div>
-          <div class="progress-pct">${p1Progress.toFixed(1)}%</div>
-          <div class="progress-track"><div class="progress-fill" style="width:${p1Progress}%"></div></div>
-          <div class="stat-sub">${weeksElapsed} of ${d.phase1.weeksToTarget} weeks</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Phase I Matures</div>
-          <div class="stat-value gold">${fmtDate(d.phase1.phase1MaturityDate)}</div>
-          <div class="stat-sub">${monthsLeft} months remaining</div>
-        </div>
-      </div>
-    </div>
-  `;
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
 }
 
-// ── Phase 2 stats block ──────────────────────────────────
-function buildPhase2Stats(d, p2Balance, p2YieldToDate, p2Progress, daysToP2) {
-  const monthsLeft = (daysToP2 / 30.44).toFixed(1);
-  return `
-    <div class="stats-section">
-      <div class="stats-section-label">Phase I — Complete</div>
-      <div class="stat-grid cols-5">
-        <div class="stat-cell">
-          <div class="stat-label">Total Deposited</div>
-          <div class="stat-value dim">${fmt(d.phase1.totalDeposited)}</div>
-          <div class="stat-sub">build phase complete</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Build Yield Earned</div>
-          <div class="stat-value green">${fmt(d.phase1.buildYieldEarned)}</div>
-          <div class="stat-sub">during accumulation</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Lock Entry Balance</div>
-          <div class="stat-value">${fmt(d.phase1.finalBalance)}</div>
-          <div class="stat-sub">phase I final balance</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Phase I Completed</div>
-          <div class="stat-value dim">${fmtDate(d.phase1.phase1MaturityDate)}</div>
-          <div class="stat-sub">✓ complete</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Build Return</div>
-          <div class="stat-value green">${(d.phase1.buildYieldEarned / d.phase1.totalDeposited * 100).toFixed(2)}%</div>
-          <div class="stat-sub">on deposits</div>
-        </div>
-      </div>
-    </div>
-    <div class="stats-section" style="border-bottom:1px solid var(--rule)">
-      <div class="stats-section-label">Phase II — Lock Contract Active</div>
-      <div class="stat-grid cols-6">
-        <div class="stat-cell">
-          <div class="stat-label">Current Balance</div>
-          <div class="stat-value">${fmt(p2Balance)}</div>
-          <div class="stat-sub">live estimate</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Lock Yield Earned</div>
-          <div class="stat-value violet">${fmt(p2YieldToDate)}</div>
-          <div class="stat-sub">since lock started</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Monthly Rate</div>
-          <div class="stat-value">${d.phase2.lockYieldRateMonthly}%</div>
-          <div class="stat-sub">compounded monthly</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Lock Progress</div>
-          <div class="progress-pct">${p2Progress.toFixed(1)}%</div>
-          <div class="progress-track"><div class="progress-fill" style="width:${p2Progress}%;background:#7a5a8a"></div></div>
-          <div class="stat-sub">${(daysToP2 / 30.44).toFixed(1)} months remaining</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Maturity Date</div>
-          <div class="stat-value gold">${fmtDate(d.phase2.lockMaturityDate)}</div>
-          <div class="stat-sub">${monthsLeft} months away</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Projected Payout</div>
-          <div class="stat-value green">${fmt(d.phase2.lockFinalBalance)}</div>
-          <div class="stat-sub">at maturity</div>
-        </div>
-      </div>
-    </div>
-  `;
+function setConnStatus(state){
+  const el = document.getElementById('conn-status');
+  if(!el) return;
+  const map = { connecting:{label:'Connecting…',color:'#8c8577'}, connected:{label:'Live',color:'#4caf50'}, error:{label:'Error',color:'#ef5350'} };
+  const s = map[state]||map.connecting;
+  el.textContent = s.label;
+  el.style.color = s.color;
 }
 
-// ── Charts ───────────────────────────────────────────────
-function renderCharts(d, inPhase1, inPhase2, depositsToDate, yieldToDate, p2YieldToDate, weeksElapsed) {
-  const mainCtx  = document.getElementById('mainChart').getContext('2d');
-  const donutCtx = document.getElementById('donutChart').getContext('2d');
+function esc(s){ if(!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-  if (inPhase1) {
-    // Stacked area: deposited + yield, up to current week
-    const labels = d.weeklyChartData.labels.slice(0, weeksElapsed + 1);
-    const dep    = d.weeklyChartData.deposited.slice(0, weeksElapsed + 1);
-    const yld    = d.weeklyChartData.yieldLayer.slice(0, weeksElapsed + 1);
-    const target = labels.map(() => d.phase1.targetBalance);
+// ══════════════════════════════════════════
+// STATS
+// ══════════════════════════════════════════
+function updateStats(){
+  const arr = Object.values(clients);
+  document.getElementById('stat-total').textContent = arr.length||'0';
+  document.getElementById('stat-active').textContent = arr.filter(c=>c.status!=='inactive'&&c.status!=='complete').length||'0';
+  document.getElementById('stat-inactive').textContent = arr.filter(c=>c.status==='inactive').length||'0';
+  document.getElementById('stat-std').textContent = arr.filter(c=>c.contractType==='standard').length||'0';
+  document.getElementById('stat-abu').textContent = arr.filter(c=>c.contractType==='abu').length||'0';
+}
 
-    new Chart(mainCtx, {
-      type: 'line',
-      data: {
-        labels,
-        datasets: [
-          { label: 'Deposited', data: dep, fill: true, backgroundColor: 'rgba(138,106,42,0.35)', borderColor: 'rgba(138,106,42,0.6)', borderWidth: 1, pointRadius: 0, tension: 0, stack: 'bal' },
-          { label: 'Yield', data: yld, fill: '-1', backgroundColor: 'rgba(74,122,90,0.35)', borderColor: 'rgba(74,122,90,0.7)', borderWidth: 1.5, pointRadius: 0, tension: 0.3, stack: 'bal' },
-          { label: 'Target', data: target, fill: false, borderColor: 'rgba(255,255,255,0.12)', borderWidth: 1, borderDash: [5,4], pointRadius: 0, tension: 0 }
-        ]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        interaction: { mode: 'index', intersect: false },
-        plugins: {
-          legend: { display: false },
-          tooltip: { ...TT, callbacks: { label: ctx => ctx.dataset.label === 'Target' ? null : ` ${ctx.dataset.label}: $${(ctx.raw||0).toLocaleString()}` } }
-        },
-        scales: {
-          x: { stacked: true, grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#5a5650', font: { family:"'EB Garamond',serif", size:10 }, maxTicksLimit: 8 }, border: { color: '#1e1c18' } },
-          y: { stacked: true, grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#5a5650', font: { family:"'EB Garamond',serif", size:10 }, callback: v => '$'+v.toLocaleString() }, border: { color: '#1e1c18' } }
-        }
-      }
-    });
+// ══════════════════════════════════════════
+// CLIENT LIST
+// ══════════════════════════════════════════
+function renderClientList(){
+  const el = document.getElementById('client-list');
+  const keys = Object.keys(clients);
+  if(!keys.length){ el.innerHTML='<div style="font-size:10px;color:var(--muted);font-style:italic;padding:8px 0">No clients yet.</div>'; return; }
+  el.innerHTML = keys.map(k=>{
+    const c = clients[k];
+    const badgeType = c.status==='inactive' ? 'inactive' : c.contractType;
+    const badgeLabel = c.status==='inactive' ? 'Inactive' : c.contractType==='abu' ? 'ABU' : 'Standard';
+    const sel = k===selectedKey ? 'selected' : '';
+    return `<div class="client-card ${sel}" onclick="selectClient('${k}')">
+      <div class="cc-top">
+        <div class="cc-name">${esc(c.clientName||'Unknown')}</div>
+        <div class="cc-badge ${badgeType}">${badgeLabel}</div>
+      </div>
+      <div class="cc-meta">${esc(c.uid||'No UID')} · ${fmtDate(c.contractType==='abu'?c.phase1?.startDate:c.startDate)}</div>
+    </div>`;
+  }).join('');
+}
 
-    document.getElementById('mainLegend').innerHTML = `
-      <div class="legend-item"><div class="legend-dot" style="background:#8a6a2a"></div>Deposited</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#4a7a5a"></div>Yield Earned</div>
-      <div class="legend-item"><div class="legend-dot" style="background:rgba(255,255,255,0.12);border:1px dashed rgba(255,255,255,0.2)"></div>Target</div>
-    `;
+// ══════════════════════════════════════════
+// SELECT CLIENT
+// ══════════════════════════════════════════
+function selectClient(key){
+  selectedKey = key;
+  isNewContract = false;
+  renderClientList();
+  renderContractView(key);
+  renderTransactions(key);
+}
 
-    // Donut: deposited vs yield
-    new Chart(donutCtx, {
-      type: 'doughnut',
-      data: {
-        datasets: [{
-          data: [depositsToDate, yieldToDate],
-          backgroundColor: ['rgba(138,106,42,0.75)', 'rgba(74,122,90,0.75)'],
-          borderColor: ['#0d0c0a','#0d0c0a'],
-          borderWidth: 2,
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        circumference: 180, rotation: -90, cutout: '72%',
-        plugins: { legend: { display: false }, tooltip: { ...TT, callbacks: { label: ctx => ' $'+ctx.parsed.toLocaleString() } } }
-      }
-    });
+// ══════════════════════════════════════════
+// CONTRACT VIEW — read mode
+// ══════════════════════════════════════════
+function renderContractView(key){
+  const c = clients[key];
+  if(!c) return;
+  document.getElementById('main-title').textContent = c.clientName || 'Unknown';
+  document.getElementById('main-actions').innerHTML = `
+    <button class="cancel-btn" onclick="deleteClient('${key}')">Delete</button>
+    <button class="save-btn" onclick="startEdit('${key}')">Edit Contract</button>
+  `;
 
-    document.getElementById('donutLegend').innerHTML = `
-      <div class="legend-item"><div class="legend-dot" style="background:#8a6a2a"></div>Deposited</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#4a7a5a"></div>Yield</div>
-    `;
+  const isStd = c.contractType === 'standard';
+  const statusColor = c.status==='inactive' ? 'gold' : c.status==='complete' ? 'blue' : 'green';
+  const statusLabel = c.status==='inactive' ? 'Inactive' : c.status==='complete' ? 'Complete' : 'Active';
 
+  let html = `
+    <div class="form-section">
+      <div class="form-section-label">Identity</div>
+      <div class="calc-preview">
+        <div class="calc-row"><span class="calc-label">Client Name</span><span class="calc-val">${esc(c.clientName)}</span></div>
+        <div class="calc-row"><span class="calc-label">Contract Type</span><span class="calc-val ${isStd?'blue':'violet'}">${isStd?'Standard':'Account Build-Up'}</span></div>
+        <div class="calc-row"><span class="calc-label">Status</span><span class="calc-val ${statusColor}">${statusLabel}</span></div>
+        <div class="calc-row"><span class="calc-label">UID</span><span class="calc-val" style="font-size:10px">${esc(c.uid||'Not set')}</span></div>
+      </div>
+    </div>`;
+
+  if(isStd){
+    html += `
+      <div class="form-section">
+        <div class="form-section-label">Contract Terms</div>
+        <div class="calc-preview">
+          <div class="calc-row"><span class="calc-label">Deposit Amount</span><span class="calc-val">${fmt(c.depositAmount)}</span></div>
+          <div class="calc-row"><span class="calc-label">Origination Fee</span><span class="calc-val">${c.origFeeRate}% — ${fmt(c.origFee)}</span></div>
+          <div class="calc-row"><span class="calc-label">Starting Principal</span><span class="calc-val">${fmt(c.principal)}</span></div>
+          <div class="calc-row"><span class="calc-label">Monthly Yield Rate</span><span class="calc-val green">${c.monthlyYieldRate}%</span></div>
+          <div class="calc-row"><span class="calc-label">Annual Yield Rate</span><span class="calc-val green">${c.annualYieldRate}%</span></div>
+          <div class="calc-row"><span class="calc-label">Term Duration</span><span class="calc-val">${c.termMonths} months</span></div>
+          <div class="calc-row"><span class="calc-label">Settlement Days</span><span class="calc-val">${c.settlementDays||0} days</span></div>
+          <div class="calc-row"><span class="calc-label">Start Date</span><span class="calc-val">${fmtDate(c.startDate)}</span></div>
+          <div class="calc-row"><span class="calc-label">Maturity Date</span><span class="calc-val gold">${fmtDate(c.maturityDate)}${c.maturityDateOverride ? ' <span style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">(override)</span>' : ''}</span></div>
+          <div class="calc-row"><span class="calc-label">Maturity Value</span><span class="calc-val green">${fmt(c.maturityValue)}${c.maturityValueOverride ? ' <span style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">(override)</span>' : ''}</span></div>
+          <div class="calc-row"><span class="calc-label">Total Yield</span><span class="calc-val green">${fmt(c.totalYield)}</span></div>
+        </div>
+      </div>`;
   } else {
-    // Phase 2 — stacked bar
-    const barLabels  = d.barChartData.labels;
-    const depLayer   = d.barChartData.depLayer;
-    const buildLayer = d.barChartData.buildLayer;
-    const lockLayer  = d.barChartData.lockLayer;
-
-    new Chart(mainCtx, {
-      type: 'bar',
-      data: {
-        labels: barLabels,
-        datasets: [
-          { label: 'Deposited',   data: depLayer,   backgroundColor: 'rgba(138,106,42,0.55)', borderWidth: 0, stack: 'cap' },
-          { label: 'Build Yield', data: buildLayer, backgroundColor: 'rgba(74,122,90,0.55)',  borderWidth: 0, stack: 'cap' },
-          { label: 'Lock Yield',  data: lockLayer,  backgroundColor: 'rgba(122,90,138,0.60)', borderWidth: 0, stack: 'cap' }
-        ]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        scales: {
-          x: { stacked: true, grid: { display: false }, ticks: { color: '#5a5650', font: { family:"'EB Garamond',serif", size:10 } }, border: { color: '#1e1c18' } },
-          y: { stacked: true, grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#5a5650', font: { family:"'EB Garamond',serif", size:10 }, callback: v => '$'+v.toLocaleString() }, border: { color: '#1e1c18' } }
-        },
-        plugins: { legend: { display: false }, tooltip: { ...TT, callbacks: { label: ctx => ` ${ctx.dataset.label}: $${(ctx.raw||0).toLocaleString()}` } } }
-      }
-    });
-
-    document.getElementById('mainLegend').innerHTML = `
-      <div class="legend-item"><div class="legend-dot" style="background:#8a6a2a"></div>Deposited</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#4a7a5a"></div>Build Yield</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#7a5a8a"></div>Lock Yield</div>
-    `;
-
-    const totalDep   = d.phase1.totalDeposited;
-    const buildYield = d.phase1.buildYieldEarned;
-    const currentLockYield = p2YieldToDate;
-
-    new Chart(donutCtx, {
-      type: 'doughnut',
-      data: {
-        datasets: [{
-          data: [totalDep, buildYield, currentLockYield],
-          backgroundColor: ['rgba(138,106,42,0.75)','rgba(74,122,90,0.75)','rgba(122,90,138,0.75)'],
-          borderColor: ['#0d0c0a','#0d0c0a','#0d0c0a'],
-          borderWidth: 2,
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        circumference: 180, rotation: -90, cutout: '72%',
-        plugins: { legend: { display: false }, tooltip: { ...TT, callbacks: { label: ctx => ' $'+ctx.parsed.toLocaleString() } } }
-      }
-    });
-
-    document.getElementById('donutLegend').innerHTML = `
-      <div class="legend-item"><div class="legend-dot" style="background:#8a6a2a"></div>Deposited</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#4a7a5a"></div>Build Yield</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#7a5a8a"></div>Lock Yield</div>
-    `;
+    const p1 = c.phase1 || {};
+    const p2 = c.phase2 || {};
+    html += `
+      <div class="form-section">
+        <div class="form-section-label">Phase I — Build-Up</div>
+        <div class="calc-preview">
+          <div class="calc-row"><span class="calc-label">Target Balance</span><span class="calc-val">${fmt(p1.targetBalance)}</span></div>
+          <div class="calc-row"><span class="calc-label">Weekly Deposit</span><span class="calc-val">${fmt(p1.weeklyDeposit)}</span></div>
+          <div class="calc-row"><span class="calc-label">Build Yield Rate</span><span class="calc-val green">${p1.buildYieldRateMonthly}% / month</span></div>
+          <div class="calc-row"><span class="calc-label">Settle Weeks</span><span class="calc-val">${p1.settleWeeks||0}</span></div>
+          <div class="calc-row"><span class="calc-label">Start Date</span><span class="calc-val">${fmtDate(p1.startDate)}</span></div>
+          <div class="calc-row"><span class="calc-label">Weeks to Target</span><span class="calc-val">${p1.weeksToTarget}</span></div>
+          <div class="calc-row"><span class="calc-label">Total Deposited</span><span class="calc-val">${fmt(p1.totalDeposited)}</span></div>
+          <div class="calc-row"><span class="calc-label">Build Yield Earned</span><span class="calc-val green">${fmt(p1.buildYieldEarned)}</span></div>
+          <div class="calc-row"><span class="calc-label">Phase I Final Balance</span><span class="calc-val green">${fmt(p1.finalBalance)}</span></div>
+          <div class="calc-row"><span class="calc-label">Phase I Matures</span><span class="calc-val gold">${fmtDate(p1.phase1MaturityDate)}</span></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-label">Phase II — Lock</div>
+        <div class="calc-preview">
+          <div class="calc-row"><span class="calc-label">Lock Duration</span><span class="calc-val">${p2.lockMonths} months</span></div>
+          <div class="calc-row"><span class="calc-label">Lock Yield Rate</span><span class="calc-val violet">${p2.lockYieldRateMonthly}% / month</span></div>
+          <div class="calc-row"><span class="calc-label">Lock Start Date</span><span class="calc-val">${fmtDate(p2.lockStartDate)}</span></div>
+          <div class="calc-row"><span class="calc-label">Lock Maturity Date</span><span class="calc-val gold">${fmtDate(p2.lockMaturityDate)}</span></div>
+          <div class="calc-row"><span class="calc-label">Lock Final Balance</span><span class="calc-val green">${fmt(p2.lockFinalBalance)}</span></div>
+          <div class="calc-row"><span class="calc-label">Lock Yield Earned</span><span class="calc-val violet">${fmt(p2.lockYieldEarned)}</span></div>
+        </div>
+      </div>`;
+    if(c.status==='inactive'){
+      html += `
+        <div class="form-section">
+          <div class="form-section-label">Inactive Status</div>
+          <div class="calc-preview">
+            <div class="calc-row"><span class="calc-label">Last Deposit</span><span class="calc-val">${fmtDate(c.lastDepositDate)}</span></div>
+            <div class="calc-row"><span class="calc-label">Frozen Date</span><span class="calc-val gold">${fmtDate(c.frozenDate)}</span></div>
+            <div class="calc-row"><span class="calc-label">Frozen Balance</span><span class="calc-val">${fmt(c.frozenBalance||0)}</span></div>
+            <div class="calc-row"><span class="calc-label">Frozen Yield</span><span class="calc-val green">${fmt(c.frozenYield||0)}</span></div>
+            <div class="calc-row"><span class="calc-label">Actual Deposited</span><span class="calc-val">${fmt(c.totalDepositedActual||0)}</span></div>
+          </div>
+        </div>`;
+    }
   }
+
+  document.getElementById('main-body').innerHTML = html;
 }
 
-// ── Maturity Section ────────────────────────────────────────
-function renderMaturitySection(d) {
-  const el = document.getElementById('maturitySection');
-  if (!el) return;
+// ══════════════════════════════════════════
+// EDIT CONTRACT
+// ══════════════════════════════════════════
+function startEdit(key){
+  const c = clients[key];
+  renderEditForm(c, key);
+}
 
-  const totalDep    = d.phase1.totalDeposited;
-  const buildYield  = d.phase1.buildYieldEarned;
-  const lockYield   = d.phase2.lockYieldEarned;
-  const finalBal    = d.phase2.lockFinalBalance;
-  const returnPct   = ((buildYield + lockYield) / totalDep * 100).toFixed(1);
-  const matDate     = d.phase2.lockMaturityDate;
+function startNewContract(type){
+  isNewContract = true;
+  newContractType = type;
+  selectedKey = null;
+  renderClientList();
+  renderEditForm(null, null, type);
+  document.getElementById('txn-client-name').textContent = 'New contract';
+  document.getElementById('txn-add-form').style.display = 'none';
+  document.getElementById('txn-list').innerHTML = '<div class="txn-empty">Save contract first to add transactions.</div>';
+}
+
+function renderEditForm(c, key, forceType){
+  const isStd = forceType ? forceType==='standard' : c.contractType==='standard';
+  const type = forceType || c?.contractType;
+  const title = key ? (c?.clientName||'Edit Contract') : (isStd ? 'New Standard Contract' : 'New ABU Contract');
+
+  document.getElementById('main-title').textContent = title;
+  document.getElementById('main-actions').innerHTML = `
+    <button class="cancel-btn" onclick="${key?`renderContractView('${key}')`:'renderEmpty()'}">Cancel</button>
+    <button class="save-btn" onclick="saveContract('${key||''}','${type}')">Save to Firebase</button>
+  `;
+
+  // Status selector
+  const curStatus = c?.status || 'active';
+  const statuses = [{s:'active',l:'Active'},{s:'inactive',l:'Inactive'},{s:'complete',l:'Complete'}];
+  const statusHTML = `<div class="status-grid">${statuses.map(x=>`<div class="status-opt${curStatus===x.s?' active':''}" data-s="${x.s}" onclick="selectStatus(this)">${x.l}</div>`).join('')}</div>`;
+
+  let html = `
+    <div class="form-section">
+      <div class="form-section-label">Identity</div>
+      <div class="form-grid">
+        <div class="field"><label>Client Name</label><input id="e-name" value="${esc(c?.clientName||'')}" placeholder="Full Name"></div>
+        <div class="field"><label>Firebase UID</label><input id="e-uid" value="${esc(c?.uid||'')}" placeholder="Paste UID from Firebase Auth"></div>
+      </div>
+      <div class="field" style="margin-top:10px"><label>Status</label>${statusHTML}</div>
+    </div>`;
+
+  if(isStd){
+    html += `
+      <div class="form-section">
+        <div class="form-section-label">Contract Terms</div>
+        <div class="form-grid cols3">
+          <div class="field"><label>Deposit Amount ($)</label><input type="number" id="e-deposit" value="${c?.depositAmount||''}" placeholder="10000" oninput="calcStd()"></div>
+          <div class="field"><label>Origination Fee (%)</label><input type="number" id="e-fee" value="${c?.origFeeRate??6.5}" step="0.1" oninput="calcStd()"></div>
+          <div class="field"><label>Monthly Yield (%)</label><input type="number" id="e-yield" value="${c?.monthlyYieldRate||''}" step="0.01" oninput="calcStd()"></div>
+        </div>
+        <div class="form-grid cols3" style="margin-top:10px">
+          <div class="field"><label>Term (months)</label><input type="number" id="e-term" value="${c?.termMonths||''}" oninput="calcStd()"></div>
+          <div class="field"><label>Settlement Days</label><input type="number" id="e-settle" value="${c?.settlementDays??7}" min="0" max="27"></div>
+          <div class="field"><label>Start Date</label><input type="date" id="e-start" value="${c?.startDate||''}" oninput="calcStd()"></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-label">Calculated Preview</div>
+        <div class="calc-preview" id="std-preview">
+          <div style="font-size:10px;color:var(--muted);font-style:italic">Fill in contract terms to preview calculations.</div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-label">Overrides <span style="font-size:9px;font-weight:400;color:var(--muted);letter-spacing:0">— leave blank to use calculated values</span></div>
+        <div class="form-grid">
+          <div class="field"><label>Maturity Date (override)</label><input type="date" id="e-mat-override" value="${c?.maturityDateOverride||''}"><div class="hint">Overrides the auto-calculated maturity date</div></div>
+          <div class="field"><label>Maturity Value (override $)</label><input type="number" id="e-matval-override" value="${c?.maturityValueOverride||''}" step="0.01"><div class="hint">Overrides the auto-calculated final payout value</div></div>
+        </div>
+      </div>`;
+  } else {
+    const p1 = c?.phase1||{};
+    const p2 = c?.phase2||{};
+    html += `
+      <div class="form-section">
+        <div class="form-section-label">Phase I — Build-Up Parameters</div>
+        <div class="form-grid cols3">
+          <div class="field"><label>Target Balance ($)</label><input type="number" id="e-target" value="${p1.targetBalance||''}" oninput="calcABU()"></div>
+          <div class="field"><label>Weekly Deposit ($)</label><input type="number" id="e-weekly" value="${p1.weeklyDeposit||''}" oninput="calcABU()"></div>
+          <div class="field"><label>Build Yield Rate (%/mo)</label><input type="number" id="e-buildyield" value="${p1.buildYieldRateMonthly||''}" step="0.01" oninput="calcABU()"></div>
+          <div class="field"><label>Starting Balance ($)</label><input type="number" id="e-startbal" value="${p1.startingBalance||''}" step="0.01" placeholder="0.00" oninput="calcABU()"></div>
+        </div>
+        <div class="form-grid cols3" style="margin-top:10px">
+          <div class="field"><label>Start Date</label><input type="date" id="e-start" value="${p1.startDate||''}" oninput="calcABU()"></div>
+          <div class="field"><label>Settle Weeks</label><input type="number" id="e-settlewk" value="${p1.settleWeeks??1}" min="0" max="4" oninput="calcABU()"></div>
+          <div class="field"></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-label">Phase II — Lock Parameters</div>
+        <div class="form-grid">
+          <div class="field"><label>Lock Duration (months)</label><input type="number" id="e-lockmonths" value="${p2.lockMonths||''}" oninput="calcABU()"></div>
+          <div class="field"><label>Lock Yield Rate (%/mo)</label><input type="number" id="e-lockyield" value="${p2.lockYieldRateMonthly||''}" step="0.01" oninput="calcABU()"></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-label">Date Overrides <span style="font-size:9px;font-weight:400;color:var(--muted);letter-spacing:0">— leave blank to use calculated dates</span></div>
+        <div class="form-grid">
+          <div class="field"><label>Phase I Maturity Date (override)</label><input type="date" id="e-p1mat" value="${p1.phase1MaturityDate||''}"><div class="hint">Overrides the auto-calculated Phase I end date</div></div>
+          <div class="field"><label>Phase II Maturity Date (override)</label><input type="date" id="e-p2mat" value="${p2.lockMaturityDate||''}"><div class="hint">Overrides the auto-calculated lock end date</div></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-label">Calculated Preview</div>
+        <div class="calc-preview" id="abu-preview">
+          <div style="font-size:10px;color:var(--muted);font-style:italic">Fill in parameters to preview calculations.</div>
+        </div>
+      </div>`;
+
+    // Inactive fields — always rendered, shown/hidden by status toggle
+    const showInactive = curStatus === 'inactive' || c?.status === 'inactive';
+    html += `
+      <div class="form-section" id="inactive-fields" style="display:${showInactive ? 'block' : 'none'}">
+        <div class="form-section-label">Inactive Details</div>
+        <div class="form-grid">
+          <div class="field"><label>Last Deposit Date</label><input type="date" id="e-lastdeposit" value="${c?.lastDepositDate||''}"></div>
+          <div class="field"><label>Frozen Date</label><input type="date" id="e-frozendate" value="${c?.frozenDate||''}"></div>
+        </div>
+        <div class="form-grid" style="margin-top:10px">
+          <div class="field"><label>Deposits Active From</label><input type="date" id="e-activestart" value="${c?.activeStart||c?.phase1?.startDate||''}"></div>
+          <div class="field"><label>Deposits Active Through</label><input type="date" id="e-activethrough" value="${c?.activeThrough||c?.lastDepositDate||''}"></div>
+        </div>
+        <div class="form-grid cols3" style="margin-top:10px">
+          <div class="field"><label>Frozen Balance ($)</label><input type="number" id="e-frozenbal" value="${c?.frozenBalance||''}" step="0.01"></div>
+          <div class="field"><label>Frozen Yield ($)</label><input type="number" id="e-frozenyield" value="${c?.frozenYield||''}" step="0.01"></div>
+          <div class="field"><label>Actual Deposited ($)</label><input type="number" id="e-actualdep" value="${c?.totalDepositedActual||''}" step="0.01"></div>
+        </div>
+      </div>`;
+  }
+
+  document.getElementById('main-body').innerHTML = html;
+
+  // Trigger calc preview on load if editing existing
+  if(c){ isStd ? calcStd() : calcABU(); }
+}
+
+// ══════════════════════════════════════════
+// STATUS SELECTOR
+// ══════════════════════════════════════════
+function selectStatus(el){
+  document.querySelectorAll('.status-opt').forEach(e=>e.classList.remove('active'));
+  el.classList.add('active');
+  // Show/hide inactive fields for ABU
+  const inactiveFields = document.getElementById('inactive-fields');
+  if(inactiveFields) inactiveFields.style.display = el.dataset.s==='inactive' ? 'block' : 'none';
+}
+
+// ══════════════════════════════════════════
+// STANDARD CALC PREVIEW
+// ══════════════════════════════════════════
+function calcStd(){
+  const dep     = parseFloat(document.getElementById('e-deposit')?.value)||0;
+  const fee     = parseFloat(document.getElementById('e-fee')?.value)||0;
+  const yld     = parseFloat(document.getElementById('e-yield')?.value)||0;
+  const months  = parseInt(document.getElementById('e-term')?.value)||0;
+  const settle  = parseInt(document.getElementById('e-settle')?.value)||0;
+  const start   = document.getElementById('e-start')?.value;
+  const el      = document.getElementById('std-preview');
+  if(!el) return;
+  if(!dep||!yld||!months){ el.innerHTML='<div style="font-size:10px;color:var(--muted);font-style:italic">Fill in all fields to preview.</div>'; return; }
+
+  const origFee  = round2(dep * (fee/100));
+  const principal = round2(dep - origFee);
+  let balance = principal;
+  // Settlement dead weeks
+  const settleWeeks = Math.ceil(settle/7);
+  for(let m=1;m<=months;m++){
+    for(let w=1;w<=4;w++){
+      if(w===4) balance += balance*(yld/100);
+    }
+  }
+  balance = round2(balance);
+  const totalYield = round2(balance - principal);
+  const annualYield = round2(yld*12);
+  const matDate = start ? addMonths(start, months) : null;
 
   el.innerHTML = `
-    <div class="maturity-section">
-      <div class="maturity-section-header">
-        <div>
-          <div class="maturity-eyebrow">Contract End State</div>
-          <div class="maturity-title">At <em>Maturity</em></div>
-        </div>
-        <div class="maturity-date-badge">${fmtDate(matDate)}</div>
-      </div>
-
-      <div class="maturity-stat-row">
-        <div class="maturity-stat-cell">
-          <div class="stat-label">Total Deposited</div>
-          <div class="stat-value">${fmt(totalDep)}</div>
-          <div class="stat-sub">your contributions</div>
-        </div>
-        <div class="maturity-stat-cell">
-          <div class="stat-label">Build Yield</div>
-          <div class="stat-value green">${fmt(buildYield)}</div>
-          <div class="stat-sub">Phase I compounding</div>
-        </div>
-        <div class="maturity-stat-cell">
-          <div class="stat-label">Lock Yield</div>
-          <div class="stat-value violet">${fmt(lockYield)}</div>
-          <div class="stat-sub">Phase II compounding</div>
-        </div>
-        <div class="maturity-stat-cell">
-          <div class="stat-label">Final Payout</div>
-          <div class="stat-value gold">${fmt(finalBal)}</div>
-          <div class="stat-sub">deposits + all yield</div>
-        </div>
-        <div class="maturity-stat-cell">
-          <div class="stat-label">Return on Deposit</div>
-          <div class="stat-value gold">${returnPct}%</div>
-          <div class="stat-sub">growth on total deposited</div>
-        </div>
-      </div>
-
-      <div class="maturity-charts">
-        <div class="maturity-chart-panel">
-          <div class="chart-panel-label">Capital Growth — Full Contract</div>
-          <div class="chart-panel-sub">How your balance builds across all months to final payout</div>
-          <div class="chart-wrap"><canvas id="matBarChart"></canvas></div>
-          <div class="legend" style="margin-top:16px">
-            <div class="legend-item"><div class="legend-dot" style="background:#8a6a2a"></div>Deposited</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#4a7a5a"></div>Build Yield</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#7a5a8a"></div>Lock Yield</div>
-          </div>
-        </div>
-        <div class="maturity-chart-panel" style="display:flex;flex-direction:column;align-items:center;text-align:center">
-          <div class="chart-panel-label">Final Capital Composition</div>
-          <div class="chart-panel-sub">Where every dollar of your payout came from</div>
-          <div class="half-donut-wrap">
-            <canvas id="matDonutChart"></canvas>
-            <div class="donut-center">
-              <div class="donut-pct">${fmt(finalBal)}</div>
-              <div class="donut-label">Final Payout</div>
-            </div>
-          </div>
-          <div class="legend" style="margin-top:16px;justify-content:center">
-            <div class="legend-item"><div class="legend-dot" style="background:#8a6a2a"></div>Deposited</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#4a7a5a"></div>Build</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#7a5a8a"></div>Lock</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-
-  // Bar chart — full contract: Phase 1 weekly build-up, then Phase 2 monthly lock growth
-  // Phase 2 "Start" bar is dropped — it duplicates the Phase 1 final week
-  const barCtx = document.getElementById('matBarChart').getContext('2d');
-
-  const p1Labels = d.weeklyChartData.labels;
-  const p1Dep    = d.weeklyChartData.deposited;   // cumulative deposited, grows week by week
-  const p1Yield  = d.weeklyChartData.yieldLayer;  // cumulative build yield, stacked on top
-
-  // Skip index 0 ("Start") from Phase 2 — same state as Phase 1 final week
-  const p2Labels = d.barChartData.labels.slice(1);
-  const p2Dep    = d.barChartData.depLayer.slice(1);    // flat — total deposited (Phase 1 final)
-  const p2Build  = d.barChartData.buildLayer.slice(1);  // flat — total build yield (Phase 1 final)
-  const p2Lock   = d.barChartData.lockLayer.slice(1);   // growing — lock yield each month
-
-  const fullLabels = [...p1Labels, ...p2Labels];
-  const fullDep    = [...p1Dep,    ...p2Dep];
-  const fullBuild  = [...p1Yield,  ...p2Build];
-  const fullLock   = [...Array(p1Labels.length).fill(0), ...p2Lock];
-
-  new Chart(barCtx, {
-    type: 'bar',
-    data: {
-      labels: fullLabels,
-      datasets: [
-        { label:'Deposited',   data:fullDep,   backgroundColor:'rgba(138,106,42,0.55)', borderWidth:0, stack:'cap' },
-        { label:'Build Yield', data:fullBuild, backgroundColor:'rgba(74,122,90,0.55)',  borderWidth:0, stack:'cap' },
-        { label:'Lock Yield',  data:fullLock,  backgroundColor:'rgba(122,90,138,0.60)', borderWidth:0, stack:'cap' }
-      ]
-    },
-    options: {
-      responsive:true, maintainAspectRatio:false,
-      interaction:{ mode:'index', intersect:false },
-      scales: {
-        x:{ stacked:true, grid:{display:false}, ticks:{color:'#5a5650',font:{family:"'EB Garamond',serif",size:10}, maxTicksLimit:14, maxRotation:45, minRotation:0}, border:{color:'#1e1c18'} },
-        y:{ stacked:true, grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#5a5650',font:{family:"'EB Garamond',serif",size:10},callback:v=>'$'+v.toLocaleString()}, border:{color:'#1e1c18'} }
-      },
-      plugins:{
-        legend:{display:false},
-        tooltip:{
-          ...TT,
-          callbacks:{
-            label: () => null,
-            afterBody: (items) => {
-              const i     = items[0].dataIndex;
-              const dep   = fullDep[i]   || 0;
-              const build = fullBuild[i] || 0;
-              const lock  = fullLock[i]  || 0;
-              const totalYield   = build + lock;
-              const totalBalance = dep + totalYield;
-              return [
-                ` Total Deposited:  $${dep.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`,
-                ` Total Yield:      $${totalYield.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`,
-                ` Total Balance:    $${totalBalance.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`,
-              ];
-            }
-          }
-        }
-      }
-    }
-  });
-
-  // Donut — full 360, 3 segments
-  const donutCtx = document.getElementById('matDonutChart').getContext('2d');
-  new Chart(donutCtx, {
-    type: 'doughnut',
-    data: {
-      labels: ['Deposited','Build Yield','Lock Yield'],
-      datasets:[{
-        data: [totalDep, buildYield, lockYield],
-        backgroundColor:['rgba(138,106,42,0.75)','rgba(74,122,90,0.75)','rgba(122,90,138,0.75)'],
-        borderColor:['#0d0c0a','#0d0c0a','#0d0c0a'],
-        borderWidth:2
-      }]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      circumference:180, rotation:-90, cutout:'72%',
-      plugins:{ legend:{display:false}, tooltip:{...TT, callbacks:{label:ctx=>' $'+ctx.parsed.toLocaleString()}} }
-    }
-  });
+    <div class="calc-row"><span class="calc-label">Origination Fee</span><span class="calc-val">${fmt(origFee)} (${fee}%)</span></div>
+    <div class="calc-row"><span class="calc-label">Starting Principal</span><span class="calc-val">${fmt(principal)}</span></div>
+    <div class="calc-row"><span class="calc-label">Annual Yield Rate</span><span class="calc-val green">${annualYield}%</span></div>
+    <div class="calc-row"><span class="calc-label">Maturity Date</span><span class="calc-val gold">${matDate?fmtDate(matDate):'—'}</span></div>
+    <div class="calc-row"><span class="calc-label">Total Yield</span><span class="calc-val green">${fmt(totalYield)}</span></div>
+    <div class="calc-row"><span class="calc-label">Maturity Value</span><span class="calc-val green">${fmt(balance)}</span></div>
+    <div class="calc-row"><span class="calc-label">Return on Deposit</span><span class="calc-val green">${((totalYield/principal)*100).toFixed(2)}%</span></div>`;
 }
 
-// ── Transactions ─────────────────────────────────────────
-function renderTransactions(txns) {
-  const el = document.getElementById('txnList');
-  if (!txns || Object.keys(txns).length === 0) {
-    el.innerHTML = '<div class="txn-empty">No transactions recorded yet.</div>';
-    return;
+// ══════════════════════════════════════════
+// ABU CALC PREVIEW
+// ══════════════════════════════════════════
+function calcABU(){
+  const target      = parseFloat(document.getElementById('e-target')?.value)||0;
+  const weekly      = parseFloat(document.getElementById('e-weekly')?.value)||0;
+  const buildYield  = parseFloat(document.getElementById('e-buildyield')?.value)||0;
+  const settleWks   = parseInt(document.getElementById('e-settlewk')?.value)||0;
+  const lockMonths  = parseInt(document.getElementById('e-lockmonths')?.value)||0;
+  const lockYield   = parseFloat(document.getElementById('e-lockyield')?.value)||0;
+  const startDate   = document.getElementById('e-start')?.value;
+  const startBal    = parseFloat(document.getElementById('e-startbal')?.value)||0;
+  const el          = document.getElementById('abu-preview');
+  if(!el) return;
+  if(!target||!weekly||!buildYield){ el.innerHTML='<div style="font-size:10px;color:var(--muted);font-style:italic">Fill in Phase I parameters to preview.</div>'; return; }
+
+  // Run Phase 1 simulation (exact same logic as ABU simulator)
+  let balance=startBal, totalDeposited=0, totalYieldBuild=0, week=0;
+  while(true){
+    week++;
+    let incomingYield=0;
+    const shouldCompound = week>settleWks && (week-settleWks)%4===0;
+    if(shouldCompound){ incomingYield=balance*(buildYield/100); totalYieldBuild+=incomingYield; }
+    const prev=balance;
+    balance+=weekly+incomingYield;
+    totalDeposited+=weekly;
+    if(balance>=target){
+      const dp=Math.abs(prev-target), dn=Math.abs(balance-target);
+      if(dn>=dp){ balance-=weekly+incomingYield; totalDeposited-=weekly; if(shouldCompound)totalYieldBuild-=incomingYield; week--; break; }
+    }
+    if(week>1000) break;
+  }
+  balance=round2(balance); totalDeposited=round2(totalDeposited); totalYieldBuild=round2(totalYieldBuild);
+
+  const p1MatDate = startDate ? addDays(startDate, (week-1) * 7) : null;
+
+  // Phase 2
+  let lockFinal=balance, lockYieldEarned=0;
+  if(lockMonths&&lockYield){
+    for(let m=1;m<=lockMonths;m++) lockFinal+=lockFinal*(lockYield/100);
+    lockFinal=round2(lockFinal);
+    lockYieldEarned=round2(lockFinal-balance);
+  }
+  const p2MatDate = p1MatDate && lockMonths ? addDays(p1MatDate, lockMonths * 28) : null;
+
+  el.innerHTML = `
+    <div class="calc-row"><span class="calc-label">Weeks to Target</span><span class="calc-val gold">${week} wks (~${(week/4.33).toFixed(1)} mo)</span></div>
+    <div class="calc-row"><span class="calc-label">Total Deposited</span><span class="calc-val">${fmt(totalDeposited)}</span></div>
+    <div class="calc-row"><span class="calc-label">Build Yield Earned</span><span class="calc-val green">${fmt(totalYieldBuild)}</span></div>
+    <div class="calc-row"><span class="calc-label">Phase I Final Balance</span><span class="calc-val green">${fmt(balance)}</span></div>
+    <div class="calc-row"><span class="calc-label">Phase I Matures</span><span class="calc-val gold">${p1MatDate?fmtDate(p1MatDate):'—'}</span></div>
+    ${lockMonths&&lockYield?`
+    <div class="calc-row"><span class="calc-label">Lock Yield Earned</span><span class="calc-val violet">${fmt(lockYieldEarned)}</span></div>
+    <div class="calc-row"><span class="calc-label">Lock Final Balance</span><span class="calc-val green">${fmt(lockFinal)}</span></div>
+    <div class="calc-row"><span class="calc-label">Phase II Matures</span><span class="calc-val gold">${p2MatDate?fmtDate(p2MatDate):'—'}</span></div>`:''}`;
+}
+
+// ══════════════════════════════════════════
+// TRANSACTION AUTO-GENERATION
+// ══════════════════════════════════════════
+function autoGenABUTransactions(start, weeklyDeposit, buildYieldRate, settleWks, weeksToTarget, startingBalance, lastDepositDate, frozenDate) {
+  const txns = {};
+  const today = new Date();
+  let balance = startingBalance || 0;
+  let monthCount = 0;
+  let tIdx = 1;
+
+  const lastDepositCutoff = lastDepositDate ? new Date(lastDepositDate + 'T23:59:59') : null;
+  const frozenCutoff      = frozenDate      ? new Date(frozenDate      + 'T23:59:59') : null;
+  const hardStop = frozenCutoff || today;
+
+  if (startingBalance > 0) {
+    txns['t' + tIdx++] = { date: start, description: 'Starting balance — yield credit', amount: round2(startingBalance), type: 'yield' };
   }
 
+  for (let wk = 1; wk <= weeksToTarget; wk++) {
+    const txDate = new Date(start + 'T12:00:00');
+    txDate.setDate(txDate.getDate() + (wk - 1) * 7);
+    if (txDate > hardStop) break;
+    const dateStr = txDate.toISOString().split('T')[0];
+    const shouldCompound = wk > settleWks && (wk - settleWks) % 4 === 0;
+
+    if (shouldCompound) {
+      const yieldAmt = round2(balance * (buildYieldRate / 100));
+      monthCount++;
+      txns['t' + tIdx++] = { date: dateStr, description: 'Monthly yield compounded — Month ' + monthCount, amount: yieldAmt, type: 'credit' };
+      balance += yieldAmt;
+    }
+
+    const depositAllowed = !lastDepositCutoff || txDate <= lastDepositCutoff;
+    if (depositAllowed) {
+      balance += weeklyDeposit;
+      txns['t' + tIdx++] = { date: dateStr, description: 'Weekly contribution — Week ' + wk, amount: weeklyDeposit, type: 'credit' };
+    }
+  }
+  return txns;
+}
+
+function autoGenStdTransactions(start, depositAmount, origFee, feeRate) {
+  const txns = {};
+  txns['t1'] = { date: start, description: 'Initial deposit', amount: depositAmount, type: 'credit' };
+  if (origFee > 0) {
+    txns['t2'] = { date: start, description: 'Origination fee (' + feeRate + '%)', amount: origFee, type: 'debit' };
+  }
+  return txns;
+}
+
+// ══════════════════════════════════════════
+// SAVE CONTRACT
+// ══════════════════════════════════════════
+function saveContract(key, type){
+  const name   = document.getElementById('e-name').value.trim();
+  const uid    = document.getElementById('e-uid').value.trim();
+  const status = (document.querySelector('.status-opt.active')||{}).dataset?.s || 'active';
+  if(!name){ toast('Client name required'); return; }
+
+  const dbKey = key || slugify(name);
+  const existing = clients[dbKey] || {};
+  let record = { clientName:name, uid, status, contractType:type, exportedAt: new Date().toISOString().split('T')[0] };
+
+  if(type==='standard'){
+    const dep    = parseFloat(document.getElementById('e-deposit').value)||0;
+    const fee    = parseFloat(document.getElementById('e-fee').value)||0;
+    const yld    = parseFloat(document.getElementById('e-yield').value)||0;
+    const months = parseInt(document.getElementById('e-term').value)||0;
+    const settle = parseInt(document.getElementById('e-settle').value)||0;
+    const start  = document.getElementById('e-start').value;
+    if(!dep||!yld||!months||!start){ toast('Fill in all required fields'); return; }
+
+    const origFee   = round2(dep*(fee/100));
+    const principal = round2(dep-origFee);
+    let balance = principal;
+    for(let m=1;m<=months;m++) for(let w=1;w<=4;w++) if(w===4) balance+=balance*(yld/100);
+    balance=round2(balance);
+
+    const matDateOverride = document.getElementById('e-mat-override')?.value || null;
+    const matValOverride  = parseFloat(document.getElementById('e-matval-override')?.value) || null;
+    const finalMatDate    = matDateOverride || addMonths(start, months);
+    const finalMatValue   = matValOverride  !== null && !isNaN(matValOverride) ? round2(matValOverride) : balance;
+    const finalTotalYield = round2(finalMatValue - principal);
+
+    // Build weekly chart data
+    const labels=[], principals=[], yields=[];
+    let b=principal;
+    labels.push('Week 0'); principals.push(principal); yields.push(0);
+    const sWeeks=Math.ceil(settle/7);
+    for(let w=1;w<=sWeeks;w++){ labels.push(`Wk ${w} (setup)`); principals.push(principal); yields.push(0); }
+    for(let m=1;m<=months;m++) for(let w=1;w<=4;w++){
+      if(w===4) b+=b*(yld/100);
+      const wn=labels.length; let lbl=`Wk ${wn}`; if(w===4) lbl+=` ✦M${m}`;
+      labels.push(lbl); principals.push(principal); yields.push(round2(Math.max(0,b-principal)));
+    }
+
+    Object.assign(record,{
+      depositAmount:dep, origFeeRate:fee, origFee:origFee, principal:principal,
+      startDate:start, termMonths:months, settlementDays:settle,
+      maturityDate:finalMatDate, maturityDateOverride:matDateOverride||null,
+      monthlyYieldRate:yld, annualYieldRate:round2(yld*12),
+      maturityValue:finalMatValue, maturityValueOverride:matValOverride||null,
+      totalYield:finalTotalYield, totalReturnPct:round2((finalTotalYield/principal)*100),
+      weeklyChartData:{labels,principal:principals,yieldLayer:yields},
+      transactions: (existing.transactions && Object.keys(existing.transactions).length > 0)
+        ? existing.transactions
+        : autoGenStdTransactions(start, dep, origFee, fee)
+    });
+
+  } else {
+    const target    = parseFloat(document.getElementById('e-target').value)||0;
+    const weekly    = parseFloat(document.getElementById('e-weekly').value)||0;
+    const buildYld  = parseFloat(document.getElementById('e-buildyield').value)||0;
+    const settleWks = parseInt(document.getElementById('e-settlewk').value)||0;
+    const lockMo    = parseInt(document.getElementById('e-lockmonths').value)||0;
+    const lockYld   = parseFloat(document.getElementById('e-lockyield').value)||0;
+    const start     = document.getElementById('e-start').value;
+    const startBal  = parseFloat(document.getElementById('e-startbal')?.value)||0;
+    if(!target||!weekly||!buildYld||!start){ toast('Fill in all required Phase I fields'); return; }
+
+    // Run Phase 1
+    let bal=startBal, totDep=0, totYB=0, wk=0;
+    const labels1=['Week 0'], dep1=[0], yld1=[0];
+    let curDate=new Date(start+'T12:00:00');
+    while(true){
+      wk++;
+      let iy=0; const sc=wk>settleWks&&(wk-settleWks)%4===0;
+      if(sc){iy=bal*(buildYld/100);totYB+=iy;}
+      const prev=bal; bal+=weekly+iy; totDep+=weekly;
+      if(bal>=target){const dp=Math.abs(prev-target),dn=Math.abs(bal-target);if(dn>=dp){bal-=weekly+iy;totDep-=weekly;if(sc)totYB-=iy;wk--;break;}}
+      let lbl=`Wk ${wk}`;
+      curDate.setDate(curDate.getDate()+7);
+      labels1.push(`Wk ${wk}`); dep1.push(round2(totDep)); yld1.push(round2(totYB));
+      if(wk>1000) break;
+    }
+    bal=round2(bal); totDep=round2(totDep); totYB=round2(totYB);
+    const overrideP1Mat = document.getElementById('e-p1mat')?.value || null;
+    const overrideP2Mat = document.getElementById('e-p2mat')?.value || null;
+    const storedP1Mat = existing?.phase1?.phase1MaturityDate || null;
+    const storedP2Mat = existing?.phase2?.lockMaturityDate || null;
+    const p1Mat = overrideP1Mat || storedP1Mat || addDays(start, (wk-1) * 7);
+
+    // Phase 2
+    let lockBal=bal;
+    const bLabels=['Start'],dL=[totDep],bL=[totYB],lL=[0];
+    for(let m=1;m<=lockMo;m++){
+      lockBal+=lockBal*(lockYld/100);
+      bLabels.push(`Month ${m}`); dL.push(totDep); bL.push(totYB); lL.push(round2(lockBal-bal));
+    }
+    lockBal=round2(lockBal);
+    const p2Mat = overrideP2Mat || storedP2Mat || addDays(p1Mat, lockMo * 28);
+
+    Object.assign(record,{
+      phase1:{
+        targetBalance:target, weeklyDeposit:weekly, buildYieldRateMonthly:buildYld,
+        startDate:start, settleWeeks:settleWks, weeksToTarget:wk,
+        totalDeposited:totDep, buildYieldEarned:totYB, finalBalance:bal,
+        phase1MaturityDate:p1Mat, startingBalance:startBal
+      },
+      phase2:{
+        lockMonths:lockMo, lockYieldRateMonthly:lockYld,
+        lockStartDate:p1Mat, lockMaturityDate:p2Mat,
+        lockFinalBalance:lockBal, lockYieldEarned:round2(lockBal-bal)
+      },
+      weeklyChartData:{labels:labels1, deposited:dep1, yieldLayer:yld1},
+      barChartData:{labels:bLabels, depLayer:dL, buildLayer:bL, lockLayer:lL},
+      transactions: (existing.transactions && Object.keys(existing.transactions).length > 0)
+        ? existing.transactions
+        : autoGenABUTransactions(start, weekly, buildYld, settleWks, wk, startBal,
+            status==='inactive' ? (document.getElementById('e-lastdeposit')?.value||null) : null,
+            status==='inactive' ? (document.getElementById('e-frozendate')?.value||null) : null)
+    });
+
+    // Inactive fields
+    if(status==='inactive'){
+      record.lastDepositDate      = document.getElementById('e-lastdeposit')?.value||'';
+      record.frozenDate           = document.getElementById('e-frozendate')?.value||'';
+      record.frozenBalance        = parseFloat(document.getElementById('e-frozenbal')?.value)||0;
+      record.frozenYield          = parseFloat(document.getElementById('e-frozenyield')?.value)||0;
+      record.totalDepositedActual = parseFloat(document.getElementById('e-actualdep')?.value)||0;
+      record.activeStart          = document.getElementById('e-activestart')?.value||'';
+      record.activeThrough        = document.getElementById('e-activethrough')?.value||'';
+    }
+  }
+
+  db.ref('clients/'+dbKey).set(record).then(()=>{
+    selectedKey = dbKey;
+    isNewContract = false;
+    toast('Saved — '+name);
+    // Auto-wire UID into login.html via Electron
+    if(uid && window.electronAPI){
+      const loginPage = type === 'abu' ? 'abu.html' : 'std.html';
+      window.electronAPI.addLoginUID(uid, loginPage)
+        .then(res => {
+          if(res.ok) toast('Login wiring OK — ' + uid.slice(0,8) + '… (' + res.reason + ')');
+          else { toast('Login wiring FAILED: ' + res.reason); alert('Login wiring FAILED:\n' + res.reason); }
+        })
+        .catch(err => {
+          toast('Login IPC error: ' + err.message);
+          alert('Login IPC error:\n' + err.message);
+        });
+    } else {
+      toast('WARNING: electronAPI not available — login.html was NOT updated');
+      alert('WARNING: window.electronAPI is not available.\nLogin.html was NOT updated.\nUID: ' + uid);
+    }
+  }).catch(e=>toast('Error: '+e.message));
+}
+
+// ══════════════════════════════════════════
+// DELETE CLIENT
+// ══════════════════════════════════════════
+function deleteClient(key){
+  if(!confirm('Delete '+clients[key]?.clientName+'? This cannot be undone.')) return;
+  db.ref('clients/'+key).remove().then(()=>{
+    selectedKey=null;
+    renderEmpty();
+    document.getElementById('txn-client-name').textContent='No client selected';
+    document.getElementById('txn-add-form').style.display='none';
+    document.getElementById('txn-list').innerHTML='<div class="txn-empty">No client selected.</div>';
+    toast('Deleted');
+  });
+}
+
+function renderEmpty(){
+  document.getElementById('main-title').textContent='Select a Client';
+  document.getElementById('main-actions').innerHTML='';
+  document.getElementById('main-body').innerHTML=`<div class="empty-state"><div class="empty-icon">◈</div><div class="empty-text">Select a client or create new</div></div>`;
+}
+
+// ══════════════════════════════════════════
+// TRANSACTIONS
+// ══════════════════════════════════════════
+function renderTransactions(key){
+  const c = clients[key];
+  if(!c){ return; }
+  document.getElementById('txn-client-name').textContent = c.clientName;
+  document.getElementById('txn-add-form').style.display = 'flex';
+  document.getElementById('txn-add-form').style.flexDirection = 'column';
+
+  const txns = c.transactions || {};
+  const el = document.getElementById('txn-list');
+  if(!Object.keys(txns).length){ el.innerHTML='<div class="txn-empty">No transactions yet.</div>'; return; }
+
   const now = new Date();
-  const list = Object.values(txns)
-    .filter(t => new Date(t.date + 'T12:00:00') <= now)
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
-  el.innerHTML = list.map(t => `
+  const list = Object.entries(txns)
+    .filter(([,t]) => new Date(t.date+'T12:00:00') <= now)
+    .sort(([,a],[,b]) => new Date(b.date)-new Date(a.date));
+
+  const future = Object.entries(txns)
+    .filter(([,t]) => new Date(t.date+'T12:00:00') > now)
+    .sort(([,a],[,b]) => new Date(a.date)-new Date(b.date));
+
+  const renderRow = ([txKey, t]) => `
     <div class="txn-row">
       <div class="txn-date">${fmtDate(t.date)}</div>
-      <div class="txn-desc">${t.description}</div>
-      <div class="txn-amt ${t.type}">${t.type === 'credit' ? '+ ' : t.type === 'debit' ? '− ' : ''}$${Math.abs(t.amount).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
-    </div>
-  `).join('');
+      <div class="txn-desc">${esc(t.description)}</div>
+      <div class="txn-amt ${t.type}">${t.type==='credit'?'+':t.type==='debit'?'−':''}${t.amount>0?fmt(Math.abs(t.amount)):'—'}</div>
+      <button class="txn-del" onclick="deleteTxn('${key}','${txKey}')">×</button>
+    </div>`;
+
+  el.innerHTML = (future.length ? `<div style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--amber);padding:6px 0 4px;border-bottom:1px solid var(--border);margin-bottom:6px">Scheduled (future)</div>${future.map(renderRow).join('')}<div style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:8px 0 4px;border-bottom:1px solid var(--border);margin-bottom:6px">History</div>` : '') + (list.length ? list.map(renderRow).join('') : '<div class="txn-empty">No past transactions.</div>');
 }
+
+function selectTxnType(el){
+  document.querySelectorAll('.txn-type-opt').forEach(e=>e.classList.remove('active'));
+  el.classList.add('active');
+  selectedTxnType = el.dataset.t;
+}
+
+function addTransaction(){
+  if(!selectedKey){ toast('Select a client first'); return; }
+  const date  = document.getElementById('txn-date').value;
+  const desc  = document.getElementById('txn-desc').value.trim();
+  const amt   = parseFloat(document.getElementById('txn-amount').value)||0;
+  if(!date||!desc){ toast('Date and description required'); return; }
+
+  const txKey = 't'+Date.now();
+  db.ref('clients/'+selectedKey+'/transactions/'+txKey).set({
+    date, description:desc, amount:round2(amt), type:selectedTxnType
+  }).then(()=>{
+    document.getElementById('txn-desc').value='';
+    document.getElementById('txn-amount').value='';
+    toast('Transaction added');
+  });
+}
+
+function deleteTxn(clientKey, txKey){
+  if(!confirm('Delete this transaction?')) return;
+  db.ref('clients/'+clientKey+'/transactions/'+txKey).remove().then(()=>toast('Deleted'));
+}
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  if(e.key==='F12')e.preventDefault();
+  if(e.ctrlKey&&e.shiftKey&&['I','J','C'].includes(e.key))e.preventDefault();
+  if(e.ctrlKey&&e.key==='U')e.preventDefault();
+});
+
+initDB();
+setDefaultDates();
 </script>
 </body>
 </html>
