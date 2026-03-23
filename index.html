@@ -159,10 +159,10 @@ header {
 
 .hero-eyebrow {
   font-family: var(--body);
-  font-size: 10px;
-  letter-spacing: 0.28em;
+  font-size: 11px;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.38);
+  color: rgba(255,255,255,0.4);
   margin-bottom: 28px;
   opacity: 0;
   animation: fadeUp 1s ease 0.2s forwards;
@@ -222,10 +222,10 @@ header {
 
 .statement-label {
   font-family: var(--body);
-  font-size: 13px;
-  letter-spacing: 0.24em;
+  font-size: 11px;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--mid);
+  color: rgba(8,8,8,0.4);
   margin-bottom: 44px;
 }
 
@@ -242,6 +242,8 @@ header {
 }
 
 .statement-pull em { font-style: italic; }
+
+.mobile-br { display: none; }
 
 .statement-body {
   display: block;
@@ -285,10 +287,10 @@ header {
 
 .model-label {
   font-family: var(--body);
-  font-size: 13px;
-  letter-spacing: 0.24em;
+  font-size: 11px;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--white);
+  color: rgba(255,255,255,0.4);
   margin-bottom: 44px;
 }
 
@@ -362,10 +364,10 @@ header {
 
 .section-label {
   font-family: var(--body);
-  font-size: 13px;
-  letter-spacing: 0.24em;
+  font-size: 11px;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--black);
+  color: rgba(8,8,8,0.4);
   margin-bottom: 24px;
 }
 
@@ -472,10 +474,10 @@ header {
 
 .capital-label {
   font-family: var(--body);
-  font-size: 13px;
-  letter-spacing: 0.24em;
+  font-size: 11px;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--black);
+  color: rgba(8,8,8,0.4);
   margin-bottom: 24px;
 }
 
@@ -542,17 +544,18 @@ header {
 /* LEGAL */
 .legal {
   background: var(--off);
-  padding: 64px 64px;
+  padding: 52px 64px;
   border-bottom: 1px solid var(--rule);
 }
 
 .legal-label {
   font-family: var(--body);
-  font-size: 13px;
-  letter-spacing: 0.24em;
+  font-size: 11px;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--black);
+  color: rgba(8,8,8,0.4);
   margin-bottom: 24px;
+  text-align: center;
 }
 
 .legal-heading {
@@ -561,9 +564,10 @@ header {
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.01em;
-  margin-bottom: 64px;
-  padding-bottom: 64px;
+  margin-bottom: 40px;
+  padding-bottom: 40px;
   border-bottom: 1px solid var(--rule);
+  text-align: center;
 }
 
 .legal-grid {
@@ -579,11 +583,30 @@ header {
   color: var(--black);
   line-height: 2;
   opacity: 0.75;
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .legal-text + .legal-text {
   padding-left: 64px;
   border-left: 1px solid var(--rule);
+}
+
+.legal-subhead {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--black);
+  opacity: 0.45;
+  display: block;
+  margin-top: 36px;
+  margin-bottom: 10px;
+}
+
+.legal-subhead:first-child {
+  margin-top: 0;
 }
 
 /* FAQ */
@@ -769,10 +792,10 @@ header {
 
 .contact-label {
   font-family: var(--body);
-  font-size: 13px;
-  letter-spacing: 0.24em;
+  font-size: 11px;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--white);
+  color: rgba(255,255,255,0.4);
   margin-bottom: 36px;
 }
 
@@ -1032,6 +1055,7 @@ footer {
 
   .statement-inner { padding: 52px 20px; }
   .statement-pull { font-size: clamp(22px, 6.5vw, 34px); }
+  .mobile-br { display: block; }
   .statement-photo { min-height: 280px; }
 
   .model { padding: 60px 20px; }
@@ -1052,23 +1076,30 @@ footer {
   border-bottom: 1px solid var(--rule);
   padding: 80px 64px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1px 1fr;
   gap: 0;
-  align-items: center;
+  align-items: stretch;
 }
 
 .sys-bridge-left {
   padding-right: 80px;
-  border-right: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.sys-bridge-divider {
+  background: var(--rule);
+  width: 1px;
 }
 
 .sys-bridge-label {
   font-family: var(--body);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--mid);
-  margin-bottom: 20px;
+  color: rgba(8,8,8,0.4);
   display: block;
 }
 
@@ -1083,20 +1114,13 @@ footer {
 
 .sys-bridge-heading em { font-style: italic; }
 
-.sys-bridge-right {
-  padding-left: 80px;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
 .sys-bridge-text {
   font-family: var(--body);
   font-size: 16px;
   color: var(--black);
   line-height: 2;
   opacity: 0.7;
-  max-width: 480px;
+  flex: 1;
 }
 
 .sys-bridge-link {
@@ -1111,9 +1135,95 @@ footer {
   padding: 14px 40px;
   transition: border-color 0.25s, background 0.25s, color 0.25s;
   align-self: flex-start;
+  margin-top: auto;
 }
 
 .sys-bridge-link:hover {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+}
+
+.sys-bridge-right {
+  padding-left: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  text-align: right;
+}
+
+.lender-portal-label {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(8,8,8,0.4);
+  display: block;
+  padding-left: 100px;
+}
+
+.lender-portal-heading {
+  font-family: var(--display);
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: 0.01em;
+  color: var(--black);
+  padding-left: 100px;
+}
+
+.lender-portal-heading em { font-style: italic; }
+
+.lender-portal-text {
+  font-family: var(--body);
+  font-size: 16px;
+  color: var(--black);
+  line-height: 2;
+  opacity: 0.7;
+  flex: 1;
+  padding-left: 100px;
+}
+
+.lender-portal-btns {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: auto;
+  padding-left: 100px;
+}
+
+.portal-btn {
+  display: inline-block;
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 40px;
+  transition: all 0.25s;
+  cursor: pointer;
+}
+
+.portal-btn-primary {
+  background: var(--black);
+  color: var(--white);
+  border: 1px solid var(--black);
+}
+
+.portal-btn-primary:hover {
+  background: transparent;
+  color: var(--black);
+}
+
+.portal-btn-secondary {
+  background: transparent;
+  color: var(--black);
+  border: 1px solid rgba(8,8,8,0.35);
+}
+
+.portal-btn-secondary:hover {
   background: var(--black);
   color: var(--white);
   border-color: var(--black);
@@ -1123,20 +1233,38 @@ footer {
   .sys-bridge {
     grid-template-columns: 1fr;
     padding: 72px 32px;
-    gap: 48px;
+    gap: 0;
   }
   .sys-bridge-left {
     padding-right: 0;
-    border-right: none;
-    border-bottom: 1px solid var(--rule);
     padding-bottom: 48px;
+    border-bottom: 1px solid var(--rule);
   }
-  .sys-bridge-right { padding-left: 0; }
-  .sys-bridge-link { align-self: center; text-align: center; }
+  .sys-bridge-divider { display: none; }
+  .sys-bridge-right {
+    padding-left: 0;
+    padding-top: 48px;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .lender-portal-label,
+  .lender-portal-heading,
+  .lender-portal-text { padding-left: 0; }
+  .lender-portal-btns { justify-content: flex-start; padding-left: 0; }
+  .lender-portal-text { max-width: 100%; }
+  .sys-bridge-link { align-self: flex-start; }
 }
 
 @media (max-width: 600px) {
   .sys-bridge { padding: 60px 20px; }
+  .lender-portal-btns { flex-direction: column; }
+  .portal-btn { text-align: center; }
+  .sys-bridge-left { text-align: center; align-items: center; }
+  .sys-bridge-right { text-align: center; align-items: center; padding-left: 0; }
+  .sys-bridge-label,
+  .lender-portal-label { padding-left: 0; text-align: center; }
+  .sys-bridge-link { align-self: center; }
+  .lender-portal-btns { align-items: center; }
 }
 
 </style>
@@ -1199,7 +1327,7 @@ function closeMenu() {
 <section class="statement">
   <div class="statement-inner">
     <p class="statement-label">We Represent</p>
-    <h2 class="statement-pull">Fixed-term account structures for private lenders.<br><em>Built by everyday people, for everyday people.</em></h2>
+    <h2 class="statement-pull">Fixed-term account structures<br class="mobile-br"> for private lenders.<br><em>Built by everyday people,<br class="mobile-br"> for everyday people.</em></h2>
     <div class="statement-body">
       <p>Bayfall Morrigan is a private capital management firm developing proprietary capital management systems designed to put private lenders in control of unique opportunities. These systems are powered by capital we acquire through high-yield fixed-term accounts, giving everyday lenders access to capital management advantages typically reserved for institutions. With a history of consistently outperforming our commitments, our approach prioritizes reliability, transparency, and long-term results.</p>
     </div>
@@ -1236,10 +1364,18 @@ function closeMenu() {
   <div class="sys-bridge-left">
     <span class="sys-bridge-label">Proprietary Systems</span>
     <h2 class="sys-bridge-heading">The engine<br><em>behind the obligation.</em></h2>
-  </div>
-  <div class="sys-bridge-right">
     <p class="sys-bridge-text">Our fixed obligations are made possible by proprietary capital management systems developed and operated entirely in-house. Built thesis-first, validated through continuous live data collection, and stress-tested across tens of thousands of simulated scenarios. The architecture behind what we do is documented in full.</p>
     <a href="proprietarycapitalmanagementsystemsindex.html" class="sys-bridge-link">Read about our system development</a>
+  </div>
+  <div class="sys-bridge-divider"></div>
+  <div class="sys-bridge-right">
+    <span class="lender-portal-label">Lender Portal</span>
+    <h2 class="lender-portal-heading">Your account,<br><em>always accessible.</em></h2>
+    <p class="lender-portal-text">Active lenders can access their account at any time. View your current balance, accrued yield, full transaction history, and projected maturity value. All with every figure tied to a verified ledger entry. No estimates. No approximations. Everything in one place, updated in real time. You won't need to request statements.</p>
+    <div class="lender-portal-btns">
+      <a href="login.html" class="portal-btn portal-btn-primary">Login</a>
+      <a href="#contact" class="portal-btn portal-btn-secondary">Contact for Signup</a>
+    </div>
   </div>
 </div>
 
@@ -1315,9 +1451,15 @@ function closeMenu() {
 <section class="legal" id="legal">
   <p class="legal-label">Legal Framework</p>
   <h2 class="legal-heading">Fixed obligations.<br><em>Honored without exception</em></h2>
-  <div class="legal-grid">
-    <p class="legal-text">Capital received through our fixed-term account structures constitutes a private loan, not an investment. Each agreement specifies a fixed principal, a fixed yield, and a fixed maturity. The return is contractually owed regardless of firm performance, which means the instruments do not satisfy the conditions courts use to classify something as a security under federal law. There is no shared enterprise, no variable return tied to our efforts, and no participation in firm upside.</p>
-    <p class="legal-text">Michigan's lending licensing requirements attach to the party extending credit, not to the borrower. We receive funds. We do not lend them to others. No lending license applies. Every lender receives complete written disclosure of these characterizations before committing capital.</p>
+  <div class="legal-text">
+    <span class="legal-subhead">The Instrument</span>
+    Our fixed-term account structures are private loan agreements. Each contract specifies a fixed principal, a fixed yield, and a fixed maturity date. The return is a contractual debt obligation which is owed in full at term and independent of firm performance or market conditions. Lenders occupy the position of a creditor, not an investor.
+
+    <span class="legal-subhead">Securities Law</span>
+    The governing federal standard for determining whether an instrument constitutes a security is established in <em>SEC v. W.J. Howey Co.</em>, 328 U.S. 293 (1946). Under that test, an instrument is a security only if it satisfies all four conditions: an investment of money, in a common enterprise, with an expectation of profits, derived from the efforts of others. Our structures fail at minimum two. The return is fixed at execution and does not vary with enterprise performance, eliminating the profit-expectation prong. Each lender’s outcome is determined exclusively by their individual agreement, with no pooling of risk or return across counterparties, eliminating the common-enterprise prong.
+
+    <span class="legal-subhead">Licensing</span>
+    Michigan’s lending licensing requirements attach to the party extending credit, not the party receiving it. We act as the borrower in every fixed-term arrangement, receiving funds and incurring a fixed obligation to return principal and yield at maturity. No licensing requirement attaches to a borrower by virtue of accepting private loans. We do not provide investment advisory services, manage assets on behalf of lenders, or exercise discretionary authority over any funds. The regulatory frameworks governing those activities are inapplicable to our structure.
   </div>
 </section>
 
@@ -1668,7 +1810,7 @@ function closeMenu() {
   <a href="discoverypage.html" class="footer-link">Discovery Form</a>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // FAQ ACCORDION
 function toggleFaq(btn) {
   const item = btn.closest('.faq-item');
