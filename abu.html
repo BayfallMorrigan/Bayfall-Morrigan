@@ -1476,8 +1476,9 @@ function renderTransactions(txns) {
   }
 
   const now = new Date();
+  const todayStr = now.toISOString().split('T')[0];
   const list = Object.values(txns)
-    .filter(t => new Date(t.date + 'T12:00:00') <= now)
+    .filter(t => t.date <= todayStr)
     .sort((a, b) => new Date(b.date) - new Date(a.date));
   el.innerHTML = list.map(t => `
     <div class="txn-row">
