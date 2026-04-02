@@ -339,27 +339,16 @@ header {
   line-height: 1.95;
 }
 
-/* STRUCTURES */
+/* STRUCTURES — PRODUCT SHOWCASE */
 .structures {
-  padding: 64px 64px;
+  padding: 0;
   background: #ffffff;
-  border-bottom: 1px solid var(--rule);
+  border-bottom: none;
 }
 
-.structures-header {
-  margin-bottom: 72px;
-  padding-bottom: 64px;
-  border-bottom: 1px solid var(--rule);
-  text-align: center;
-}
-
-.structures-note {
-  font-family: var(--body);
-  font-size: 16px;
-  color: var(--black);
-  line-height: 2;
-  max-width: 680px;
-  margin: 0 auto;
+.structures-intro {
+  padding: 96px 64px 80px;
+  max-width: 720px;
 }
 
 .section-label {
@@ -385,91 +374,233 @@ header {
   font-size: 16px;
   color: var(--black);
   line-height: 2;
-  max-width: 680px;
+  opacity: 0.7;
 }
 
-.structures-grid {
+/* Product Cards */
+.product-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  min-height: 440px;
+  background: #f3f2f0;
+}
+
+.product-card-dark {
+  background: var(--black) !important;
+  border-top: 1px solid var(--rule-dk);
+  border-bottom: 1px solid var(--rule-dk);
+}
+
+.product-card-left {
+  padding: 72px 64px;
+  border-right: 1px solid var(--rule);
   display: flex;
   flex-direction: column;
-  gap: 0;
-  max-width: 1100px;
-  margin: 0 auto;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
 }
 
-.structure-row {
-  display: grid;
-  grid-template-columns: 80px 1fr 1fr 1fr;
-  gap: 0 48px;
-  padding: 64px 0;
-  border-top: 1px solid var(--rule);
-  align-items: start;
+.product-card-dark .product-card-left {
+  border-right-color: var(--rule-dk);
 }
 
-.structure-row:last-child {
-  border-bottom: 1px solid var(--rule);
-}
-
-.structure-index {
+.product-numeral {
   font-family: var(--display);
-  font-size: 13px;
+  font-size: 180px;
   font-weight: 300;
   font-style: italic;
-  color: var(--mid);
-  padding-top: 6px;
+  color: var(--black);
+  opacity: 0.05;
+  line-height: 1;
+  position: absolute;
+  bottom: -20px;
+  right: 32px;
+  user-select: none;
+  pointer-events: none;
+  letter-spacing: -0.04em;
 }
 
-.structure-name {
+.product-card-dark .product-numeral {
+  color: var(--white);
+  opacity: 0.06;
+}
+
+.product-card-left-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.product-tag {
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--mid);
+  display: inline-block;
+  border: 1px solid #a8a49d;
+  padding: 7px 16px;
+  align-self: flex-start;
+}
+
+.product-card-dark .product-tag {
+  color: rgba(255,255,255,0.3);
+  border-color: rgba(255,255,255,0.12);
+}
+
+.product-name {
   font-family: var(--display);
-  font-size: clamp(28px, 2.8vw, 42px);
+  font-size: clamp(34px, 3.5vw, 54px);
   font-weight: 400;
-  line-height: 1.12;
+  line-height: 1.1;
   letter-spacing: 0.01em;
   color: var(--black);
 }
 
-.structure-tag {
+.product-card-dark .product-name {
+  color: var(--white);
+}
+
+.product-desc {
   font-family: var(--body);
-  font-size: 11px;
-  letter-spacing: 0.2em;
+  font-size: 16px;
+  color: var(--black);
+  line-height: 2;
+  opacity: 0.65;
+  max-width: 400px;
+}
+
+.product-card-dark .product-desc {
+  color: var(--white);
+  opacity: 0.5;
+}
+
+.product-card-right {
+  padding: 0 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product-spec-group {
+  padding: 30px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.product-card-dark .product-spec-group {
+  border-bottom-color: var(--rule-dk);
+}
+
+.product-spec-group:last-child {
+  border-bottom: none;
+}
+
+.product-spec-label {
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--mid);
-  margin-bottom: 16px;
   display: block;
+  margin-bottom: 8px;
 }
 
-.structure-col-head {
+.product-card-dark .product-spec-label {
+  color: rgba(255,255,255,0.28);
+}
+
+.product-spec-value {
   font-family: var(--display);
-  font-size: 14px;
-  font-weight: 500;
-  font-style: italic;
+  font-size: clamp(20px, 1.8vw, 26px);
+  font-weight: 400;
   color: var(--black);
-  margin-bottom: 14px;
-  line-height: 1.3;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  margin-bottom: 6px;
 }
 
-.structure-text {
+.product-card-dark .product-spec-value {
+  color: var(--white);
+}
+
+.product-spec-sub {
   font-family: var(--body);
-  font-size: 15px;
+  font-size: 14px;
   color: var(--black);
-  line-height: 1.95;
-  margin-bottom: 14px;
+  opacity: 0.55;
+  line-height: 1.85;
 }
 
-.structure-text:last-child { margin-bottom: 0; }
+.product-card-dark .product-spec-sub {
+  color: var(--white);
+  opacity: 0.38;
+}
+
+@media (max-width: 960px) {
+  .structures-intro {
+    grid-template-columns: 1fr;
+    padding: 72px 32px 60px;
+    gap: 32px;
+  }
+  .product-card {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .product-card-left {
+    padding: 52px 32px;
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
+    min-height: 300px;
+  }
+  .product-card-dark .product-card-left {
+    border-bottom-color: var(--rule-dk);
+  }
+  .product-card-right {
+    padding: 0 32px;
+  }
+  .product-spec-group {
+    padding: 28px 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .structures-intro { padding: 52px 20px 48px; }
+  .product-card-left { padding: 48px 20px; }
+  .product-card-right { padding: 0 20px; }
+  .product-numeral { font-size: 130px; right: 12px; }
+}
 
 
-/* CAPITAL MODEL */
+/* CAPITAL MODEL — PHOTO HEADER + WHITE CONTENT */
 .capital {
-  background: var(--white);
-  padding: 64px 64px 120px;
+  padding: 0;
   border-bottom: 1px solid var(--rule);
 }
 
 .capital-header {
-  margin-bottom: 72px;
-  padding-bottom: 64px;
+  position: relative;
+  padding: 80px 64px 80px;
+  overflow: hidden;
   border-bottom: 1px solid var(--rule);
-  text-align: center;
+}
+
+.capital-header-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('Curves9.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.capital-header-content {
+  position: relative;
+  z-index: 1;
 }
 
 .capital-label {
@@ -477,68 +608,76 @@ header {
   font-size: 11px;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: rgba(8,8,8,0.4);
-  margin-bottom: 24px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 44px;
 }
 
 .capital-heading {
   font-family: var(--display);
-  font-size: clamp(32px, 3.5vw, 52px);
-  font-weight: 400;
-  line-height: 1.2;
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.08;
   letter-spacing: 0.01em;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
+  color: var(--white);
 }
 
 .capital-intro {
   font-family: var(--body);
   font-size: 16px;
-  color: var(--black);
+  color: rgba(255,255,255,0.45);
   line-height: 2;
-  max-width: 680px;
-  margin: 0 auto;
+  max-width: 420px;
 }
 
 .capital-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 0;
-  max-width: 1100px;
-  margin: 0 auto;
+  background: var(--white);
+  padding: 64px 64px 80px;
 }
 
 .capital-item {
-  padding: 0 52px;
-  border-right: 1px solid var(--rule);
-  text-align: center;
+  background: #f3f2f0;
+  padding: 48px 44px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
-.capital-item:first-child {
-  padding-left: 0;
+.capital-item + .capital-item {
+  margin-left: 1px;
 }
 
-.capital-item:last-child {
-  border-right: none;
-  padding-right: 0;
+.capital-item-ordinal {
+  font-family: var(--body);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(8,8,8,0.3);
+  margin-bottom: 24px;
 }
 
 .capital-item-heading {
   font-family: var(--display);
-  font-size: 24px;
+  font-size: clamp(22px, 2vw, 30px);
   font-weight: 400;
   font-style: italic;
-  line-height: 1.3;
+  line-height: 1.25;
   color: var(--black);
-  margin-bottom: 24px;
   letter-spacing: 0.01em;
+  margin-bottom: 24px;
 }
 
 .capital-item-text {
   font-family: var(--body);
-  font-size: 15px;
+  font-size: 16px;
   color: var(--black);
   line-height: 2;
-  opacity: 0.75;
+  opacity: 0.7;
 }
 
 /* LEGAL */
@@ -612,14 +751,15 @@ header {
 /* FAQ */
 .faq {
   background: var(--black);
-  padding: 96px 64px;
+  padding: 64px 64px 96px;
   border-bottom: 1px solid var(--rule-dk);
 }
 
 .faq-header {
-  margin-bottom: 72px;
-  padding-bottom: 64px;
+  margin-bottom: 52px;
+  padding-bottom: 48px;
   border-bottom: 1px solid var(--rule-dk);
+  text-align: center;
 }
 
 .faq-label {
@@ -629,6 +769,7 @@ header {
   text-transform: uppercase;
   color: rgba(255,255,255,0.35);
   margin-bottom: 24px;
+  text-align: center;
 }
 
 .faq-heading {
@@ -638,6 +779,7 @@ header {
   line-height: 1.15;
   letter-spacing: 0.01em;
   color: var(--white);
+  text-align: center;
 }
 
 .faq-heading em { font-style: italic; }
@@ -648,6 +790,7 @@ header {
   color: rgba(255,255,255,0.4);
   line-height: 2;
   align-self: end;
+  text-align: center;
 }
 
 .faq-list {
@@ -665,6 +808,7 @@ header {
   margin-top: 56px;
   padding-bottom: 20px;
   border-bottom: 1px solid var(--rule-dk);
+  text-align: center;
 }
 
 .faq-category-label:first-child { margin-top: 0; }
@@ -680,10 +824,10 @@ header {
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 40px;
   padding: 28px 0;
-  text-align: left;
+  text-align: center;
 }
 
 .faq-question-text {
@@ -694,6 +838,7 @@ header {
   line-height: 1.3;
   letter-spacing: 0.01em;
   transition: color 0.25s;
+  text-align: center;
 }
 
 .faq-question:hover .faq-question-text {
@@ -749,6 +894,7 @@ header {
 
 .faq-answer-inner {
   padding: 0 0 36px;
+  text-align: center;
 }
 
 .faq-subheader {
@@ -758,6 +904,7 @@ header {
   color: rgba(255,255,255,0.45);
   margin-bottom: 16px;
   letter-spacing: 0.01em;
+  text-align: center;
 }
 
 .faq-answer-inner p {
@@ -766,6 +913,7 @@ header {
   color: rgba(255,255,255,0.55);
   line-height: 2;
   margin-bottom: 16px;
+  text-align: center;
 }
 
 .faq-answer-inner p:last-child { margin-bottom: 0; }
@@ -778,6 +926,64 @@ header {
 @media (max-width: 600px) {
   .faq { padding: 60px 20px; }
   .faq-question { padding: 22px 0; }
+}
+
+/* DISCOVERY CTA */
+.discovery-cta {
+  background: var(--black);
+  border-top: 1px solid var(--rule-dk);
+  border-bottom: 1px solid var(--rule-dk);
+  padding: 120px 64px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.discovery-cta-label {
+  font-family: var(--display);
+  font-size: clamp(32px, 3.5vw, 52px);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 32px;
+}
+
+.discovery-cta-body {
+  font-family: var(--body);
+  font-size: 17px;
+  color: rgba(255,255,255,0.45);
+  line-height: 2;
+  max-width: 620px;
+  margin-bottom: 56px;
+}
+
+.discovery-cta-btn {
+  display: inline-block;
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.6);
+  padding: 16px 52px;
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.discovery-cta-btn:hover {
+  border-color: var(--white);
+  background: rgba(255,255,255,0.08);
+}
+
+@media (max-width: 960px) {
+  .discovery-cta { padding: 88px 32px; }
+}
+
+@media (max-width: 600px) {
+  .discovery-cta { padding: 60px 20px; }
+  .discovery-cta-btn { padding: 14px 36px; }
 }
 
 /* CONTACT */
@@ -1020,15 +1226,9 @@ footer {
   .model-item { border-right: none; border-bottom: 1px solid var(--rule-dk); padding: 0 0 48px; margin: 0 0 0 0; }
   .model-item:last-child { border-bottom: none; padding-bottom: 0; }
 
-  .structures { padding: 88px 32px; }
-  .structure-row { grid-template-columns: 1fr; gap: 28px; padding: 48px 0; }
-  .structure-row > div:last-child { grid-column: auto; }
-  .structure-index { display: none; }
-
-  .capital { padding: 88px 32px; }
-  .capital-grid { grid-template-columns: 1fr; }
-  .capital-item { border-right: none; border-bottom: 1px solid var(--rule); padding: 0 0 48px; margin: 0 0 48px; text-align: left; }
-  .capital-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+  .capital-header { padding: 64px 32px 64px; }
+  .capital-grid { grid-template-columns: 1fr; padding: 48px 32px; gap: 1px; }
+  .capital-item + .capital-item { margin-left: 0; }
 
   .legal { padding: 88px 32px; }
   .legal-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -1059,212 +1259,16 @@ footer {
   .statement-photo { min-height: 280px; }
 
   .model { padding: 60px 20px; }
-  .structures { padding: 60px 20px; }
-
-  .capital { padding: 60px 20px; }
-  .capital-item { text-align: left; }
+  .capital-header { padding: 64px 20px 48px; }
+  .capital-grid { padding: 32px 20px; }
+  .capital-item { padding: 36px 28px; }
+  .capital-item-heading { font-size: clamp(22px, 6vw, 28px); }
   .legal { padding: 60px 20px; }
   .legal-grid { text-align: left; }
   .contact { padding: 60px 20px; gap: 48px; }
   .contact-heading { font-size: clamp(26px, 8vw, 38px); }
 
   footer { padding: 20px; gap: 10px; }
-}
-/* SYSTEM BRIDGE */
-.sys-bridge {
-  background: var(--white);
-  border-bottom: 1px solid var(--rule);
-  padding: 80px 64px;
-  display: grid;
-  grid-template-columns: 1fr 1px 1fr;
-  gap: 0;
-  align-items: stretch;
-}
-
-.sys-bridge-left {
-  padding-right: 80px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 28px;
-}
-
-.sys-bridge-divider {
-  background: var(--rule);
-  width: 1px;
-}
-
-.sys-bridge-label {
-  font-family: var(--body);
-  font-size: 11px;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: rgba(8,8,8,0.4);
-  display: block;
-}
-
-.sys-bridge-heading {
-  font-family: var(--display);
-  font-size: clamp(28px, 3vw, 44px);
-  font-weight: 400;
-  line-height: 1.18;
-  letter-spacing: 0.01em;
-  color: var(--black);
-}
-
-.sys-bridge-heading em { font-style: italic; }
-
-.sys-bridge-text {
-  font-family: var(--body);
-  font-size: 16px;
-  color: var(--black);
-  line-height: 2;
-  opacity: 0.7;
-  flex: 1;
-}
-
-.sys-bridge-link {
-  display: inline-block;
-  font-family: var(--body);
-  font-size: 11px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--black);
-  text-decoration: none;
-  border: 1px solid rgba(8,8,8,0.4);
-  padding: 14px 40px;
-  transition: border-color 0.25s, background 0.25s, color 0.25s;
-  align-self: flex-start;
-  margin-top: auto;
-}
-
-.sys-bridge-link:hover {
-  background: var(--black);
-  color: var(--white);
-  border-color: var(--black);
-}
-
-.sys-bridge-right {
-  padding-left: 80px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 24px;
-  text-align: right;
-}
-
-.lender-portal-label {
-  font-family: var(--body);
-  font-size: 11px;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: rgba(8,8,8,0.4);
-  display: block;
-  padding-left: 100px;
-}
-
-.lender-portal-heading {
-  font-family: var(--display);
-  font-size: clamp(28px, 3vw, 44px);
-  font-weight: 400;
-  line-height: 1.18;
-  letter-spacing: 0.01em;
-  color: var(--black);
-  padding-left: 100px;
-}
-
-.lender-portal-heading em { font-style: italic; }
-
-.lender-portal-text {
-  font-family: var(--body);
-  font-size: 16px;
-  color: var(--black);
-  line-height: 2;
-  opacity: 0.7;
-  flex: 1;
-  padding-left: 100px;
-}
-
-.lender-portal-btns {
-  display: flex;
-  gap: 12px;
-  justify-content: flex-end;
-  margin-top: auto;
-  padding-left: 100px;
-}
-
-.portal-btn {
-  display: inline-block;
-  font-family: var(--body);
-  font-size: 11px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 14px 40px;
-  transition: all 0.25s;
-  cursor: pointer;
-}
-
-.portal-btn-primary {
-  background: var(--black);
-  color: var(--white);
-  border: 1px solid var(--black);
-}
-
-.portal-btn-primary:hover {
-  background: transparent;
-  color: var(--black);
-}
-
-.portal-btn-secondary {
-  background: transparent;
-  color: var(--black);
-  border: 1px solid rgba(8,8,8,0.35);
-}
-
-.portal-btn-secondary:hover {
-  background: var(--black);
-  color: var(--white);
-  border-color: var(--black);
-}
-
-@media (max-width: 960px) {
-  .sys-bridge {
-    grid-template-columns: 1fr;
-    padding: 72px 32px;
-    gap: 0;
-  }
-  .sys-bridge-left {
-    padding-right: 0;
-    padding-bottom: 48px;
-    border-bottom: 1px solid var(--rule);
-  }
-  .sys-bridge-divider { display: none; }
-  .sys-bridge-right {
-    padding-left: 0;
-    padding-top: 48px;
-    align-items: flex-start;
-    text-align: left;
-  }
-  .lender-portal-label,
-  .lender-portal-heading,
-  .lender-portal-text { padding-left: 0; }
-  .lender-portal-btns { justify-content: flex-start; padding-left: 0; }
-  .lender-portal-text { max-width: 100%; }
-  .sys-bridge-link { align-self: flex-start; }
-}
-
-@media (max-width: 600px) {
-  .sys-bridge { padding: 60px 20px; }
-  .lender-portal-btns { flex-direction: column; }
-  .portal-btn { text-align: center; }
-  .sys-bridge-left { text-align: center; align-items: center; }
-  .sys-bridge-right { text-align: center; align-items: center; padding-left: 0; }
-  .sys-bridge-label,
-  .lender-portal-label { padding-left: 0; text-align: center; }
-  .sys-bridge-link { align-self: center; }
-  .lender-portal-btns { align-items: center; }
 }
 
 </style>
@@ -1276,10 +1280,9 @@ footer {
     <img class="logo-img" src="logopng.png" alt="Bayfall Morrigan">
   </a>
   <nav class="header-right">
+    <a href="#model">Lender Framework</a>
     <a href="#structures">Structures</a>
-    <a href="#capital">Capital Model</a>
-    <a href="#legal">Legal Framework</a>
-    <a href="proprietarycapitalmanagementsystemsindex.html">Our Systems</a>
+    <a href="#capital">Operational Framework</a>
     <a href="discoverypage.html">Discovery Form</a>
     <a href="#contact">Contact</a>
     <a href="login.html" style="opacity:0.45;border-bottom:1px solid rgba(255,255,255,0.15);padding-bottom:2px;">Lender Login</a>
@@ -1290,10 +1293,9 @@ footer {
 </header>
 
 <nav class="mobile-menu" id="mobile-menu">
+  <a href="#model" onclick="closeMenu()">Lender Framework</a>
   <a href="#structures" onclick="closeMenu()">Structures</a>
-  <a href="#capital" onclick="closeMenu()">Capital Model</a>
-  <a href="#legal" onclick="closeMenu()">Legal Framework</a>
-  <a href="proprietarycapitalmanagementsystemsindex.html" onclick="closeMenu()">Our Systems</a>
+  <a href="#capital" onclick="closeMenu()">Operational Framework</a>
   <a href="discoverypage.html" onclick="closeMenu()">Discovery Form</a>
   <a href="#contact" onclick="closeMenu()">Contact</a>
   <a href="login.html" onclick="closeMenu()">Lender Login</a>
@@ -1326,10 +1328,10 @@ function closeMenu() {
 <!-- STATEMENT -->
 <section class="statement">
   <div class="statement-inner">
-    <p class="statement-label">We Represent</p>
+    <p class="statement-label">We Offer</p>
     <h2 class="statement-pull">Fixed-term account structures for<br class="mobile-br"> private lenders.<br><em>Built by everyday people,<br class="mobile-br"> for everyday people.</em></h2>
     <div class="statement-body">
-      <p>Bayfall Morrigan is a private capital management firm developing proprietary capital management systems designed to put private lenders in control of unique opportunities. These systems are powered by capital we acquire through high-yield fixed-term accounts, giving everyday lenders access to capital management advantages typically reserved for institutions. With a history of consistently outperforming our commitments, our approach prioritizes reliability, transparency, and long-term results.</p>
+      <p>Welcome to Bayfall Morrigan. We offer fixed-term account structures to private lenders, building toward an institutional-grade track record. Lender capital is deployed through proprietary capital management systems designed and operated internally. Participation is structured in alignment with our capital deployment parameters and internal capacity. With a growing record of consistently fulfilling our commitments, our approach prioritizes reliability, transparency, and long-term results for our lenders.</p>
     </div>
   </div>
   <div class="statement-photo">
@@ -1338,136 +1340,147 @@ function closeMenu() {
 </section>
 
 <!-- MODEL -->
-<section class="model">
-  <p class="model-label">The Model</p>
+<section class="model" id="model">
+  <p class="model-label">Lender Framework</p>
   <div class="model-grid">
     <div class="model-item">
       <p class="model-number">01</p>
-      <h3 class="model-heading">Fixed-Term Account Structures</h3>
-      <p class="model-text">Capital enters our firm through private high-yield loan agreements. Each agreement specifies a principal amount, a term length, and a fixed yield to be returned at maturity. All terms are immutable.</p>
+      <h3 class="model-heading">Fixed-Term Agreements</h3>
+      <p class="model-text">Each agreement specifies a principal amount, a term length, and a fixed yield to be returned at maturity. Terms are established at execution and do not change for the life of the agreement.</p>
     </div>
     <div class="model-item">
       <p class="model-number">02</p>
-      <h3 class="model-heading">Proprietary Capital Management</h3>
-      <p class="model-text">Lender capital is deployed into proprietary capital management systems developed and operated internally. These systems are designed to generate output in excess of contractual obligations across a defined range of operating conditions.</p>
+      <h3 class="model-heading">The Creditor Position</h3>
+      <p class="model-text">Lenders occupy the position of creditor and hold no exposure to internal performance, no participation in upside, and no variable outcome. What they hold is a fixed contractual claim that is defined at contract execution and honored at maturity with zero exceptions.</p>
     </div>
     <div class="model-item">
       <p class="model-number">03</p>
-      <h3 class="model-heading">Spread-Based Economics</h3>
-      <p class="model-text">Revenue is the spread between what the proprietary systems produce and the fixed cost of lender capital. Contractual yields are priced against the modeled worst-case system outcomes.</p>
+      <h3 class="model-heading">The Firm's Obligation</h3>
+      <p class="model-text">The obligation to return principal and yield is unconditional. It does not vary with system performance, market conditions, or any other variable. What the firm does internally to generate the spread that services lender commitments is the firm's operational domain. The lender's position begins and ends with the contract.</p>
     </div>
   </div>
 </section>
 
-<!-- SYSTEM BRIDGE -->
-<div class="sys-bridge">
-  <div class="sys-bridge-left">
-    <span class="sys-bridge-label">Proprietary Systems</span>
-    <h2 class="sys-bridge-heading">The engine<br><em>behind the obligation.</em></h2>
-    <p class="sys-bridge-text">Our fixed obligations are made possible by proprietary capital management systems developed and operated entirely in-house. Built thesis-first, validated through continuous live data collection, and stress-tested across tens of thousands of simulated scenarios. The architecture behind what we do is documented in full.</p>
-    <a href="proprietarycapitalmanagementsystemsindex.html" class="sys-bridge-link">Read about our system development</a>
-  </div>
-  <div class="sys-bridge-divider"></div>
-  <div class="sys-bridge-right">
-    <span class="lender-portal-label">Lender Portal</span>
-    <h2 class="lender-portal-heading">Your account,<br><em>always accessible.</em></h2>
-    <p class="lender-portal-text">Active lenders can access their account at any time. View your current balance, accrued yield, full transaction history, and projected maturity value. All with every figure tied to a verified ledger entry. No estimates. No approximations. Everything in one place, updated in real time. You won't need to request statements.</p>
-    <div class="lender-portal-btns">
-      <a href="login.html" class="portal-btn portal-btn-primary">Login</a>
-      <a href="#contact" class="portal-btn portal-btn-secondary">Contact for Signup</a>
-    </div>
-  </div>
-</div>
-
 <!-- STRUCTURES -->
 <section class="structures" id="structures">
-  <div class="structures-header">
-      <p class="section-label">Lending Structures</p>
-      <h2 class="structures-heading">Two structures.<br>One principle.</h2>
-    <p class="structures-note">Bayfall Morrigan provides two distinct fixed-term account structures, each carefully designed to accommodate the varying circumstances and objectives of private lenders. One structure serves those with capital immediately available, offering a direct and fully operational pathway into our firm's funding framework. The other supports those who prefer to build their allocation progressively, advancing over time through a structured, guided process. Both pathways are constructed to provide transparency, consistency, and alignment with our operational principles.</p>
-  </div>
-  <div class="structures-grid">
 
-    <div class="structure-row">
-      <div class="structure-index">I</div>
-      <div>
-        <span class="structure-tag">Standard Structure</span>
-        <h3 class="structure-name">Standard Private<br>High-Yield Loan</h3>
-      </div>
-      <div>
-        <p class="structure-col-head">How it works</p>
-        <p class="structure-text">Lenders commit a predetermined lump sum through a private high-yield loan agreement. A 6.5% origination fee is taken at inception, after which the selected term begins. Three term lengths are available: 3, 6, or 12 months.</p>
-        <p class="structure-text">Each term carries a different fixed monthly yield that compounds every 28 days. Longer terms carry higher rates and produce significantly greater total returns. The stated yield is locked at execution.</p>
-      </div>
-      <div>
-        <p class="structure-col-head">At maturity</p>
-        <p class="structure-text">The lender has preselected either a lump sum payout of the full balance, or scheduled monthly distributions over an agreed period, with the same yield continuing to accrue on any remaining balance throughout.</p>
+  <div class="structures-intro">
+    <p class="section-label">Account Structures</p>
+    <h2 class="structures-heading">Two structures.<br>One principle.</h2>
+    <p class="structures-note">Bayfall Morrigan offers two distinct fixed-term account structures built around the variable circumstances of the private lenders we work with and the liquidity requirements of our firm. Each structure serves a different entry condition. Both produce the same outcome: a fixed contractual obligation, honored at maturity.</p>
+  </div>
+
+  <!-- Product I -->
+  <div class="product-card">
+    <div class="product-card-left">
+      <span class="product-numeral" aria-hidden="true">I</span>
+      <div class="product-card-left-inner">
+        <span class="product-tag">Standard Structure</span>
+        <h3 class="product-name">Standard Private<br>High-Yield Loan</h3>
+        <p class="product-desc">Lenders participate through a one-time deposit structure, where capital is committed upfront and a one-time origination fee is applied at entry. Each agreement is defined by a fixed duration and a predetermined monthly yield, with a clearly established maturity value at inception. All key parameters are locked at execution.</p>
       </div>
     </div>
-
-    <div class="structure-row">
-      <div class="structure-index">II</div>
-      <div>
-        <span class="structure-tag">Alternative Structure</span>
-        <h3 class="structure-name">Account<br>Build-Up Program</h3>
+    <div class="product-card-right">
+      <div class="product-spec-group">
+        <span class="product-spec-label">Term Options</span>
+        <p class="product-spec-value">3, 6, or 12 Months</p>
+        <p class="product-spec-sub">Longer terms carry higher fixed yields and produce significantly greater total returns.</p>
       </div>
-      <div>
-        <p class="structure-col-head">Accumulation phase</p>
-        <p class="structure-text">For lenders whose intended allocation exceeds what is currently available. A target balance is established and funded through weekly contributions over a defined period. The weekly contribution size determines the yield rate, larger contributions produce higher rates.</p>
+      <div class="product-spec-group">
+        <span class="product-spec-label">Origination Fee</span>
+        <p class="product-spec-value">6.5% at Inception</p>
+        <p class="product-spec-sub">Deducted at the start of the term before the yield period begins. Not all standard contracts include an origination fee.</p>
       </div>
-      <div>
-        <p class="structure-col-head">Transition to loan</p>
-        <p class="structure-text">Yield compounds identically to the standard structure and is added to the balance, total capital contributed is typically less than the target balance itself. No origination fee applies. Once the target is reached, the account transitions automatically into a pre-agreed standard high-yield loan on terms set before accumulation begins.</p>
+      <div class="product-spec-group">
+        <span class="product-spec-label">Compounding</span>
+        <p class="product-spec-value">Monthly</p>
+        <p class="product-spec-sub">Yield is compounded every 28 days throughout the term and is locked at execution. It does not vary with market conditions or firm performance.</p>
+      </div>
+      <div class="product-spec-group">
+        <span class="product-spec-label">At Maturity</span>
+        <p class="product-spec-value">Single Payout</p>
+        <p class="product-spec-sub">At the end of the term, the agreement settles in full. Lenders receive a single payout reflecting the finalized maturity value, representing the return of principal and all accrued yield generated over the life of the contract. Rollovers are permitted, but require a waiting period and the initiation of a new agreement.</p>
       </div>
     </div>
-
   </div>
+
+  <!-- Product II -->
+  <div class="product-card product-card-dark">
+    <div class="product-card-left">
+      <span class="product-numeral" aria-hidden="true">II</span>
+      <div class="product-card-left-inner">
+        <span class="product-tag">Alternative Structure</span>
+        <h3 class="product-name">Account<br>Build-Up Program</h3>
+        <p class="product-desc">The Account Build-Up Program exists for lenders whose intended allocation exceeds their current available liquidity. A target balance is established and scheduled to be funded through weekly contributions. Throughout the funding period, a modest yield (build-up yield) compounds on the growing balance. This supplements contributions and accelerates progress toward the target. The build-up yield is determined by the percentage of the scheduled weekly contribution, expressed as a percentage of the target balance. Once the target is reached, the account transitions automatically into a standard high-yield loan on terms that are established at initial contract execution. That account carries an enhanced yield relative to the standard structure, with the degree of enhancement determined by the length of the funding period. Longer funding periods produce higher enhanced yields at transition.</p>
+      </div>
+    </div>
+    <div class="product-card-right">
+      <div class="product-spec-group">
+        <span class="product-spec-label">Accumulation</span>
+        <p class="product-spec-value">Weekly Contributions</p>
+        <p class="product-spec-sub">Unlike the standard structure, which requires a one-time upfront deposit, accounts under this program are funded through weekly contributions over a defined period. This gives lenders direct control over the shape of their funding period and by extension, the terms of the transition into the standard high-yield loan it produces.</p>
+      </div>
+      <div class="product-spec-group">
+        <span class="product-spec-label">Origination Fee</span>
+        <p class="product-spec-value">None</p>
+        <p class="product-spec-sub">No origination fee applies to the build-up program.</p>
+      </div>
+      <div class="product-spec-group">
+        <span class="product-spec-label">Compounding</span>
+        <p class="product-spec-value">Monthly</p>
+        <p class="product-spec-sub">Yield compounds identically to the standard structure and is added to the accumulating balance throughout the contribution period.</p>
+      </div>
+      <div class="product-spec-group">
+        <span class="product-spec-label">Transition</span>
+        <p class="product-spec-value">Automatic at Target</p>
+        <p class="product-spec-sub">Once the target balance is reached, the account transitions automatically into a pre-agreed standard high-yield loan on terms set before accumulation begins. Specific rates are disclosed at initiation.</p>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <!-- CAPITAL MODEL -->
 <section class="capital" id="capital">
   <div class="capital-header">
-    <p class="capital-label">Our Capital Model</p>
-    <h2 class="capital-heading">Why we use private lenders.</h2>
-    <p class="capital-intro">This phase is building something larger than itself.</p>
+    <div class="capital-header-bg"></div>
+    <div class="capital-header-content">
+      <p class="capital-label">Operational Framework</p>
+      <h2 class="capital-heading">Why private lenders?</h2>
+      <p class="capital-intro">Private lending is the foundation, not the ceiling.</p>
+    </div>
   </div>
   <div class="capital-grid">
     <div class="capital-item">
-      <h3 class="capital-item-heading">A track record is a structural asset.</h3>
-      <p class="capital-item-text">Building proprietary systems that generate consistent returns is one thing. Building a firm with a verifiable history of accepting fixed obligations and honoring every one of them on schedule is another. The private lending phase of our operation is where that record is established. Every contract executed and settled at the promised yield advances a body of evidence that no marketing material can substitute for.</p>
+      <span class="capital-item-ordinal">Part One</span>
+      <h3 class="capital-item-heading">A Track Record is a Structural Asset.</h3>
+      <p class="capital-item-text">Building capital management systems that generate consistent returns above average market returns when dealing with non-institutional capital is one thing. Building a firm with a verifiable history of accepting fixed obligations and honoring every one of them on schedule is another. The private lending phase is where that record is established. Every contract executed and settled at the promised yield advances a body of evidence that no marketing material can substitute for.</p>
     </div>
     <div class="capital-item">
-      <h3 class="capital-item-heading">Institutional relationships require institutional credibility.</h3>
+      <span class="capital-item-ordinal">Part Two</span>
+      <h3 class="capital-item-heading">Institutional Relationships Require Institutional Credibility.</h3>
       <p class="capital-item-text">The capital structures required to work with institutional counterparties are not accessible to firms without a demonstrated history of obligation fulfillment at scale. Private lenders give us the environment to build that history deliberately, at a pace that keeps our obligations well within what our systems are built to support. The goal is not to stay here. The goal is to build through here.</p>
     </div>
     <div class="capital-item">
-      <h3 class="capital-item-heading">Larger capital requires purpose-built systems.</h3>
-      <p class="capital-item-text">Institutional-scale capital does not simply run through the same systems at a larger size. It requires systems designed from the ground up to operate at that range efficiently. The retained earnings generated through the private lending phase fund the development of those next-generation systems in parallel, so that when the track record is in place, the infrastructure already is too.</p>
+      <span class="capital-item-ordinal">Part Three</span>
+      <h3 class="capital-item-heading">Utilizing Institutional Capital Requires Purpose-Built Systems.</h3>
+      <p class="capital-item-text">Institutional-scale capital does not run through the same infrastructure at a larger size. It requires systems designed from the ground up for that range. The retained margin generated through the private lending phase funds that development in parallel, so when the track record is in place, the infrastructure already is too.</p>
     </div>
   </div>
 </section>
 
-<!-- LEGAL -->
-<section class="legal" id="legal">
-  <p class="legal-label">Legal Framework</p>
-  <h2 class="legal-heading">Fixed obligations.<br><em>Honored without exception</em></h2>
-  <div class="legal-text">
-    <span class="legal-subhead">The Instrument</span>
-    Our fixed-term account structures are private loan agreements. Each contract specifies a fixed principal, a fixed yield, and a fixed maturity date. The return is a contractual debt obligation which is owed in full at term and independent of firm performance or market conditions. Lenders occupy the position of a creditor, not an investor.
-
-    <span class="legal-subhead">Securities Law</span>
-    The governing federal standard for determining whether an instrument constitutes a security is established in <em>SEC v. W.J. Howey Co.</em>, 328 U.S. 293 (1946). Under that test, an instrument is a security only if it satisfies all four conditions: an investment of money, in a common enterprise, with an expectation of profits, derived from the efforts of others. Our structures fail at minimum two. The return is fixed at execution and does not vary with enterprise performance, eliminating the profit-expectation prong. Each lender’s outcome is determined exclusively by their individual agreement, with no pooling of risk or return across counterparties, eliminating the common-enterprise prong.
-
-    <span class="legal-subhead">Licensing</span>
-    Michigan’s lending licensing requirements attach to the party extending credit, not the party receiving it. We act as the borrower in every fixed-term arrangement, receiving funds and incurring a fixed obligation to return principal and yield at maturity. No licensing requirement attaches to a borrower by virtue of accepting private loans. We do not provide investment advisory services, manage assets on behalf of lenders, or exercise discretionary authority over any funds. The regulatory frameworks governing those activities are inapplicable to our structure.
-  </div>
+<!-- ACCOUNT DISCOVERY CTA -->
+<section class="discovery-cta" id="account-discovery">
+  <p class="discovery-cta-label">Account Discovery Form</p>
+  <p class="discovery-cta-body">If the offered fixed-term account structures align with your circumstances, we encourage you to complete the account discovery form below. It allows us to understand your position and configure any account that moves forward accordingly.</p>
+  <a href="discoverypage.html" class="discovery-cta-btn">Begin the Account Discovery Form</a>
 </section>
 
 <!-- FAQ -->
 <section class="faq" id="faq">
   <div class="faq-header">
     <p class="faq-label">Frequently Asked</p>
-    <h2 class="faq-heading">Questions,<br><em>answered directly.</em></h2>
+    <h2 class="faq-heading">Questions, <em>answered directly.</em></h2>
   </div>
 
   <div class="faq-list">
@@ -1482,7 +1495,7 @@ function closeMenu() {
       <div class="faq-answer">
         <div class="faq-answer-inner">
           <p class="faq-subheader">There is no fixed minimum or maximum; however, we operate within a defined and intentional range.</p>
-          <p>The range we work within is dynamic, and it evolves with our systems. What we can say is that our systems are specifically engineered for lower-denomination capital. That is not a limitation, it is the design. Precision execution at this scale is where our edge is cleanest, and the diminishing returns effect at higher capital levels reflects that architecture rather than contradicts it. Allocations that fall meaningfully outside of that range are not a fit for our structure and will not be accepted. </p>
+          <p>The range we work within is dynamic, and it evolves with our systems. What we can say is that our systems are specifically engineered for lower-denomination capital. That is not a limitation. It is the design. Precision execution at this scale is where our edge is cleanest, and the diminishing returns effect at higher capital levels reflects that architecture rather than contradicts it. Allocations that fall meaningfully outside of that range are not a fit for our structure and will not be accepted.</p>
           <p>On the lower end, the math needs to make sense for both sides. A very small allocation over a very short term produces a yield that is neither meaningful to the lender nor operationally worth structuring. If capital or duration falls below a threshold where the arrangement creates real value, we will say so directly and suggest a configuration that does.</p>
           <p>If you are uncertain whether your intended allocation and preferred term are a fit, the discovery form is the right starting point.</p>
         </div>
@@ -1506,7 +1519,7 @@ function closeMenu() {
 
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
-        <span class="faq-question-text">How does the compounding actually work, what does "every 28 days" mean in practice?</span>
+        <span class="faq-question-text">How does the compounding actually work and what does every 28 days mean in practice?</span>
         <span class="faq-icon"></span>
       </button>
       <div class="faq-answer">
@@ -1575,7 +1588,7 @@ function closeMenu() {
 
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
-        <span class="faq-question-text">How does the Build-Up Program transition into a standard loan?</span>
+        <span class="faq-question-text">How does the build-up program transition into a standard loan?</span>
         <span class="faq-icon"></span>
       </button>
       <div class="faq-answer">
@@ -1599,6 +1612,33 @@ function closeMenu() {
           <p>Once a build-up program is underway, the contribution amount and target balance can be revised through a contract amendment. This is not available on the standard structure, once a standard account is open, the terms are fixed and no additional capital can be added to it. The build-up program is different by design, and we recognize that a lender's circumstances can shift over the course of an accumulation period.</p>
           <p>That said, any mid-program amendment is a formal request, not a unilateral adjustment. The lender initiates the request, and we review and either accept or decline the proposed changes. Amendments of this nature will typically carry yield adjustments and may affect the agreed phase two terms. Nothing changes without both parties signing off on the revised structure.</p>
           <p>If your circumstances change and you want to explore an amendment, the right move is to bring it to us directly. We will tell you honestly what is and is not workable.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">What documentation will I receive at year end?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">A 1099-INT for interest earned, and the forms collected before opening your account determine how it is reported.</p>
+          <p>Prior to opening an account, US-based lenders complete a W-9 form providing their name, address, and taxpayer identification number. Lenders based in the United Kingdom complete a W-8BEN form providing equivalent information, which certifies their foreign status under US tax law. Both forms are held on file and used for year-end reporting purposes.</p>
+          <p>At the close of each calendar year, lenders who have received or accrued $10 or more in interest income receive a 1099-INT reflecting the total interest earned during that period. Lenders are responsible for any tax obligations arising from interest received. Bayfall Morrigan does not provide tax advice. Lenders with questions about their specific situation should consult a qualified tax professional.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">Can I roll over my account at maturity?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          <p class="faq-subheader">Yes.</p>
+          <p>At maturity, the full balance is returned to the lender as agreed. If the lender chooses to re-enter, they do so by opening a new fixed-term agreement — typically at a larger principal than the original, reflecting the yield accumulated over the prior term. Each contract is discrete. The original obligation is settled in full before the new one begins. This cycle-oriented structure is the most common participation pattern among Bayfall Morrigan's lender base.</p>
         </div>
       </div>
     </div>
@@ -1641,7 +1681,7 @@ function closeMenu() {
       <div class="faq-answer">
         <div class="faq-answer-inner">
           <p class="faq-subheader">The nature of the return. That is the entire distinction.</p>
-          <p>When you make an investment, you do not know what you will get back. You can model it, project it, average it, but the return is contingent. It moves with the performance of whatever you are invested in. If that asset performs poorly, your capital reflects that. Principal is at risk because the outcome is variable by design.</p>
+          <p>When you make an investment, you do not know what you will get back. You can model it, project it, average it, but the return is contingent. It moves with the performance of whatever you are invested in. If that asset performs poorly, your capital reflects that. The principal is at risk because the outcome is variable by design.</p>
           <p>A loan is not that. A loan has a fixed return established at the moment it is made. The amount coming back, the yield it carries, and the date it is due are all settled before any capital moves. That is the structure we operate under. Every lender who enters an arrangement with us knows exactly what they will receive and exactly when. Nothing that happens between execution and maturity changes that figure.</p>
           <p>All loans carry a theoretical risk of default. That is true of a private loan, a corporate bond, and a 10-year Treasury. What we have built internally through our coverage ratios and the standards we hold before executing any contract is a structure designed to make that theoretical risk as remote as our systems can make it. But we will not pretend the word default does not exist. We would rather acknowledge it honestly and show you what we have done about it.</p>
         </div>
@@ -1671,7 +1711,7 @@ function closeMenu() {
       <div class="faq-answer">
         <div class="faq-answer-inner">
           <p class="faq-subheader">Because what we offer is not a security under the controlling federal standard.</p>
-          <p>The governing legal test for whether an instrument constitutes a security was established in SEC v. W.J. Howey Co., 328 U.S. 293 (1946). Under Howey, an instrument is an investment contract and therefore a security only if it satisfies all four of the following conditions: an investment of money, in a common enterprise, with an expectation of profits, derived from the efforts of others. The failure of any single condition is enough. Our fixed-term account structures fail three of them.</p>
+          <p>The governing legal test for whether an instrument constitutes a security was established in <em>SEC v. W.J. Howey Co.</em>, 328 U.S. 293 (1946). Under Howey, an instrument is an investment contract and therefore a security only if it satisfies all four of the following conditions: an investment of money, in a common enterprise, with an expectation of profits, derived from the efforts of others. The failure of any single condition is enough. Our fixed-term account structures fail three of them.</p>
           <p>Lenders enter our arrangements with a fixed, contractually defined return. There is no expectation of profit in the entrepreneurial sense. There is no variable upside, no participation in firm performance. The yield does not move regardless of what our systems produce or what markets do. That severs the third condition entirely. The return is also owed unconditionally as a fixed debt obligation, with no dependence on anything we do after execution, severing the fourth. Additionally our arrangements are not a common enterprise because every contract is individually negotiated, documented, and settled, with no lender sharing in another's risk or return.</p>
           <p>Our arrangements are not securities by virtue of what they actually are. That is a substantive legal position, not a technicality.</p>
         </div>
@@ -1689,49 +1729,6 @@ function closeMenu() {
           <p>Michigan's lending licensing framework governs entities that make loans to others. We receive funds from private individuals and incur a fixed contractual obligation to return principal and yield at maturity. That makes us the borrower in every arrangement we enter. No licensing requirement attaches to a borrower by virtue of receiving private loans.</p>
           <p>The same logic applies to investment advisory regulation. We do not manage assets on behalf of lenders, do not provide investment advisory services, and do not hold discretionary authority over anyone's funds. The regulatory frameworks that govern those activities simply do not reach what we do.</p>
           <p>The deeper question some lenders ask is whether these arrangements constitute securities, which would trigger an entirely different regulatory framework. Our position is that they do not, and that position is grounded in the substantive design of the instruments themselves. The legal character of the arrangement is that of a private loan. That is not a label we apply for convenience. It is what the structure actually is.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        <span class="faq-question-text">How is yield income treated for tax purposes?</span>
-        <span class="faq-icon"></span>
-      </button>
-      <div class="faq-answer">
-        <div class="faq-answer-inner">
-          <p class="faq-subheader">It is interest income, reported the same way as any other.</p>
-          <p>The yield earned through your contract is treated as interest income for federal tax purposes. That is the same category as interest from a savings account or a bond. At the close of the tax year, you will receive a 1099-INT reflecting the amount earned. That figure gets reported on your return and is taxed at your ordinary income rate. Hand it to your accountant or enter it into your tax software. There is nothing unusual about how it is handled.</p>
-        </div>
-      </div>
-    </div>
-
-    <p class="faq-category-label">The Systems</p>
-
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        <span class="faq-question-text">Is the trading automated or does it involve manual decisions?</span>
-        <span class="faq-icon"></span>
-      </button>
-      <div class="faq-answer">
-        <div class="faq-answer-inner">
-          <p class="faq-subheader">Every decision is algorithmic. Execution may involve a human hand. The decision never does.</p>
-          <p>Our systems are deterministic and rule-based. Every capital allocation that occurs is the output of an algorithm, a set of conditions that either are or are not met. There is no discretion involved in that process. No gut call, no manual override, no interpretation. If the conditions are present, the system identifies the action. If they are not, nothing happens.</p>
-          <p>In some cases the final execution step involves a human operator carrying out what the system has already decided. That is a mechanical function, not a decision-making one. The judgment lives entirely in the algorithm.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        <span class="faq-question-text">What markets and hours does the system operate in?</span>
-        <span class="faq-icon"></span>
-      </button>
-      <div class="faq-answer">
-        <div class="faq-answer-inner">
-          <p class="faq-subheader">For data security reasons, we do not disclose the specifics.</p>
-          <p>What we can say is that our systems are built around an ethos of short and controlled market exposure. Positions exist for a defined segment of the trading day and for no longer than the conditions that created them remain valid. Roughly 90% of the time, capital sits in a neutral state: not exposed, not deployed, not at risk. It moves only when a precise set of conditions defined by our deterministic system have been confirmed.</p>
-          <p>The specifics of what those conditions are, where they appear, and when during the day they occur are proprietary. That information stays internal.</p>
         </div>
       </div>
     </div>
@@ -1774,8 +1771,8 @@ function closeMenu() {
     <p class="contact-label">Get in Touch</p>
     <h2 class="contact-heading">Inquiries are<br><em>handled directly.</em></h2>
     <p class="contact-info-line">Email</p>
-    <p class="contact-info-value"><a href="mailto:contact@bayfallmorrigan.com">contact@bayfallmorrigan.com</a></p>
-    <p class="contact-info-value"><a href="mailto:bayfallmorrigan@outlook.com">bayfallmorrigan@outlook.com</a></p>
+    <p class="contact-info-value"><a href="/cdn-cgi/l/email-protection#9ffcf0f1ebfefcebdffdfee6f9fef3f3f2f0ededf6f8fef1b1fcf0f2"><span class="__cf_email__" data-cfemail="e5868a8b91848691a587849c83848989888a97978c82848bcb868a88">[email&#160;protected]</span></a></p>
+    <p class="contact-info-value"><a href="/cdn-cgi/l/email-protection#5537342c33343939383a27273c32343b153a2021393a3a3e7b363a38"><span class="__cf_email__" data-cfemail="1270736b74737e7e7f7d60607b75737c527d67667e7d7d793c717d7f">[email&#160;protected]</span></a></p>
     <p class="contact-info-line">Phone</p>
     <p class="contact-info-value"><a href="tel:+12699996247">+1 (269) 999-6247</a></p>
     <p class="contact-info-line">Based in</p>
@@ -1810,7 +1807,7 @@ function closeMenu() {
   <a href="discoverypage.html" class="footer-link">Discovery Form</a>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // FAQ ACCORDION
 function toggleFaq(btn) {
   const item = btn.closest('.faq-item');
@@ -1857,7 +1854,7 @@ contactForm.addEventListener('submit', function(e) {
         <div style="padding: 60px 0;">
           <p style="font-family:var(--body); font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:24px;">Submitted</p>
           <h2 style="font-family:var(--display); font-size:clamp(30px,3.5vw,50px); font-weight:300; line-height:1.2; color:var(--white);">Thank you.<br><em>We'll be in touch.</em></h2>
-          <p style="font-family:var(--body); font-size:15px; color:rgba(255,255,255,0.45); margin-top:24px; line-height:1.9; max-width:380px;">A member of our team will review your inquiry and reach out directly within two business days.</p>
+          <p style="font-family:var(--body); font-size:15px; color:rgba(255,255,255,255,0.45); margin-top:24px; line-height:1.9; max-width:380px;">A member of our team will review your inquiry and reach out directly within two business days.</p>
         </div>`;
     } else {
       alert('Something went wrong. Please try again or contact us directly.');
