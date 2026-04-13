@@ -978,7 +978,7 @@ function buildDashboard(d) {
   // Return on deposit
   const totalInvested = d.phase1.totalDeposited;
   const currentReturn = inPhase1
-    ? (yieldToDate / totalInvested * 100)
+    ? (depositsToDate > 0 ? yieldToDate / depositsToDate * 100 : 0)
     : ((p2YieldToDate + d.phase1.buildYieldEarned) / totalInvested * 100);
 
   // ── Status badge ──
