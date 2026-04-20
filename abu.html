@@ -937,10 +937,15 @@ function buildDashboard(d) {
   const p1Weeks      = d.phase1.weeksToTarget;
   const p1Progress   = inPhase1 ? Math.min(weeksElapsed / p1Weeks * 100, 100) : 100;
 
-  // Deposits so far (weekly * weeks, capped at total)
-  const depositsToDate = inPhase1
-    ? Math.min(weeksElapsed * d.phase1.weeklyDeposit, d.phase1.totalDeposited)
-    : d.phase1.totalDeposited;
+  // Deposits so far — sum only "Weekly contribution" transactions up to today
+  const depositsToDate = (() => {
+    if (!inPhase1) return d.phase1.totalDeposited;
+    if (!d.transactions) return 0;
+    const todayStr = today.toISOString().split('T')[0];
+    return Object.values(d.transactions)
+      .filter(t => t.type === 'credit' && t.date <= todayStr && t.description && t.description.startsWith('Weekly contribution'))
+      .reduce((sum, t) => sum + (Number(t.amount) || 0), 0);
+  })();
 
   // Yield to date in phase 1 — interpolate from chart data
   let yieldToDate = 0;
