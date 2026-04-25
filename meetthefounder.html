@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meet the Founder | Bayfall Morrigan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta name="description" content="Meet the founder of Bayfall Morrigan — a private capital management firm built around discipline, structure, and conviction.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Bayfall Morrigan">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.bayfallmorrigan.com/founder.html">
+<meta property="og:title" content="Meet the Founder | Bayfall Morrigan">
+<meta property="og:description" content="Meet the founder of Bayfall Morrigan — a private capital management firm built around discipline, structure, and conviction.">
+<meta property="og:site_name" content="Bayfall Morrigan">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:   #080808;
+  --white:   #ffffff;
+  --off:     #ffffff;
+  --mid:     #7a7670;
+  --rule:    #ccc9c2;
+  --rule-dk: #1a1a1a;
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --body:    'EB Garamond', Georgia, serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: var(--black);
+  border-bottom: 1px solid var(--rule-dk);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 64px;
+  height: 72px;
+}
+
+.logo-img {
+  height: auto;
+  width: 140px;
+  display: block;
+  filter: invert(1) brightness(0.7);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.header-right a {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.25s, border-color 0.25s;
+}
+
+.header-right a:hover {
+  color: rgba(255,255,255,0.85);
+  border-color: rgba(255,255,255,0.35);
+}
+
+/* PAGE INTRO BAND */
+.page-intro {
+  padding: 152px 64px 88px;
+  border-bottom: 1px solid var(--rule);
+  opacity: 0;
+  animation: fadeUp 1s ease 0.15s forwards;
+}
+
+.page-intro-eyebrow {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(8,8,8,0.4);
+  margin-bottom: 28px;
+}
+
+.page-intro-headline {
+  font-family: var(--display);
+  font-size: clamp(48px, 6.5vw, 90px);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--black);
+  letter-spacing: 0.01em;
+  max-width: 900px;
+}
+
+.page-intro-headline em { font-style: italic; font-weight: 300; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* FOUNDER SECTION */
+.founder {
+  padding: 104px 64px 128px;
+  background: var(--white);
+}
+
+.founder-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 96px;
+  align-items: start;
+}
+
+.founder-card {
+  position: sticky;
+  top: 112px;
+}
+
+.founder-photo-wrap {
+  position: relative;
+  margin-bottom: 32px;
+}
+
+.founder-photo-wrap::after {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(8,8,8,0.14);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.founder-photo {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: #f3f2f0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  font-size: 0;
+}
+
+.founder-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
+.founder-photo-placeholder {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(8,8,8,0.32);
+  line-height: 1.6;
+}
+
+.founder-name {
+  font-family: var(--display);
+  font-size: clamp(28px, 2.4vw, 36px);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--black);
+  letter-spacing: 0.01em;
+  margin-bottom: 14px;
+}
+
+.founder-title {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(8,8,8,0.5);
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+}
+
+.founder-bio p {
+  font-family: var(--body);
+  font-size: 17px;
+  color: var(--black);
+  line-height: 2;
+  opacity: 0.82;
+  margin-bottom: 24px;
+}
+
+.founder-bio p:first-child::first-letter {
+  font-family: var(--display);
+  font-size: 3.4em;
+  font-weight: 400;
+  float: left;
+  line-height: 1;
+  margin: 0.05em 0.12em 0 -0.04em;
+  color: var(--black);
+  opacity: 1;
+}
+
+.founder-bio p:last-child { margin-bottom: 0; }
+
+.founder-bio em { font-style: italic; }
+
+/* FOOTER */
+footer {
+  background: var(--black);
+  border-top: 1px solid var(--rule-dk);
+  padding: 28px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-name {
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.22);
+  text-decoration: none;
+}
+
+.footer-copy {
+  font-family: var(--body);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.14);
+}
+
+.footer-link {
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: color 0.25s, border-color 0.25s;
+}
+
+.footer-link:hover {
+  color: rgba(255,255,255,0.65);
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  z-index: 200;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: rgba(255,255,255,0.6);
+  transition: transform 0.3s, opacity 0.3s;
+  transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 64px;
+  left: 0; right: 0;
+  background: var(--black);
+  border-bottom: 1px solid var(--rule-dk);
+  flex-direction: column;
+  padding: 24px 20px 32px;
+  gap: 0;
+  z-index: 99;
+  transform: translateY(-8px);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.mobile-menu.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu a {
+  font-family: var(--body);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule-dk);
+  transition: color 0.2s;
+}
+
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: var(--white); }
+
+/* TABLET */
+@media (max-width: 960px) {
+  header { padding: 0 32px; }
+
+  .page-intro { padding: 132px 32px 64px; }
+
+  .founder { padding: 80px 32px 104px; }
+  .founder-inner {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+  .founder-card {
+    position: static;
+    max-width: 320px;
+  }
+  .founder-photo-wrap { margin-bottom: 28px; }
+
+  footer { padding: 24px 32px; flex-direction: column; gap: 12px; text-align: center; }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  html, body { overflow-x: hidden; max-width: 100%; }
+
+  header { padding: 0 20px; height: 64px; }
+  .logo-img { width: 108px; }
+  .hamburger { display: flex; }
+  .header-right { display: none; }
+  .mobile-menu { display: flex; }
+
+  .page-intro { padding: 108px 20px 52px; }
+  .page-intro-headline { font-size: clamp(38px, 11vw, 56px); }
+
+  .founder { padding: 60px 20px 84px; }
+  .founder-inner { gap: 44px; }
+  .founder-card { max-width: 260px; }
+  .founder-photo-wrap { margin-bottom: 24px; }
+  .founder-photo-wrap::after { top: 10px; left: 10px; }
+  .founder-name { font-size: clamp(26px, 7.5vw, 32px); }
+  .founder-bio p { font-size: 16px; }
+  .founder-bio p:first-child::first-letter { font-size: 3em; }
+
+  footer { padding: 20px; gap: 10px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" style="display:flex;align-items:center;">
+    <img class="logo-img" src="logopng.png" alt="Bayfall Morrigan">
+  </a>
+  <nav class="header-right">
+    <a href="index.html#model">Lender Framework</a>
+    <a href="index.html#structures">Structures</a>
+    <a href="index.html#capital">Operational Framework</a>
+    <a href="discoverypage.html">Discovery Form</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="meetthefounder.html">Founder</a>
+    <a href="login.html" style="opacity:0.45;border-bottom:1px solid rgba(255,255,255,0.15);padding-bottom:2px;">Lender Login</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="index.html#model" onclick="closeMenu()">Lender Framework</a>
+  <a href="index.html#structures" onclick="closeMenu()">Structures</a>
+  <a href="index.html#capital" onclick="closeMenu()">Operational Framework</a>
+  <a href="discoverypage.html" onclick="closeMenu()">Discovery Form</a>
+  <a href="index.html#contact" onclick="closeMenu()">Contact</a>
+  <a href="meetthefounder.html" onclick="closeMenu()">Founder</a>
+  <a href="login.html" onclick="closeMenu()">Lender Login</a>
+</nav>
+
+<!-- PAGE INTRO -->
+<section class="page-intro">
+  <p class="page-intro-eyebrow">Meet the Founder</p>
+  <h1 class="page-intro-headline">Behind the work,<br><em>a single conviction.</em></h1>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder">
+  <div class="founder-inner">
+    <aside class="founder-card">
+      <div class="founder-photo-wrap">
+        <div class="founder-photo">
+          <img src="founder.jpg" alt="Aidan Ronan, Founder of Bayfall Morrigan" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <span class="founder-photo-placeholder" style="display:none;">Founder photo</span>
+        </div>
+      </div>
+      <h2 class="founder-name">Aidan Ronan</h2>
+      <p class="founder-title">Founder &nbsp;&mdash;&nbsp; Bayfall Morrigan</p>
+    </aside>
+
+    <div class="founder-bio">
+      <p>I didn't come to finance through a traditional path. At sixteen, I was building and running a consumer brand managing cash flow, international contracts, fulfillment, and margins. What that experience didn't give me was a mindset. It exposed one that was already there. An obsession with risk instead of reward. I was fortunate enough to recognize what I was looking at.</p>
+      <p>What I learned running a business had nothing to do with the products. It had everything to do with structure. You can't afford guesswork when real obligations are on the line. Assumptions are the most expensive thing any operation can carry.</p>
+      <p>When the brand ended, I locked onto what I knew. Markets. Over years of direct experience and deliberate refinement, what started as a simpler operation evolved into something more considered. The volatility of early decisions made it clear to me that durability required a different foundation. It required systems built from logic, not discretion. That process became Bayfall Morrigan.</p>
+      <p>Bayfall Morrigan was not built in spare hours. There were no spare hours. At some point the work stopped being something I did and became something I lived. I didn't notice the transition.</p>
+      <p>Bayfall Morrigan is built around one conviction: that the most dangerous thing in any system is <em>an assumption you haven't tested.</em> We don't chase outcomes. We build structures designed to hold across changing conditions.</p>
+      <p>I am not building Bayfall Morrigan for what it is today. I am building it for what it becomes. For the name attached to it. For the people who come after me who will never know what the beginning looked like but will inherit what the beginning made possible.</p>
+      <p>That is what this is for.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="index.html" class="footer-name">Bayfall Morrigan</a>
+  <p class="footer-copy">&copy; 2026 Bayfall Morrigan. All rights reserved.</p>
+  <a href="discoverypage.html" class="footer-link">Discovery Form</a>
+</footer>
+
+<script>
+function toggleMenu() {
+  const btn = document.getElementById('hamburger');
+  const menu = document.getElementById('mobile-menu');
+  btn.classList.toggle('open');
+  menu.classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+</script>
+
+</body>
+</html>
