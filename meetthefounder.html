@@ -325,6 +325,39 @@ header {
   border-top: 1px solid var(--rule);
 }
 
+.founder-linkedin {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: transparent;
+  border: 1px solid rgba(8,8,8,0.35);
+  padding: 13px 22px;
+  text-decoration: none;
+  border-radius: 0;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+
+.founder-linkedin svg {
+  width: 12px;
+  height: 12px;
+  display: block;
+  transition: fill 0.25s;
+}
+
+.founder-linkedin:hover {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+}
+
+.founder-linkedin:hover svg { fill: var(--white); }
+
 .founder-bio p {
   font-family: var(--body);
   font-size: 17px;
@@ -503,6 +536,14 @@ footer {
     white-space: nowrap;
     margin-left: -0.1em;
   }
+  .founder-linkedin {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    padding: 12px 18px;
+    margin-top: 18px;
+    gap: 9px;
+  }
+  .founder-linkedin svg { width: 11px; height: 11px; }
   .founder-bio p { font-size: 16px; }
   .founder-bio p:first-child::first-letter { font-size: 3em; }
 
@@ -558,6 +599,10 @@ footer {
       </div>
       <h2 class="founder-name">Aidan Ronan</h2>
       <p class="founder-title">Founder &nbsp;&mdash;&nbsp; Bayfall Morrigan</p>
+      <a href="https://www.linkedin.com/in/aidan-ronan-97a610402/" class="founder-linkedin" target="_blank" rel="noopener noreferrer" aria-label="Connect with Aidan Ronan on LinkedIn">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+        Connect on LinkedIn
+      </a>
     </aside>
 
     <div class="founder-bio">
