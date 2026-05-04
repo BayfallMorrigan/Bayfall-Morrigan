@@ -827,7 +827,9 @@ function buildInactiveDashboard(d, today) {
   const lastDepDate   = d.lastDepositDate ? new Date(d.lastDepositDate + 'T12:00:00') : frozenDate;
   const daysMissed   = lastDepDate ? Math.max(0, Math.round((today - lastDepDate) / 86400000)) : 0;
   const weeksMissed  = Math.floor(daysMissed / 7);
-  const amountBehind = weeksMissed * weeklyDeposit;
+  const amountBehind = (d.missingDepositBalance !== undefined)
+    ? d.missingDepositBalance
+    : weeksMissed * weeklyDeposit;
 
   const page = document.getElementById('mainPage');
   page.innerHTML = `
@@ -872,7 +874,7 @@ function buildInactiveDashboard(d, today) {
         <div class="stat-cell">
           <div class="stat-label">Frozen Balance</div>
           <div class="stat-value">${fmt(frozenBalance)}</div>
-          <div class="stat-sub">as of ${fmtDate(d.frozenDate)}</div>
+          <div class="stat-sub">as of ${fmtDate(d.lastDepositDate || d.frozenDate)}</div>
         </div>
         <div class="stat-cell">
           <div class="stat-label">Target Balance</div>
