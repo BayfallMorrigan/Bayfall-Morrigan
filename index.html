@@ -168,6 +168,14 @@ html, body {
   color: var(--white);
 }
 
+/* BUTTON GROUP */
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
 /* LENDER ACCESS BUTTON */
 .access-btn {
   display: inline-block;
@@ -239,7 +247,10 @@ html, body {
       </div>
     </div>
 
-    <a class="access-btn" href="login.html">Lender Access</a>
+    <div class="btn-group">
+      <a class="access-btn" href="login.html">Lender Access</a>
+      <a class="access-btn" href="meetthefounder.html">Founder</a>
+    </div>
   </div>
 
   <div class="holding-footer">© 2026 Bayfall Morrigan</div>
