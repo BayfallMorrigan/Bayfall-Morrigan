@@ -949,6 +949,26 @@ function buildDashboard(d) {
       .reduce((sum, t) => sum + (Number(t.amount) || 0), 0);
   })();
 
+  // Rebuild deposited array week-by-week from actual transactions (so manual Firebase edits reflect in chart)
+  const dynamicDep = (() => {
+    if (!d.weeklyChartData) return [];
+    const txnCredits = d.transactions
+      ? Object.values(d.transactions).filter(
+          t => t.type === 'credit' && t.description && t.description.startsWith('Weekly contribution')
+        )
+      : [];
+    const p1StartDate = new Date(d.phase1.startDate + 'T12:00:00');
+    return d.weeklyChartData.labels.map((_, i) => {
+      if (i === 0) return 0; // "Start" — no deposits yet
+      const weekDate = new Date(p1StartDate);
+      weekDate.setDate(weekDate.getDate() + (i - 1) * 7);
+      const weekStr = weekDate.toISOString().split('T')[0];
+      return txnCredits
+        .filter(t => t.date <= weekStr)
+        .reduce((sum, t) => sum + (Number(t.amount) || 0), 0);
+    });
+  })();
+
   // Yield to date in phase 1 — interpolate from chart data
   let yieldToDate = 0;
   if (d.weeklyChartData && d.weeklyChartData.yieldLayer) {
@@ -1059,10 +1079,10 @@ function buildDashboard(d) {
   });
 
   // ── Render charts ──
-  renderCharts(d, inPhase1, inPhase2, depositsToDate, yieldToDate, p2YieldToDate, weeksElapsed);
+  renderCharts(d, inPhase1, inPhase2, depositsToDate, yieldToDate, p2YieldToDate, weeksElapsed, dynamicDep);
 
   // ── Render maturity section ──
-  renderMaturitySection(d);
+  renderMaturitySection(d, dynamicDep);
 
   // ── Render transactions ──
   renderTransactions(d.transactions);
@@ -1185,14 +1205,14 @@ function buildPhase2Stats(d, p2Balance, p2YieldToDate, p2Progress, daysToP2) {
 }
 
 // ── Charts ───────────────────────────────────────────────
-function renderCharts(d, inPhase1, inPhase2, depositsToDate, yieldToDate, p2YieldToDate, weeksElapsed) {
+function renderCharts(d, inPhase1, inPhase2, depositsToDate, yieldToDate, p2YieldToDate, weeksElapsed, dynamicDep) {
   const mainCtx  = document.getElementById('mainChart').getContext('2d');
   const donutCtx = document.getElementById('donutChart').getContext('2d');
 
   if (inPhase1) {
     // Stacked area: deposited + yield, up to current week
     const labels = d.weeklyChartData.labels.slice(0, weeksElapsed + 1);
-    const dep    = d.weeklyChartData.deposited.slice(0, weeksElapsed + 1);
+    const dep    = dynamicDep.slice(0, weeksElapsed + 1);
     const yld    = d.weeklyChartData.yieldLayer.slice(0, weeksElapsed + 1);
     const target = labels.map(() => d.phase1.targetBalance);
 
@@ -1312,7 +1332,7 @@ function renderCharts(d, inPhase1, inPhase2, depositsToDate, yieldToDate, p2Yiel
 }
 
 // ── Maturity Section ────────────────────────────────────────
-function renderMaturitySection(d) {
+function renderMaturitySection(d, dynamicDep) {
   const el = document.getElementById('maturitySection');
   if (!el) return;
 
@@ -1397,7 +1417,7 @@ function renderMaturitySection(d) {
   const barCtx = document.getElementById('matBarChart').getContext('2d');
 
   const p1Labels = d.weeklyChartData.labels;
-  const p1Dep    = d.weeklyChartData.deposited;   // cumulative deposited, grows week by week
+  const p1Dep    = dynamicDep;                         // live from transactions
   const p1Yield  = d.weeklyChartData.yieldLayer;  // cumulative build yield, stacked on top
 
   // Skip index 0 ("Start") from Phase 2 — same state as Phase 1 final week
