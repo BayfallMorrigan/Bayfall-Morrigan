@@ -1464,8 +1464,8 @@ footer {
     <div class="hero-bg"></div>
     <div class="hero-content">
       <p class="hero-eyebrow">Bayfall Morrigan &nbsp;&middot;&nbsp; Systematic Proprietary Trading · Market Microstructure Research</p>
-      <h2 class="hero-headline">Structural reasoning,<br><em>not statistical discovery.</em></h2>
-      <p class="hero-sub">Bayfall Morrigan develops proprietary trading systems anchored to the mechanics of market execution, the layer where order flow resolves into price. Each system is specified from a model of how a market condition is produced. Data is brought in afterward to validate and calibrate that model, never to find it.</p>
+      <h2 class="hero-headline">Data is only as good as<br><em>the structure it is given to.</em></h2>
+      <p class="hero-sub">Bayfall Morrigan designs and operates proprietary trading systems built mechanism-first, with every component reasoned from how a market behaves before any data is examined. We treat this as a science, and a science does not trust its data blindly. The data we bring in is conditioned to the structure we are testing, never a raw history mined for whatever correlations happen to sit in it.</p>
       <div class="hero-rule"></div>
     </div>
   </section>
@@ -1476,7 +1476,7 @@ footer {
       <p class="statement-label">Method</p>
       <h2 class="statement-pull">We begin with the mechanism.<br><em>Data confirms it.<br class="mobile-br"> It does not write it.</em></h2>
       <div class="statement-body">
-        <p>A system originates as a structural thesis: a precise account of a recurring market dynamic, written as a causal chain from participant behavior to order book state to price consequence. Signal conditions follow from that chain. They are not selected from a return series and rationalized after the fact. Because the conditions are derived from logic rather than fitted to a historical window, a system's behavior remains legible when results diverge from expectation, the question is never simply whether the edge has decayed, but which component of the chain is under stress.</p>
+        <p>A system begins as a structural thesis: a precise account of a recurring market dynamic, written as a causal chain from participant behavior to order book state to price consequence. The signal conditions follow from that chain. They are not pulled from a return series and explained after the fact. This is the part most practitioners skip. They treat the data as the science, when the data is only ever the evidence. The science is the reasoning the evidence is asked to test. Because our conditions are derived from that reasoning rather than fitted to a window of history, a system stays legible when results diverge from what we expected. The question is never just whether the edge has decayed. It is which link in the chain is under stress.</p>
       </div>
     </div>
     <div class="statement-photo">
@@ -1514,18 +1514,6 @@ footer {
   </section>
 
   <!-- THE CAPACITY MOAT -->
-  <section class="moat">
-    <div class="moat-inner">
-      <p class="moat-label">The Capacity Moat</p>
-      <h2 class="moat-heading">Scale is the enemy of structural alpha.</h2>
-      <div class="moat-body">
-        <p>It is commonly assumed that any real structural inefficiency has already been found and captured by the largest quantitative funds. That assumption misunderstands how institutional capital operates. The largest firms require strategies that can absorb enormous liquidity, and a pure structural edge in mid-liquidity equities reaches its hard capacity ceiling at a fraction of what moves the needle for a multi-billion-dollar operation.</p>
-        <p>The mega-funds do not pass on these mechanics because they are blind to them. They pass because their capital physically cannot fit through the door. Deploying size into an edge this small would consume the very structure the edge depends on, the reflexive problem named in the section below, before a meaningful position could ever be built.</p>
-        <p>That ceiling is not a flaw in our models. It is the moat around them. We operate in the structural vacuum that scale leaves behind, on mechanics that are too small for the largest participants to harvest and too situational for them to want to. The feature that limits how much any one of these systems can ever manage is the same feature that guarantees no larger participant will push us out of it.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- VALIDATION + INFRASTRUCTURE -->
   <section class="model">
     <h2 class="model-label">Production Architecture &amp; Validation Gates</h2>
@@ -1557,17 +1545,43 @@ footer {
       <div class="legal-col">
         <span class="legal-subhead">One</span>
         <h3 class="legal-col-heading">Competitive Compression</h3>
-        <p class="legal-text">The mechanics can play out exactly as the thesis describes and the realized edge can still go to zero, because faster participants reached the same structural condition first. This is a latency problem, not a thesis failure, and the diagnosis is visible in the live data: entry conditions confirmed, the move resolved before the position could capture it.</p>
+        <p class="legal-text">The mechanics can play out exactly as the thesis describes and the realized edge can still go to zero, because faster participants reached the same structural condition first. This is a latency problem, not a thesis failure, and the diagnosis is visible in the live data. Entry conditions are confirmed, the move has resolved before the position could capture it.</p>
       </div>
       <div class="legal-col">
         <span class="legal-subhead">Two</span>
         <h3 class="legal-col-heading">Reflexive Impact</h3>
-        <p class="legal-text">At meaningful scale, a system's own orders alter the queue dynamics it is trying to measure. Pure structural edges are fragile to size. We do not solve this with execution algorithms that hide large flow; we solve it by holding to the capacity moat. When a system reaches the point where its own volume would degrade the structural signal, it has reached its hard capacity, and we do not force scale where the physics prohibit it.</p>
+        <p class="legal-text">At meaningful scale, a system's own orders alter the queue dynamics it is trying to measure. A pure structural edge in this form is fragile to size, and that fragility is not solved by execution tricks that hide large flow. It is the reason a low-capacity system has a hard ceiling: past the point where its own volume would degrade the structural signal, the edge it was built on no longer holds. This is a limit of the small, fast architecture specifically. Carrying the method into size is a separate engineering problem, addressed by different architecture built for a longer horizon, not by forcing more capital through a system that was never shaped to hold it.</p>
       </div>
       <div class="legal-col">
         <span class="legal-subhead">Three</span>
         <h3 class="legal-col-heading">Matching Engine Change</h3>
         <p class="legal-text">A system anchored to order book physics inherits the stability of the matching engine, and its specific vulnerability. A thesis is anchored to the mechanics of a specific venue, and no two venues match orders the same way, so validity on one is not validity on another until proven. A change to tick size, priority rules, or venue policy can rewrite the physics a thesis was built to read. This is the hard-reset condition: it cannot be recalibrated around, and it is why exchange rule changes are monitored as risk, not maintenance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY IT STARTED SMALL -->
+  <section class="moat">
+    <div class="moat-inner">
+      <p class="moat-label">Why It Started Small</p>
+      <h2 class="moat-heading">A pure structural edge has a ceiling. That made it the place to prove the method.</h2>
+      <div class="moat-body">
+        <p>It is commonly assumed that any real structural inefficiency has already been found and captured by the largest quantitative funds. That assumption misunderstands how institutional capital operates. The largest firms require strategies that can absorb enormous liquidity, and a pure structural edge in mid-liquidity equities reaches its hard capacity ceiling at a fraction of what moves the needle for a multi-billion-dollar operation.</p>
+        <p>The mega-funds do not pass on these mechanics because they are blind to them. They pass because their capital physically cannot fit through the door. Deploying size into an edge this small would consume the very structure the edge depends on, the reflexive problem named in the limits above, before a meaningful position could ever be built.</p>
+        <p>That ceiling is not a flaw in these models. It is what made them the right place to start. A low-capacity edge sits in the structural vacuum scale leaves behind, on mechanics too small for the largest participants to harvest and too situational for them to want to. The same feature that caps how much one of these systems manages is the feature that let the method be proven cheaply, quickly, and without competition for the space. What the ceiling does not do is define where the firm stops.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURRENT FOCUS -->
+  <section class="moat">
+    <div class="moat-inner">
+      <p class="moat-label">Current Focus</p>
+      <h2 class="moat-heading">The current scale is a laboratory, not a destination.</h2>
+      <div class="moat-body">
+        <p>The systems running today operate at low capacity and hold positions for minutes. Small size was the deliberate choice, because a low-capacity environment returns feedback quickly, and that speed was the fastest way to prove a structure-first method with live capital. The clean, fast exposure those systems run on is a characteristic of operating small. It is not the architecture the firm intends to carry forward.</p>
+        <p>Capital scale dictates execution horizon. A small position can move instantly. An institutional position cannot, because deploying that much capital begins to degrade its own execution environment, and the position has to be worked across a longer horizon to avoid it. The infrastructure built for speed and the infrastructure built for scale do not resemble each other.</p>
+        <p>The engineering is focused there. The work is adapting the same structure-first method to hold across institutional horizons, which means giving up the fast exposure the low-capacity systems depend on. The mechanism still comes first. The new architecture is built to preserve it in a larger and slower regime. The systems in production today fund that development and establish the audited record the next stage requires.</p>
       </div>
     </div>
   </section>
