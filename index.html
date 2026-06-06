@@ -235,7 +235,18 @@ body {
   border-radius: 50%;
 }
 
-.holding-descriptor {
+.holding-headline {
+  font-family: var(--display);
+  font-size: 27px;
+  color: rgba(240,237,232,0.92);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+  margin-bottom: 14px;
+  max-width: 480px;
+}
+
+.holding-subhead {
   font-family: var(--display);
   font-size: 20px;
   color: rgba(240,237,232,0.6);
@@ -1324,7 +1335,8 @@ footer {
   .holding-page { padding: 60px 22px 80px; }
   .holding-logo { width: 220px; margin-bottom: 44px; }
   .holding-divider { margin-bottom: 32px; }
-  .holding-descriptor { font-size: 17px; margin-bottom: 44px; }
+  .holding-headline { font-size: 23px; margin-bottom: 12px; }
+  .holding-subhead { font-size: 17px; margin-bottom: 44px; }
   .holding-nav { padding: 20px 22px; gap: 20px; }
   .holding-nav a { font-size: 9px; letter-spacing: 0.22em; }
 
@@ -1398,7 +1410,8 @@ footer {
       <div class="rule-thin"></div>
     </div>
 
-    <p class="holding-descriptor">Market Microstructure-Based Quant Systems. Built on structural reasoning rather than statistical discovery.</p>
+    <h1 class="holding-headline">Quantitative Research & Systematic Proprietary Trading.</h1>
+    <p class="holding-subhead">Built on structural reasoning rather than statistical discovery.</p>
 
     <div class="holding-btn-group">
       <a class="holding-btn primary" href="#about">About the Firm</a>
