@@ -248,7 +248,7 @@ body {
 
 .holding-subhead {
   font-family: var(--display);
-  font-size: 20px;
+  font-size: 19px;
   color: rgba(240,237,232,0.6);
   font-style: italic;
   font-weight: 300;
@@ -399,6 +399,14 @@ body {
     height: 64px;
     padding: 0 20px;
     z-index: 150;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+
+  .site-header.nav-visible {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .holding-btn {
@@ -496,7 +504,7 @@ body {
 
 .hero-headline {
   font-family: var(--display);
-  font-size: clamp(46px, 6.5vw, 88px);
+  font-size: clamp(36px, 5vw, 64px);
   font-weight: 300;
   line-height: 1.07;
   color: var(--white);
@@ -1414,7 +1422,7 @@ footer {
   <p class="sr-only">Bayfall Morrigan is a systematic, quantitative proprietary trading firm that develops structure-first systems anchored to the mechanics of market execution. The firm was founded by Aidan Ronan and operates with a methodology grounded in structural reasoning, discipline, and rigorous forward validation.</p>
 
   <div class="holding-wrap">
-    <img src="logopng.png" alt="Bayfall Morrigan — Systematic Proprietary Trading & Market Microstructure Research" class="holding-logo">
+    <img src="logopng.png" alt="Bayfall Morrigan, Systematic Proprietary Trading & Market Microstructure Research" class="holding-logo">
 
     <div class="holding-divider">
       <div class="rule-thin"></div>
@@ -1422,7 +1430,7 @@ footer {
       <div class="rule-thin"></div>
     </div>
 
-    <p class="holding-headline">Systematic Proprietary Trading &amp; Market Microstructure Research.</p>
+    <p class="holding-headline">Systematic Proprietary Trading<br>&amp;<br>Market Microstructure Research.</p>
     <p class="holding-subhead">Built on structural reasoning rather than statistical discovery.</p>
 
     <div class="holding-btn-group">
@@ -1475,9 +1483,9 @@ footer {
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">Bayfall Morrigan &nbsp;&middot;&nbsp; Systematic Proprietary Trading &nbsp;&middot;&nbsp; Market Microstructure Research</p>
-      <h2 class="hero-headline">Data is only as good as<br><em>the structure it is given to.</em></h2>
-      <p class="hero-sub">Bayfall Morrigan designs and operates proprietary trading systems built mechanism-first, with every component reasoned from how a market behaves before any data is examined. We treat this as a science, and a science does not trust its data blindly. The data we bring in is conditioned to the structure we are testing, never a raw history mined for whatever correlations happen to sit in it.</p>
+      <p class="hero-eyebrow">Systematic Proprietary Trading &nbsp;&middot;&nbsp; Market Microstructure Research</p>
+      <h2 class="hero-headline">Built From Mechanism,<br><em>Not Data.</em></h2>
+      <p class="hero-sub">We design and operate proprietary trading systems anchored to how a market behaves, reasoned from participant behavior and order book mechanics before any data is examined. Data is conditioned to the structure we are testing, never a raw history mined for whatever correlations happen to sit in it. We treat this as a science. A science does not trust its data blindly.</p>
       <div class="hero-rule"></div>
     </div>
   </section>
@@ -1486,9 +1494,9 @@ footer {
   <section class="statement" id="method">
     <div class="statement-inner">
       <p class="statement-label">Method</p>
-      <h2 class="statement-pull">We begin with the mechanism.<br><em>Data confirms it.<br class="mobile-br"> It does not write it.</em></h2>
+      <h2 class="statement-pull">Data Doesn't Build Models.<br><em>It Proves Them.</em></h2>
       <div class="statement-body">
-        <p>A system begins as a structural thesis: a precise account of a recurring market dynamic, written as a causal chain from participant behavior to order book state to price consequence. The signal conditions follow from that chain. They are not pulled from a return series and explained after the fact. This is the part most practitioners skip. They treat the data as the science, when the data is only ever the evidence. The science is the reasoning the evidence is asked to test. Because our conditions are derived from that reasoning rather than fitted to a window of history, a system stays legible when results diverge from what we expected. The question is never just whether the edge has decayed. It is which link in the chain is under stress.</p>
+        <p>At Bayfall Morrigan, systems begin as a structural thesis: a precise account of a recurring market dynamic, written as a causal chain from participant behavior to order book state to price consequence. The signal conditions follow from that chain. They are not pulled from a return series and explained after the fact. This is the part most practitioners skip. They treat the data as the science, when the data is only ever the evidence. The science is the reasoning the evidence is asked to test. Because our conditions are derived from that reasoning rather than fitted to a window of history, a system stays legible when results diverge from what we expected. The question is never just whether the edge has decayed. It is which link in the chain is under stress.</p>
       </div>
     </div>
     <div class="statement-photo">
@@ -1502,8 +1510,8 @@ footer {
       <div class="capital-header-bg"></div>
       <div class="capital-header-content">
         <p class="capital-label">The Anchor</p>
-        <h2 class="capital-heading">Where a mechanism is anchored decides how much of it survives a regime change.</h2>
-        <p class="capital-intro">Most quantitative systems are designed at the price level. Ours are grounded in the mechanics beneath it.</p>
+        <h2 class="capital-heading">Survival Through Regime Shifts Requires a Deeper Anchor Than Price.</h2>
+        <p class="capital-intro">Most models anchor at the price level. Ours anchor into the underlying mechanics.</p>
       </div>
     </div>
     <div class="capital-grid">
@@ -1528,7 +1536,7 @@ footer {
   <!-- THE CAPACITY MOAT -->
   <!-- VALIDATION + INFRASTRUCTURE -->
   <section class="model">
-    <h2 class="model-label">Production Architecture &amp; Validation Gates</h2>
+    <p class="model-label">Production Architecture &amp; Validation Gates</p>
     <div class="model-grid">
       <div class="model-item">
         <p class="model-number">01</p>
@@ -1562,7 +1570,7 @@ footer {
       <div class="legal-col">
         <span class="legal-subhead">Two</span>
         <h3 class="legal-col-heading">Reflexive Impact</h3>
-        <p class="legal-text">At meaningful scale, a system's own orders alter the queue dynamics it is trying to measure. A pure structural edge in this form is fragile to size, and that fragility is not solved by execution tricks that hide large flow. It is the reason a low-capacity system has a hard ceiling: past the point where its own volume would degrade the structural signal, the edge it was built on no longer holds. This is a limit of the small, fast architecture specifically. Carrying the method into size is a separate engineering problem, addressed by different architecture built for a longer horizon, not by forcing more capital through a system that was never shaped to hold it.</p>
+        <p class="legal-text">At meaningful scale, a system's own orders alter the queue dynamics it is trying to measure. A structural edge occupies a finite pocket of liquidity, and past a certain size, harvesting it begins to consume the structure it reads, an effect no execution tactic can fully hide. That sets a hard capacity ceiling on any single structural edge: beyond the point where its own volume degrades the signal, the edge stops paying. The ceiling is a property of the inefficiency, not a flaw in the method that locates it, which is why every system is built with its capacity limit derived in advance rather than discovered in a drawdown.</p>
       </div>
       <div class="legal-col">
         <span class="legal-subhead">Three</span>
@@ -1578,9 +1586,9 @@ footer {
       <p class="moat-label">Why It Started Small</p>
       <h2 class="moat-heading">A pure structural edge has a ceiling. That made it the place to prove the method.</h2>
       <div class="moat-body">
-        <p>It is commonly assumed that any real structural inefficiency has already been found and captured by the largest quantitative funds. That assumption misunderstands how institutional capital operates. The largest firms require strategies that can absorb enormous liquidity, and a pure structural edge in mid-liquidity equities reaches its hard capacity ceiling at a fraction of what moves the needle for a multi-billion-dollar operation.</p>
+        <p>It is commonly assumed that any real structural inefficiency has already been found and captured by the largest quantitative funds. That assumption misunderstands how institutional capital operates. The largest firms require strategies that can absorb enormous liquidity, and a pure structural edge in mid-liquidity equities reaches its hard capacity ceiling at a fraction of what moves the needle for a multi-billion-dollar operation. Mid-liquidity is where we point the method, not where the method lives: structure-first reasoning applies wherever a mechanism does. We target it deliberately, because in the most liquid names the legible mechanisms are also the most contested, and an edge can be reasoned correctly and still already be priced by faster, larger participants to the point where being right pays nothing. Mid-liquidity is where correct reasoning still leaves room to participate.</p>
         <p>The mega-funds do not pass on these mechanics because they are blind to them. They pass because their capital physically cannot fit through the door. Deploying size into an edge this small would consume the very structure the edge depends on, the reflexive problem named in the limits above, before a meaningful position could ever be built.</p>
-        <p>That ceiling is not a flaw in these models. It is what made them the right place to start. A low-capacity edge sits in the structural vacuum scale leaves behind, on mechanics too small for the largest participants to harvest and too situational for them to want to. The same feature that caps how much one of these systems manages is the feature that let the method be proven cheaply, quickly, and without competition for the space. What the ceiling does not do is define where the firm stops.</p>
+        <p>That ceiling is not a flaw in these models. It is what made them the right place to start. A low-capacity edge sits in the structural vacuum scale leaves behind, on mechanics too small for the largest participants to harvest and too situational for them to want to. Short, controlled exposure was the instrument we chose to work that space: a preference, not a property of the method, but the one that returns feedback fast enough to prove a structure-first system cheaply, quickly, and without competition for the room. The same feature that caps how much one of these systems manages is the feature that let the method be proven at all. What the ceiling does not do is define where the firm stops.</p>
       </div>
     </div>
   </section>
@@ -1593,7 +1601,7 @@ footer {
       <div class="moat-body">
         <p>The systems running today operate at low capacity and hold positions for minutes. Small size was the deliberate choice, because a low-capacity environment returns feedback quickly, and that speed was the fastest way to prove a structure-first method with live capital. The clean, fast exposure those systems run on is a characteristic of operating small. It is not the architecture the firm intends to carry forward.</p>
         <p>Capital scale dictates execution horizon. A small position can move instantly. An institutional position cannot, because deploying that much capital begins to degrade its own execution environment, and the position has to be worked across a longer horizon to avoid it. The infrastructure built for speed and the infrastructure built for scale do not resemble each other.</p>
-        <p>The engineering is focused there. The work is adapting the same structure-first method to hold across institutional horizons, which means giving up the fast exposure the low-capacity systems depend on. The mechanism still comes first. The new architecture is built to preserve it in a larger and slower regime. The systems in production today fund that development and establish the audited record the next stage requires.</p>
+        <p>The engineering is focused there. The work is adapting the same structure-first method to hold across institutional horizons, which means giving up the short, controlled exposure that has been the firm's preference and the lab's reason for being. Nothing in the method changes; what is set down is a preference, not a principle. The mechanism comes forward into size. The fast, short exposure does not. The new architecture exists to preserve the method in a larger and slower regime, and the systems in production today fund that development and establish the audited record the next stage requires.</p>
       </div>
     </div>
   </section>
@@ -1742,6 +1750,26 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.mobile-menu a').forEach(function(link) {
     link.addEventListener('click', closeMenu);
   });
+
+  // Mobile only: fade nav in when hero scrolls into view, hide when back on holding page
+  var hero = document.querySelector('.hero');
+  var header = document.querySelector('.site-header');
+  if (hero && header) {
+    var heroObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          header.classList.add('nav-visible');
+        } else {
+          // If hero is below the viewport, user is back on the holding page — hide nav
+          if (entry.boundingClientRect.top > 0) {
+            header.classList.remove('nav-visible');
+          }
+          // If hero is above, user scrolled past it — keep nav visible
+        }
+      });
+    }, { threshold: 0 });
+    heroObserver.observe(hero);
+  }
 });
 </script>
 
