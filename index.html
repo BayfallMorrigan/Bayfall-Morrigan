@@ -254,24 +254,26 @@ body {
   font-weight: 300;
   letter-spacing: 0.02em;
   line-height: 1.5;
-  margin-bottom: 56px;
+  margin-bottom: 38px;
   max-width: 440px;
 }
 
 /* HOLDING BTN GROUP */
 .holding-btn-group {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: nowrap;
   gap: 14px;
   align-items: center;
-  width: 100%;
+  justify-content: center;
+  width: min(520px, calc(100vw - 48px));
 }
 
 .holding-btn {
   display: inline-block;
   background: transparent;
   border: 1px solid var(--rule3);
-  padding: 15px 52px;
+  padding: 15px 0;
   font-family: var(--display);
   font-size: 11px;
   letter-spacing: 0.42em;
@@ -280,9 +282,9 @@ body {
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s;
-  width: 100%;
-  max-width: 320px;
+  width: 200px;
   text-align: center;
+  white-space: nowrap;
 }
 
 .holding-btn:hover {
@@ -299,6 +301,25 @@ body {
 .holding-btn.primary:hover {
   border-color: rgba(240,237,232,0.55);
   color: var(--white);
+}
+
+.holding-lender-link {
+  display: inline-block;
+  margin-top: 22px;
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(240,237,232,0.4);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.holding-lender-link:hover {
+  color: var(--white);
+  border-bottom-color: rgba(240,237,232,0.4);
 }
 
 /* SCROLL CUE */
@@ -410,10 +431,9 @@ body {
   }
 
   .holding-btn {
-    padding: 12px 36px;
+    padding: 12px 30px;
     font-size: 10px;
     letter-spacing: 0.34em;
-    max-width: 260px;
   }
 
   .holding-btn-group {
@@ -547,7 +567,7 @@ body {
 }
 
 .statement-inner {
-  padding: 96px 64px;
+  padding: 72px 64px 96px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -806,6 +826,16 @@ body {
   opacity: 0.62;
 }
 
+/* Light-band variant — breaks the back-to-back dark rhythm */
+.regime-light { background: #ffffff; border-top-color: var(--rule); }
+.regime-light.regime:last-of-type { border-bottom-color: var(--rule); }
+.regime-light .regime-label { color: rgba(8,8,8,0.4); }
+.regime-light .regime-heading { color: var(--black); border-bottom-color: var(--rule); }
+.regime-light .regime-step { border-right-color: var(--rule); }
+.regime-light .regime-num { color: var(--black); opacity: 0.4; }
+.regime-light .regime-step-heading { color: var(--black); }
+.regime-light .regime-text { color: var(--black); opacity: 0.7; }
+
 /* CAPITAL / ANCHOR */
 .capital {
   padding: 0;
@@ -964,14 +994,15 @@ body {
 .legal-col:first-child { padding-left: 0; }
 
 .legal-subhead {
-  font-family: var(--body);
-  font-size: 10px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.04em;
   color: var(--black);
   opacity: 0.4;
   display: block;
-  margin-bottom: 14px;
+  margin-bottom: 24px;
 }
 
 .legal-col-heading {
@@ -1418,8 +1449,8 @@ footer {
   .holding-divider { margin-bottom: 32px; }
   .holding-headline { font-size: 23px; margin-bottom: 12px; }
   .holding-subhead { font-size: 17px; margin-bottom: 40px; }
-  .holding-btn { padding: 12px 32px; font-size: 10px; letter-spacing: 0.3em; max-width: 280px; }
-  .holding-btn-group { gap: 11px; }
+  .holding-btn { padding: 13px 32px; font-size: 10px; letter-spacing: 0.3em; width: 100%; max-width: 280px; }
+  .holding-btn-group { flex-direction: column; gap: 11px; }
   .holding-wrap { padding-bottom: 0; }
   .scroll-cue { bottom: 68px; }
   .scroll-cue-line { height: 28px; }
@@ -1512,10 +1543,10 @@ footer {
     <p class="holding-subhead">Built on structural reasoning rather than statistical discovery.</p>
 
     <div class="holding-btn-group">
-      <a class="holding-btn primary" href="#about">About the Firm</a>
+      <a class="holding-btn primary" href="#about">About</a>
       <a class="holding-btn" href="meetthefounder.html">Founder</a>
-      <a class="holding-btn" href="login.html">Lender Access</a>
     </div>
+    <a class="holding-lender-link" href="login.html">Lender Access</a>
   </div>
 
   <!-- Scroll cue -->
@@ -1639,17 +1670,17 @@ footer {
     <h2 class="legal-heading">Anchoring at the execution layer is durable, but it is not impervious.</h2>
     <div class="legal-grid">
       <div class="legal-col">
-        <span class="legal-subhead">One</span>
+        <span class="legal-subhead">01</span>
         <h3 class="legal-col-heading">Competitive compression</h3>
         <p class="legal-text">The mechanics can play out exactly as the thesis describes, and the realized edge can still go to zero, because faster participants reached the same structural condition first. This is a latency problem, not a thesis failure, and the diagnosis is visible in the live data. Entry conditions are confirmed; the move has resolved before the position could capture it.</p>
       </div>
       <div class="legal-col">
-        <span class="legal-subhead">Two</span>
+        <span class="legal-subhead">02</span>
         <h3 class="legal-col-heading">Reflexive impact</h3>
         <p class="legal-text">At meaningful scale, a system's own orders alter the queue dynamics it is trying to measure. A structural edge occupies a finite pocket of liquidity, and past a certain size, harvesting it begins to consume the structure it reads — an effect no execution tactic can fully hide. That sets a hard capacity ceiling: beyond the point where a system's own volume degrades the signal, the edge stops paying. The ceiling is a property of the inefficiency, not a flaw in the method that locates it, which is why every system is built with its capacity limit derived in advance rather than discovered in a drawdown.</p>
       </div>
       <div class="legal-col">
-        <span class="legal-subhead">Three</span>
+        <span class="legal-subhead">03</span>
         <h3 class="legal-col-heading">Matching engine change</h3>
         <p class="legal-text">A system anchored to order book physics inherits the stability of the matching engine, and its specific vulnerability. A thesis is anchored to the mechanics of a specific venue, and no two venues match orders the same way, so validity on one is not validity on another until proven. A change to tick size, priority rules, or venue policy can rewrite the physics a thesis was built to read. This is the hard-reset condition: it cannot be recalibrated around, and it is why exchange rule changes are monitored as risk, not maintenance.</p>
       </div>
@@ -1685,7 +1716,7 @@ footer {
   </section>
 
   <!-- SCALED ARCHITECTURE -->
-  <section class="regime">
+  <section class="regime regime-light">
     <div class="regime-inner">
       <p class="regime-label">Scaled Architecture</p>
       <h2 class="regime-heading">Absorbing institutional size requires surrendering <em>our short-horizon preference.</em></h2>
