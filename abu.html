@@ -826,10 +826,10 @@ function buildInactiveDashboard(d, today) {
   const frozenReturnPct = totalDeposited > 0 ? (frozenYield / totalDeposited * 100).toFixed(2) : '0.00';
   const lastDepDate   = d.lastDepositDate ? new Date(d.lastDepositDate + 'T12:00:00') : frozenDate;
   const daysMissed   = lastDepDate ? Math.max(0, Math.round((today - lastDepDate) / 86400000)) : 0;
-  const weeksMissed  = Math.floor(daysMissed / 7);
   const amountBehind = (d.missingDepositBalance !== undefined)
     ? d.missingDepositBalance
-    : weeksMissed * weeklyDeposit;
+    : Math.floor(daysMissed / 7) * weeklyDeposit;
+  const weeksMissed  = weeklyDeposit > 0 ? Math.round(amountBehind / weeklyDeposit) : 0;
 
   const page = document.getElementById('mainPage');
   page.innerHTML = `
