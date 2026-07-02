@@ -894,6 +894,27 @@ function buildInactiveDashboard(d, today) {
       </div>
     </div>
 
+    <div class="charts-section">
+      <div class="chart-panel">
+        <div class="chart-panel-label">Build-Up Trajectory — Frozen</div>
+        <div class="chart-panel-sub">Deposits and yield through freeze, plotted against target</div>
+        <div class="chart-wrap"><canvas id="frozenChart"></canvas></div>
+        <div class="legend" id="frozenLegend"></div>
+      </div>
+      <div class="chart-panel chart-panel-donut" style="border-left:1px solid var(--rule2)">
+        <div class="chart-panel-label">Frozen Capital Breakdown</div>
+        <div class="chart-panel-sub">Origin of the balance as of freeze</div>
+        <div class="half-donut-wrap">
+          <canvas id="frozenDonutChart"></canvas>
+          <div class="donut-center">
+            <div class="donut-pct" id="frozenDonutVal">${frozenReturnPct}%</div>
+            <div class="donut-label">Frozen Return</div>
+          </div>
+        </div>
+        <div class="legend" id="frozenDonutLegend"></div>
+      </div>
+    </div>
+
     <div class="txn-section">
       <div class="txn-section-label">Transaction History</div>
       <div id="txnList"></div>
@@ -911,9 +932,139 @@ function buildInactiveDashboard(d, today) {
   });
 
   renderTransactions(d.transactions);
+  renderInactiveCharts(d, frozenDate, frozenBalance, frozenYield, totalDeposited);
 
   document.getElementById('loadingScreen').style.display = 'none';
   document.getElementById('pageContent') && (document.getElementById('pageContent').style.display = 'block');
+}
+
+// ── Inactive-account charts ──────────────────────────────
+function renderInactiveCharts(d, frozenDate, frozenBalance, frozenYield, totalDeposited) {
+  const wcd = d.weeklyChartData;
+  if (!wcd || !wcd.labels || !wcd.labels.length) return; // no build-up chart data on this record
+
+  const p1StartDate = new Date(d.phase1.startDate + 'T12:00:00');
+  const freezeRef    = frozenDate || p1StartDate;
+  const freezeIdxRaw = weeksBetween(p1StartDate, freezeRef);
+  const freezeIdx    = Math.max(0, Math.min(freezeIdxRaw, wcd.labels.length - 1));
+
+  const weekStr = i => {
+    const wd = new Date(p1StartDate);
+    wd.setDate(wd.getDate() + Math.max(0, i - 1) * 7);
+    return wd.toISOString().split('T')[0];
+  };
+
+  // Where "today" falls on the week axis (deposits at week i are dated start+(i-1)*7,
+  // so today's step lands at weeksBetween+1). Clamped to the chart's last week.
+  const todayIdx = Math.max(0, Math.min(weeksBetween(p1StartDate, new Date()) + 1, wcd.labels.length - 1));
+
+  // Classify yield vs deposit by type (case-insensitive) OR description. Some yield entries
+  // ("Monthly yield compounded", and the manual "Yield" correction) are logged as
+  // 'credit'/'Yield', so the description check is a fallback so they aren't read as deposits.
+  const isYieldTxn = t =>
+    String(t.type).toLowerCase() === 'yield' || (t.description && /yield/i.test(t.description));
+
+  const allTxns = d.transactions ? Object.values(d.transactions) : [];
+  const depositTxns = allTxns.filter(t => !isYieldTxn(t) && String(t.type).toLowerCase() === 'credit');
+  const yieldTxns   = allTxns.filter(isYieldTxn);
+
+  // Both lines are TRUE running totals straight off the ledger — no stored-field + delta
+  // math, so nothing is ever double-counted and the curves always sum to the real deposited
+  // ($750) and yield ($275.92) figures. A late correction simply steps up on its dated week.
+  const cumTo = (txns, cutoff) =>
+    txns.filter(t => t.date <= cutoff).reduce((s, t) => s + (Number(t.amount) || 0), 0);
+  const depSeries   = wcd.labels.map((_, i) => i === 0 ? 0 : cumTo(depositTxns, weekStr(i)));
+  const yieldSeries = wcd.labels.map((_, i) => i === 0 ? 0 : cumTo(yieldTxns,   weekStr(i)));
+
+  const targetSeries = wcd.labels.map(() => d.phase1.targetBalance);
+  const pointStyle = wcd.labels.map((_, i) => i === freezeIdx ? 'circle' : false);
+  const pointRadius = wcd.labels.map((_, i) => i === freezeIdx ? 5 : 0);
+
+  // "Today" vertical marker drawn over the plot.
+  const todayMarker = {
+    id: 'todayMarker',
+    afterDatasetsDraw(chart) {
+      const xs = chart.scales.x;
+      if (!xs) return;
+      const x = xs.getPixelForValue(todayIdx);
+      const { top, bottom } = chart.chartArea;
+      const ctx = chart.ctx;
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(x, top);
+      ctx.lineTo(x, bottom);
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 3]);
+      ctx.strokeStyle = 'rgba(240,237,232,0.5)';
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.font = "10px 'EB Garamond', serif";
+      ctx.fillStyle = '#f0ede8';
+      ctx.textBaseline = 'top';
+      ctx.textAlign = x > chart.chartArea.right - 28 ? 'right' : 'left';
+      ctx.fillText('TODAY', ctx.textAlign === 'right' ? x - 3 : x + 3, top + 2);
+      ctx.restore();
+    }
+  };
+
+  const chartCtx = document.getElementById('frozenChart').getContext('2d');
+  new Chart(chartCtx, {
+    type: 'line',
+    plugins: [todayMarker],
+    data: {
+      labels: wcd.labels,
+      datasets: [
+        { label: 'Deposited', data: depSeries, fill: true, backgroundColor: 'rgba(200,146,42,0.30)', borderColor: 'rgba(200,146,42,0.65)', borderWidth: 1, pointRadius: 0, tension: 0, stack: 'bal' },
+        { label: 'Yield', data: yieldSeries, fill: '-1', backgroundColor: 'rgba(74,122,90,0.28)', borderColor: 'rgba(74,122,90,0.6)', borderWidth: 1.5, pointRadius, pointStyle, pointBackgroundColor: '#c8922a', pointBorderColor: '#c8922a', tension: 0.3, stack: 'bal' },
+        { label: 'Target', data: targetSeries, fill: false, borderColor: 'rgba(255,255,255,0.12)', borderWidth: 1, borderDash: [5,4], pointRadius: 0, tension: 0 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: { ...TT, callbacks: {
+          title: ctx => ctx[0].dataIndex === freezeIdx ? `${ctx[0].label} — Frozen` : ctx[0].label,
+          label: ctx => ctx.dataset.label === 'Target' ? null : ` ${ctx.dataset.label}: $${(ctx.raw||0).toLocaleString()}`
+        } }
+      },
+      scales: {
+        x: { stacked: true, grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#5a5650', font: { family:"'EB Garamond',serif", size:10 }, maxTicksLimit: 8 }, border: { color: '#1e1c18' } },
+        y: { stacked: true, grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#5a5650', font: { family:"'EB Garamond',serif", size:10 }, callback: v => '$'+v.toLocaleString() }, border: { color: '#1e1c18' } }
+      }
+    }
+  });
+
+  document.getElementById('frozenLegend').innerHTML = `
+    <div class="legend-item"><div class="legend-dot" style="background:#c8922a"></div>Deposited</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#4a7a5a"></div>Yield Earned</div>
+    <div class="legend-item"><div class="legend-dot" style="background:rgba(255,255,255,0.12);border:1px dashed rgba(255,255,255,0.2)"></div>Target</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#c8922a;box-shadow:0 0 0 2px rgba(200,146,42,0.3)"></div>Freeze Point</div>
+  `;
+
+  const donutCtx = document.getElementById('frozenDonutChart').getContext('2d');
+  new Chart(donutCtx, {
+    type: 'doughnut',
+    data: {
+      datasets: [{
+        data: [totalDeposited, frozenYield],
+        backgroundColor: ['rgba(200,146,42,0.75)', 'rgba(74,122,90,0.75)'],
+        borderColor: ['#0d0c0a','#0d0c0a'],
+        borderWidth: 2,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      circumference: 180, rotation: -90, cutout: '72%',
+      plugins: { legend: { display: false }, tooltip: { ...TT, callbacks: { label: ctx => ' $'+ctx.parsed.toLocaleString() } } }
+    }
+  });
+
+  document.getElementById('frozenDonutLegend').innerHTML = `
+    <div class="legend-item"><div class="legend-dot" style="background:#c8922a"></div>Deposited</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#4a7a5a"></div>Yield</div>
+  `;
 }
 
 function buildDashboard(d) {
@@ -1511,7 +1662,7 @@ function renderTransactions(txns) {
     <div class="txn-row">
       <div class="txn-date">${fmtDate(t.date)}</div>
       <div class="txn-desc">${t.description}</div>
-      <div class="txn-amt ${t.type}">${t.type === 'credit' ? '+ ' : t.type === 'debit' ? '− ' : ''}$${Math.abs(t.amount).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+      <div class="txn-amt ${String(t.type).toLowerCase() === 'debit' ? 'debit' : 'credit'}">${String(t.type).toLowerCase() === 'debit' ? '− ' : '+ '}$${Math.abs(t.amount).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
     </div>
   `).join('');
 }
