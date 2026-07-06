@@ -1427,8 +1427,11 @@ footer {
 
   .regime { padding: 72px 32px 80px; }
   .regime-grid { grid-template-columns: 1fr; }
-  .regime-step { padding-right: 0; margin-right: 0; border-right: none; border-bottom: 1px solid var(--rule-dk); padding-bottom: 48px; margin-bottom: 48px; }
-  .regime-step:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+  .regime-step { position: relative; padding-right: 0; margin-right: 0; border-right: none; border-bottom: none; padding-bottom: 48px; margin-bottom: 48px; }
+  .regime-step::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: rgba(255,255,255,0.12); transform: scaleY(0.5); transform-origin: bottom; }
+  .regime-light .regime-step::after { background: rgba(0,0,0,0.12); }
+  .regime-step:last-child { padding-bottom: 0; margin-bottom: 0; }
+  .regime-step:last-child::after { display: none; }
 
   .structures-intro { padding: 72px 32px 60px; }
   .product-card { grid-template-columns: 1fr; min-height: auto; }
