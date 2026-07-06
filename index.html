@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bayfall Morrigan | Systematic Proprietary Trading & Market Microstructure Research</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<meta name="description" content="Bayfall Morrigan is a systematic, quantitative proprietary trading firm specializing in market microstructure. Structure-first methodology, building an audited track record via proprietary capital deployment. Not an investment adviser or fund offering. Founded by Aidan Ronan.">
+<meta name="keywords" content="Bayfall Morrigan, Bayfall Morrigan trading, Aidan Ronan, Aidan Ronan founder, quantitative trading firm, systematic proprietary trading, proprietary trading firm, market microstructure, order book mechanics, structure-first methodology, systematic trading, forward validation, regime durability">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="Bayfall Morrigan">
+<link rel="canonical" href="https://www.bayfallmorrigan.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.bayfallmorrigan.com/">
+<meta property="og:title" content="Bayfall Morrigan | Systematic Proprietary Trading & Market Microstructure Research">
+<meta property="og:description" content="A systematic, quantitative proprietary trading firm specializing in market microstructure. Structure-first methodology, building an audited track record via proprietary capital deployment.">
+<meta property="og:site_name" content="Bayfall Morrigan">
+<meta property="og:image" content="https://www.bayfallmorrigan.com/logopng.png">
+<meta property="og:image:alt" content="Bayfall Morrigan">
+<meta property="og:locale" content="en_US">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bayfall Morrigan | Systematic Proprietary Trading & Market Microstructure Research">
+<meta name="twitter:description" content="A systematic, quantitative proprietary trading firm specializing in market microstructure. Structure-first methodology, building an audited track record via proprietary capital deployment.">
+<meta name="twitter:image" content="https://www.bayfallmorrigan.com/logopng.png">
+<meta name="twitter:image:alt" content="Bayfall Morrigan">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.bayfallmorrigan.com/#website",
+      "url": "https://www.bayfallmorrigan.com/",
+      "name": "Bayfall Morrigan",
+      "description": "A systematic, quantitative proprietary trading firm specializing in market microstructure, built on a structure-first methodology.",
+      "inLanguage": "en-US",
+      "publisher": { "@id": "https://www.bayfallmorrigan.com/#organization" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.bayfallmorrigan.com/#webpage",
+      "url": "https://www.bayfallmorrigan.com/",
+      "name": "Bayfall Morrigan | Systematic Proprietary Trading & Market Microstructure Research",
+      "description": "Bayfall Morrigan is a systematic, quantitative proprietary trading firm specializing in market microstructure. Building an audited track record via proprietary capital deployment. Not an investment adviser or fund offering.",
+      "about": { "@id": "https://www.bayfallmorrigan.com/#organization" }
+    },
+    {
+      "@type": ["Organization", "FinancialService"],
+      "@id": "https://www.bayfallmorrigan.com/#organization",
+      "name": "Bayfall Morrigan",
+      "legalName": "Bayfall Morrigan",
+      "alternateName": ["Bayfall Morrigan Capital", "BayfallMorrigan"],
+      "url": "https://www.bayfallmorrigan.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.bayfallmorrigan.com/logopng.png"
+      },
+      "image": "https://www.bayfallmorrigan.com/logopng.png",
+      "description": "Bayfall Morrigan is a systematic, quantitative proprietary trading firm specializing in market microstructure. Structure-first methodology, trading proprietary capital only. Not an investment adviser or fund offering.",
+      "founder": {
+        "@type": "Person",
+        "@id": "https://www.bayfallmorrigan.com/#aidanronan",
+        "name": "Aidan Ronan",
+        "jobTitle": "Founder",
+        "url": "https://www.bayfallmorrigan.com/meetthefounder.html"
+      },
+      "email": "contact@bayfallmorrigan.com",
+      "telephone": "+1-708-300-8172",
+      "knowsAbout": [
+        "Quantitative Trading",
+        "Proprietary Trading",
+        "Structure-First Methodology",
+        "Systematic Trading",
+        "Risk Management",
+        "Market Microstructure"
+      ],
+      "sameAs": [
+        "https://www.bayfallmorrigan.com/meetthefounder.html"
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:   #080808;
+  --white:   #f0ede8;
+  --off:     #ffffff;
+  --mid:     #7a7670;
+  --dim:     #3a3830;
+  --rule:    #ccc9c2;
+  --rule-dk: #1a1a1a;
+  --rule2:   #2a2824;
+  --rule3:   #3a3830;
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --body:    'EB Garamond', Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ─── HOLDING PAGE ─── */
+
+.holding-page {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px 80px;
+  overflow: hidden;
+}
+
+.holding-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('Curves66.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.holding-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(8,8,8,0.55) 0%,
+    rgba(8,8,8,0.88) 65%,
+    rgba(8,8,8,0.99) 100%
+  );
+}
+
+/* NAV — sits at top of holding screen */
+.holding-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 32px 48px;
+  gap: 40px;
+}
+
+.holding-nav a {
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(240,237,232,0.35);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.holding-nav a:hover {
+  color: rgba(240,237,232,0.85);
+  border-color: rgba(240,237,232,0.25);
+}
+
+/* HOLDING CENTER WRAP */
+.holding-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  animation: holdingFadeIn 1.4s ease 0.2s forwards;
+}
+
+@keyframes holdingFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.holding-logo {
+  width: 280px;
+  height: auto;
+  display: block;
+  filter: invert(1) brightness(0.78);
+  margin-bottom: 56px;
+}
+
+.holding-divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin: 0 auto 40px;
+}
+
+.holding-divider .rule-thin {
+  width: 60px;
+  height: 1px;
+  background: var(--rule3);
+}
+
+.holding-divider .rule-dot {
+  width: 3px;
+  height: 3px;
+  background: var(--rule3);
+  border-radius: 50%;
+}
+
+.holding-headline {
+  font-family: var(--display);
+  font-size: 27px;
+  color: rgba(240,237,232,0.92);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+  margin-bottom: 14px;
+  max-width: 480px;
+}
+
+.holding-subhead {
+  font-family: var(--display);
+  font-size: 19px;
+  color: rgba(240,237,232,0.6);
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  margin-bottom: 38px;
+  max-width: 440px;
+}
+
+/* HOLDING BTN GROUP */
+.holding-btn-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: center;
+  width: min(520px, calc(100vw - 48px));
+}
+
+.holding-btn {
+  display: inline-block;
+  background: transparent;
+  border: 1px solid var(--rule3);
+  padding: 15px 0;
+  font-family: var(--display);
+  font-size: 11px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: rgba(240,237,232,0.6);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 200px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.holding-btn:hover {
+  border-color: var(--mid);
+  color: var(--white);
+  background: rgba(240,237,232,0.02);
+}
+
+.holding-btn.primary {
+  border-color: rgba(240,237,232,0.22);
+  color: rgba(240,237,232,0.75);
+}
+
+.holding-btn.primary:hover {
+  border-color: rgba(240,237,232,0.55);
+  color: var(--white);
+}
+
+.holding-lender-link {
+  display: inline-block;
+  margin-top: 22px;
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(240,237,232,0.4);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.holding-lender-link:hover {
+  color: var(--white);
+  border-bottom-color: rgba(240,237,232,0.4);
+}
+
+/* SCROLL CUE */
+.scroll-cue {
+  position: absolute;
+  bottom: 92px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: fit-content;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  opacity: 0;
+  animation: holdingFadeIn 1s ease 1.6s forwards;
+  text-decoration: none;
+}
+
+.scroll-cue-label {
+  font-family: var(--body);
+  font-size: 9px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(240,237,232,0.22);
+}
+
+.scroll-cue-line {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(to bottom, rgba(240,237,232,0.22), transparent);
+  animation: scrollPulse 2.2s ease-in-out 2s infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50% { opacity: 0.75; transform: scaleY(1.15); }
+}
+
+/* HOLDING FOOTER */
+.holding-footer {
+  position: absolute;
+  bottom: 32px;
+  left: 0; right: 0;
+  text-align: center;
+  z-index: 1;
+  font-family: var(--body);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(240,237,232,0.14);
+  pointer-events: none;
+}
+
+/* SR-ONLY */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ─── MAIN SITE — scrolls below the holding page ─── */
+
+.site-body {
+  background: #ffffff;
+  color: var(--black);
+}
+
+/* Sticky inner header that appears once you've scrolled past the holding page */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--black);
+  border-bottom: 1px solid var(--rule-dk);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 64px;
+  height: 72px;
+}
+
+/* On mobile, sticky inside a non-scroll container can fail — use fixed instead */
+@media (max-width: 600px) {
+  .site-header {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 64px;
+    padding: 0 20px;
+    z-index: 150;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+
+  .site-header.nav-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .holding-btn {
+    padding: 12px 30px;
+    font-size: 10px;
+    letter-spacing: 0.34em;
+  }
+
+  .holding-btn-group {
+    gap: 11px;
+  }
+}
+
+.site-logo-img {
+  height: 46px;
+  width: auto;
+  display: block;
+  filter: invert(1) brightness(0.7);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.site-nav a {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.25s, border-color 0.25s;
+}
+
+.site-nav a:hover {
+  color: rgba(255,255,255,0.85);
+  border-color: rgba(255,255,255,0.35);
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 64px 84px;
+  overflow: hidden;
+  background: var(--black);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('Curves2.png');
+  background-size: cover;
+  background-position: center 25%;
+  z-index: 0;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(8,8,8,0.95) 0%,
+    rgba(8,8,8,0.60) 40%,
+    rgba(8,8,8,0.20) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+}
+
+.hero-eyebrow {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.2s forwards;
+}
+
+.hero-headline {
+  font-family: var(--display);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 300;
+  line-height: 1.07;
+  color: var(--white);
+  letter-spacing: 0.01em;
+  margin-bottom: 30px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.45s forwards;
+}
+
+.hero-headline em { font-style: italic; font-weight: 300; }
+
+.hero-sub {
+  font-family: var(--body);
+  font-size: 16px;
+  color: rgba(255,255,255,0.5);
+  max-width: 560px;
+  line-height: 1.95;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.7s forwards;
+}
+
+.hero-rule {
+  width: 40px;
+  height: 1px;
+  background: rgba(255,255,255,0.18);
+  margin-top: 52px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.9s forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* STATEMENT */
+.statement {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+}
+
+.statement-inner {
+  padding: 72px 64px 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--rule);
+}
+
+.statement-label {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(8,8,8,0.4);
+  margin-bottom: 44px;
+}
+
+.statement-pull {
+  font-family: var(--display);
+  font-size: clamp(26px, 3vw, 44px);
+  font-weight: 300;
+  line-height: 1.18;
+  letter-spacing: 0.01em;
+  color: var(--black);
+  margin-bottom: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.statement-pull em { font-style: italic; }
+
+.mobile-br { display: none; }
+
+.statement-body p {
+  font-family: var(--body);
+  font-size: 17px;
+  color: var(--black);
+  line-height: 2;
+  opacity: 0.8;
+}
+
+.statement-photo {
+  position: relative;
+  overflow: hidden;
+  background: var(--black);
+  min-height: 400px;
+  line-height: 0;
+  font-size: 0;
+}
+
+.statement-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  display: block;
+  opacity: 0.88;
+  filter: grayscale(10%);
+  vertical-align: bottom;
+}
+
+/* MODEL */
+.model {
+  background: var(--black);
+  padding: 96px 64px;
+  border-bottom: 1px solid var(--rule-dk);
+}
+
+.model-label {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 44px;
+}
+
+.model-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.model-item {
+  padding-right: 56px;
+  margin-right: 56px;
+  border-right: 1px solid var(--rule-dk);
+}
+
+.model-item:last-child {
+  border-right: none;
+  padding-right: 0;
+  margin-right: 0;
+}
+
+.model-number {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.model-heading {
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.22;
+  color: var(--white);
+  margin-bottom: 20px;
+  letter-spacing: 0.01em;
+}
+
+.model-text {
+  font-family: var(--body);
+  font-size: 17px;
+  color: var(--white);
+  line-height: 1.95;
+  opacity: 0.62;
+}
+
+/* MOAT */
+.moat {
+  background: var(--black);
+  border-top: 1px solid var(--rule-dk);
+  border-bottom: 1px solid var(--rule-dk);
+  padding: 110px 64px;
+}
+
+.moat-inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.moat-label {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 36px;
+}
+
+.moat-heading {
+  font-family: var(--display);
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.12;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  margin-bottom: 44px;
+  padding-bottom: 44px;
+  border-bottom: 1px solid var(--rule-dk);
+}
+
+.moat-body p {
+  font-family: var(--body);
+  font-size: 17px;
+  color: var(--white);
+  line-height: 2;
+  opacity: 0.6;
+  margin-bottom: 26px;
+}
+
+.moat-body p:last-child {
+  margin-bottom: 0;
+  opacity: 0.72;
+}
+
+/* REGIME — full-width 3-up grid (Strategic Evolution / Scaled Architecture) */
+.regime {
+  background: var(--black);
+  border-top: 1px solid var(--rule-dk);
+  padding: 80px 64px 88px;
+}
+
+.regime:last-of-type {
+  border-bottom: 1px solid var(--rule-dk);
+}
+
+.regime-inner {
+  width: 100%;
+}
+
+.regime-label {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 28px;
+}
+
+.regime-heading {
+  font-family: var(--display);
+  font-size: clamp(34px, 4vw, 58px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  margin: 0 0 72px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid var(--rule-dk);
+  max-width: 900px;
+}
+
+.regime-heading em { font-style: italic; }
+
+/* three points across the full width, matching .model-grid */
+.regime-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.regime-step {
+  padding-right: 56px;
+  margin-right: 56px;
+  border-right: 1px solid var(--rule-dk);
+}
+
+.regime-step:last-child {
+  border-right: none;
+  padding-right: 0;
+  margin-right: 0;
+}
+
+.regime-num {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  opacity: 0.5;
+  display: block;
+  margin-bottom: 24px;
+}
+
+.regime-step-heading {
+  font-family: var(--display);
+  font-size: clamp(24px, 2vw, 30px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.22;
+  color: var(--white);
+  margin-bottom: 24px;
+  letter-spacing: 0.01em;
+}
+
+.regime-text {
+  font-family: var(--body);
+  font-size: 16px;
+  color: var(--white);
+  line-height: 2;
+  opacity: 0.62;
+}
+
+/* Light-band variant — breaks the back-to-back dark rhythm */
+.regime-light { background: #ffffff; border-top-color: var(--rule); }
+.regime-light.regime:last-of-type { border-bottom-color: var(--rule); }
+.regime-light .regime-label { color: rgba(8,8,8,0.4); }
+.regime-light .regime-heading { color: var(--black); border-bottom-color: var(--rule); }
+.regime-light .regime-step { border-right-color: var(--rule); }
+.regime-light .regime-num { color: var(--black); opacity: 0.4; }
+.regime-light .regime-step-heading { color: var(--black); }
+.regime-light .regime-text { color: var(--black); opacity: 0.7; }
+
+/* CAPITAL / ANCHOR */
+.capital {
+  padding: 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.capital-header {
+  position: relative;
+  padding: 80px 64px 80px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--rule);
+}
+
+.capital-header-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('Curves6.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.capital-header-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(8,8,8,0.85) 0%, rgba(8,8,8,0.55) 100%);
+}
+
+.capital-header-content {
+  position: relative;
+  z-index: 1;
+}
+
+.capital-label {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 44px;
+}
+
+.capital-heading {
+  font-family: var(--display);
+  font-size: clamp(34px, 4vw, 58px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  margin-bottom: 28px;
+  color: var(--white);
+  max-width: 760px;
+}
+
+.capital-intro {
+  font-family: var(--body);
+  font-size: 16px;
+  color: rgba(255,255,255,0.5);
+  line-height: 2;
+  max-width: 540px;
+}
+
+.capital-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  background: #ffffff;
+  padding: 64px 64px 80px;
+}
+
+.capital-item {
+  background: #f3f2f0;
+  padding: 48px 44px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.capital-item + .capital-item {
+  margin-left: 1px;
+}
+
+.capital-item-ordinal {
+  font-family: var(--body);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(8,8,8,0.3);
+  margin-bottom: 24px;
+}
+
+.capital-item-heading {
+  font-family: var(--display);
+  font-size: clamp(22px, 2vw, 30px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.25;
+  color: var(--black);
+  letter-spacing: 0.01em;
+  margin-bottom: 24px;
+}
+
+.capital-item-text {
+  font-family: var(--body);
+  font-size: 16px;
+  color: var(--black);
+  line-height: 2;
+  opacity: 0.7;
+}
+
+/* LIMITS */
+.legal {
+  background: #ffffff;
+  padding: 96px 64px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.legal-label {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(8,8,8,0.4);
+  margin-bottom: 28px;
+}
+
+.legal-heading {
+  font-family: var(--display);
+  font-size: clamp(34px, 4vw, 58px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  color: var(--black);
+  margin: 0 0 72px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid var(--rule);
+  max-width: 900px;
+}
+
+.legal-heading em { font-style: italic; }
+
+.legal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.legal-col {
+  padding-right: 56px;
+  margin-right: 56px;
+  border-right: 1px solid var(--rule);
+}
+
+.legal-col:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+.legal-col:first-child { padding-left: 0; }
+
+.legal-subhead {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: var(--black);
+  opacity: 0.4;
+  display: block;
+  margin-bottom: 24px;
+}
+
+.legal-col-heading {
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.25;
+  color: var(--black);
+  margin-bottom: 18px;
+  letter-spacing: 0.01em;
+}
+
+.legal-text {
+  font-family: var(--body);
+  font-size: 16px;
+  color: var(--black);
+  line-height: 1.95;
+  opacity: 0.72;
+}
+
+.legal-foot {
+  font-family: var(--body);
+  font-size: 16px;
+  color: var(--black);
+  line-height: 2;
+  opacity: 0.6;
+  max-width: 720px;
+  margin: 56px auto 0;
+  text-align: center;
+  font-style: italic;
+}
+
+/* SYSTEMS */
+.structures {
+  padding: 0;
+  background: #ffffff;
+  border-top: 1px solid var(--rule);
+  border-bottom: none;
+}
+
+.structures-intro {
+  padding: 96px 64px 80px;
+}
+
+.section-label {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(8,8,8,0.4);
+  margin-bottom: 24px;
+}
+
+.structures-heading {
+  font-family: var(--display);
+  font-size: clamp(32px, 3.5vw, 52px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  margin-bottom: 32px;
+  color: var(--black);
+  max-width: 900px;
+}
+
+.structures-note {
+  font-family: var(--body);
+  font-size: 16px;
+  color: var(--black);
+  line-height: 2;
+  opacity: 0.7;
+  max-width: 760px;
+}
+
+.product-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  min-height: 380px;
+  background: #f3f2f0;
+}
+
+.product-card-dark {
+  background: var(--black) !important;
+  border-top: 1px solid var(--rule-dk);
+  border-bottom: 1px solid var(--rule-dk);
+}
+
+.product-card-left {
+  padding: 72px 64px;
+  border-right: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card-dark .product-card-left { border-right-color: var(--rule-dk); }
+
+.product-numeral {
+  font-family: var(--display);
+  font-size: 180px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--black);
+  opacity: 0.05;
+  line-height: 1;
+  position: absolute;
+  bottom: -20px;
+  right: 32px;
+  user-select: none;
+  pointer-events: none;
+  letter-spacing: -0.04em;
+}
+
+.product-card-dark .product-numeral { color: var(--white); opacity: 0.06; }
+
+.product-card-left-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.product-name-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.product-tag {
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--black);
+  display: inline-block;
+  border: 1px solid var(--black);
+  padding: 7px 16px;
+  white-space: nowrap;
+}
+
+.product-card-dark .product-tag {
+  color: rgba(255,255,255,0.55);
+  border-color: rgba(255,255,255,0.4);
+}
+
+.product-name {
+  font-family: var(--display);
+  font-size: clamp(34px, 3.5vw, 54px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  color: var(--black);
+}
+
+.product-card-dark .product-name { color: var(--white); }
+
+.product-desc {
+  font-family: var(--body);
+  font-size: 16px;
+  color: var(--black);
+  line-height: 2;
+  opacity: 0.65;
+  max-width: 400px;
+}
+
+.product-card-dark .product-desc { color: var(--white); opacity: 0.5; }
+
+.product-card-right {
+  padding: 0 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product-spec-group {
+  padding: 30px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.product-card-dark .product-spec-group { border-bottom-color: var(--rule-dk); }
+.product-spec-group:last-child { border-bottom: none; }
+
+.product-spec-label {
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--mid);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.product-card-dark .product-spec-label { color: rgba(255,255,255,0.28); }
+
+.product-spec-value {
+  font-family: var(--display);
+  font-size: clamp(20px, 1.8vw, 26px);
+  font-weight: 400;
+  color: var(--black);
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  margin-bottom: 6px;
+}
+
+.product-card-dark .product-spec-value { color: var(--white); }
+
+.product-spec-sub {
+  font-family: var(--body);
+  font-size: 14px;
+  color: var(--black);
+  opacity: 0.55;
+  line-height: 1.85;
+}
+
+.product-card-dark .product-spec-sub { color: var(--white); opacity: 0.38; }
+
+/* CONTACT */
+.contact {
+  background: var(--black);
+  padding: 120px 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: start;
+}
+
+.contact-label {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 36px;
+}
+
+.contact-heading {
+  font-family: var(--display);
+  font-size: clamp(30px, 3.5vw, 50px);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 40px;
+  letter-spacing: 0.01em;
+}
+
+.contact-heading em { font-style: italic; }
+
+.contact-blurb {
+  font-family: var(--body);
+  font-size: 16px;
+  color: rgba(255,255,255,0.45);
+  line-height: 2;
+  max-width: 420px;
+}
+
+.contact-info-line {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 8px;
+}
+
+.contact-info-value {
+  font-family: var(--body);
+  font-size: 16px;
+  color: var(--white);
+  margin-bottom: 32px;
+}
+
+.contact-info-value a {
+  color: var(--white);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.35);
+  padding-bottom: 1px;
+  transition: color 0.25s, border-color 0.25s;
+}
+
+.contact-info-value a:hover {
+  color: var(--white);
+  border-color: rgba(255,255,255,0.8);
+}
+
+/* FOOTER */
+footer {
+  background: var(--black);
+  border-top: 1px solid var(--rule-dk);
+  padding: 28px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-name {
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.22);
+  text-decoration: none;
+}
+
+.footer-disclaimer {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.22);
+  max-width: 520px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.footer-copy {
+  font-family: var(--body);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.14);
+}
+
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  z-index: 200;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: rgba(255,255,255,0.6);
+  transition: transform 0.3s, opacity 0.3s;
+  transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 64px;
+  left: 0; right: 0;
+  background: var(--black);
+  border-bottom: 1px solid var(--rule-dk);
+  flex-direction: column;
+  padding: 24px 20px 32px;
+  gap: 0;
+  z-index: 149;
+  transform: translateY(-8px);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.mobile-menu.open {
+  display: flex;
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu a {
+  font-family: var(--body);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule-dk);
+  transition: color 0.2s;
+}
+
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: var(--white); }
+
+/* ─── RESPONSIVE ─── */
+
+/* TABLET */
+@media (max-width: 960px) {
+  .holding-nav { padding: 24px 32px; gap: 28px; }
+  .site-header { padding: 0 32px; }
+  .hero { padding: 0 32px 64px; }
+
+  .statement { grid-template-columns: 1fr; }
+  .statement-inner { padding: 72px 32px; border-right: none; border-bottom: 1px solid var(--rule); }
+  .statement-photo { min-height: 400px; }
+
+  .model { padding: 88px 32px; }
+  .moat { padding: 80px 32px; }
+  .model-grid { grid-template-columns: 1fr; }
+  .model-item { border-right: none; border-bottom: 1px solid var(--rule-dk); padding: 0 0 48px; margin: 0 0 48px 0; }
+  .model-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+
+  .capital-header { padding: 64px 32px 64px; }
+  .capital-grid { grid-template-columns: 1fr; padding: 48px 32px; gap: 1px; }
+  .capital-item + .capital-item { margin-left: 0; }
+
+  .legal { padding: 88px 32px; }
+  .legal-grid { grid-template-columns: 1fr; gap: 0; }
+  .legal-col { padding: 0; border-right: none; border-bottom: 1px solid var(--rule); padding-bottom: 36px; margin-bottom: 36px; }
+  .legal-col:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+
+  .regime { padding: 72px 32px 80px; }
+  .regime-grid { grid-template-columns: 1fr; }
+  .regime-step { position: relative; padding-right: 0; margin-right: 0; border-right: none; border-bottom: none; padding-bottom: 48px; margin-bottom: 48px; }
+  .regime-step::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: rgba(255,255,255,0.12); transform: scaleY(0.5); transform-origin: bottom; }
+  .regime-light .regime-step::after { background: rgba(0,0,0,0.12); }
+  .regime-step:last-child { padding-bottom: 0; margin-bottom: 0; }
+  .regime-step:last-child::after { display: none; }
+
+  .structures-intro { padding: 72px 32px 60px; }
+  .product-card { grid-template-columns: 1fr; min-height: auto; }
+  .product-card-left { padding: 52px 32px; border-right: none; border-bottom: 1px solid var(--rule); min-height: 280px; }
+  .product-card-dark .product-card-left { border-bottom-color: var(--rule-dk); }
+  .product-card-right { padding: 0 32px; }
+  .product-spec-group { padding: 28px 0; }
+
+  .contact { grid-template-columns: 1fr; gap: 60px; padding: 88px 32px; }
+  footer { padding: 24px 32px; flex-direction: column; gap: 14px; text-align: center; }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  html, body { overflow-x: hidden; max-width: 100%; }
+
+  .holding-page { padding: 88px 22px 132px; justify-content: center; }
+  .holding-logo { width: 220px; margin-bottom: 44px; }
+  .holding-divider { margin-bottom: 32px; }
+  .holding-headline { font-size: 23px; margin-bottom: 12px; }
+  .holding-subhead { font-size: 17px; margin-bottom: 40px; }
+  .holding-btn { padding: 13px 32px; font-size: 10px; letter-spacing: 0.3em; width: 100%; max-width: 280px; }
+  .holding-btn-group { flex-direction: column; gap: 11px; }
+  .holding-wrap { padding-bottom: 0; }
+  .scroll-cue { bottom: 68px; }
+  .scroll-cue-line { height: 28px; }
+  .holding-nav { padding: 20px 22px; gap: 20px; }
+  .holding-nav a { font-size: 9px; letter-spacing: 0.22em; }
+
+  .site-header { padding: 0 20px; height: 64px; }
+  .site-logo-img { height: 40px; width: auto; }
+  .hamburger { display: flex; }
+  .site-nav { display: none; }
+  /* mobile-menu visibility is controlled entirely by .open class — no display override needed here */
+
+  /* Compensate for fixed header so hero content isn't hidden behind it */
+  .site-body > .site-header + * { margin-top: 0; }
+  .hero { padding-top: 64px; }
+
+  .hero { padding: 0 20px 52px; }
+  .hero-eyebrow {
+    font-size: 9.5px;
+    letter-spacing: 0.16em;
+    line-height: 1.7;
+    margin-bottom: 22px;
+    max-width: 100%;
+  }
+  .hero-headline { font-size: clamp(30px, 8vw, 52px); line-height: 1.14; }
+  .hero-sub { font-size: 15px; max-width: 100%; }
+  .hero-rule { margin-top: 40px; }
+
+  .statement-inner { padding: 52px 20px; }
+  .statement-pull { font-size: clamp(28px, 8vw, 40px); }
+  .mobile-br { display: block; }
+  .statement-photo { min-height: 280px; }
+
+  .model { padding: 60px 20px; }
+  .moat { padding: 60px 20px; }
+  .capital-header { padding: 64px 20px 48px; }
+  .capital-grid { padding: 32px 20px; }
+  .capital-item { padding: 36px 28px; }
+  .capital-item-heading { font-size: clamp(22px, 6vw, 28px); }
+
+  .legal { padding: 60px 20px; }
+  .legal-grid { text-align: left; }
+  .legal-lead { text-align: left; }
+  .legal-close { text-align: left; }
+  .legal-foot { text-align: left; }
+  .legal-heading { text-align: left; }
+  .legal-label { text-align: left; }
+
+  .regime { padding: 60px 20px; }
+  .regime-heading { text-align: left; }
+  .regime-label { text-align: left; }
+  .regime-step { padding-bottom: 44px; margin-bottom: 44px; }
+
+  .structures-intro { padding: 52px 20px 48px; }
+  .product-card-left { padding: 48px 20px; }
+  .product-card-right { padding: 0 20px; }
+  .product-numeral { font-size: 130px; right: 12px; }
+
+  .contact { padding: 60px 20px; gap: 48px; }
+  .contact-heading { font-size: clamp(26px, 8vw, 38px); }
+
+  footer { padding: 20px; gap: 12px; }
+  .footer-disclaimer { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     LAYER 1: HOLDING PAGE (entry experience)
+════════════════════════════════════════════ -->
+<div class="holding-page">
+  <div class="holding-bg"></div>
+
+
+  <!-- SEO: crawlable heading -->
+  <h1 class="sr-only">Bayfall Morrigan</h1>
+  <p class="sr-only">Bayfall Morrigan is a systematic, quantitative proprietary trading firm that develops structure-first systems anchored to the mechanics of market execution. The firm was founded by Aidan Ronan and operates with a methodology grounded in structural reasoning, discipline, and rigorous forward validation.</p>
+
+  <div class="holding-wrap">
+    <img src="logopng.png" alt="Bayfall Morrigan, Systematic Proprietary Trading & Market Microstructure Research" class="holding-logo">
+
+    <div class="holding-divider">
+      <div class="rule-thin"></div>
+      <div class="rule-dot"></div>
+      <div class="rule-thin"></div>
+    </div>
+
+    <p class="holding-headline">Systematic Proprietary Trading<br>Market Microstructure Research</p>
+    <p class="holding-subhead">Built on structural reasoning rather than statistical discovery.</p>
+
+    <div class="holding-btn-group">
+      <a class="holding-btn primary" href="#about">About</a>
+      <a class="holding-btn" href="meetthefounder.html">Founder</a>
+    </div>
+    <a class="holding-lender-link" href="login.html">Lender Access</a>
+  </div>
+
+  <!-- Scroll cue -->
+  <a class="scroll-cue" href="#about" aria-label="Scroll to learn more">
+    <span class="scroll-cue-label">Read more</span>
+    <span class="scroll-cue-line"></span>
+  </a>
+
+  <div class="holding-footer">© 2026 Bayfall Morrigan</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     LAYER 2: MAIN SITE (scrolls below)
+════════════════════════════════════════════ -->
+<div class="site-body" id="about">
+
+  <!-- Sticky site header — visible once inside the main site -->
+  <header class="site-header">
+    <a href="#about" style="display:flex;align-items:center;">
+      <img class="site-logo-img" src="logopng.png" alt="Bayfall Morrigan">
+    </a>
+    <nav class="site-nav">
+      <a href="#method">Method</a>
+      <a href="#anchor">The Anchor</a>
+      <a href="#systems">Systems</a>
+      <a href="#contact">Contact</a>
+      <a href="meetthefounder.html">Founder</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <nav class="mobile-menu" id="mobile-menu">
+    <a href="#method" onclick="closeMenu()">Method</a>
+    <a href="#anchor" onclick="closeMenu()">The Anchor</a>
+    <a href="#systems" onclick="closeMenu()">Systems</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
+    <a href="meetthefounder.html" onclick="closeMenu()">Founder</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Systematic Integrity in Quantitative Trading</p>
+      <h2 class="hero-headline">Built from mechanism,<br><em>not data.</em></h2>
+      <p class="hero-sub">Bayfall Morrigan designs and operates quantitative trading models engineered from market microstructure. We strictly decouple structural architecture from empirical testing. Instead of data snooping for spurious correlations, we rigorously validate behavioral hypotheses and calibrate our systems through structural logic.</p>
+      <div class="hero-rule"></div>
+    </div>
+  </section>
+
+  <!-- STATEMENT / METHOD -->
+  <section class="statement" id="method">
+    <div class="statement-inner">
+      <p class="statement-label">Method</p>
+      <h2 class="statement-pull">Data doesn't build models.<br><em>It proves them.</em></h2>
+      <div class="statement-body">
+        <p>At Bayfall Morrigan, our systematic models originate as structural hypotheses. We map recurring market dynamics into explicit causal chains, tracing the path from participant behavior to order book mechanics to price impact. Our predictive signals are derived directly from these causal mechanisms. We do not extract patterns from historical return series and invent post-hoc rationales. While standard industry practice often treats data as the model itself, we recognize that data is merely the empirical evidence. The true science lies in the structural reasoning being tested. Because our execution triggers are rooted in economic logic rather than fitted to historical data windows, our systems remain fully legible during periods of underperformance. When market results diverge from expectations, we are not left guessing whether an edge has simply decayed. We can precisely isolate which link in our causal chain is experiencing structural stress.</p>
+      </div>
+    </div>
+    <div class="statement-photo">
+      <img src="Curves1.png" alt="Bayfall Morrigan">
+    </div>
+  </section>
+
+  <!-- VALIDATION + INFRASTRUCTURE -->
+  <section class="model">
+    <p class="model-label">Production Architecture</p>
+    <div class="model-grid">
+      <div class="model-item">
+        <p class="model-number">01</p>
+        <h3 class="model-heading">Forward Validation</h3>
+        <p class="model-text">We utilize historical testing strictly to assess how a completed methodology performs across prior market regimes, never to parameterize a system to a transient historical window. Final validation runs exclusively against out-of-sample, live data forward in time, forcing the system to prove its logic in real time across the ordinary variations of an active market. The result is an authentic behavioral profile under real operating conditions, entirely insulated from historical backtest optimization.</p>
+      </div>
+      <div class="model-item">
+        <p class="model-number">02</p>
+        <h3 class="model-heading">In-House Engineering</h3>
+        <p class="model-text">Every component of our pipeline, spanning from our cross-sectional screening frameworks to our non-parametric bootstrap simulators, runs on completely custom-built infrastructure. We operate a bespoke data architecture that logs every microstructural metric underlying a model's resolution, strictly separating setup variables from terminal outcomes to preserve absolute statistical integrity.</p>
+      </div>
+      <div class="model-item">
+        <p class="model-number">03</p>
+        <h3 class="model-heading">Characterized Behavior</h3>
+        <p class="model-text">Prior to capital allocation, every system undergoes extensive simulation across a complete distribution of adversarial outcomes. We do not evaluate models based on average-case performance. We stress-test them under tail-risk conditions to fully characterize their behavioral boundaries and select the exact execution configuration that aligns with how the system operates in reality.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANCHOR -->
+  <section class="capital" id="anchor">
+    <div class="capital-header">
+      <div class="capital-header-bg"></div>
+      <div class="capital-header-content">
+        <p class="capital-label">The Anchor</p>
+        <h2 class="capital-heading">Survival through regime shifts requires a deeper anchor than price.</h2>
+        <p class="capital-intro">Most models anchor at the surface level, capturing transient statistical patterns in price return series that inevitably evaporate when conditions change. We anchor our systems directly into invariant microstructure and execution mechanics, the underlying matching laws of the market that remain stable when participant behavior shifts.</p>
+      </div>
+    </div>
+    <div class="capital-grid">
+      <div class="capital-item">
+        <span class="capital-item-ordinal">The Statistical Layer</span>
+        <h3 class="capital-item-heading">Price properties move with the regime.</h3>
+        <p class="capital-item-text">Price properties are inherently regime-dependent. Statistical attributes of returns, such as momentum, mean reversion, and correlation structures, are functions of the prevailing market environment. When participant composition or liquidity conditions shift, these surface-level statistical properties shift with them. A trading system grounded at this layer inevitably breaks during a regime transition.</p>
+      </div>
+      <div class="capital-item">
+        <span class="capital-item-ordinal">The Mechanical Layer</span>
+        <h3 class="capital-item-heading">Execution mechanics do not.</h3>
+        <p class="capital-item-text">Beneath price action lies the structural architecture of the order book: the deterministic rules of order interaction, queue priority, and fill propagation through available liquidity. While the current regime dictates why an order arrives, matching mechanics dictate exactly what happens when it does. When a regime turns, only these mechanical laws hold still.</p>
+      </div>
+      <div class="capital-item">
+        <span class="capital-item-ordinal">Our Position</span>
+        <h3 class="capital-item-heading">We anchor as deep as the thesis allows.</h3>
+        <p class="capital-item-text">Not every mathematical thesis can be grounded purely at the microstructural layer. However, our core design principle remains unyielding: the deeper a system is anchored in market mechanics, the less its performance depends on shifting market conditions. Systems anchored at the order book layer achieve a level of regime independence that price-level frameworks simply cannot replicate.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIMITS -->
+  <section class="legal" id="limits">
+    <p class="legal-label">The Limits of the Approach</p>
+    <h2 class="legal-heading">Anchoring at the execution layer is durable, but it is not impervious.</h2>
+    <div class="legal-grid">
+      <div class="legal-col">
+        <span class="legal-subhead">01</span>
+        <h3 class="legal-col-heading">Competitive compression</h3>
+        <p class="legal-text">The mechanics can play out exactly as the thesis describes, and the realized edge can still go to zero, because faster participants reached the same structural condition first. This is a latency problem, not a thesis failure, and the diagnosis is visible in the live data. Entry conditions are confirmed; the move has resolved before the position could capture it.</p>
+      </div>
+      <div class="legal-col">
+        <span class="legal-subhead">02</span>
+        <h3 class="legal-col-heading">Reflexive impact</h3>
+        <p class="legal-text">At meaningful scale, a system's own orders alter the queue dynamics it is trying to measure. A structural edge occupies a finite pocket of liquidity, and past a certain size, harvesting it begins to consume the structure it reads, an effect no execution tactic can fully hide. That sets a hard capacity ceiling: beyond the point where a system's own volume degrades the signal, the edge stops paying. The ceiling is a property of the inefficiency, not a flaw in the method that locates it, which is why every system is built with its capacity limit derived in advance rather than discovered in a drawdown.</p>
+      </div>
+      <div class="legal-col">
+        <span class="legal-subhead">03</span>
+        <h3 class="legal-col-heading">Matching engine change</h3>
+        <p class="legal-text">A system anchored to order book physics inherits the stability of the matching engine, and its specific vulnerability. A thesis is anchored to the mechanics of a specific venue, and no two venues match orders the same way, so validity on one is not validity on another until proven. A change to tick size, priority rules, or venue policy can rewrite the physics a thesis was built to read. This is the hard-reset condition: it cannot be recalibrated around, and it is why exchange rule changes are monitored as risk, not maintenance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY IT STARTED SMALL -->
+  <section class="regime">
+    <div class="regime-inner">
+      <p class="regime-label">Strategic Evolution</p>
+      <h2 class="regime-heading">Operational constraints provided the ideal landscape to <em>validate our core science.</em></h2>
+
+      <div class="regime-grid">
+        <div class="regime-step">
+          <span class="regime-num">01</span>
+          <h3 class="regime-step-heading">Capacity Limits as an Asset</h3>
+          <p class="regime-text">The largest quantitative funds require strategies capable of deploying institutional-scale capital. A pure structural edge in mid-liquidity equities reaches a hard capacity ceiling at a fraction of what moves the needle for a multi-billion-dollar operation. Institutional mega-funds do not bypass these microstructural mechanics because they are blind to them; they bypass these positions because their capital cannot physically fit through the door. Deploying institutional size into these specific spaces would immediately consume the very market structures the edge depends on before a meaningful position could even be built.</p>
+        </div>
+
+        <div class="regime-step">
+          <span class="regime-num">02</span>
+          <h3 class="regime-step-heading">Ecosystem Viability</h3>
+          <p class="regime-text">Mid-liquidity is where we pointed our methodology, not where structural mechanics are confined. Our core operational preference has always been for short, controlled risk exposure. Because of that specific constraint, mid-liquidity equities represented the only viable ecosystem where our short-horizon preference and structure-first architecture could intersect productively. In highly liquid instruments, these fast mechanisms are hyper-contested and heavily priced out by speed. Mid-liquidity provided the necessary operational space where correct structural reasoning left room to participate.</p>
+        </div>
+
+        <div class="regime-step">
+          <span class="regime-num">03</span>
+          <h3 class="regime-step-heading">Proving the Laboratory</h3>
+          <p class="regime-text">Short, controlled exposure was an operational preference, not a structural limit of our core method. We chose this constraint because a low-capacity environment returns live-capital feedback rapidly, allowing us to validate our structure-first framework quickly, cheaply, and without competition. The clean, fast exposure our current systems run on is simply a characteristic of operating small. The capacity ceiling on our current deployment is the exact feature that allowed our foundational science to be proven in the first place. It defines where we started, not where the methodology stops.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCALED ARCHITECTURE -->
+  <section class="regime regime-light">
+    <div class="regime-inner">
+      <p class="regime-label">Scaled Architecture</p>
+      <h2 class="regime-heading">Absorbing institutional size requires surrendering <em>our short-horizon preference.</em></h2>
+
+      <div class="regime-grid">
+        <div class="regime-step">
+          <span class="regime-num">01</span>
+          <h3 class="regime-step-heading">Horizon &amp; Capital Scale</h3>
+          <p class="regime-text">Structure-first reasoning applies wherever a market mechanism does, across all liquidity regimes. However, scaling a structure-first model demands that we relinquish our operational preference for short, controlled exposure. Capital scale dictates execution horizons. While a small position can move instantly, an institutional position cannot. Deploying significant capital alters its own execution environment; therefore, the position must be systematically worked across a longer horizon to mitigate market impact.</p>
+        </div>
+
+        <div class="regime-step">
+          <span class="regime-num">02</span>
+          <h3 class="regime-step-heading">The Engineering Transition</h3>
+          <p class="regime-text">Adapting our core structure-first methodology to institutional horizons is an entirely distinct engineering feat. This requires designing an architecture that can sustain the integrity of our core thesis over extended timeframes, moving past the short-horizon wrappers that defined our laboratory phase. Because our core design principle is rooted in invariant microstructural mechanics rather than historically contingent patterns, the underlying logic remains entirely unchanged. We are setting aside an operational preference, not a structural principle.</p>
+        </div>
+
+        <div class="regime-step">
+          <span class="regime-num">03</span>
+          <h3 class="regime-step-heading">The Next Stage</h3>
+          <p class="regime-text">As we scale, our core structural mechanisms move forward into size, while the short-horizon exposure does not. Our scaling architecture exists explicitly to preserve our structure-first methodology within a larger, slower execution regime. We are not changing how we reason; we are engineering a fundamentally different operational framework to sustain that reasoning at institutional capacity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- SYSTEMS -->
+<section class="structures" id="systems">
+  <div class="structures-intro">
+    <p class="section-label">Systems</p>
+    <h2 class="structures-heading">The research and production environment consists of independent, thesis-driven engines.</h2>
+    <p class="structures-note">Each system advances independently through our validation lifecycle, from structural specification and historical regime testing to live forward validation and complete simulation characterization. Risk parameters, position sizing, and capacity limits are derived natively from each mechanism rather than arbitrarily imposed on them. Once deployed, each engine stands alone as a discrete operational system. Specific logic remains proprietary.</p>
+  </div>
+
+  <div class="product-card">
+    <div class="product-card-left">
+      <div class="product-numeral">I</div>
+      <div class="product-card-left-inner">
+        <div class="product-name-row">
+          <h3 class="product-name">Kill&nbsp;Window</h3>
+          <span class="product-tag">Operational</span>
+        </div>
+        <p class="product-desc">A high-precision momentum reentry framework. When short-term direction aligns with the prevailing intraday trend, the engine monitors the initial pullback to test that structural level. It triggers execution the exact instant the retest holds, capturing the immediate microstructural pivot where recent participants actively defend their positions. The execution window is deliberately brief and precise. This high precision inherently caps its capacity; the system targets thin, fast-moving equities where outsized volume induces adverse market impact. It is engineered to operate a contained book rather than an expansive one, constraining deployable capital, not its structural performance.</p>
+      </div>
+    </div>
+    <div class="product-card-right">
+      <div class="product-spec-group">
+        <span class="product-spec-label">Class</span>
+        <p class="product-spec-value">Momentum reentry</p>
+        <p class="product-spec-sub">A system class focused on reentering directional movement after temporary structural retracements.</p>
+      </div>
+      <div class="product-spec-group">
+        <span class="product-spec-label">Target</span>
+        <p class="product-spec-value">Structural continuation</p>
+        <p class="product-spec-sub">Captures trend continuation immediately following a validated structural retracement.</p>
+      </div>
+      <div class="product-spec-group">
+        <span class="product-spec-label">Status</span>
+        <p class="product-spec-value">Fully operational</p>
+        <p class="product-spec-sub">Verified under live conditions and characterized via simulation.</p>
+      </div>
+      <div class="product-spec-group">
+        <span class="product-spec-label">Anchor</span>
+        <p class="product-spec-value">Price structure</p>
+        <p class="product-spec-sub">Short-term levels treated as decision points for the participants who established them.</p>
+      </div>
+    </div>
+  </div>
+
+<div class="product-card product-card-dark">
+    <div class="product-card-left">
+      <div class="product-numeral">II</div>
+      <div class="product-card-left-inner">
+        <div class="product-name-row">
+          <h3 class="product-name">Operation&nbsp;Echo</h3>
+          <span class="product-tag">In Development</span>
+        </div>
+        <p class="product-desc">An intraday system that trades equities whose observed response to order flow has become directionally asymmetric. It measures how a given name's own order flow moves price in each direction, and acts only when that asymmetry is present, stable, and the move has begun. Positions are built and unwound deliberately over minutes, and held only while the condition that justified entry remains observably true.</p>
+      </div>
+    </div>
+    <div class="product-card-right">
+      <div class="product-spec-group">
+        <span class="product-spec-label">Class</span>
+        <p class="product-spec-value">Intraday response-asymmetry trading</p>
+        <p class="product-spec-sub">A system class that acts on how a name's price reacts to order flow, not on a view of where price should go.</p>
+      </div>
+      <div class="product-spec-group">
+        <span class="product-spec-label">Methodology</span>
+        <p class="product-spec-value">Market response measurement</p>
+        <p class="product-spec-sub">Quantifies the name's own reaction to aggressive flow, live from the session, rather than inferring it from price charts.</p>
+      </div>
+      <div class="product-spec-group">
+        <span class="product-spec-label">Target</span>
+        <p class="product-spec-value">Persistent directional flow-to-price asymmetry</p>
+        <p class="product-spec-sub">Names where aggressive flow in one direction moves price materially more than equal flow in the other, and where that imbalance holds rather than flickers.</p>
+      </div>
+      <div class="product-spec-group">
+        <span class="product-spec-label">Status</span>
+        <p class="product-spec-value">Research phase</p>
+        <p class="product-spec-sub">Pre-build. Measurement design and regime characterization underway.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div>
+      <p class="contact-label">Contact</p>
+      <h2 class="contact-heading">Inquiries are<br><em>handled directly.</em></h2>
+      <p class="contact-blurb">Bayfall Morrigan is a private firm. We are not raising capital and this site is not an offering. General correspondence is welcome at the address below.</p>
+    </div>
+    <div>
+      <p class="contact-info-line">Email</p>
+      <p class="contact-info-value"><a href="mailto:contact@bayfallmorrigan.com">contact@bayfallmorrigan.com</a></p>
+      <p class="contact-info-line">Founder</p>
+      <p class="contact-info-value"><a href="meetthefounder.html">Aidan Ronan</a></p>
+      <p class="contact-info-line">Based in</p>
+      <p class="contact-info-value">United States</p>
+    </div>
+  </section>
+
+  <footer>
+    <a href="#" class="footer-name">Bayfall Morrigan</a>
+    <p class="footer-disclaimer">This website is for informational purposes only. It does not constitute an offer, solicitation, or recommendation of any security or investment, and nothing on it should be construed as such.</p>
+    <p class="footer-copy">&copy; 2026 Bayfall Morrigan</p>
+  </footer>
+
+</div><!-- /.site-body -->
+
+<script>
+function toggleMenu() {
+  const btn = document.getElementById('hamburger');
+  const menu = document.getElementById('mobile-menu');
+  const isOpen = btn.classList.contains('open');
+
+  if (isOpen) {
+    // Closing: fade out, then hide
+    menu.style.opacity = '0';
+    menu.style.transform = 'translateY(-8px)';
+    menu.addEventListener('transitionend', function handler() {
+      menu.classList.remove('open');
+      menu.style.opacity = '';
+      menu.style.transform = '';
+      menu.removeEventListener('transitionend', handler);
+    });
+    btn.classList.remove('open');
+  } else {
+    // Opening: show first (display:flex via .open), then trigger transition
+    menu.classList.add('open');
+    // Force a reflow so the transition kicks in from the initial translateY(-8px)
+    menu.style.opacity = '0';
+    menu.style.transform = 'translateY(-8px)';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        menu.style.opacity = '';
+        menu.style.transform = '';
+      });
+    });
+    btn.classList.add('open');
+  }
+}
+
+function closeMenu() {
+  const btn = document.getElementById('hamburger');
+  const menu = document.getElementById('mobile-menu');
+  if (!btn.classList.contains('open')) return;
+
+  menu.style.opacity = '0';
+  menu.style.transform = 'translateY(-8px)';
+  menu.addEventListener('transitionend', function handler() {
+    menu.classList.remove('open');
+    menu.style.opacity = '';
+    menu.style.transform = '';
+    menu.removeEventListener('transitionend', handler);
+  });
+  btn.classList.remove('open');
+}
+
+// Close menu when a nav link is tapped
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.mobile-menu a').forEach(function(link) {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Mobile only: fade nav in when hero scrolls into view, hide when back on holding page
+  var hero = document.querySelector('.hero');
+  var header = document.querySelector('.site-header');
+  if (hero && header) {
+    var heroObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          header.classList.add('nav-visible');
+        } else {
+          // If hero is below the viewport, user is back on the holding page — hide nav
+          if (entry.boundingClientRect.top > 0) {
+            header.classList.remove('nav-visible');
+          }
+          // If hero is above, user scrolled past it — keep nav visible
+        }
+      });
+    }, { threshold: 0 });
+    heroObserver.observe(hero);
+  }
+});
+</script>
+
+</body>
+</html>
