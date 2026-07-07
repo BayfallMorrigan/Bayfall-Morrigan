@@ -585,7 +585,7 @@ body {
 
 .statement-pull {
   font-family: var(--display);
-  font-size: clamp(26px, 3vw, 44px);
+  font-size: clamp(34px, 4vw, 58px);
   font-weight: 300;
   line-height: 1.18;
   letter-spacing: 0.01em;
@@ -631,7 +631,6 @@ body {
 .model {
   background: var(--black);
   padding: 96px 64px;
-  border-bottom: 1px solid var(--rule-dk);
 }
 
 .model-label {
@@ -852,17 +851,8 @@ body {
 .capital-header-bg {
   position: absolute;
   inset: 0;
-  background-image: url('Curves6.png');
-  background-size: cover;
-  background-position: center;
+  background: #ffffff;
   z-index: 0;
-}
-
-.capital-header-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(8,8,8,0.85) 0%, rgba(8,8,8,0.55) 100%);
 }
 
 .capital-header-content {
@@ -875,7 +865,7 @@ body {
   font-size: 11px;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
+  color: rgba(8,8,8,0.4);
   margin-bottom: 44px;
 }
 
@@ -887,14 +877,14 @@ body {
   line-height: 1.1;
   letter-spacing: 0.01em;
   margin-bottom: 28px;
-  color: var(--white);
+  color: var(--black);
   max-width: 760px;
 }
 
 .capital-intro {
   font-family: var(--body);
   font-size: 16px;
-  color: rgba(255,255,255,0.5);
+  color: rgba(8,8,8,0.5);
   line-height: 2;
   max-width: 540px;
 }
@@ -1427,11 +1417,9 @@ footer {
 
   .regime { padding: 72px 32px 80px; }
   .regime-grid { grid-template-columns: 1fr; }
-  .regime-step { position: relative; padding-right: 0; margin-right: 0; border-right: none; border-bottom: none; padding-bottom: 48px; margin-bottom: 48px; }
-  .regime-step::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: rgba(255,255,255,0.12); transform: scaleY(0.5); transform-origin: bottom; }
-  .regime-light .regime-step::after { background: rgba(0,0,0,0.12); }
-  .regime-step:last-child { padding-bottom: 0; margin-bottom: 0; }
-  .regime-step:last-child::after { display: none; }
+  .regime-step { padding-right: 0; margin-right: 0; border-right: none; border-bottom: 1px solid var(--rule-dk); padding-bottom: 48px; margin-bottom: 48px; }
+  .regime-light .regime-step { border-bottom-color: var(--rule); }
+  .regime-step:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
 
   .structures-intro { padding: 72px 32px 60px; }
   .product-card { grid-template-columns: 1fr; min-height: auto; }
@@ -1640,30 +1628,24 @@ footer {
   </section>
 
   <!-- ANCHOR -->
-  <section class="capital" id="anchor">
-    <div class="capital-header">
-      <div class="capital-header-bg"></div>
-      <div class="capital-header-content">
-        <p class="capital-label">The Anchor</p>
-        <h2 class="capital-heading">Survival through regime shifts requires a deeper anchor than price.</h2>
-        <p class="capital-intro">Most models anchor at the surface level, capturing transient statistical patterns in price return series that inevitably evaporate when conditions change. We anchor our systems directly into invariant microstructure and execution mechanics, the underlying matching laws of the market that remain stable when participant behavior shifts.</p>
+  <section class="legal" id="anchor">
+    <p class="legal-label">The Anchor</p>
+    <h2 class="legal-heading">Survival through regime shifts requires a deeper anchor than price.</h2>
+    <div class="legal-grid">
+      <div class="legal-col">
+        <span class="legal-subhead">01</span>
+        <h3 class="legal-col-heading">Price properties move with the regime.</h3>
+        <p class="legal-text">Price properties are inherently regime-dependent. Statistical attributes of returns, such as momentum, mean reversion, and correlation structures, are functions of the prevailing market environment. When participant composition or liquidity conditions shift, these surface-level statistical properties shift with them. A trading system grounded at this layer inevitably breaks during a regime transition.</p>
       </div>
-    </div>
-    <div class="capital-grid">
-      <div class="capital-item">
-        <span class="capital-item-ordinal">The Statistical Layer</span>
-        <h3 class="capital-item-heading">Price properties move with the regime.</h3>
-        <p class="capital-item-text">Price properties are inherently regime-dependent. Statistical attributes of returns, such as momentum, mean reversion, and correlation structures, are functions of the prevailing market environment. When participant composition or liquidity conditions shift, these surface-level statistical properties shift with them. A trading system grounded at this layer inevitably breaks during a regime transition.</p>
+      <div class="legal-col">
+        <span class="legal-subhead">02</span>
+        <h3 class="legal-col-heading">Execution mechanics do not.</h3>
+        <p class="legal-text">Beneath price action lies the structural architecture of the order book: the deterministic rules of order interaction, queue priority, and fill propagation through available liquidity. While the current regime dictates why an order arrives, matching mechanics dictate exactly what happens when it does. When a regime turns, only these mechanical laws hold still.</p>
       </div>
-      <div class="capital-item">
-        <span class="capital-item-ordinal">The Mechanical Layer</span>
-        <h3 class="capital-item-heading">Execution mechanics do not.</h3>
-        <p class="capital-item-text">Beneath price action lies the structural architecture of the order book: the deterministic rules of order interaction, queue priority, and fill propagation through available liquidity. While the current regime dictates why an order arrives, matching mechanics dictate exactly what happens when it does. When a regime turns, only these mechanical laws hold still.</p>
-      </div>
-      <div class="capital-item">
-        <span class="capital-item-ordinal">Our Position</span>
-        <h3 class="capital-item-heading">We anchor as deep as the thesis allows.</h3>
-        <p class="capital-item-text">Not every mathematical thesis can be grounded purely at the microstructural layer. However, our core design principle remains unyielding: the deeper a system is anchored in market mechanics, the less its performance depends on shifting market conditions. Systems anchored at the order book layer achieve a level of regime independence that price-level frameworks simply cannot replicate.</p>
+      <div class="legal-col">
+        <span class="legal-subhead">03</span>
+        <h3 class="legal-col-heading">We anchor as deep as the thesis allows.</h3>
+        <p class="legal-text">Not every mathematical thesis can be grounded purely at the microstructural layer. However, our core design principle remains unyielding: the deeper a system is anchored in market mechanics, the less its performance depends on shifting market conditions. Systems anchored at the order book layer achieve a level of regime independence that price-level frameworks simply cannot replicate.</p>
       </div>
     </div>
   </section>
