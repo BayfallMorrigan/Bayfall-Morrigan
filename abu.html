@@ -825,10 +825,13 @@ function buildInactiveDashboard(d, today) {
 
   const frozenReturnPct = totalDeposited > 0 ? (frozenYield / totalDeposited * 100).toFixed(2) : '0.00';
   const lastDepDate   = d.lastDepositDate ? new Date(d.lastDepositDate + 'T12:00:00') : frozenDate;
-  const daysMissed   = lastDepDate ? Math.max(0, Math.round((today - lastDepDate) / 86400000)) : 0;
+  // Outstanding is bounded by the contract: total scheduled deposits minus what
+  // was actually deposited. The deposit obligation ends when the contract ends,
+  // it does not keep accruing week after week.
+  const contractDepositTotal = d.phase1.totalDeposited;
   const amountBehind = (d.missingDepositBalance !== undefined)
     ? d.missingDepositBalance
-    : Math.floor(daysMissed / 7) * weeklyDeposit;
+    : Math.max(0, contractDepositTotal - totalDeposited);
   const weeksMissed  = weeklyDeposit > 0 ? Math.round(amountBehind / weeklyDeposit) : 0;
 
   const page = document.getElementById('mainPage');
