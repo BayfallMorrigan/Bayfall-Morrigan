@@ -384,6 +384,158 @@ header {
 
 .founder-bio em { font-style: italic; }
 
+/* WRITING */
+.writing {
+  padding: 104px 64px 128px;
+  background: var(--white);
+  border-top: 1px solid var(--rule);
+}
+
+.writing-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.writing-head {
+  max-width: 720px;
+  margin-bottom: 72px;
+}
+
+.writing-eyebrow {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(8,8,8,0.4);
+  margin-bottom: 20px;
+}
+
+.writing-title {
+  font-family: var(--display);
+  font-size: clamp(32px, 3.5vw, 48px);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--black);
+  letter-spacing: 0.01em;
+}
+
+.writing-title em { font-style: italic; font-weight: 300; }
+
+.writing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px;
+}
+
+.article-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.article-cover-wrap {
+  position: relative;
+  display: block;
+  margin-bottom: 24px;
+  text-decoration: none;
+}
+
+.article-cover-wrap::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(8,8,8,0.14);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.article-cover {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  background: #f3f2f0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  font-size: 0;
+}
+
+.article-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.article-card:hover .article-cover img { transform: scale(1.035); }
+
+.article-cover-placeholder {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(8,8,8,0.32);
+}
+
+.article-eyebrow {
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(8,8,8,0.4);
+  margin-bottom: 10px;
+}
+
+.article-title {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.32;
+  color: var(--black);
+  margin-bottom: 14px;
+}
+
+.article-summary {
+  font-family: var(--body);
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: var(--black);
+  opacity: 0.75;
+  margin-bottom: 22px;
+  flex-grow: 1;
+}
+
+.article-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 1px solid rgba(8,8,8,0.35);
+  align-self: flex-start;
+  transition: color 0.25s, border-color 0.25s;
+}
+
+.article-link svg {
+  width: 10px;
+  height: 10px;
+  transition: transform 0.25s;
+}
+
+.article-link:hover { color: rgba(8,8,8,0.55); border-color: rgba(8,8,8,0.15); }
+.article-link:hover svg { transform: translate(2px, -2px); }
+
 /* FOOTER */
 footer {
   background: var(--black);
@@ -510,6 +662,10 @@ footer {
   }
   .founder-photo-wrap { margin-bottom: 28px; }
 
+  .writing { padding: 80px 32px 104px; }
+  .writing-head { margin-bottom: 56px; }
+  .writing-grid { grid-template-columns: repeat(2, 1fr); gap: 48px; }
+
   footer { padding: 24px 32px; flex-direction: column; gap: 12px; text-align: center; }
 }
 
@@ -548,6 +704,11 @@ footer {
   .founder-linkedin svg { width: 11px; height: 11px; }
   .founder-bio p { font-size: 16px; }
   .founder-bio p:first-child::first-letter { font-size: 3em; }
+
+  .writing { padding: 60px 20px 84px; }
+  .writing-head { margin-bottom: 44px; }
+  .writing-grid { grid-template-columns: 1fr; gap: 52px; }
+  .article-title { font-size: 20px; }
 
   footer { padding: 20px; gap: 10px; }
 }
@@ -611,6 +772,71 @@ footer {
       <p>Bayfall Morrigan is built around one conviction: that the most dangerous thing in any system is <em>an assumption you haven't tested.</em> We don't chase outcomes. We build structures designed to hold across changing conditions.</p>
       <p>I am not building Bayfall Morrigan for what it is today. I am building it for the people who come after me who will never know what the beginning looked like but will inherit what the beginning made possible.</p>
       <p>That is what this is for.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WRITING -->
+<section class="writing" id="writing">
+  <div class="writing-inner">
+    <div class="writing-head">
+      <p class="writing-eyebrow">Published Writing &nbsp;&mdash;&nbsp; LinkedIn</p>
+      <p class="writing-title">On markets, methodology, <em>and the assumptions underneath both.</em></p>
+    </div>
+
+    <div class="writing-grid">
+
+      <!-- ARTICLE 1 -->
+      <article class="article-card">
+        <a href="https://www.linkedin.com/pulse/what-should-we-admire-quantitative-finance-aidan-ronan-mxypc" target="_blank" rel="noopener noreferrer" class="article-cover-wrap" aria-label="Read article on LinkedIn">
+          <div class="article-cover">
+            <img src="article1.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <span class="article-cover-placeholder" style="display:none;">Article cover</span>
+          </div>
+        </a>
+        <p class="article-eyebrow">Model Risk &amp; Epistemology</p>
+        <h3 class="article-title">What Should We Admire in Quantitative Finance?</h3>
+        <p class="article-summary">For most of human history, you could not look inside another person's skull and check their competence. You read it off their outputs. Complexity was a proxy for skill, and for a very long time it was a good one. The two traveled together for so long that we stopped treating complexity as evidence and started treating it as competence itself. The problem with this is that proxies drift.</p>
+        <a href="https://www.linkedin.com/pulse/what-should-we-admire-quantitative-finance-aidan-ronan-mxypc" target="_blank" rel="noopener noreferrer" class="article-link">
+          Read on LinkedIn
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </article>
+
+      <!-- ARTICLE 2 -->
+      <article class="article-card">
+        <a href="https://www.linkedin.com/pulse/deploying-mcmc-outside-bayesian-frameworks-aidan-ronan-qbqoc" target="_blank" rel="noopener noreferrer" class="article-cover-wrap" aria-label="Read article on LinkedIn">
+          <div class="article-cover">
+            <img src="article2.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <span class="article-cover-placeholder" style="display:none;">Article cover</span>
+          </div>
+        </a>
+        <p class="article-eyebrow">Bayesian Inference &amp; MCMC</p>
+        <h3 class="article-title">Deploying MCMC Outside of Bayesian Frameworks</h3>
+        <p class="article-summary">Most people let MCMC define their model, treating whatever the posterior finds as the answer. I use it the opposite way: feeding the sampler the exact cases my model was already built to capture, so it can only confirm what matters, never decide it. That looks like an overfitting machine on paper, but it isn't, because the sampler is never given the authority to define anything.</p>
+        <a href="https://www.linkedin.com/pulse/deploying-mcmc-outside-bayesian-frameworks-aidan-ronan-qbqoc" target="_blank" rel="noopener noreferrer" class="article-link">
+          Read on LinkedIn
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </article>
+
+      <!-- ARTICLE 3 -->
+      <article class="article-card">
+        <a href="https://www.linkedin.com/pulse/you-didnt-overfit-just-never-understood-why-pattern-aidan-ronan-7in4e" target="_blank" rel="noopener noreferrer" class="article-cover-wrap" aria-label="Read article on LinkedIn">
+          <div class="article-cover">
+            <img src="article3.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <span class="article-cover-placeholder" style="display:none;">Article cover</span>
+          </div>
+        </a>
+        <p class="article-eyebrow">Structure-First Methodology</p>
+        <h3 class="article-title">You Didn't Overfit. You Just Never Understood Why The Pattern Was There.</h3>
+        <p class="article-summary">Most quantitative researchers are using machine learning the same way an eight year old uses laser eyes: impressive until nobody tells him when to stop. This article is about what separates a system you can maintain from one you can only replace, and why the difference has nothing to do with how much data you have.</p>
+        <a href="https://www.linkedin.com/pulse/you-didnt-overfit-just-never-understood-why-pattern-aidan-ronan-7in4e" target="_blank" rel="noopener noreferrer" class="article-link">
+          Read on LinkedIn
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </article>
+
     </div>
   </div>
 </section>
