@@ -607,334 +607,246 @@ body {
   opacity: 0.8;
 }
 
-.statement-photo {
+.statement-figure {
   position: relative;
-  overflow: hidden;
-  background: var(--black);
-  min-height: 400px;
-  line-height: 0;
-  font-size: 0;
+  background: #ffffff;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 72px 48px;
 }
 
-.statement-photo img {
+.statement-figure svg {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 35%;
+  max-width: 360px;
+  height: auto;
   display: block;
-  opacity: 0.88;
-  filter: grayscale(10%);
-  vertical-align: bottom;
 }
 
-/* MODEL */
-.model {
+.figure-node { fill: none; stroke: rgba(8,8,8,0.28); }
+.figure-label {
+  font-family: var(--body);
+  font-size: 12.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  fill: rgba(8,8,8,0.9);
+}
+.figure-sub {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 13.5px;
+  letter-spacing: 0.02em;
+  fill: rgba(8,8,8,0.5);
+}
+.figure-line { stroke: rgba(8,8,8,0.45); }
+.figure-rail { stroke: rgba(8,8,8,0.28); }
+.figure-rail-label {
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  fill: rgba(8,8,8,0.4);
+}
+
+/* ─── PRODUCTION ARCHITECTURE — spec ledger ─── */
+.arch {
   background: var(--black);
-  padding: 72px 64px;
+  padding: 88px 64px 96px;
 }
 
-.model-label {
+.arch-label {
   font-family: var(--body);
   font-size: 11px;
   letter-spacing: 0.26em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.4);
-  margin-bottom: 44px;
 }
 
-.model-grid {
+.arch-accordion {
+  margin-top: 44px;
+  border-top: 1px solid var(--rule-dk);
+}
+
+.arch-item {
+  border-bottom: 1px solid var(--rule-dk);
+}
+
+.arch-trigger {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 48px 1fr 24px;
+  align-items: center;
+  gap: 0 32px;
+  width: 100%;
+  padding: 30px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: padding-left 0.25s ease;
 }
 
-.model-item {
-  padding-right: 56px;
-  margin-right: 56px;
-  border-right: 1px solid var(--rule-dk);
+.arch-trigger:hover {
+  padding-left: 10px;
 }
 
-.model-item:last-child {
-  border-right: none;
-  padding-right: 0;
-  margin-right: 0;
+.arch-index {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  color: rgba(240,237,232,0.3);
 }
 
-.model-heading {
+.arch-item.is-open .arch-index {
+  color: rgba(240,237,232,0.55);
+}
+
+.arch-heading {
   font-family: var(--display);
   font-size: 30px;
   font-weight: 400;
-  line-height: 1.22;
-  color: var(--white);
-  margin-bottom: 20px;
+  line-height: 1.1;
   letter-spacing: 0.01em;
+  color: var(--white);
+  opacity: 0.7;
+  transition: opacity 0.25s ease;
 }
 
-.model-text {
+.arch-trigger:hover .arch-heading,
+.arch-item.is-open .arch-heading {
+  opacity: 1;
+}
+
+/* plus / minus mark */
+.arch-mark {
+  position: relative;
+  width: 13px;
+  height: 13px;
+  justify-self: end;
+}
+.arch-mark::before,
+.arch-mark::after {
+  content: '';
+  position: absolute;
+  background: rgba(240,237,232,0.55);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.arch-mark::before {
+  top: 6px;
+  left: 0;
+  width: 13px;
+  height: 1px;
+}
+.arch-mark::after {
+  top: 0;
+  left: 6px;
+  width: 1px;
+  height: 13px;
+}
+.arch-item.is-open .arch-mark::after {
+  transform: scaleY(0);
+  opacity: 0;
+}
+
+.arch-panel {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.arch-item.is-open .arch-panel {
+  max-height: 480px;
+  opacity: 1;
+}
+
+.arch-text {
   font-family: var(--body);
   font-size: 17px;
   color: var(--white);
-  line-height: 1.95;
+  line-height: 1.85;
   opacity: 0.62;
-}
-
-/* MOAT */
-.moat {
-  background: var(--black);
-  border-top: 1px solid var(--rule-dk);
-  border-bottom: 1px solid var(--rule-dk);
-  padding: 110px 64px;
-}
-
-.moat-inner {
   max-width: 760px;
-  margin: 0 auto;
+  padding: 0 0 34px 80px;
 }
 
-.moat-label {
-  font-family: var(--body);
-  font-size: 11px;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
-  margin-bottom: 36px;
-}
-
-.moat-heading {
-  font-family: var(--display);
-  font-size: clamp(32px, 4vw, 56px);
-  font-weight: 300;
-  font-style: italic;
-  line-height: 1.12;
-  letter-spacing: 0.01em;
-  color: var(--white);
-  margin-bottom: 44px;
-  padding-bottom: 44px;
-  border-bottom: 1px solid var(--rule-dk);
-}
-
-.moat-body p {
-  font-family: var(--body);
-  font-size: 17px;
-  color: var(--white);
-  line-height: 2;
-  opacity: 0.6;
-  margin-bottom: 26px;
-}
-
-.moat-body p:last-child {
-  margin-bottom: 0;
-  opacity: 0.72;
-}
-
-/* REGIME — full-width 3-up grid (Strategic Evolution / Scaled Architecture) */
-.regime {
+/* ─── THE ANCHOR — ledger ─── */
+.depth {
   background: var(--black);
-  border-top: 1px solid var(--rule-dk);
-  padding: 80px 64px 88px;
 }
 
-.regime:last-of-type {
-  border-bottom: 1px solid var(--rule-dk);
+.depth-header {
+  padding: 96px 64px 72px;
 }
 
-.regime-inner {
-  width: 100%;
-}
-
-.regime-label {
+.depth-label {
   font-family: var(--body);
   font-size: 11px;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
+  color: rgba(240,237,232,0.4);
   margin-bottom: 28px;
 }
 
-.regime-heading {
+.depth-heading {
   font-family: var(--display);
   font-size: clamp(34px, 4vw, 58px);
   font-weight: 300;
   line-height: 1.1;
   letter-spacing: 0.01em;
   color: var(--white);
-  margin: 0 0 72px;
-  padding-bottom: 56px;
-  border-bottom: 1px solid var(--rule-dk);
   max-width: 900px;
 }
 
-.regime-heading em { font-style: italic; }
+.depth-strata {
+  padding: 0 64px 8px;
+}
 
-/* three points across the full width, matching .model-grid */
-.regime-grid {
+.stratum {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 64px 320px 1fr;
+  gap: 48px;
+  align-items: start;
+  padding: 44px 0;
+  border-top: 1px solid var(--rule-dk);
 }
 
-.regime-step {
-  padding-right: 56px;
-  margin-right: 56px;
-  border-right: 1px solid var(--rule-dk);
-}
+.depth-strata .stratum:last-child { border-bottom: 1px solid var(--rule-dk); }
 
-.regime-step:last-child {
-  border-right: none;
-  padding-right: 0;
-  margin-right: 0;
-}
-
-.regime-num {
-  font-family: var(--display);
-  font-size: 22px;
-  font-weight: 300;
-  font-style: italic;
-  letter-spacing: 0.04em;
-  color: var(--white);
-  opacity: 0.5;
-  display: block;
-  margin-bottom: 24px;
-}
-
-.regime-step-heading {
-  font-family: var(--display);
-  font-size: clamp(24px, 2vw, 30px);
-  font-weight: 400;
-  font-style: italic;
-  line-height: 1.22;
-  color: var(--white);
-  margin-bottom: 24px;
-  letter-spacing: 0.01em;
-}
-
-.regime-text {
+.stratum-num {
   font-family: var(--body);
-  font-size: 16px;
-  color: var(--white);
-  line-height: 2;
-  opacity: 0.62;
-}
-
-/* Light-band variant — breaks the back-to-back dark rhythm */
-.regime-light { background: #ffffff; border-top-color: var(--rule); }
-.regime-light.regime:last-of-type { border-bottom-color: var(--rule); }
-.regime-light .regime-label { color: rgba(8,8,8,0.4); }
-.regime-light .regime-heading { color: var(--black); border-bottom-color: var(--rule); }
-.regime-light .regime-step { border-right-color: var(--rule); }
-.regime-light .regime-num { color: var(--black); opacity: 0.4; }
-.regime-light .regime-step-heading { color: var(--black); }
-.regime-light .regime-text { color: var(--black); opacity: 0.7; }
-
-/* CAPITAL / ANCHOR */
-.capital {
-  padding: 0;
-  border-bottom: 1px solid var(--rule);
-}
-
-.capital-header {
-  position: relative;
-  padding: 80px 64px 80px;
-  overflow: hidden;
-  border-bottom: 1px solid var(--rule);
-}
-
-.capital-header-bg {
-  position: absolute;
-  inset: 0;
-  background: #ffffff;
-  z-index: 0;
-}
-
-.capital-header-content {
-  position: relative;
-  z-index: 1;
-}
-
-.capital-label {
-  font-family: var(--body);
-  font-size: 11px;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: rgba(8,8,8,0.4);
-  margin-bottom: 44px;
-}
-
-.capital-heading {
-  font-family: var(--display);
-  font-size: clamp(34px, 4vw, 58px);
-  font-weight: 300;
-  font-style: italic;
-  line-height: 1.1;
-  letter-spacing: 0.01em;
-  margin-bottom: 28px;
-  color: var(--black);
-  max-width: 760px;
-}
-
-.capital-intro {
-  font-family: var(--body);
-  font-size: 16px;
-  color: rgba(8,8,8,0.5);
-  line-height: 2;
-  max-width: 540px;
-}
-
-.capital-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 0;
-  background: #ffffff;
-  padding: 64px 64px 80px;
-}
-
-.capital-item {
-  background: #f3f2f0;
-  padding: 48px 44px;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-
-.capital-item + .capital-item {
-  margin-left: 1px;
-}
-
-.capital-item-ordinal {
-  font-family: var(--body);
-  font-size: 10px;
-  font-weight: 400;
+  font-size: 12px;
   letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: rgba(8,8,8,0.3);
-  margin-bottom: 24px;
+  color: rgba(240,237,232,0.35);
+  padding-top: 6px;
 }
 
-.capital-item-heading {
+.stratum-heading {
   font-family: var(--display);
-  font-size: clamp(22px, 2vw, 30px);
+  font-size: clamp(22px, 2.2vw, 28px);
   font-weight: 400;
-  font-style: italic;
-  line-height: 1.25;
-  color: var(--black);
+  line-height: 1.3;
   letter-spacing: 0.01em;
-  margin-bottom: 24px;
+  color: var(--white);
 }
 
-.capital-item-text {
+.stratum-text {
   font-family: var(--body);
   font-size: 16px;
-  color: var(--black);
-  line-height: 2;
-  opacity: 0.7;
+  color: var(--white);
+  line-height: 1.9;
+  opacity: 0.65;
+  max-width: 640px;
 }
 
-/* LIMITS */
-.legal {
+/* ─── THE LIMITS — austere ledger ─── */
+.limits {
   background: #ffffff;
   padding: 96px 64px;
   border-bottom: 1px solid var(--rule);
 }
 
-.legal-label {
+.limits-label {
   font-family: var(--body);
   font-size: 11px;
   letter-spacing: 0.26em;
@@ -943,76 +855,150 @@ body {
   margin-bottom: 28px;
 }
 
-.legal-heading {
+.limits-heading {
   font-family: var(--display);
-  font-size: clamp(34px, 4vw, 58px);
-  font-weight: 300;
-  line-height: 1.1;
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
   letter-spacing: 0.01em;
   color: var(--black);
-  margin: 0 0 72px;
-  padding-bottom: 56px;
-  border-bottom: 1px solid var(--rule);
-  max-width: 900px;
+  margin-bottom: 64px;
+  max-width: 820px;
 }
 
-.legal-heading em { font-style: italic; }
-
-.legal-grid {
+.limit-entry {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 64px 280px 1fr;
+  gap: 48px;
+  padding: 44px 0;
+  border-top: 1px solid var(--rule);
 }
 
-.legal-col {
-  padding-right: 56px;
-  margin-right: 56px;
-  border-right: 1px solid var(--rule);
+.limit-entry:last-child { border-bottom: 1px solid var(--rule); }
+
+.limit-num {
+  font-family: var(--body);
+  font-size: 12px;
+  letter-spacing: 0.28em;
+  color: rgba(8,8,8,0.35);
+  padding-top: 5px;
 }
 
-.legal-col:last-child { border-right: none; padding-right: 0; margin-right: 0; }
-.legal-col:first-child { padding-left: 0; }
+.limit-heading {
+  font-family: var(--display);
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+  color: var(--black);
+}
 
-.legal-subhead {
+.limit-text {
+  font-family: var(--body);
+  font-size: 16px;
+  color: var(--black);
+  line-height: 1.9;
+  opacity: 0.75;
+  max-width: 720px;
+}
+
+/* ─── STRATEGIC EVOLUTION — diptych ─── */
+.evolution {
+  background: var(--black);
+  border-top: 1px solid var(--rule-dk);
+  padding: 88px 64px 96px;
+}
+
+.evolution-label {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+.evolution-grid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  grid-template-rows: auto auto auto auto;
+  gap: 28px 72px;
+  margin-top: 56px;
+}
+
+.evo-col {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: 1 / 5;
+}
+
+.evolution-divider {
+  position: relative;
+  background: var(--rule2);
+  grid-row: 1 / 5;
+}
+
+.evolution-divider::after {
+  content: '\2192';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--black);
+  padding: 14px 0;
   font-family: var(--display);
   font-size: 22px;
   font-weight: 300;
-  font-style: italic;
-  letter-spacing: 0.04em;
-  color: var(--black);
-  opacity: 0.4;
-  display: block;
-  margin-bottom: 24px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1;
 }
 
-.legal-col-heading {
+.evo-header {
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--rule-dk);
+}
+
+.evo-col-kicker {
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 26px;
+}
+
+.evo-col-heading {
+  font-family: var(--display);
+  font-size: clamp(26px, 2.6vw, 38px);
+  font-weight: 300;
+  line-height: 1.22;
+  letter-spacing: 0.01em;
+  color: var(--white);
+}
+
+.evo-item {
+  padding: 32px 30px;
+  border: 1px solid var(--rule-dk);
+  background: rgba(255,255,255,0.015);
+  display: flex;
+  flex-direction: column;
+}
+
+.evo-item-heading {
   font-family: var(--display);
   font-size: 24px;
   font-weight: 400;
-  font-style: italic;
   line-height: 1.25;
-  color: var(--black);
-  margin-bottom: 18px;
   letter-spacing: 0.01em;
+  color: var(--white);
+  margin-bottom: 16px;
 }
 
-.legal-text {
+.evo-item-text {
   font-family: var(--body);
   font-size: 16px;
-  color: var(--black);
+  color: var(--white);
   line-height: 1.95;
-  opacity: 0.72;
-}
-
-.legal-foot {
-  font-family: var(--body);
-  font-size: 16px;
-  color: var(--black);
-  line-height: 2;
   opacity: 0.6;
-  max-width: 720px;
-  margin: 56px auto 0;
-  text-align: center;
-  font-style: italic;
 }
 
 /* SYSTEMS */
@@ -1082,24 +1068,6 @@ body {
 }
 
 .product-card-dark .product-card-left { border-right-color: var(--rule-dk); }
-
-.product-numeral {
-  font-family: var(--display);
-  font-size: 180px;
-  font-weight: 300;
-  font-style: italic;
-  color: var(--black);
-  opacity: 0.05;
-  line-height: 1;
-  position: absolute;
-  bottom: -20px;
-  right: 32px;
-  user-select: none;
-  pointer-events: none;
-  letter-spacing: -0.04em;
-}
-
-.product-card-dark .product-numeral { color: var(--white); opacity: 0.06; }
 
 .product-card-left-inner {
   position: relative;
@@ -1387,28 +1355,28 @@ footer {
 
   .statement { grid-template-columns: 1fr; }
   .statement-inner { padding: 72px 32px; border-right: none; border-bottom: 1px solid var(--rule); }
-  .statement-photo { min-height: 400px; }
 
-  .model { padding: 64px 32px; }
-  .moat { padding: 80px 32px; }
-  .model-grid { grid-template-columns: 1fr; }
-  .model-item { border-right: none; border-bottom: 1px solid var(--rule-dk); padding: 0 0 48px; margin: 0 0 48px 0; }
-  .model-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+  .arch { padding: 64px 32px 72px; }
+  .arch-heading { font-size: 26px; }
+  .arch-text { padding-left: 80px; }
 
-  .capital-header { padding: 64px 32px 64px; }
-  .capital-grid { grid-template-columns: 1fr; padding: 48px 32px; gap: 1px; }
-  .capital-item + .capital-item { margin-left: 0; }
+  .statement-figure { min-height: 400px; padding: 56px 32px; }
 
-  .legal { padding: 88px 32px; }
-  .legal-grid { grid-template-columns: 1fr; gap: 0; }
-  .legal-col { padding: 0; border-right: none; border-bottom: 1px solid var(--rule); padding-bottom: 36px; margin-bottom: 36px; }
-  .legal-col:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+  .depth-header { padding: 72px 32px 56px; }
+  .depth-strata { padding: 0 32px 8px; }
+  .stratum { grid-template-columns: 1fr; gap: 16px; padding: 36px 0; }
+  .stratum-num { padding-top: 0; }
+  .stratum-text { max-width: none; }
 
-  .regime { padding: 72px 32px 80px; }
-  .regime-grid { grid-template-columns: 1fr; }
-  .regime-step { padding-right: 0; margin-right: 0; border-right: none; border-bottom: 1px solid var(--rule-dk); padding-bottom: 48px; margin-bottom: 48px; }
-  .regime-light .regime-step { border-bottom-color: var(--rule); }
-  .regime-step:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+  .limits { padding: 88px 32px; }
+  .limit-entry { grid-template-columns: 1fr; gap: 12px; padding: 40px 0; }
+  .limit-num { padding-top: 0; }
+
+  .evolution { padding: 72px 32px 80px; }
+  .evolution-grid { grid-template-columns: 1fr; grid-template-rows: none; gap: 0; }
+  .evo-col { grid-template-rows: none; grid-row: auto; gap: 28px; }
+  .evolution-divider { grid-row: auto; width: 100%; height: 1px; margin: 64px 0; }
+  .evolution-divider::after { content: '\2193'; padding: 0 16px; }
 
   .structures-intro { padding: 72px 32px 60px; }
   .product-card { grid-template-columns: 1fr; min-height: auto; }
@@ -1463,32 +1431,28 @@ footer {
   .statement-inner { padding: 52px 20px; }
   .statement-pull { font-size: clamp(28px, 8vw, 40px); }
   .mobile-br { display: block; }
-  .statement-photo { min-height: 280px; }
 
-  .model { padding: 60px 20px; }
-  .moat { padding: 60px 20px; }
-  .capital-header { padding: 64px 20px 48px; }
-  .capital-grid { padding: 32px 20px; }
-  .capital-item { padding: 36px 28px; }
-  .capital-item-heading { font-size: clamp(22px, 6vw, 28px); }
+  .arch { padding: 56px 20px 64px; }
+  .arch-heading { font-size: 23px; }
+  .arch-trigger { grid-template-columns: 34px 1fr 20px; gap: 0 18px; padding: 24px 0; }
+  .arch-text { font-size: 16px; padding-left: 52px; padding-bottom: 28px; }
 
-  .legal { padding: 60px 20px; }
-  .legal-grid { text-align: left; }
-  .legal-lead { text-align: left; }
-  .legal-close { text-align: left; }
-  .legal-foot { text-align: left; }
-  .legal-heading { text-align: left; }
-  .legal-label { text-align: left; }
+  .statement-figure { min-height: 340px; padding: 48px 20px; }
 
-  .regime { padding: 60px 20px; }
-  .regime-heading { text-align: left; }
-  .regime-label { text-align: left; }
-  .regime-step { padding-bottom: 44px; margin-bottom: 44px; }
+  .depth-header { padding: 60px 20px 44px; }
+  .depth-strata { padding: 0 20px 8px; }
+  .stratum { padding: 32px 0; }
+
+  .limits { padding: 60px 20px; }
+  .limits-heading { margin-bottom: 40px; }
+
+  .evolution { padding: 56px 20px 64px; }
+  .evolution-divider { margin: 52px 0; }
+  .evo-col-heading { font-size: clamp(24px, 7vw, 32px); }
 
   .structures-intro { padding: 52px 20px 48px; }
   .product-card-left { padding: 48px 20px; }
   .product-card-right { padding: 0 20px; }
-  .product-numeral { font-size: 130px; right: 12px; }
 
   .contact { padding: 60px 20px; gap: 48px; }
   .contact-heading { font-size: clamp(26px, 8vw, 38px); }
@@ -1586,130 +1550,169 @@ footer {
       <p class="statement-label">Method</p>
       <h2 class="statement-pull">Data doesn't build models.<br><em>It proves them.</em></h2>
       <div class="statement-body">
-        <p>At Bayfall Morrigan, our systematic models originate as structural hypotheses. We map recurring market dynamics into explicit causal chains, tracing the path from participant behavior to order book mechanics to price impact. Our predictive signals are derived directly from these causal mechanisms. We do not extract patterns from historical return series and invent post-hoc rationales. While standard industry practice often treats data as the model itself, we recognize that data is merely the empirical evidence. The true science lies in the structural reasoning being tested. Because our execution triggers are rooted in economic logic rather than fitted to historical data windows, our systems remain fully legible during periods of underperformance. When market results diverge from expectations, we are not left guessing whether an edge has simply decayed. We can precisely isolate which link in our causal chain is experiencing structural stress.</p>
+        <p>At Bayfall Morrigan, our systematic models originate as structural hypotheses. We map recurring market dynamics into explicit causal chains, tracing the path from the structural condition that should create an inefficiency, to the order book mechanics it produces, to the price impact those mechanics leave behind. Our predictive signals are derived directly from these causal mechanisms. We do not extract patterns from historical return series and invent post-hoc rationales. While standard industry practice often treats data as the model itself, we recognize that data is merely the empirical evidence. The true science lies in the structural reasoning being tested. Because our execution triggers are rooted in economic logic rather than fitted to historical data windows, our systems remain fully legible during periods of underperformance. When market results diverge from expectations, we are not left guessing whether an edge has simply decayed. We can precisely isolate which link in our causal chain is experiencing structural stress.</p>
       </div>
     </div>
-    <div class="statement-photo">
-      <img src="Curves1.png" alt="Bayfall Morrigan">
-    </div>
-  </section>
+    <div class="statement-figure" aria-hidden="false">
+      <svg viewBox="0 0 340 470" role="img" aria-label="Causal chain diagram. Structural reasoning flows from a structural condition to order book mechanics to price impact. Empirical validation flows back up.">
+        <defs>
+          <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="rgba(8,8,8,0.5)"/>
+          </marker>
+        </defs>
 
-  <!-- VALIDATION + INFRASTRUCTURE -->
-  <section class="model">
-    <p class="model-label">Production Architecture</p>
-    <div class="model-grid">
-      <div class="model-item">
-        <h3 class="model-heading">Forward Validation</h3>
-        <p class="model-text">We utilize historical testing strictly to assess how a completed methodology performs across prior market regimes, never to parameterize a system to a transient historical window. Final validation runs exclusively against out-of-sample, live data forward in time, forcing the system to prove its logic in real time across the ordinary variations of an active market. The result is an authentic behavioral profile under real operating conditions, entirely insulated from historical backtest optimization.</p>
-      </div>
-      <div class="model-item">
-        <h3 class="model-heading">In-House Engineering</h3>
-        <p class="model-text">Every component of our pipeline, spanning from our cross-sectional screening frameworks to our non-parametric bootstrap simulators, runs on completely custom-built infrastructure. We operate a bespoke data architecture that logs every microstructural metric underlying a model's resolution, strictly separating setup variables from terminal outcomes to preserve absolute statistical integrity.</p>
-      </div>
-      <div class="model-item">
-        <h3 class="model-heading">Characterized Behavior</h3>
-        <p class="model-text">Prior to capital allocation, every system undergoes extensive simulation across a complete distribution of adversarial outcomes. We do not evaluate models based on average-case performance. We stress-test them under tail-risk conditions to fully characterize their behavioral boundaries and select the exact execution configuration that aligns with how the system operates in reality.</p>
-      </div>
+        <rect class="figure-node" x="58" y="24" width="224" height="92"/>
+        <text class="figure-label" x="170" y="66" text-anchor="middle">Structural Condition</text>
+        <text class="figure-sub" x="170" y="92" text-anchor="middle">why an inefficiency should exist</text>
+
+        <line class="figure-line" x1="170" y1="116" x2="170" y2="160" marker-end="url(#arr)"/>
+
+        <rect class="figure-node" x="58" y="168" width="224" height="92"/>
+        <text class="figure-label" x="170" y="210" text-anchor="middle">Order Book Mechanics</text>
+        <text class="figure-sub" x="170" y="236" text-anchor="middle">the observable it produces</text>
+
+        <line class="figure-line" x1="170" y1="260" x2="170" y2="304" marker-end="url(#arr)"/>
+
+        <rect class="figure-node" x="58" y="312" width="224" height="92"/>
+        <text class="figure-label" x="170" y="354" text-anchor="middle">Price Impact</text>
+        <text class="figure-sub" x="170" y="380" text-anchor="middle">the measured outcome</text>
+
+        <line class="figure-rail" x1="26" y1="32" x2="26" y2="392" marker-end="url(#arr)"/>
+        <text class="figure-rail-label" transform="rotate(-90 14 212)" x="14" y="212" text-anchor="middle">Mechanism</text>
+
+        <line class="figure-rail" x1="314" y1="396" x2="314" y2="36" stroke-dasharray="2 5" marker-end="url(#arr)"/>
+        <text class="figure-rail-label" transform="rotate(90 326 212)" x="326" y="212" text-anchor="middle">Validation</text>
+
+        <text class="figure-sub" x="170" y="446" text-anchor="middle">The hypothesis descends. The evidence returns.</text>
+      </svg>
     </div>
   </section>
 
   <!-- ANCHOR -->
-  <section class="legal" id="anchor">
-    <p class="legal-label">The Anchor</p>
-    <h2 class="legal-heading">Survival through regime shifts requires a deeper anchor than price.</h2>
-    <div class="legal-grid">
-      <div class="legal-col">
-        <span class="legal-subhead">01</span>
-        <h3 class="legal-col-heading">Price properties move with the regime.</h3>
-        <p class="legal-text">Price properties are inherently regime-dependent. Statistical attributes of returns, such as momentum, mean reversion, and correlation structures, are functions of the prevailing market environment. When participant composition or liquidity conditions shift, these surface-level statistical properties shift with them. A trading system grounded at this layer inevitably breaks during a regime transition.</p>
+  <section class="depth" id="anchor">
+    <div class="depth-header">
+      <p class="depth-label">The Anchor</p>
+      <h2 class="depth-heading">Survival through regime shifts requires a deeper anchor than price.</h2>
+    </div>
+    <div class="depth-strata">
+      <div class="stratum stratum-1">
+        <span class="stratum-num">01</span>
+        <h3 class="stratum-heading">Price properties move with the regime.</h3>
+        <p class="stratum-text">Price properties are inherently regime-dependent. Statistical attributes of returns, such as momentum, mean reversion, and correlation structures, are functions of the prevailing market environment. When participant composition or liquidity conditions shift, these surface-level statistical properties shift with them. A trading system grounded at this layer inevitably breaks during a regime transition.</p>
       </div>
-      <div class="legal-col">
-        <span class="legal-subhead">02</span>
-        <h3 class="legal-col-heading">Execution mechanics do not.</h3>
-        <p class="legal-text">Beneath price action lies the structural architecture of the order book: the deterministic rules of order interaction, queue priority, and fill propagation through available liquidity. While the current regime dictates why an order arrives, matching mechanics dictate exactly what happens when it does. When a regime turns, only these mechanical laws hold still.</p>
+      <div class="stratum stratum-2">
+        <span class="stratum-num">02</span>
+        <h3 class="stratum-heading">Execution mechanics do not.</h3>
+        <p class="stratum-text">Beneath price action lies the structural architecture of the order book: the deterministic rules of order interaction, queue priority, and fill propagation through available liquidity. While the current regime shifts which orders arrive, matching mechanics dictate exactly what happens when they do. When a regime turns, only these mechanical laws hold still.</p>
       </div>
-      <div class="legal-col">
-        <span class="legal-subhead">03</span>
-        <h3 class="legal-col-heading">We anchor as deep as the thesis allows.</h3>
-        <p class="legal-text">Not every mathematical thesis can be grounded purely at the microstructural layer. However, our core design principle remains unyielding: the deeper a system is anchored in market mechanics, the less its performance depends on shifting market conditions. Systems anchored at the order book layer achieve a level of regime independence that price-level frameworks simply cannot replicate.</p>
+      <div class="stratum stratum-3">
+        <span class="stratum-num">03</span>
+        <h3 class="stratum-heading">We anchor as deep as the thesis allows.</h3>
+        <p class="stratum-text">Not every mathematical thesis can be grounded purely at the microstructural layer. However, our core design principle remains unyielding: the deeper a system is anchored in market mechanics, the less its performance depends on shifting market conditions. Systems anchored at the order book layer achieve a level of regime independence that price-level frameworks simply cannot replicate.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTION ARCHITECTURE -->
+  <section class="arch">
+    <p class="arch-label">Production Architecture</p>
+    <h2 class="sr-only">Production Architecture</h2>
+    <div class="arch-accordion">
+      <div class="arch-item">
+        <button class="arch-trigger" type="button" aria-expanded="false">
+          <span class="arch-index">01</span>
+          <span class="arch-heading">Forward Validation</span>
+          <span class="arch-mark" aria-hidden="true"></span>
+        </button>
+        <div class="arch-panel">
+          <p class="arch-text">We utilize historical testing strictly to assess how a completed methodology performs across prior market regimes, never to parameterize a system to a transient historical window. Final validation runs exclusively against out-of-sample, live data forward in time, forcing the system to prove its logic in real time across the ordinary variations of an active market. The result is an authentic behavioral profile under real operating conditions, entirely insulated from historical backtest optimization.</p>
+        </div>
+      </div>
+      <div class="arch-item">
+        <button class="arch-trigger" type="button" aria-expanded="false">
+          <span class="arch-index">02</span>
+          <span class="arch-heading">In-House Engineering</span>
+          <span class="arch-mark" aria-hidden="true"></span>
+        </button>
+        <div class="arch-panel">
+          <p class="arch-text">Every component of our pipeline, spanning from our cross-sectional screening frameworks to our non-parametric bootstrap simulators, runs on completely custom-built infrastructure. We operate a bespoke data architecture that logs every microstructural metric underlying a model's resolution, strictly separating setup variables from terminal outcomes to preserve absolute statistical integrity.</p>
+        </div>
+      </div>
+      <div class="arch-item">
+        <button class="arch-trigger" type="button" aria-expanded="false">
+          <span class="arch-index">03</span>
+          <span class="arch-heading">Characterized Behavior</span>
+          <span class="arch-mark" aria-hidden="true"></span>
+        </button>
+        <div class="arch-panel">
+          <p class="arch-text">Prior to capital allocation, every system undergoes extensive simulation across a complete distribution of adversarial outcomes. We do not evaluate models based on average-case performance. We stress-test them under tail-risk conditions to fully characterize their behavioral boundaries and select the exact execution configuration that aligns with how the system operates in reality.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- LIMITS -->
-  <section class="legal" id="limits">
-    <p class="legal-label">The Limits of the Approach</p>
-    <h2 class="legal-heading">Anchoring at the execution layer is durable, but it is not impervious.</h2>
-    <div class="legal-grid">
-      <div class="legal-col">
-        <span class="legal-subhead">01</span>
-        <h3 class="legal-col-heading">Competitive compression</h3>
-        <p class="legal-text">The mechanics can play out exactly as the thesis describes, and the realized edge can still go to zero, because faster participants reached the same structural condition first. This is a latency problem, not a thesis failure, and the diagnosis is visible in the live data. Entry conditions are confirmed; the move has resolved before the position could capture it.</p>
+  <section class="limits" id="limits">
+    <p class="limits-label">The Limits of the Approach</p>
+    <h2 class="limits-heading">Anchoring at the execution layer is durable, but it is not impervious.</h2>
+    <div class="limits-ledger">
+      <div class="limit-entry">
+        <span class="limit-num">01</span>
+        <h3 class="limit-heading">Competitive compression</h3>
+        <p class="limit-text">The mechanics can play out exactly as the thesis describes, and the realized edge can still go to zero, because faster participants reached the same structural condition first. This is a latency problem, not a thesis failure, and the diagnosis is visible in the live data. Entry conditions are confirmed; the move has resolved before the position could capture it.</p>
       </div>
-      <div class="legal-col">
-        <span class="legal-subhead">02</span>
-        <h3 class="legal-col-heading">Reflexive impact</h3>
-        <p class="legal-text">At meaningful scale, a system's own orders alter the queue dynamics it is trying to measure. A structural edge occupies a finite pocket of liquidity, and past a certain size, harvesting it begins to consume the structure it reads, an effect no execution tactic can fully hide. That sets a hard capacity ceiling: beyond the point where a system's own volume degrades the signal, the edge stops paying. The ceiling is a property of the inefficiency, not a flaw in the method that locates it, which is why every system is built with its capacity limit derived in advance rather than discovered in a drawdown.</p>
+      <div class="limit-entry">
+        <span class="limit-num">02</span>
+        <h3 class="limit-heading">Reflexive impact</h3>
+        <p class="limit-text">At meaningful scale, a system's own orders alter the queue dynamics it is trying to measure. A structural edge occupies a finite pocket of liquidity, and past a certain size, harvesting it begins to consume the structure it reads, an effect no execution tactic can fully hide. That sets a hard capacity ceiling: beyond the point where a system's own volume degrades the signal, the edge stops paying. The ceiling is a property of the inefficiency, not a flaw in the method that locates it, which is why every system is built with its capacity limit derived in advance rather than discovered in a drawdown.</p>
       </div>
-      <div class="legal-col">
-        <span class="legal-subhead">03</span>
-        <h3 class="legal-col-heading">Matching engine change</h3>
-        <p class="legal-text">A system anchored to order book physics inherits the stability of the matching engine, and its specific vulnerability. A thesis is anchored to the mechanics of a specific venue, and no two venues match orders the same way, so validity on one is not validity on another until proven. A change to tick size, priority rules, or venue policy can rewrite the physics a thesis was built to read. This is the hard-reset condition: it cannot be recalibrated around, and it is why exchange rule changes are monitored as risk, not maintenance.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY IT STARTED SMALL -->
-  <section class="regime">
-    <div class="regime-inner">
-      <p class="regime-label">Strategic Evolution</p>
-      <h2 class="regime-heading">Operational constraints provided the ideal landscape to <em>validate our core science.</em></h2>
-
-      <div class="regime-grid">
-        <div class="regime-step">
-          <span class="regime-num">01</span>
-          <h3 class="regime-step-heading">Capacity Limits as an Asset</h3>
-          <p class="regime-text">The largest quantitative funds require strategies capable of deploying institutional-scale capital. A pure structural edge in mid-liquidity equities reaches a hard capacity ceiling at a fraction of what moves the needle for a multi-billion-dollar operation. Institutional mega-funds do not bypass these microstructural mechanics because they are blind to them; they bypass these positions because their capital cannot physically fit through the door. Deploying institutional size into these specific spaces would immediately consume the very market structures the edge depends on before a meaningful position could even be built.</p>
-        </div>
-
-        <div class="regime-step">
-          <span class="regime-num">02</span>
-          <h3 class="regime-step-heading">Ecosystem Viability</h3>
-          <p class="regime-text">Mid-liquidity is where we pointed our methodology, not where structural mechanics are confined. Our core operational preference has always been for short, controlled risk exposure. Because of that specific constraint, mid-liquidity equities represented the only viable ecosystem where our short-horizon preference and structure-first architecture could intersect productively. In highly liquid instruments, these fast mechanisms are hyper-contested and heavily priced out by speed. Mid-liquidity provided the necessary operational space where correct structural reasoning left room to participate.</p>
-        </div>
-
-        <div class="regime-step">
-          <span class="regime-num">03</span>
-          <h3 class="regime-step-heading">Proving the Laboratory</h3>
-          <p class="regime-text">Short, controlled exposure was an operational preference, not a structural limit of our core method. We chose this constraint because a low-capacity environment returns live-capital feedback rapidly, allowing us to validate our structure-first framework quickly, cheaply, and without competition. The clean, fast exposure our current systems run on is simply a characteristic of operating small. The capacity ceiling on our current deployment is the exact feature that allowed our foundational science to be proven in the first place. It defines where we started, not where the methodology stops.</p>
-        </div>
+      <div class="limit-entry">
+        <span class="limit-num">03</span>
+        <h3 class="limit-heading">Matching engine change</h3>
+        <p class="limit-text">A system anchored to order book physics inherits the stability of the matching engine, and its specific vulnerability. A thesis is anchored to the mechanics of a specific venue, and no two venues match orders the same way, so validity on one is not validity on another until proven. A change to tick size, priority rules, or venue policy can rewrite the physics a thesis was built to read. This is the hard-reset condition: it cannot be recalibrated around, and it is why exchange rule changes are monitored as risk, not maintenance.</p>
       </div>
     </div>
   </section>
 
-  <!-- SCALED ARCHITECTURE -->
-  <section class="regime regime-light">
-    <div class="regime-inner">
-      <p class="regime-label">Scaled Architecture</p>
-      <h2 class="regime-heading">Absorbing institutional size requires surrendering <em>our short-horizon preference.</em></h2>
-
-      <div class="regime-grid">
-        <div class="regime-step">
-          <span class="regime-num">01</span>
-          <h3 class="regime-step-heading">Horizon &amp; Capital Scale</h3>
-          <p class="regime-text">Structure-first reasoning applies wherever a market mechanism does, across all liquidity regimes. However, scaling a structure-first model demands that we relinquish our operational preference for short, controlled exposure. Capital scale dictates execution horizons. While a small position can move instantly, an institutional position cannot. Deploying significant capital alters its own execution environment; therefore, the position must be systematically worked across a longer horizon to mitigate market impact.</p>
+  <!-- STRATEGIC EVOLUTION -->
+  <section class="evolution">
+    <p class="evolution-label">Strategic Evolution</p>
+    <div class="evolution-grid">
+      <div class="evo-col">
+        <div class="evo-header">
+          <p class="evo-col-kicker">The Laboratory</p>
+          <h2 class="evo-col-heading">Operational constraints provided the ideal landscape to validate our core science.</h2>
         </div>
-
-        <div class="regime-step">
-          <span class="regime-num">02</span>
-          <h3 class="regime-step-heading">The Engineering Transition</h3>
-          <p class="regime-text">Adapting our core structure-first methodology to institutional horizons is an entirely distinct engineering feat. This requires designing an architecture that can sustain the integrity of our core thesis over extended timeframes, moving past the short-horizon wrappers that defined our laboratory phase. Because our core design principle is rooted in invariant microstructural mechanics rather than historically contingent patterns, the underlying logic remains entirely unchanged. We are setting aside an operational preference, not a structural principle.</p>
+        <div class="evo-item">
+          <h3 class="evo-item-heading">Capacity Limits as an Asset</h3>
+          <p class="evo-item-text">The largest quantitative funds require strategies capable of deploying institutional-scale capital. A pure structural edge in mid-liquidity equities reaches a hard capacity ceiling at a fraction of what moves the needle for a multi-billion-dollar operation. Institutional mega-funds do not bypass these microstructural mechanics because they are blind to them; they bypass these positions because their capital cannot physically fit through the door. Deploying institutional size into these specific spaces would immediately consume the very market structures the edge depends on before a meaningful position could even be built.</p>
         </div>
-
-        <div class="regime-step">
-          <span class="regime-num">03</span>
-          <h3 class="regime-step-heading">The Next Stage</h3>
-          <p class="regime-text">As we scale, our core structural mechanisms move forward into size, while the short-horizon exposure does not. Our scaling architecture exists explicitly to preserve our structure-first methodology within a larger, slower execution regime. We are not changing how we reason; we are engineering a fundamentally different operational framework to sustain that reasoning at institutional capacity.</p>
+        <div class="evo-item">
+          <h3 class="evo-item-heading">Ecosystem Viability</h3>
+          <p class="evo-item-text">Mid-liquidity is where we pointed our methodology, not where structural mechanics are confined. Our core operational preference has always been for short, controlled risk exposure. Because of that specific constraint, mid-liquidity equities represented the only viable ecosystem where our short-horizon preference and structure-first architecture could intersect productively. In highly liquid instruments, these fast mechanisms are hyper-contested and heavily priced out by speed. Mid-liquidity provided the necessary operational space where correct structural reasoning left room to participate.</p>
+        </div>
+        <div class="evo-item">
+          <h3 class="evo-item-heading">Proving the Laboratory</h3>
+          <p class="evo-item-text">Short, controlled exposure was an operational preference, not a structural limit of our core method. We chose this constraint because a low-capacity environment returns live-capital feedback rapidly, allowing us to validate our structure-first framework quickly, cheaply, and without competition. The clean, fast exposure our current systems run on is simply a characteristic of operating small. The capacity ceiling on our current deployment is the exact feature that allowed our foundational science to be proven in the first place. It defines where we started, not where the methodology stops.</p>
+        </div>
+      </div>
+      <div class="evolution-divider" aria-hidden="true"></div>
+      <div class="evo-col">
+        <div class="evo-header">
+          <p class="evo-col-kicker">Scaled Architecture</p>
+          <h2 class="evo-col-heading">Absorbing institutional size requires surrendering our short-horizon preference.</h2>
+        </div>
+        <div class="evo-item">
+          <h3 class="evo-item-heading">Horizon &amp; Capital Scale</h3>
+          <p class="evo-item-text">Structure-first reasoning applies wherever a market mechanism does, across all liquidity regimes. However, scaling a structure-first model demands that we relinquish our operational preference for short, controlled exposure. Capital scale dictates execution horizons. While a small position can move instantly, an institutional position cannot. Deploying significant capital alters its own execution environment; therefore, the position must be systematically worked across a longer horizon to mitigate market impact.</p>
+        </div>
+        <div class="evo-item">
+          <h3 class="evo-item-heading">The Engineering Transition</h3>
+          <p class="evo-item-text">Adapting our core structure-first methodology to institutional horizons is an entirely distinct engineering feat. This requires designing an architecture that can sustain the integrity of our core thesis over extended timeframes, moving past the short-horizon wrappers that defined our laboratory phase. Because our core design principle is rooted in invariant microstructural mechanics rather than historically contingent patterns, the underlying logic remains entirely unchanged. We are setting aside an operational preference, not a structural principle.</p>
+        </div>
+        <div class="evo-item">
+          <h3 class="evo-item-heading">The Next Stage</h3>
+          <p class="evo-item-text">As we scale, our core structural mechanisms move forward into size, while the short-horizon exposure does not. Our scaling architecture exists explicitly to preserve our structure-first methodology within a larger, slower execution regime. We are not changing how we reason; we are engineering a fundamentally different operational framework to sustain that reasoning at institutional capacity.</p>
         </div>
       </div>
     </div>
@@ -1725,7 +1728,6 @@ footer {
 
   <div class="product-card">
     <div class="product-card-left">
-      <div class="product-numeral">I</div>
       <div class="product-card-left-inner">
         <div class="product-name-row">
           <h3 class="product-name">Kill&nbsp;Window</h3>
@@ -1760,7 +1762,6 @@ footer {
 
 <div class="product-card product-card-dark">
     <div class="product-card-left">
-      <div class="product-numeral">II</div>
       <div class="product-card-left-inner">
         <div class="product-name-row">
           <h3 class="product-name">Operation&nbsp;Echo</h3>
@@ -1792,6 +1793,7 @@ footer {
       </div>
     </div>
   </div>
+</section>
 
   <!-- CONTACT -->
   <section class="contact" id="contact">
@@ -1871,6 +1873,23 @@ function closeMenu() {
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.mobile-menu a').forEach(function(link) {
     link.addEventListener('click', closeMenu);
+  });
+
+  // Production Architecture accordion — single-open
+  var archItems = document.querySelectorAll('.arch-item');
+  archItems.forEach(function(item) {
+    var trigger = item.querySelector('.arch-trigger');
+    trigger.addEventListener('click', function() {
+      var isOpen = item.classList.contains('is-open');
+      archItems.forEach(function(other) {
+        other.classList.remove('is-open');
+        other.querySelector('.arch-trigger').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
   });
 
   // Mobile only: fade nav in when hero scrolls into view, hide when back on holding page
