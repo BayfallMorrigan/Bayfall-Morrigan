@@ -150,9 +150,9 @@ body {
   inset: 0;
   background: radial-gradient(
     ellipse at center,
-    rgba(8,8,8,0.55) 0%,
-    rgba(8,8,8,0.88) 65%,
-    rgba(8,8,8,0.99) 100%
+    rgba(8,8,8,0.055) 0%,
+    rgba(8,8,8,0.088) 65%,
+    rgba(8,8,8,0.099) 100%
   );
 }
 
@@ -651,7 +651,7 @@ body {
 
 /* ─── PRODUCTION ARCHITECTURE — spec ledger ─── */
 .arch {
-  background: var(--black);
+  background: #f3f2f0;
   padding: 88px 64px 96px;
 }
 
@@ -660,16 +660,16 @@ body {
   font-size: 11px;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
+  color: rgba(8,8,8,0.4);
 }
 
 .arch-accordion {
   margin-top: 44px;
-  border-top: 1px solid var(--rule-dk);
+  border-top: 1px solid var(--rule);
 }
 
 .arch-item {
-  border-bottom: 1px solid var(--rule-dk);
+  border-bottom: 1px solid var(--rule);
 }
 
 .arch-trigger {
@@ -694,11 +694,11 @@ body {
   font-family: var(--body);
   font-size: 11px;
   letter-spacing: 0.24em;
-  color: rgba(240,237,232,0.3);
+  color: rgba(8,8,8,0.3);
 }
 
 .arch-item.is-open .arch-index {
-  color: rgba(240,237,232,0.55);
+  color: rgba(8,8,8,0.55);
 }
 
 .arch-heading {
@@ -707,7 +707,7 @@ body {
   font-weight: 400;
   line-height: 1.1;
   letter-spacing: 0.01em;
-  color: var(--white);
+  color: var(--black);
   opacity: 0.7;
   transition: opacity 0.25s ease;
 }
@@ -728,7 +728,7 @@ body {
 .arch-mark::after {
   content: '';
   position: absolute;
-  background: rgba(240,237,232,0.55);
+  background: rgba(8,8,8,0.55);
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 .arch-mark::before {
@@ -763,7 +763,7 @@ body {
 .arch-text {
   font-family: var(--body);
   font-size: 17px;
-  color: var(--white);
+  color: var(--black);
   line-height: 1.85;
   opacity: 0.62;
   max-width: 760px;
