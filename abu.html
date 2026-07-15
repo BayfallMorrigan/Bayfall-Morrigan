@@ -1135,16 +1135,24 @@ function buildDashboard(d) {
     ? depositsToDate + yieldToDate
     : d.phase1.finalBalance;
 
-  // Phase 2 live yield
+  // Phase 2 lock yield — sum posted lock-yield transactions (date <= today), same as the ledger.
+  // Lock-yield entries are yield transactions dated on/after the lock start; phase-1 build yields fall before it.
   let p2YieldToDate = 0;
   let p2Balance = d.phase1.finalBalance;
   if (!inPhase1) {
-    const p2Start   = new Date(d.phase2.lockStartDate + 'T12:00:00');
-    const daysIn    = Math.max(0, daysBetween(p2Start, today));
-    const monthsIn  = daysIn / 30.44;
-    const monthRate = d.phase2.lockYieldRateMonthly / 100;
-    p2Balance = d.phase1.finalBalance * Math.pow(1 + monthRate, monthsIn);
-    p2YieldToDate = p2Balance - d.phase1.finalBalance;
+    const todayStr     = today.toISOString().split('T')[0];
+    const lockStartStr = d.phase2.lockStartDate;
+    const txns = d.transactions ? Object.values(d.transactions) : [];
+    const isYieldTxn = t =>
+      String(t.type).toLowerCase() === 'yield' || (t.description && /yield/i.test(t.description));
+    p2YieldToDate = txns
+      .filter(t => t.date >= lockStartStr && t.date <= todayStr && isYieldTxn(t))
+      .reduce((sum, t) => {
+        const amt = Math.abs(Number(t.amount) || 0);
+        return sum + (String(t.type).toLowerCase() === 'debit' ? -amt : amt);
+      }, 0);
+    p2YieldToDate = Math.round(p2YieldToDate * 100) / 100;
+    p2Balance = d.phase1.finalBalance + p2YieldToDate;
   }
 
   // Phase 2 progress
