@@ -260,7 +260,329 @@ header {
   z-index: 1;
 }
 
-/* ── STAT GRID ── */
+/* ════════════════════════════════════════════════════════
+   CLIENT VIEW — redesigned, mobile-first presentation layer
+   (math untouched; this only restyles what clients see)
+   ════════════════════════════════════════════════════════ */
+
+/* Hero: the one number that matters */
+.cv-hero {
+  padding: 32px 20px 28px;
+  border-bottom: 1px solid var(--rule);
+}
+.cv-hero-label {
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 10px;
+}
+.cv-hero-value {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(44px, 13vw, 76px);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  color: var(--white);
+}
+.cv-hero-sub {
+  font-family: var(--body);
+  font-size: 14px;
+  color: var(--mid);
+  font-style: italic;
+  margin-top: 12px;
+}
+.cv-hero-sub strong { color: var(--gold-lt); font-style: normal; font-weight: 400; }
+
+/* Progress timeline — "how far along am I" */
+.cv-timeline {
+  padding: 22px 20px 24px;
+  border-bottom: 1px solid var(--rule);
+}
+.cv-timeline-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+.cv-timeline-title {
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
+.cv-timeline-remain {
+  font-family: var(--display);
+  font-size: 17px;
+  color: var(--gold-lt);
+  letter-spacing: 0.02em;
+}
+.cv-track-wrap { position: relative; padding: 14px 0 8px; }
+.cv-track {
+  position: relative;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--rule2);
+}
+.cv-track-fill {
+  position: absolute;
+  top: 0; left: 0; height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold-lt) 100%);
+  width: 0;
+  transition: width 1.1s cubic-bezier(.22,.61,.36,1);
+}
+.cv-track.phase2 .cv-track-fill {
+  background: linear-gradient(90deg, #6a4a7a 0%, #9a7aaa 100%);
+}
+.cv-marker {
+  position: absolute;
+  top: 50%;
+  width: 15px; height: 15px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 1px var(--gold-lt);
+  transform: translate(-50%, -50%);
+  transition: left 1.1s cubic-bezier(.22,.61,.36,1);
+  z-index: 2;
+}
+.cv-track.phase2 .cv-marker { box-shadow: 0 0 0 1px #9a7aaa; }
+/* Flag sits BELOW the track so it never collides with the header's remain label.
+   Clamped horizontally via max-width + clamp on the left inline style is handled in JS,
+   but the base rule keeps it readable and edge-safe. */
+.cv-marker-flag {
+  position: absolute;
+  top: 22px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: var(--body);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--white);
+  transition: left 1.1s cubic-bezier(.22,.61,.36,1);
+  z-index: 3;
+  pointer-events: none;
+}
+.cv-endpoints {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+/* Mobile: stack the header so the remain label owns its own row (no collision) */
+@media (max-width: 719px) {
+  .cv-timeline-head { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 4px; }
+  .cv-timeline-remain { font-size: 15px; }
+}
+.cv-endpoint-label {
+  font-family: var(--body);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 4px;
+}
+.cv-endpoint-date {
+  font-family: var(--display);
+  font-size: 15px;
+  color: var(--off);
+  letter-spacing: 0.02em;
+}
+.cv-endpoint.right { text-align: right; }
+.cv-endpoint.right .cv-endpoint-date { color: var(--gold-lt); }
+
+/* Three headline cards */
+.cv-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-bottom: 1px solid var(--rule);
+}
+.cv-card {
+  padding: 24px 20px;
+  border-bottom: 1px solid var(--rule);
+  text-align: center;
+}
+.cv-card:last-child { border-bottom: none; }
+.cv-card-label {
+  font-family: var(--body);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 10px;
+}
+.cv-card-value {
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  line-height: 1;
+}
+.cv-card-value.gold  { color: var(--gold-lt); }
+.cv-card-value.green { color: #6aaa7a; }
+.cv-card-sub {
+  font-family: var(--body);
+  font-size: 12px;
+  color: var(--mid);
+  font-style: italic;
+  margin-top: 8px;
+}
+
+/* Single growth chart */
+.cv-chart-section { padding: 32px 20px 36px; border-bottom: 1px solid var(--rule); }
+.cv-chart-title {
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 6px;
+}
+.cv-chart-sub {
+  font-family: var(--body);
+  font-size: 13px;
+  color: var(--dim);
+  font-style: italic;
+  margin-bottom: 24px;
+}
+.cv-chart-wrap { position: relative; height: 240px; }
+
+/* Deposits vs earnings split */
+.cv-split { padding: 30px 20px 36px; border-bottom: 1px solid var(--rule); }
+.cv-split-title {
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 20px;
+}
+.cv-split-bar {
+  display: flex;
+  height: 44px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.cv-split-seg { height: 100%; transition: width 1s ease; min-width: 2px; }
+.cv-split-seg.dep { background: linear-gradient(180deg, #9a7632, var(--gold)); }
+.cv-split-seg.earn { background: linear-gradient(180deg, #5a8a6a, var(--green)); }
+.cv-split-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 18px;
+}
+.cv-split-key { display: flex; align-items: flex-start; gap: 9px; }
+.cv-split-dot {
+  width: 10px; height: 10px; border-radius: 2px; margin-top: 5px; flex-shrink: 0;
+}
+.cv-split-dot.dep  { background: var(--gold); }
+.cv-split-dot.earn { background: var(--green); }
+.cv-split-ktext { line-height: 1.3; }
+.cv-split-kname {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
+.cv-split-kval {
+  font-family: var(--display);
+  font-size: 19px;
+  color: var(--white);
+}
+.cv-split-kval.earn { color: #6aaa7a; }
+
+/* Collapsible transactions */
+.cv-txn-section { padding: 20px 20px 40px; }
+.cv-txn-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: 1px solid var(--rule2);
+  border-radius: 3px;
+  padding: 16px 20px;
+  cursor: pointer;
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--off);
+  transition: border-color 0.2s, color 0.2s;
+}
+.cv-txn-toggle:hover { border-color: var(--gold); color: var(--white); }
+.cv-txn-chevron { transition: transform 0.3s ease; font-size: 12px; color: var(--mid); }
+.cv-txn-toggle.open .cv-txn-chevron { transform: rotate(180deg); }
+.cv-txn-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.cv-txn-body.open { max-height: 4000px; }
+.cv-txn-inner { padding-top: 14px; }
+
+/* Inactive / paused banner (kept, restyled to match) */
+.cv-paused {
+  padding: 22px 20px;
+  background: rgba(138,90,30,0.08);
+  border-bottom: 1px solid #3a2810;
+}
+.cv-paused-title {
+  font-family: var(--display);
+  font-size: 17px;
+  color: #c8922a;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+.cv-paused-line {
+  font-family: var(--body);
+  font-size: 13px;
+  color: var(--mid);
+  font-style: italic;
+}
+.cv-paused-amount {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(138,90,30,0.2);
+}
+.cv-paused-amount-val {
+  font-family: var(--display);
+  font-size: 26px;
+  color: #c8922a;
+}
+.cv-paused-amount-label {
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-top: 4px;
+}
+
+/* ── DESKTOP ENHANCEMENT (client view) ── */
+@media (min-width: 720px) {
+  .cv-hero { padding: 52px 64px 40px; }
+  .cv-timeline { padding: 26px 64px 28px; }
+  .cv-cards { grid-template-columns: repeat(3, 1fr); }
+  .cv-card { border-bottom: none; border-right: 1px solid var(--rule); }
+  .cv-card:last-child { border-right: none; }
+  .cv-chart-section { padding: 48px 64px; }
+  .cv-split { padding: 40px 64px 48px; }
+  .cv-txn-section { padding: 32px 64px 56px; }
+  .cv-paused { padding: 28px 64px; display: flex; justify-content: space-between; align-items: center; }
+  .cv-paused-amount { margin-top: 0; padding-top: 0; border-top: none; text-align: right; }
+  .cv-chart-wrap { height: 300px; }
+}
+
+/* ── STAT GRID (legacy — retained, unused by client view) ── */
 .stats-section {
   padding: 40px 64px;
   border-bottom: 1px solid var(--rule);
@@ -838,9 +1160,9 @@ function buildInactiveDashboard(d, today) {
   page.innerHTML = `
     <div class="acct-header">
       <div>
-        <div class="acct-eyebrow">Account Build-Up Program</div>
+        <div class="acct-eyebrow">Your Account</div>
         <div class="acct-name">${d.clientName.split(' ')[0]} <em>${d.clientName.split(' ').slice(1).join(' ')}</em></div>
-        <div class="acct-meta">Program started ${fmtDate(d.phase1.startDate)} &nbsp;·&nbsp; Two-Phase Contract</div>
+        <div class="acct-meta">Started ${fmtDate(d.phase1.startDate)} &nbsp;·&nbsp; Paused</div>
       </div>
       <div class="acct-status">
         <div class="status-badge inactive">Inactive</div>
@@ -848,79 +1170,80 @@ function buildInactiveDashboard(d, today) {
       </div>
     </div>
 
-    <div class="inactive-banner">
+    <div class="cv-hero">
+      <div class="cv-hero-label">Frozen Balance</div>
+      <div class="cv-hero-value">${fmt(frozenBalance)}</div>
+      <div class="cv-hero-sub">as of ${fmtDate(d.lastDepositDate || d.frozenDate)}</div>
+    </div>
+
+    <div class="cv-paused">
       <div>
-        <div class="inactive-title">Account Inactive — Deposits Paused</div>
-        <div class="inactive-sub">Last deposit received ${fmtDate(d.lastDepositDate)}</div>
-        <div class="inactive-sub">Account frozen ${fmtDate(d.frozenDate)}</div>
-        <div class="inactive-sub">${weeksMissed} weekly deposits missed</div>
+        <div class="cv-paused-title">Deposits Paused</div>
+        <div class="cv-paused-line">Last deposit received ${fmtDate(d.lastDepositDate)}</div>
+        <div class="cv-paused-line">${weeksMissed} weekly deposits missed since</div>
       </div>
-      <div class="inactive-amount">
-        <div class="inactive-amount-val">${fmt(amountBehind)}</div>
-        <div class="inactive-amount-label">Outstanding at ${fmt(weeklyDeposit)} / week</div>
-      </div>
-    </div>
-
-    <div class="stats-section">
-      <div class="stats-section-label">Account Summary — Frozen State</div>
-      <div class="stat-grid frozen-stat-grid">
-        <div class="stat-cell">
-          <div class="stat-label">Total Deposited</div>
-          <div class="stat-value">${fmt(totalDeposited)}</div>
-          <div class="stat-sub">actual contributions</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Yield Earned</div>
-          <div class="stat-value green">${fmt(frozenYield)}</div>
-          <div class="stat-sub">while active</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Frozen Balance</div>
-          <div class="stat-value">${fmt(frozenBalance)}</div>
-          <div class="stat-sub">as of ${fmtDate(d.lastDepositDate || d.frozenDate)}</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Target Balance</div>
-          <div class="stat-value dim">${fmt(d.phase1.targetBalance)}</div>
-          <div class="stat-sub">${fmt(d.phase1.targetBalance - frozenBalance)} remaining to target</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Weekly Deposit</div>
-          <div class="stat-value gold">${fmt(weeklyDeposit)}</div>
-          <div class="stat-sub">scheduled contribution</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Principal Return</div>
-          <div class="stat-value gold">${frozenReturnPct}%</div>
-          <div class="stat-sub">yield vs. contributions</div>
-        </div>
+      <div class="cv-paused-amount">
+        <div class="cv-paused-amount-val">${fmt(amountBehind)}</div>
+        <div class="cv-paused-amount-label">Outstanding at ${fmt(weeklyDeposit)} / week</div>
       </div>
     </div>
 
-    <div class="charts-section">
-      <div class="chart-panel">
-        <div class="chart-panel-label">Build-Up Trajectory — Frozen</div>
-        <div class="chart-panel-sub">Deposits and yield through freeze, plotted against target</div>
-        <div class="chart-wrap"><canvas id="frozenChart"></canvas></div>
-        <div class="legend" id="frozenLegend"></div>
+    <div class="cv-cards">
+      <div class="cv-card">
+        <div class="cv-card-label">Deposited</div>
+        <div class="cv-card-value">${fmt(totalDeposited)}</div>
+        <div class="cv-card-sub">while active</div>
       </div>
-      <div class="chart-panel chart-panel-donut" style="border-left:1px solid var(--rule2)">
-        <div class="chart-panel-label">Frozen Capital Breakdown</div>
-        <div class="chart-panel-sub">Origin of the balance as of freeze</div>
-        <div class="half-donut-wrap">
-          <canvas id="frozenDonutChart"></canvas>
-          <div class="donut-center">
-            <div class="donut-pct" id="frozenDonutVal">${frozenReturnPct}%</div>
-            <div class="donut-label">Frozen Return</div>
+      <div class="cv-card">
+        <div class="cv-card-label">Frozen Balance</div>
+        <div class="cv-card-value">${fmt(frozenBalance)}</div>
+        <div class="cv-card-sub">deposits + ${fmt(frozenYield)} earned</div>
+      </div>
+      <div class="cv-card">
+        <div class="cv-card-label">Target Balance</div>
+        <div class="cv-card-value gold">${fmt(d.phase1.targetBalance)}</div>
+        <div class="cv-card-sub">${fmt(Math.max(0, d.phase1.targetBalance - frozenBalance))} remaining</div>
+      </div>
+    </div>
+
+    <div class="cv-chart-section">
+      <div class="cv-chart-title">Your Balance — Through Freeze</div>
+      <div class="cv-chart-sub">Deposits and earnings up to the point the account was paused</div>
+      <div class="cv-chart-wrap"><canvas id="frozenChart"></canvas></div>
+    </div>
+
+    <div class="cv-split">
+      <div class="cv-split-title">What Makes Up Your Balance</div>
+      <div class="cv-split-bar">
+        <div class="cv-split-seg dep"  id="cvSegDep"></div>
+        <div class="cv-split-seg earn" id="cvSegEarn"></div>
+      </div>
+      <div class="cv-split-legend">
+        <div class="cv-split-key">
+          <div class="cv-split-dot dep"></div>
+          <div class="cv-split-ktext">
+            <div class="cv-split-kname">Your Deposits</div>
+            <div class="cv-split-kval">${fmt(totalDeposited)}</div>
           </div>
         </div>
-        <div class="legend" id="frozenDonutLegend"></div>
+        <div class="cv-split-key">
+          <div class="cv-split-dot earn"></div>
+          <div class="cv-split-ktext">
+            <div class="cv-split-kname">Earnings (${frozenReturnPct}%)</div>
+            <div class="cv-split-kval earn">${fmt(frozenYield)}</div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="txn-section">
-      <div class="txn-section-label">Transaction History</div>
-      <div id="txnList"></div>
+    <div class="cv-txn-section">
+      <button class="cv-txn-toggle" id="cvTxnToggle">
+        <span>View Transaction History</span>
+        <span class="cv-txn-chevron">▾</span>
+      </button>
+      <div class="cv-txn-body" id="cvTxnBody">
+        <div class="cv-txn-inner"><div id="txnList"></div></div>
+      </div>
     </div>
 
     <footer>
@@ -932,6 +1255,19 @@ function buildInactiveDashboard(d, today) {
 
   document.getElementById('footerSignOut').addEventListener('click', () => {
     auth.signOut().then(() => window.location.href = 'login.html');
+  });
+
+  requestAnimationFrame(() => {
+    const splitTotal = totalDeposited + frozenYield || 1;
+    document.getElementById('cvSegDep').style.width  = (totalDeposited / splitTotal * 100) + '%';
+    document.getElementById('cvSegEarn').style.width = (frozenYield / splitTotal * 100) + '%';
+  });
+
+  const txnToggle = document.getElementById('cvTxnToggle');
+  const txnBody   = document.getElementById('cvTxnBody');
+  txnToggle.addEventListener('click', () => {
+    txnToggle.classList.toggle('open');
+    txnBody.classList.toggle('open');
   });
 
   renderTransactions(d.transactions);
@@ -1017,8 +1353,17 @@ function renderInactiveCharts(d, frozenDate, frozenBalance, frozenYield, totalDe
     data: {
       labels: wcd.labels,
       datasets: [
-        { label: 'Deposited', data: depSeries, fill: true, backgroundColor: 'rgba(200,146,42,0.30)', borderColor: 'rgba(200,146,42,0.65)', borderWidth: 1, pointRadius: 0, tension: 0, stack: 'bal' },
-        { label: 'Yield', data: yieldSeries, fill: '-1', backgroundColor: 'rgba(74,122,90,0.28)', borderColor: 'rgba(74,122,90,0.6)', borderWidth: 1.5, pointRadius, pointStyle, pointBackgroundColor: '#c8922a', pointBorderColor: '#c8922a', tension: 0.3, stack: 'bal' },
+        {
+          label: 'Balance',
+          data: wcd.labels.map((_, i) => (depSeries[i] || 0) + (yieldSeries[i] || 0)),
+          fill: true,
+          backgroundColor: 'rgba(184,146,42,0.10)',
+          borderColor: '#b8922a',
+          borderWidth: 2,
+          pointRadius, pointStyle,
+          pointBackgroundColor: '#f0ede8', pointBorderColor: '#b8922a', pointBorderWidth: 2,
+          tension: 0.3
+        },
         { label: 'Target', data: targetSeries, fill: false, borderColor: 'rgba(255,255,255,0.12)', borderWidth: 1, borderDash: [5,4], pointRadius: 0, tension: 0 }
       ]
     },
@@ -1029,45 +1374,15 @@ function renderInactiveCharts(d, frozenDate, frozenBalance, frozenYield, totalDe
         legend: { display: false },
         tooltip: { ...TT, callbacks: {
           title: ctx => ctx[0].dataIndex === freezeIdx ? `${ctx[0].label} — Frozen` : ctx[0].label,
-          label: ctx => ctx.dataset.label === 'Target' ? null : ` ${ctx.dataset.label}: $${(ctx.raw||0).toLocaleString()}`
+          label: ctx => ctx.dataset.label === 'Target' ? null : ` Balance: $${(ctx.raw||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`
         } }
       },
       scales: {
-        x: { stacked: true, grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#5a5650', font: { family:"'EB Garamond',serif", size:10 }, maxTicksLimit: 8 }, border: { color: '#1e1c18' } },
-        y: { stacked: true, grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#5a5650', font: { family:"'EB Garamond',serif", size:10 }, callback: v => '$'+v.toLocaleString() }, border: { color: '#1e1c18' } }
+        x: { grid: { display: false }, ticks: { color: '#5a5650', font: { family:"'EB Garamond',serif", size:10 }, maxTicksLimit: 7, maxRotation: 0 }, border: { color: '#1e1c18' } },
+        y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#5a5650', font: { family:"'EB Garamond',serif", size:10 }, callback: v => '$'+v.toLocaleString() }, border: { color: '#1e1c18' } }
       }
     }
   });
-
-  document.getElementById('frozenLegend').innerHTML = `
-    <div class="legend-item"><div class="legend-dot" style="background:#c8922a"></div>Deposited</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#4a7a5a"></div>Yield Earned</div>
-    <div class="legend-item"><div class="legend-dot" style="background:rgba(255,255,255,0.12);border:1px dashed rgba(255,255,255,0.2)"></div>Target</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#c8922a;box-shadow:0 0 0 2px rgba(200,146,42,0.3)"></div>Freeze Point</div>
-  `;
-
-  const donutCtx = document.getElementById('frozenDonutChart').getContext('2d');
-  new Chart(donutCtx, {
-    type: 'doughnut',
-    data: {
-      datasets: [{
-        data: [totalDeposited, frozenYield],
-        backgroundColor: ['rgba(200,146,42,0.75)', 'rgba(74,122,90,0.75)'],
-        borderColor: ['#0d0c0a','#0d0c0a'],
-        borderWidth: 2,
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      circumference: 180, rotation: -90, cutout: '72%',
-      plugins: { legend: { display: false }, tooltip: { ...TT, callbacks: { label: ctx => ' $'+ctx.parsed.toLocaleString() } } }
-    }
-  });
-
-  document.getElementById('frozenDonutLegend').innerHTML = `
-    <div class="legend-item"><div class="legend-dot" style="background:#c8922a"></div>Deposited</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#4a7a5a"></div>Yield</div>
-  `;
 }
 
 function buildDashboard(d) {
@@ -1178,14 +1493,37 @@ function buildDashboard(d) {
   const p1TabClass = inPhase1 ? 'phase-tab active' : 'phase-tab complete';
   const p2TabClass = complete ? 'phase-tab complete' : inPhase2 ? 'phase-tab phase2-active' : 'phase-tab';
 
+  // ══ Display-scoped values (no new math — derived from figures above) ══
+  // Timeline runs across the WHOLE program: Phase 1 start → Phase 2 maturity.
+  const progStart = p1Start;
+  const progEnd   = p2MatDate;
+  const progTotal = Math.max(1, daysBetween(progStart, progEnd));
+  const progDone  = Math.min(progTotal, Math.max(0, daysBetween(progStart, today)));
+  const overallPct = complete ? 100 : Math.min(100, progDone / progTotal * 100);
+  const daysLeftOverall = Math.max(0, daysBetween(today, progEnd));
+  const monthsLeftOverall = (daysLeftOverall / 30.44).toFixed(1);
+
+  // Three headline cards + the deposits-vs-earnings split.
+  const depForSplit  = inPhase1 ? depositsToDate : d.phase1.totalDeposited;
+  const earnForSplit = inPhase1 ? yieldToDate : (d.phase1.buildYieldEarned + p2YieldToDate);
+  const balNow       = inPhase1 ? currentBalance : p2Balance;
+  const projectedPayout = d.phase2.lockFinalBalance;
+  const returnNow    = depForSplit > 0 ? (earnForSplit / depForSplit * 100) : 0;
+
+  const heroSub = complete
+    ? `Your contract has matured. Final payout <strong>${fmt(projectedPayout)}</strong>.`
+    : `On track for <strong>${fmt(projectedPayout)}</strong> at maturity`;
+
+  const phaseWord = complete ? 'Complete' : inPhase1 ? 'Building' : 'Locked & growing';
+
   // ── Build HTML ──
   const page = document.getElementById('mainPage');
   page.innerHTML = `
     <div class="acct-header">
       <div>
-        <div class="acct-eyebrow">Account Build-Up Program</div>
+        <div class="acct-eyebrow">Your Account</div>
         <div class="acct-name">${d.clientName.split(' ')[0]} <em>${d.clientName.split(' ').slice(1).join(' ')}</em></div>
-        <div class="acct-meta">Program started ${fmtDate(d.phase1.startDate)} &nbsp;·&nbsp; Two-Phase Contract</div>
+        <div class="acct-meta">Started ${fmtDate(d.phase1.startDate)} &nbsp;·&nbsp; ${phaseWord}</div>
       </div>
       <div class="acct-status">
         <div class="${statusClass}">${statusText}</div>
@@ -1193,40 +1531,92 @@ function buildDashboard(d) {
       </div>
     </div>
 
-    <div class="phase-banner">
-      <div class="${p1TabClass}"><span class="phase-main">Phase I</span><span class="phase-sep"> &nbsp;·&nbsp; </span><span class="phase-sub">Build-Up${!inPhase1 ? ' ✓' : ''}</span></div>
-      <div class="${p2TabClass}"><span class="phase-main">Phase II</span><span class="phase-sep"> &nbsp;·&nbsp; </span><span class="phase-sub">Lock Contract${complete ? ' ✓' : ''}</span></div>
+    <div class="cv-hero">
+      <div class="cv-hero-label">Current Balance</div>
+      <div class="cv-hero-value">${fmt(balNow)}</div>
+      <div class="cv-hero-sub">${heroSub}</div>
     </div>
 
-    ${inPhase1 ? buildPhase1Stats(d, weeksElapsed, depositsToDate, yieldToDate, currentBalance, p1Progress, daysToP1) : ''}
-    ${!inPhase1 ? buildPhase2Stats(d, p2Balance, p2YieldToDate, p2Progress, daysToP2) : ''}
-
-    <div class="charts-section">
-      <div class="chart-panel">
-        <div class="chart-panel-label">${inPhase1 ? 'Balance vs Target — Weekly' : 'Capital Origin — Lock Period'}</div>
-        <div class="chart-panel-sub">${inPhase1 ? 'Weekly deposits building toward target balance' : 'Deposits, build yield, and lock yield growing each month'}</div>
-        <div class="chart-wrap"><canvas id="mainChart"></canvas></div>
-        <div class="legend" id="mainLegend"></div>
+    <div class="cv-timeline">
+      <div class="cv-timeline-head">
+        <div class="cv-timeline-title">Contract Progress</div>
+        <div class="cv-timeline-remain">${complete ? 'Matured' : monthsLeftOverall + ' months to go'}</div>
       </div>
-      <div class="chart-panel chart-panel-donut" style="border-left:1px solid var(--rule2)">
-        <div class="chart-panel-label">${inPhase1 ? 'Build Phase Composition' : 'Full Capital Breakdown'}</div>
-        <div class="chart-panel-sub">${inPhase1 ? 'Deposits vs yield earned so far' : 'Complete origin of your current balance'}</div>
-        <div class="half-donut-wrap">
-          <canvas id="donutChart"></canvas>
-          <div class="donut-center">
-            <div class="donut-pct" id="donutVal">${currentReturn.toFixed(1)}%</div>
-            <div class="donut-label">${inPhase1 ? 'Build Return' : 'Total Return'}</div>
+      <div class="cv-track-wrap">
+        <div class="cv-track ${inPhase1 ? '' : 'phase2'}">
+          <div class="cv-track-fill" id="cvFill"></div>
+          <div class="cv-marker" id="cvMarker"></div>
+        </div>
+        <div class="cv-marker-flag" id="cvFlag">${overallPct.toFixed(0)}% · Today</div>
+      </div>
+      <div class="cv-endpoints">
+        <div class="cv-endpoint">
+          <div class="cv-endpoint-label">Start</div>
+          <div class="cv-endpoint-date">${fmtDate(d.phase1.startDate)}</div>
+        </div>
+        <div class="cv-endpoint right">
+          <div class="cv-endpoint-label">Maturity</div>
+          <div class="cv-endpoint-date">${fmtDate(d.phase2.lockMaturityDate)}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-cards">
+      <div class="cv-card">
+        <div class="cv-card-label">Deposited</div>
+        <div class="cv-card-value">${fmt(depForSplit)}</div>
+        <div class="cv-card-sub">${inPhase1 ? fmt(d.phase1.weeklyDeposit) + ' / week' : 'contributions complete'}</div>
+      </div>
+      <div class="cv-card">
+        <div class="cv-card-label">Current Balance</div>
+        <div class="cv-card-value">${fmt(balNow)}</div>
+        <div class="cv-card-sub">deposits + ${fmt(earnForSplit)} earned</div>
+      </div>
+      <div class="cv-card">
+        <div class="cv-card-label">Projected Payout</div>
+        <div class="cv-card-value green">${fmt(projectedPayout)}</div>
+        <div class="cv-card-sub">at ${fmtDate(d.phase2.lockMaturityDate)}</div>
+      </div>
+    </div>
+
+    <div class="cv-chart-section">
+      <div class="cv-chart-title">Your Balance Over Time</div>
+      <div class="cv-chart-sub">Where you started, where you are now, and where you're headed</div>
+      <div class="cv-chart-wrap"><canvas id="growthChart"></canvas></div>
+    </div>
+
+    <div class="cv-split">
+      <div class="cv-split-title">What Makes Up Your Balance</div>
+      <div class="cv-split-bar">
+        <div class="cv-split-seg dep"  id="cvSegDep"></div>
+        <div class="cv-split-seg earn" id="cvSegEarn"></div>
+      </div>
+      <div class="cv-split-legend">
+        <div class="cv-split-key">
+          <div class="cv-split-dot dep"></div>
+          <div class="cv-split-ktext">
+            <div class="cv-split-kname">Your Deposits</div>
+            <div class="cv-split-kval">${fmt(depForSplit)}</div>
           </div>
         </div>
-        <div class="legend" id="donutLegend"></div>
+        <div class="cv-split-key">
+          <div class="cv-split-dot earn"></div>
+          <div class="cv-split-ktext">
+            <div class="cv-split-kname">Earnings (${returnNow.toFixed(1)}%)</div>
+            <div class="cv-split-kval earn">${fmt(earnForSplit)}</div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div id="maturitySection"></div>
-
-    <div class="txn-section">
-      <div class="txn-section-label">Transaction History</div>
-      <div id="txnList"></div>
+    <div class="cv-txn-section">
+      <button class="cv-txn-toggle" id="cvTxnToggle">
+        <span>View Transaction History</span>
+        <span class="cv-txn-chevron">▾</span>
+      </button>
+      <div class="cv-txn-body" id="cvTxnBody">
+        <div class="cv-txn-inner"><div id="txnList"></div></div>
+      </div>
     </div>
 
     <footer>
@@ -1240,418 +1630,106 @@ function buildDashboard(d) {
     auth.signOut().then(() => window.location.href = 'login.html');
   });
 
-  // ── Render charts ──
-  renderCharts(d, inPhase1, inPhase2, depositsToDate, yieldToDate, p2YieldToDate, weeksElapsed, dynamicDep);
+  // ── Animate timeline + split (after paint) ──
+  requestAnimationFrame(() => {
+    document.getElementById('cvFill').style.width   = overallPct + '%';
+    document.getElementById('cvMarker').style.left  = overallPct + '%';
+    // Flag is center-anchored; clamp so its text stays inside the track on any width.
+    const flagPct = Math.min(90, Math.max(10, overallPct));
+    document.getElementById('cvFlag').style.left    = flagPct + '%';
+    const splitTotal = depForSplit + earnForSplit || 1;
+    document.getElementById('cvSegDep').style.width  = (depForSplit / splitTotal * 100) + '%';
+    document.getElementById('cvSegEarn').style.width = (earnForSplit / splitTotal * 100) + '%';
+  });
 
-  // ── Render maturity section ──
-  renderMaturitySection(d, dynamicDep);
+  // ── Collapsible transactions ──
+  const txnToggle = document.getElementById('cvTxnToggle');
+  const txnBody   = document.getElementById('cvTxnBody');
+  txnToggle.addEventListener('click', () => {
+    txnToggle.classList.toggle('open');
+    txnBody.classList.toggle('open');
+  });
+
+  // ── Render single growth chart ──
+  renderGrowthChart(d, inPhase1, dynamicDep, weeksElapsed, today, progEnd);
 
   // ── Render transactions ──
   renderTransactions(d.transactions);
 }
 
-// ── Phase 1 stats block ──────────────────────────────────
-function buildPhase1Stats(d, weeksElapsed, depositsToDate, yieldToDate, currentBalance, p1Progress, daysToP1) {
-  const monthsLeft = (daysToP1 / 30.44).toFixed(1);
-  return `
-    <div class="stats-section">
-      <div class="stats-section-label">Phase I — Build-Up Summary</div>
-      <div class="stat-grid cols-6">
-        <div class="stat-cell">
-          <div class="stat-label">Target Balance</div>
-          <div class="stat-value">${fmt(d.phase1.targetBalance)}</div>
-          <div class="stat-sub">program target</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Deposited to Date</div>
-          <div class="stat-value gold">${fmt(depositsToDate)}</div>
-          <div class="stat-sub">${fmt(d.phase1.weeklyDeposit)} / week</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Yield Earned</div>
-          <div class="stat-value green">${fmt(yieldToDate)}</div>
-          <div class="stat-sub">${d.phase1.buildYieldRateMonthly}% monthly rate</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Current Balance</div>
-          <div class="stat-value">${fmt(currentBalance)}</div>
-          <div class="stat-sub">deposits + yield</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Build Progress</div>
-          <div class="progress-pct">${p1Progress.toFixed(1)}%</div>
-          <div class="progress-track"><div class="progress-fill" style="width:${p1Progress}%"></div></div>
-          <div class="stat-sub">${weeksElapsed} of ${d.phase1.weeksToTarget} weeks</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Phase I Matures</div>
-          <div class="stat-value gold">${fmtDate(d.phase1.phase1MaturityDate)}</div>
-          <div class="stat-sub">${monthsLeft} months remaining</div>
-        </div>
-      </div>
-    </div>
-  `;
-}
+// ── Single growth curve: full contract, one line, "you are here" + projection ──
+function renderGrowthChart(d, inPhase1, dynamicDep, weeksElapsed, today, progEnd) {
+  const ctx = document.getElementById('growthChart').getContext('2d');
 
-// ── Phase 2 stats block ──────────────────────────────────
-function buildPhase2Stats(d, p2Balance, p2YieldToDate, p2Progress, daysToP2) {
-  const monthsLeft = (daysToP2 / 30.44).toFixed(1);
-  return `
-    <div class="stats-section">
-      <div class="stats-section-label">Phase I — Complete</div>
-      <div class="stat-grid cols-5">
-        <div class="stat-cell">
-          <div class="stat-label">Total Deposited</div>
-          <div class="stat-value dim">${fmt(d.phase1.totalDeposited)}</div>
-          <div class="stat-sub">build phase complete</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Build Yield Earned</div>
-          <div class="stat-value green">${fmt(d.phase1.buildYieldEarned)}</div>
-          <div class="stat-sub">during accumulation</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Lock Entry Balance</div>
-          <div class="stat-value">${fmt(d.phase1.finalBalance)}</div>
-          <div class="stat-sub">phase I final balance</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Phase I Completed</div>
-          <div class="stat-value dim">${fmtDate(d.phase1.phase1MaturityDate)}</div>
-          <div class="stat-sub">✓ complete</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Build Return</div>
-          <div class="stat-value green">${(d.phase1.buildYieldEarned / d.phase1.totalDeposited * 100).toFixed(2)}%</div>
-          <div class="stat-sub">on deposits</div>
-        </div>
-      </div>
-    </div>
-    <div class="stats-section" style="border-bottom:1px solid var(--rule)">
-      <div class="stats-section-label">Phase II — Lock Contract Active</div>
-      <div class="stat-grid cols-6">
-        <div class="stat-cell">
-          <div class="stat-label">Current Balance</div>
-          <div class="stat-value">${fmt(p2Balance)}</div>
-          <div class="stat-sub">live estimate</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Lock Yield Earned</div>
-          <div class="stat-value violet">${fmt(p2YieldToDate)}</div>
-          <div class="stat-sub">since lock started</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Monthly Rate</div>
-          <div class="stat-value">${d.phase2.lockYieldRateMonthly}%</div>
-          <div class="stat-sub">compounded monthly</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Lock Progress</div>
-          <div class="progress-pct">${p2Progress.toFixed(1)}%</div>
-          <div class="progress-track"><div class="progress-fill" style="width:${p2Progress}%;background:#7a5a8a"></div></div>
-          <div class="stat-sub">${(daysToP2 / 30.44).toFixed(1)} months remaining</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Maturity Date</div>
-          <div class="stat-value gold">${fmtDate(d.phase2.lockMaturityDate)}</div>
-          <div class="stat-sub">${monthsLeft} months away</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-label">Projected Payout</div>
-          <div class="stat-value green">${fmt(d.phase2.lockFinalBalance)}</div>
-          <div class="stat-sub">at maturity</div>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-// ── Charts ───────────────────────────────────────────────
-function renderCharts(d, inPhase1, inPhase2, depositsToDate, yieldToDate, p2YieldToDate, weeksElapsed, dynamicDep) {
-  const mainCtx  = document.getElementById('mainChart').getContext('2d');
-  const donutCtx = document.getElementById('donutChart').getContext('2d');
-
-  if (inPhase1) {
-    // Stacked area: deposited + yield, up to current week
-    const labels = d.weeklyChartData.labels.slice(0, weeksElapsed + 1);
-    const dep    = dynamicDep.slice(0, weeksElapsed + 1);
-    const yld    = d.weeklyChartData.yieldLayer.slice(0, weeksElapsed + 1);
-    const target = labels.map(() => d.phase1.targetBalance);
-
-    new Chart(mainCtx, {
-      type: 'line',
-      data: {
-        labels,
-        datasets: [
-          { label: 'Deposited', data: dep, fill: true, backgroundColor: 'rgba(138,106,42,0.35)', borderColor: 'rgba(138,106,42,0.6)', borderWidth: 1, pointRadius: 0, tension: 0, stack: 'bal' },
-          { label: 'Yield', data: yld, fill: '-1', backgroundColor: 'rgba(74,122,90,0.35)', borderColor: 'rgba(74,122,90,0.7)', borderWidth: 1.5, pointRadius: 0, tension: 0.3, stack: 'bal' },
-          { label: 'Target', data: target, fill: false, borderColor: 'rgba(255,255,255,0.12)', borderWidth: 1, borderDash: [5,4], pointRadius: 0, tension: 0 }
-        ]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        interaction: { mode: 'index', intersect: false },
-        plugins: {
-          legend: { display: false },
-          tooltip: { ...TT, callbacks: { label: ctx => ctx.dataset.label === 'Target' ? null : ` ${ctx.dataset.label}: $${(ctx.raw||0).toLocaleString()}` } }
-        },
-        scales: {
-          x: { stacked: true, grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#5a5650', font: { family:"'EB Garamond',serif", size:10 }, maxTicksLimit: 8 }, border: { color: '#1e1c18' } },
-          y: { stacked: true, grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#5a5650', font: { family:"'EB Garamond',serif", size:10 }, callback: v => '$'+v.toLocaleString() }, border: { color: '#1e1c18' } }
-        }
-      }
-    });
-
-    document.getElementById('mainLegend').innerHTML = `
-      <div class="legend-item"><div class="legend-dot" style="background:#8a6a2a"></div>Deposited</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#4a7a5a"></div>Yield Earned</div>
-      <div class="legend-item"><div class="legend-dot" style="background:rgba(255,255,255,0.12);border:1px dashed rgba(255,255,255,0.2)"></div>Target</div>
-    `;
-
-    // Donut: deposited vs yield
-    new Chart(donutCtx, {
-      type: 'doughnut',
-      data: {
-        datasets: [{
-          data: [depositsToDate, yieldToDate],
-          backgroundColor: ['rgba(138,106,42,0.75)', 'rgba(74,122,90,0.75)'],
-          borderColor: ['#0d0c0a','#0d0c0a'],
-          borderWidth: 2,
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        circumference: 180, rotation: -90, cutout: '72%',
-        plugins: { legend: { display: false }, tooltip: { ...TT, callbacks: { label: ctx => ' $'+ctx.parsed.toLocaleString() } } }
-      }
-    });
-
-    document.getElementById('donutLegend').innerHTML = `
-      <div class="legend-item"><div class="legend-dot" style="background:#8a6a2a"></div>Deposited</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#4a7a5a"></div>Yield</div>
-    `;
-
-  } else {
-    // Phase 2 — stacked bar
-    const barLabels  = d.barChartData.labels;
-    const depLayer   = d.barChartData.depLayer;
-    const buildLayer = d.barChartData.buildLayer;
-    const lockLayer  = d.barChartData.lockLayer;
-
-    new Chart(mainCtx, {
-      type: 'bar',
-      data: {
-        labels: barLabels,
-        datasets: [
-          { label: 'Deposited',   data: depLayer,   backgroundColor: 'rgba(138,106,42,0.55)', borderWidth: 0, stack: 'cap' },
-          { label: 'Build Yield', data: buildLayer, backgroundColor: 'rgba(74,122,90,0.55)',  borderWidth: 0, stack: 'cap' },
-          { label: 'Lock Yield',  data: lockLayer,  backgroundColor: 'rgba(122,90,138,0.60)', borderWidth: 0, stack: 'cap' }
-        ]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        scales: {
-          x: { stacked: true, grid: { display: false }, ticks: { color: '#5a5650', font: { family:"'EB Garamond',serif", size:10 } }, border: { color: '#1e1c18' } },
-          y: { stacked: true, grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#5a5650', font: { family:"'EB Garamond',serif", size:10 }, callback: v => '$'+v.toLocaleString() }, border: { color: '#1e1c18' } }
-        },
-        plugins: { legend: { display: false }, tooltip: { ...TT, callbacks: { label: ctx => ` ${ctx.dataset.label}: $${(ctx.raw||0).toLocaleString()}` } } }
-      }
-    });
-
-    document.getElementById('mainLegend').innerHTML = `
-      <div class="legend-item"><div class="legend-dot" style="background:#8a6a2a"></div>Deposited</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#4a7a5a"></div>Build Yield</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#7a5a8a"></div>Lock Yield</div>
-    `;
-
-    const totalDep   = d.phase1.totalDeposited;
-    const buildYield = d.phase1.buildYieldEarned;
-    const currentLockYield = p2YieldToDate;
-
-    new Chart(donutCtx, {
-      type: 'doughnut',
-      data: {
-        datasets: [{
-          data: [totalDep, buildYield, currentLockYield],
-          backgroundColor: ['rgba(138,106,42,0.75)','rgba(74,122,90,0.75)','rgba(122,90,138,0.75)'],
-          borderColor: ['#0d0c0a','#0d0c0a','#0d0c0a'],
-          borderWidth: 2,
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        circumference: 180, rotation: -90, cutout: '72%',
-        plugins: { legend: { display: false }, tooltip: { ...TT, callbacks: { label: ctx => ' $'+ctx.parsed.toLocaleString() } } }
-      }
-    });
-
-    document.getElementById('donutLegend').innerHTML = `
-      <div class="legend-item"><div class="legend-dot" style="background:#8a6a2a"></div>Deposited</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#4a7a5a"></div>Build Yield</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#7a5a8a"></div>Lock Yield</div>
-    `;
-  }
-}
-
-// ── Maturity Section ────────────────────────────────────────
-function renderMaturitySection(d, dynamicDep) {
-  const el = document.getElementById('maturitySection');
-  if (!el) return;
-
-  const totalDep    = d.phase1.totalDeposited;
-  const buildYield  = d.phase1.buildYieldEarned;
-  const lockYield   = d.phase2.lockYieldEarned;
-  const finalBal    = d.phase2.lockFinalBalance;
-  const returnPct   = ((buildYield + lockYield) / totalDep * 100).toFixed(1);
-  const matDate     = d.phase2.lockMaturityDate;
-
-  el.innerHTML = `
-    <div class="maturity-section">
-      <div class="maturity-section-header">
-        <div>
-          <div class="maturity-eyebrow">Contract End State</div>
-          <div class="maturity-title">At <em>Maturity</em></div>
-        </div>
-        <div class="maturity-date-badge">${fmtDate(matDate)}</div>
-      </div>
-
-      <div class="maturity-stat-row">
-        <div class="maturity-stat-cell">
-          <div class="stat-label">Total Deposited</div>
-          <div class="stat-value">${fmt(totalDep)}</div>
-          <div class="stat-sub">your contributions</div>
-        </div>
-        <div class="maturity-stat-cell">
-          <div class="stat-label">Build Yield</div>
-          <div class="stat-value green">${fmt(buildYield)}</div>
-          <div class="stat-sub">Phase I compounding</div>
-        </div>
-        <div class="maturity-stat-cell">
-          <div class="stat-label">Lock Yield</div>
-          <div class="stat-value violet">${fmt(lockYield)}</div>
-          <div class="stat-sub">Phase II compounding</div>
-        </div>
-        <div class="maturity-stat-cell">
-          <div class="stat-label">Final Payout</div>
-          <div class="stat-value gold">${fmt(finalBal)}</div>
-          <div class="stat-sub">deposits + all yield</div>
-        </div>
-        <div class="maturity-stat-cell">
-          <div class="stat-label">Return on Deposit</div>
-          <div class="stat-value gold">${returnPct}%</div>
-          <div class="stat-sub">growth on total deposited</div>
-        </div>
-      </div>
-
-      <div class="maturity-charts">
-        <div class="maturity-chart-panel">
-          <div class="chart-panel-label">Capital Growth — Full Contract</div>
-          <div class="chart-panel-sub">How your balance builds across all months to final payout</div>
-          <div class="chart-wrap"><canvas id="matBarChart"></canvas></div>
-          <div class="legend" style="margin-top:16px">
-            <div class="legend-item"><div class="legend-dot" style="background:#8a6a2a"></div>Deposited</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#4a7a5a"></div>Build Yield</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#7a5a8a"></div>Lock Yield</div>
-          </div>
-        </div>
-        <div class="maturity-chart-panel" style="display:flex;flex-direction:column;align-items:center;text-align:center">
-          <div class="chart-panel-label">Final Capital Composition</div>
-          <div class="chart-panel-sub">Where every dollar of your payout came from</div>
-          <div class="half-donut-wrap">
-            <canvas id="matDonutChart"></canvas>
-            <div class="donut-center">
-              <div class="donut-pct">${fmt(finalBal)}</div>
-              <div class="donut-label">Final Payout</div>
-            </div>
-          </div>
-          <div class="legend" style="margin-top:16px;justify-content:center">
-            <div class="legend-item"><div class="legend-dot" style="background:#8a6a2a"></div>Deposited</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#4a7a5a"></div>Build</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#7a5a8a"></div>Lock</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-
-  // Bar chart — full contract: Phase 1 weekly build-up, then Phase 2 monthly lock growth
-  // Phase 2 "Start" bar is dropped — it duplicates the Phase 1 final week
-  const barCtx = document.getElementById('matBarChart').getContext('2d');
-
+  // Build one balance series across the whole contract from the SAME source
+  // arrays the old charts used — Phase 1 weekly (deposits+build yield), then
+  // Phase 2 monthly (deposits + build + lock). No values are recomputed.
   const p1Labels = d.weeklyChartData.labels;
-  const p1Dep    = dynamicDep;                         // live from transactions
-  const p1Yield  = d.weeklyChartData.yieldLayer;  // cumulative build yield, stacked on top
+  const p1Dep    = dynamicDep;
+  const p1Build  = d.weeklyChartData.yieldLayer;
+  const p1Bal    = p1Labels.map((_, i) => (p1Dep[i] || 0) + (p1Build[i] || 0));
 
-  // Skip index 0 ("Start") from Phase 2 — same state as Phase 1 final week
+  // Phase 2 monthly totals (skip index 0 — duplicates P1 final)
   const p2Labels = d.barChartData.labels.slice(1);
-  const p2Dep    = d.barChartData.depLayer.slice(1);    // flat — total deposited (Phase 1 final)
-  const p2Build  = d.barChartData.buildLayer.slice(1);  // flat — total build yield (Phase 1 final)
-  const p2Lock   = d.barChartData.lockLayer.slice(1);   // growing — lock yield each month
+  const p2Dep    = d.barChartData.depLayer.slice(1);
+  const p2Build  = d.barChartData.buildLayer.slice(1);
+  const p2Lock   = d.barChartData.lockLayer.slice(1);
+  const p2Bal    = p2Labels.map((_, i) => (p2Dep[i] || 0) + (p2Build[i] || 0) + (p2Lock[i] || 0));
 
-  const fullLabels = [...p1Labels, ...p2Labels];
-  const fullDep    = [...p1Dep,    ...p2Dep];
-  const fullBuild  = [...p1Yield,  ...p2Build];
-  const fullLock   = [...Array(p1Labels.length).fill(0), ...p2Lock];
+  const labels = [...p1Labels, ...p2Labels];
+  const balAll = [...p1Bal, ...p2Bal];
 
-  new Chart(barCtx, {
-    type: 'bar',
+  // "You are here" index: last point at or before today.
+  // Phase 1 → weeksElapsed; Phase 2 → p1 length + months since lock start.
+  let hereIdx;
+  if (inPhase1) {
+    hereIdx = Math.min(weeksElapsed, p1Labels.length - 1);
+  } else {
+    const lockStart = new Date(d.phase2.lockStartDate + 'T12:00:00');
+    const monthsIn = Math.max(0, Math.floor(daysBetween(lockStart, today) / 30.44));
+    hereIdx = Math.min(p1Labels.length - 1 + monthsIn, labels.length - 1);
+  }
+
+  // Split the line: solid up to "here", dashed (projection) after.
+  const solid    = balAll.map((v, i) => i <= hereIdx ? v : null);
+  const projected = balAll.map((v, i) => i >= hereIdx ? v : null);
+
+  const pointR = balAll.map((_, i) => i === hereIdx ? 5 : 0);
+
+  new Chart(ctx, {
+    type: 'line',
     data: {
-      labels: fullLabels,
+      labels,
       datasets: [
-        { label:'Deposited',   data:fullDep,   backgroundColor:'rgba(138,106,42,0.55)', borderWidth:0, stack:'cap' },
-        { label:'Build Yield', data:fullBuild, backgroundColor:'rgba(74,122,90,0.55)',  borderWidth:0, stack:'cap' },
-        { label:'Lock Yield',  data:fullLock,  backgroundColor:'rgba(122,90,138,0.60)', borderWidth:0, stack:'cap' }
+        {
+          label: 'Balance', data: solid,
+          borderColor: '#b8922a', borderWidth: 2,
+          backgroundColor: 'rgba(184,146,42,0.10)', fill: true,
+          tension: 0.35, spanGaps: false,
+          pointRadius: pointR, pointBackgroundColor: '#f0ede8', pointBorderColor: '#b8922a', pointBorderWidth: 2
+        },
+        {
+          label: 'Projected', data: projected,
+          borderColor: 'rgba(154,122,170,0.7)', borderWidth: 2, borderDash: [5,4],
+          backgroundColor: 'rgba(122,90,138,0.06)', fill: true,
+          tension: 0.35, pointRadius: 0, spanGaps: false
+        }
       ]
     },
     options: {
-      responsive:true, maintainAspectRatio:false,
-      interaction:{ mode:'index', intersect:false },
-      scales: {
-        x:{ stacked:true, grid:{display:false}, ticks:{color:'#5a5650',font:{family:"'EB Garamond',serif",size:10}, maxTicksLimit:14, maxRotation:45, minRotation:0}, border:{color:'#1e1c18'} },
-        y:{ stacked:true, grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#5a5650',font:{family:"'EB Garamond',serif",size:10},callback:v=>'$'+v.toLocaleString()}, border:{color:'#1e1c18'} }
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: { ...TT, callbacks: {
+          title: items => items[0].dataIndex === hereIdx ? items[0].label + ' — Today' : items[0].label,
+          label: ctx => ctx.raw == null ? null : ' Balance: $' + Number(ctx.raw).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})
+        } }
       },
-      plugins:{
-        legend:{display:false},
-        tooltip:{
-          ...TT,
-          callbacks:{
-            label: () => null,
-            afterBody: (items) => {
-              const i     = items[0].dataIndex;
-              const dep   = fullDep[i]   || 0;
-              const build = fullBuild[i] || 0;
-              const lock  = fullLock[i]  || 0;
-              const totalYield   = build + lock;
-              const totalBalance = dep + totalYield;
-              return [
-                ` Total Deposited:  $${dep.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`,
-                ` Total Yield:      $${totalYield.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`,
-                ` Total Balance:    $${totalBalance.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`,
-              ];
-            }
-          }
-        }
+      scales: {
+        x: { grid: { display: false }, ticks: { color: '#5a5650', font: { family:"'EB Garamond',serif", size:10 }, maxTicksLimit: 7, maxRotation: 0 }, border: { color: '#1e1c18' } },
+        y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#5a5650', font: { family:"'EB Garamond',serif", size:10 }, callback: v => '$'+v.toLocaleString() }, border: { color: '#1e1c18' } }
       }
-    }
-  });
-
-  // Donut — full 360, 3 segments
-  const donutCtx = document.getElementById('matDonutChart').getContext('2d');
-  new Chart(donutCtx, {
-    type: 'doughnut',
-    data: {
-      labels: ['Deposited','Build Yield','Lock Yield'],
-      datasets:[{
-        data: [totalDep, buildYield, lockYield],
-        backgroundColor:['rgba(138,106,42,0.75)','rgba(74,122,90,0.75)','rgba(122,90,138,0.75)'],
-        borderColor:['#0d0c0a','#0d0c0a','#0d0c0a'],
-        borderWidth:2
-      }]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      circumference:180, rotation:-90, cutout:'72%',
-      plugins:{ legend:{display:false}, tooltip:{...TT, callbacks:{label:ctx=>' $'+ctx.parsed.toLocaleString()}} }
     }
   });
 }
