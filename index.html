@@ -647,6 +647,9 @@ body {
   text-transform: uppercase;
   fill: rgba(8,8,8,0.4);
 }
+.figure-rail-label--threshold {
+  fill: rgba(8,8,8,0.6);
+}
 
 /* ─── PRODUCTION ARCHITECTURE — spec ledger ─── */
 .arch {
@@ -1560,7 +1563,7 @@ footer {
           </marker>
         </defs>
 
-        <rect class="figure-rail" x="15" y="12" width="310" height="505" rx="3" stroke-dasharray="2 5" fill="none"/>
+        <rect class="figure-rail" x="15" y="12" width="310" height="512" rx="3" stroke-dasharray="2 5" fill="none"/>
         <text class="figure-rail-label" x="30" y="32" text-anchor="start">Before data</text>
 
         <rect class="figure-node" x="30" y="54" width="280" height="132"/>
@@ -1583,26 +1586,26 @@ footer {
         <text class="figure-sub" x="170" y="452" text-anchor="middle">structural inefficiency, constructed</text>
         <text class="figure-sub" x="170" y="470" text-anchor="middle">entirely from market microstructure logic</text>
 
-        <line class="figure-line" x1="170" y1="502" x2="170" y2="536" marker-end="url(#arr)"/>
+        <line class="figure-line" x1="170" y1="502" x2="170" y2="522" marker-end="url(#arr)"/>
 
-        <line class="figure-rail" x1="15" y1="540" x2="325" y2="540"/>
-        <text class="figure-rail-label" x="190" y="536" text-anchor="start">Data enters</text>
+        <line class="figure-rail" x1="15" y1="558" x2="325" y2="558"/>
+        <text class="figure-rail-label figure-rail-label--threshold" x="170" y="546" text-anchor="middle">Data enters</text>
 
-        <line class="figure-line" x1="170" y1="540" x2="170" y2="568" marker-end="url(#arr)"/>
+        <line class="figure-line" x1="170" y1="558" x2="170" y2="588" marker-end="url(#arr)"/>
 
-        <rect class="figure-node" x="30" y="568" width="280" height="112"/>
-        <text class="figure-label" x="170" y="600" text-anchor="middle">CALIBRATION</text>
-        <text class="figure-sub" x="170" y="624" text-anchor="middle">aligns the model's capture</text>
-        <text class="figure-sub" x="170" y="640" text-anchor="middle">with the structural</text>
-        <text class="figure-sub" x="170" y="656" text-anchor="middle">inefficiency</text>
+        <rect class="figure-node" x="30" y="588" width="280" height="112"/>
+        <text class="figure-label" x="170" y="618" text-anchor="middle">CALIBRATION</text>
+        <text class="figure-sub" x="170" y="642" text-anchor="middle">aligns the model's capture</text>
+        <text class="figure-sub" x="170" y="658" text-anchor="middle">with the structural</text>
+        <text class="figure-sub" x="170" y="674" text-anchor="middle">inefficiency</text>
 
-        <line class="figure-line" x1="170" y1="680" x2="170" y2="706" marker-end="url(#arr)"/>
+        <line class="figure-line" x1="170" y1="700" x2="170" y2="724" marker-end="url(#arr)"/>
 
-        <rect class="figure-node" x="30" y="706" width="280" height="112"/>
-        <text class="figure-label" x="170" y="738" text-anchor="middle">MECHANISM VALIDATION</text>
-        <text class="figure-sub" x="170" y="762" text-anchor="middle">tests predicted conditions and</text>
-        <text class="figure-sub" x="170" y="778" text-anchor="middle">failure boundaries against</text>
-        <text class="figure-sub" x="170" y="794" text-anchor="middle">observed market behavior</text>
+        <rect class="figure-node" x="30" y="724" width="280" height="112"/>
+        <text class="figure-label" x="170" y="756" text-anchor="middle">MECHANISM VALIDATION</text>
+        <text class="figure-sub" x="170" y="780" text-anchor="middle">tests predicted conditions and</text>
+        <text class="figure-sub" x="170" y="796" text-anchor="middle">failure boundaries against</text>
+        <text class="figure-sub" x="170" y="812" text-anchor="middle">observed market behavior</text>
       </svg>
     </div>
   </section>
