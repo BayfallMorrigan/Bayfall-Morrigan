@@ -772,7 +772,7 @@ body {
   padding: 0 0 34px 80px;
 }
 
-/* ─── THE ANCHOR — ledger ─── */
+/* ─── Model Integrity — ledger ─── */
 .depth {
   background: var(--black);
 }
@@ -1517,7 +1517,7 @@ footer {
     </a>
     <nav class="site-nav">
       <a href="#method">Method</a>
-      <a href="#anchor">The Anchor</a>
+      <a href="#anchor">Model Integrity</a>
       <a href="#systems">Systems</a>
       <a href="#contact">Contact</a>
       <a href="meetthefounder.html">Founder</a>
@@ -1529,7 +1529,7 @@ footer {
 
   <nav class="mobile-menu" id="mobile-menu">
     <a href="#method" onclick="closeMenu()">Method</a>
-    <a href="#anchor" onclick="closeMenu()">The Anchor</a>
+    <a href="#anchor" onclick="closeMenu()">Model Integrity</a>
     <a href="#systems" onclick="closeMenu()">Systems</a>
     <a href="#contact" onclick="closeMenu()">Contact</a>
     <a href="meetthefounder.html" onclick="closeMenu()">Founder</a>
@@ -1610,27 +1610,27 @@ footer {
     </div>
   </section>
 
-  <!-- ANCHOR -->
+<!-- ANCHOR -->
   <section class="depth" id="anchor">
     <div class="depth-header">
-      <p class="depth-label">The Anchor</p>
-      <h2 class="depth-heading">Survival through regime shifts requires a deeper anchor than price.</h2>
+      <p class="depth-label">Model Integrity</p>
+      <h2 class="depth-heading">Survival through regime shifts requires interpretability.</h2>
     </div>
     <div class="depth-strata">
       <div class="stratum stratum-1">
         <span class="stratum-num">01</span>
-        <h3 class="stratum-heading">Price properties move with the regime.</h3>
-        <p class="stratum-text">Price properties are inherently regime-dependent. Statistical attributes of returns, such as momentum, mean reversion, and correlation structures, are functions of the prevailing market environment. When participant composition or liquidity conditions shift, these surface-level statistical properties shift with them. A trading system grounded at this layer inevitably breaks during a regime transition.</p>
+        <h3 class="stratum-heading">A model must be explainable when it breaks.</h3>
+        <p class="stratum-text">Regime shifts are inevitable. What matters is whether a model remains interpretable when the environment changes. An interpretable model gives us something to pull apart: its assumptions, mechanisms, conditions, and parameters. When performance changes, we can examine the reasoning that produced the model rather than simply observing that the output changed.</p>
       </div>
       <div class="stratum stratum-2">
         <span class="stratum-num">02</span>
-        <h3 class="stratum-heading">Execution mechanics do not.</h3>
-        <p class="stratum-text">Beneath price action lies the structural architecture of the order book: the deterministic rules of order interaction, queue priority, and fill propagation through available liquidity. While the current regime shifts which orders arrive, matching mechanics dictate exactly what happens when they do. When a regime turns, only these mechanical laws hold still.</p>
+        <h3 class="stratum-heading">Every model decision needs a reason beyond the data.</h3>
+        <p class="stratum-text">Parameters should not exist simply because historical observations improved a fit. Calibration decisions should not be accepted simply because the data preferred them. Statistical discoveries can reveal relationships worth investigating, but they do not, by themselves, establish why those relationships exist. The model must remain grounded in a reason for what it contains.</p>
       </div>
       <div class="stratum stratum-3">
         <span class="stratum-num">03</span>
-        <h3 class="stratum-heading">We anchor as deep as the thesis allows.</h3>
-        <p class="stratum-text">Not every thesis can be grounded purely at the microstructural layer. However, our core design principle remains unyielding: the deeper a system is anchored in market mechanics, the less its performance depends on shifting market conditions. Systems anchored at the order book layer achieve a level of regime independence that price-level frameworks simply cannot replicate.</p>
+        <h3 class="stratum-heading">We test the mechanism, not just the outcome.</h3>
+        <p class="stratum-text">Our models are built around claims about how a structural inefficiency should behave. We test those claims against predicted conditions and defined failure boundaries.</p>
       </div>
     </div>
   </section>
@@ -1676,22 +1676,27 @@ footer {
   <!-- LIMITS -->
   <section class="limits" id="limits">
     <p class="limits-label">The Limits of the Approach</p>
-    <h2 class="limits-heading">Anchoring at the execution layer is durable, but it is not impervious.</h2>
+    <h2 class="limits-heading">Structural reasoning buys interpretability. It does not buy immunity.</h2>
     <div class="limits-ledger">
       <div class="limit-entry">
         <span class="limit-num">01</span>
         <h3 class="limit-heading">Competitive compression</h3>
-        <p class="limit-text">The mechanics can play out exactly as the thesis describes, and the realized edge can still go to zero, because faster participants reached the same structural condition first. This is a latency problem, not a thesis failure, and the diagnosis is visible in the live data. Entry conditions are confirmed; the move has resolved before the position could capture it.</p>
+        <p class="limit-text">The mechanics can resolve exactly as the thesis describes while the realized edge approaches zero, because another participant reaches the same structural condition first. This is a discovery problem rather than a thesis failure, and it is diagnosable in live data. The entry condition confirms, but the opportunity has already resolved before the position can capture it.</p>
       </div>
       <div class="limit-entry">
         <span class="limit-num">02</span>
-        <h3 class="limit-heading">Reflexive impact</h3>
-        <p class="limit-text">At meaningful scale, a system's own orders alter the queue dynamics it is trying to measure. A structural edge occupies a finite pocket of liquidity, and past a certain size, harvesting it begins to consume the structure it reads, an effect no execution tactic can fully hide. That sets a hard capacity ceiling: beyond the point where a system's own volume degrades the signal, the edge stops paying. The ceiling is a property of the inefficiency, not a flaw in the method that locates it, which is why every system is built with its capacity limit derived in advance rather than discovered in a drawdown.</p>
+        <h3 class="limit-heading">Structural condition removal</h3>
+        <p class="limit-text">A mechanism is a claim about a condition in the market that produces the edge, not about the edge itself. That condition can be removed by changes outside the model: a rule change, a shift in market structure, or a change in how the underlying condition is produced. When the condition no longer exists, the thesis no longer applies. This is a hard-reset condition, not a recalibration. External changes relevant to each mechanism are therefore monitored as structural risk.</p>
       </div>
       <div class="limit-entry">
         <span class="limit-num">03</span>
-        <h3 class="limit-heading">Matching engine change</h3>
-        <p class="limit-text">A system anchored to order book physics inherits the stability of the matching engine, and its specific vulnerability. A thesis is anchored to the mechanics of a specific venue, and no two venues match orders the same way, so validity on one is not validity on another until proven. A change to tick size, priority rules, or venue policy can rewrite the physics a thesis was built to read. This is the hard-reset condition: it cannot be recalibrated around, and it is why exchange rule changes are monitored as risk, not maintenance.</p>
+        <h3 class="limit-heading">Dependent commitments</h3>
+        <p class="limit-text">Interpretability is only as strong as the independence of the information being interpreted. Commitments within a model, including the condition, failure boundary, and expected residue, can depend on the same upstream data, classification scheme, and reasoning. An error upstream can therefore produce apparent agreement across multiple commitments without being independently exposed by any of them. The number of commitments does not necessarily reflect the number of independent reasons supporting the model.</p>
+      </div>
+      <div class="limit-entry">
+        <span class="limit-num">04</span>
+        <h3 class="limit-heading">Dimensional blindness</h3>
+        <p class="limit-text">Every model in this methodology begins with a stated mechanism, specific enough to be wrong. This constrains the space of inefficiencies the methodology can address. High-dimensional relationships without an interpretable structural mechanism fall outside that space.</p>
       </div>
     </div>
   </section>
