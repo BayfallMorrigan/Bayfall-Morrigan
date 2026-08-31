@@ -184,18 +184,24 @@ header {
   margin-bottom: 24px;
 }
 
-.stat-grid {
+.stat-tier {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   border: 1px solid var(--rule2);
 }
 
+.stat-tier + .stat-tier,
+.stat-tier + .progress-strip,
+.progress-strip + .stat-tier {
+  margin-top: 20px;
+}
+
 .stat-cell {
-  padding: 24px 20px;
+  padding: 28px 28px;
   border-right: 1px solid var(--rule2);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .stat-cell:last-child { border-right: none; }
@@ -218,9 +224,13 @@ header {
   line-height: 1.1;
 }
 
+.stat-tier-primary .stat-value { font-size: 32px; }
+
 .stat-value.gold { color: var(--gold-lt); }
 .stat-value.green { color: #6aaa7a; }
-.stat-value.dim { color: var(--off); font-size: 18px; }
+.stat-value.dim { color: var(--off); font-size: 17px; }
+
+.stat-tier-secondary .stat-cell { padding: 20px 28px; }
 
 .stat-sub {
   font-family: var(--body);
@@ -229,7 +239,19 @@ header {
   font-style: italic;
 }
 
-/* ── PROGRESS BAR ── */
+/* ── PROGRESS STRIP (desktop) ── */
+.progress-strip {
+  border: 1px solid var(--rule2);
+  padding: 22px 28px;
+}
+
+.progress-strip-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
 .progress-wrap {
   margin-top: 6px;
 }
@@ -249,7 +271,7 @@ header {
 
 .progress-pct {
   font-family: var(--display);
-  font-size: 22px;
+  font-size: 26px;
   color: var(--gold-lt);
   letter-spacing: 0.02em;
 }
@@ -464,11 +486,9 @@ footer {
   .acct-header { padding: 28px 20px 20px; }
   .acct-name { font-size: clamp(22px, 7vw, 34px); }
   .stats-section { padding: 20px 20px; }
-  .stat-grid { grid-template-columns: repeat(2, 1fr); }
-  .stat-grid.cols-6 { grid-template-columns: repeat(2, 1fr); }
-  .stat-grid.cols-5 { grid-template-columns: repeat(2, 1fr); }
+  .stat-tier { grid-template-columns: repeat(2, 1fr); }
   .stat-cell { padding: 16px 14px; text-align: center; }
-  .stat-cell.term-progress-cell { display: none; }
+  .progress-strip { display: none; }
   .charts-section { grid-template-columns: 1fr; }
   .chart-panel { padding: 24px 20px; }
   .txn-section { padding: 24px 20px; }
@@ -520,9 +540,6 @@ footer {
   header { padding: 0 32px; }
   .acct-header { padding: 40px 32px 28px; flex-direction: column; align-items: flex-start; gap: 16px; }
   .stats-section { padding: 28px 32px; }
-  .stat-grid { grid-template-columns: repeat(3, 1fr); }
-  .stat-grid.cols-6 { grid-template-columns: repeat(3, 1fr); }
-  .stat-grid.cols-5 { grid-template-columns: repeat(3, 1fr); }
   .charts-section { grid-template-columns: 1fr; }
   .txn-section { padding: 32px 32px; }
   footer { padding: 20px 32px; }
@@ -539,9 +556,7 @@ footer {
   .acct-header { padding: 28px 20px 20px; }
   .acct-name { font-size: clamp(22px, 7vw, 34px); }
   .stats-section { padding: 20px 20px; }
-  .stat-grid { grid-template-columns: repeat(2, 1fr); align-items: start; }
-  .stat-grid.cols-6 { grid-template-columns: repeat(2, 1fr); align-items: start; }
-  .stat-grid.cols-5 { grid-template-columns: repeat(2, 1fr); align-items: start; }
+  .stat-tier { grid-template-columns: repeat(2, 1fr); align-items: start; }
   .stat-cell { padding: 16px 14px; text-align: center; }
   .charts-section { grid-template-columns: 1fr; }
   .chart-panel { padding: 24px 20px; }
@@ -743,8 +758,7 @@ footer {
       <div class="mobile-progress-sub" id="s-progress-sub-mobile">—</div>
     </div>
 
-    <div class="stat-grid">
-
+    <div class="stat-tier stat-tier-primary">
       <div class="stat-cell">
         <div class="stat-label">Current Balance</div>
         <div class="stat-value green" id="s-live-balance">—</div>
@@ -760,16 +774,22 @@ footer {
         <div class="stat-value" id="s-live-return">—</div>
         <div class="stat-sub">on initial deposit</div>
       </div>
-      <div class="stat-cell term-progress-cell">
+    </div>
+
+    <div class="progress-strip">
+      <div class="progress-strip-top">
         <div class="stat-label">Term Progress</div>
         <div class="progress-pct" id="pct-display">—</div>
-        <div class="progress-wrap">
-          <div class="progress-track">
-            <div class="progress-fill" id="progress-fill" style="width:0%"></div>
-          </div>
-        </div>
-        <div class="stat-sub" id="s-progress-sub">—</div>
       </div>
+      <div class="progress-wrap">
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="stat-sub" id="s-progress-sub">—</div>
+    </div>
+
+    <div class="stat-tier stat-tier-secondary">
       <div class="stat-cell">
         <div class="stat-label">Starting Principal</div>
         <div class="stat-value dim" id="s-principal">—</div>
@@ -785,7 +805,6 @@ footer {
         <div class="stat-value dim" id="s-maturity-val">—</div>
         <div class="stat-sub" id="s-maturity-val-sub">—</div>
       </div>
-
     </div>
   </div>
 
