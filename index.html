@@ -72,7 +72,7 @@
           "@id": "https://bayfallmorrigan.com/#aidanronan",
           "name": "Aidan Ronan",
           "jobTitle": "Founder and Chief Executive Officer",
-          "url": "https://bayfallmorrigan.com/team.html",
+          "url": "https://bayfallmorrigan.com/team",
           "sameAs": ["https://www.linkedin.com/in/aidan-ronan-97a610402/"]
         },
         {
@@ -80,7 +80,7 @@
           "@id": "https://bayfallmorrigan.com/#aarongreyling",
           "name": "Aaron Greyling",
           "jobTitle": "Co-Founder and Head of Relations",
-          "url": "https://bayfallmorrigan.com/team.html"
+          "url": "https://bayfallmorrigan.com/team"
         }
       ],
       "foundingDate": "2024",
@@ -1577,6 +1577,28 @@ footer {
   .footer-disclaimer { font-size: 10px; }
 }
 </style>
+<script>
+/* Clean URLs. The live site shows addresses without ".html" (GitHub Pages serves /team from team.html).
+   In a local preview opened from disk, clean links are pointed back at the .html files so navigation still works. */
+(function () {
+  var local = location.protocol === 'file:' || /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  if (!local) {
+    if (/\.html$/.test(location.pathname)) {
+      var clean = location.pathname.replace(/index\.html$/, '').replace(/\.html$/, '');
+      history.replaceState(null, '', clean + location.search + location.hash);
+    }
+    return;
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      var h = a.getAttribute('href');
+      if (/^(https?:|mailto:|tel:|#)/i.test(h)) return;
+      var m = h.match(/^\/?([a-z0-9-]*)(#.*)?$/i);
+      if (m) a.setAttribute('href', (m[1] || 'index') + '.html' + (m[2] || ''));
+    });
+  });
+})();
+</script>
 </head>
 <body>
 
@@ -1605,7 +1627,7 @@ footer {
 
     <div class="holding-btn-group">
       <a class="holding-btn primary" href="#about">About</a>
-      <a class="holding-btn" href="team.html">Team</a>
+      <a class="holding-btn" href="team">Team</a>
     </div>
   </div>
 
@@ -1633,7 +1655,7 @@ footer {
       <a href="#anchor">Model Integrity</a>
       <a href="#systems">Systems</a>
       <a href="#contact">Contact</a>
-      <a href="team.html">Team</a>
+      <a href="team">Team</a>
     </nav>
     <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
       <span></span><span></span><span></span>
@@ -1645,7 +1667,7 @@ footer {
     <a href="#anchor" onclick="closeMenu()">Model Integrity</a>
     <a href="#systems" onclick="closeMenu()">Systems</a>
     <a href="#contact" onclick="closeMenu()">Contact</a>
-    <a href="team.html" onclick="closeMenu()">Team</a>
+    <a href="team" onclick="closeMenu()">Team</a>
   </nav>
 
   <!-- HERO -->
@@ -1935,7 +1957,7 @@ footer {
       <p class="contact-info-line">Email</p>
       <p class="contact-info-value"><a href="mailto:contact@bayfallmorrigan.com">contact@bayfallmorrigan.com</a></p>
       <p class="contact-info-line">Founder &amp; CEO</p>
-      <p class="contact-info-value"><a href="team.html">Aidan Ronan</a></p>
+      <p class="contact-info-value"><a href="team">Aidan Ronan</a></p>
       <p class="contact-info-line">Based in</p>
       <p class="contact-info-value">United States</p>
     </div>

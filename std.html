@@ -1131,19 +1131,19 @@ window.BMNotify = (function () {
 <body>
 
 <header>
-  <a href="index.html"><img class="logo-img" src="logopng.png" alt="Bayfall Morrigan"></a>
+  <a href="/"><img class="logo-img" src="logopng.png" alt="Bayfall Morrigan"></a>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
   <div class="header-right">
-    <a href="index.html">Home</a>
+    <a href="/">Home</a>
     <a class="active">My Account</a>
     <a class="logout-link" id="signOutBtn" style="cursor:pointer">Sign Out</a>
   </div>
 </header>
 
 <div class="mobile-menu" id="mobile-menu">
-  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="/" onclick="closeMenu()">Home</a>
   <a onclick="closeMenu()">My Account</a>
   <a id="mobileSignOut" onclick="closeMenu()">Sign Out</a>
 </div>
@@ -1302,8 +1302,8 @@ const fmtDate = s => { if(!s) return '-'; const d=new Date(s+'T12:00:00'); retur
 const daysBetween = (a,b) => Math.round((b-a)/86400000);
 
 // Sign out
-document.getElementById('signOutBtn').addEventListener('click', () => auth.signOut().then(()=>window.location.href='login.html'));
-document.getElementById('mobileSignOut').addEventListener('click', () => auth.signOut().then(()=>window.location.href='login.html'));
+document.getElementById('signOutBtn').addEventListener('click', () => auth.signOut().then(()=>window.location.href='login'));
+document.getElementById('mobileSignOut').addEventListener('click', () => auth.signOut().then(()=>window.location.href='login'));
 function toggleMenu() {
   const h = document.getElementById('hamburger');
   const m = document.getElementById('mobile-menu');
@@ -1315,11 +1315,11 @@ function closeMenu() {
   document.getElementById('mobile-menu').classList.remove('open');
 }
 
-document.getElementById('footerSignOutBtn').addEventListener('click', () => auth.signOut().then(()=>window.location.href='login.html'));
+document.getElementById('footerSignOutBtn').addEventListener('click', () => auth.signOut().then(()=>window.location.href='login'));
 
 // Auth guard - find client by UID
 auth.onAuthStateChanged(user => {
-  if (!user) { window.location.href = 'login.html'; return; }
+  if (!user) { window.location.href = 'login'; return; }
   db.ref('clients').orderByChild('uid').equalTo(user.uid).once('value').then(snap => {
     const data = snap.val();
     if (!data) { document.getElementById('loadingScreen').textContent = 'Account not found.'; return; }

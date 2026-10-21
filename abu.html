@@ -1427,19 +1427,19 @@ window.BMNotify = (function () {
 <body>
 
 <header>
-  <a href="index.html"><img class="logo-img" src="logopng.png" alt="Bayfall Morrigan"></a>
+  <a href="/"><img class="logo-img" src="logopng.png" alt="Bayfall Morrigan"></a>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
   <div class="header-right">
-    <a href="index.html">Home</a>
+    <a href="/">Home</a>
     <a class="active">My Account</a>
     <a class="logout-link" id="signOutBtn">Sign Out</a>
   </div>
 </header>
 
 <div class="mobile-menu" id="mobile-menu">
-  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="/" onclick="closeMenu()">Home</a>
   <a onclick="closeMenu()">My Account</a>
   <a id="mobileSignOut" onclick="closeMenu()">Sign Out</a>
 </div>
@@ -1471,10 +1471,10 @@ const TT = {
 
 // ── Sign out ─────────────────────────────────────────────
 document.getElementById('signOutBtn').addEventListener('click', () => {
-  auth.signOut().then(() => window.location.href = 'login.html');
+  auth.signOut().then(() => window.location.href = 'login');
 });
 document.getElementById('mobileSignOut').addEventListener('click', () => {
-  auth.signOut().then(() => window.location.href = 'login.html');
+  auth.signOut().then(() => window.location.href = 'login');
 });
 
 function toggleMenu() {
@@ -1489,7 +1489,7 @@ function closeMenu() {
 // ── Auth guard + data load ───────────────────────────────
 auth.onAuthStateChanged(user => {
   if (!user) {
-    window.location.href = 'login.html';
+    window.location.href = 'login';
     return;
   }
   db.ref('clients').orderByChild('uid').equalTo(user.uid).once('value').then(snap => {
@@ -1623,7 +1623,7 @@ function buildInactiveDashboard(d, today) {
   `;
 
   document.getElementById('footerSignOut').addEventListener('click', () => {
-    auth.signOut().then(() => window.location.href = 'login.html');
+    auth.signOut().then(() => window.location.href = 'login');
   });
 
   requestAnimationFrame(() => {
@@ -1997,7 +1997,7 @@ function buildDashboard(d) {
   `;
 
   document.getElementById('footerSignOut').addEventListener('click', () => {
-    auth.signOut().then(() => window.location.href = 'login.html');
+    auth.signOut().then(() => window.location.href = 'login');
   });
 
   // ── Animate timeline + split (after paint) ──

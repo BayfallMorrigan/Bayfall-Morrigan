@@ -412,15 +412,15 @@ header {
 <body>
 
 <header>
-  <a href="index.html"><img class="logo-img" src="logopng.png" alt="Bayfall Morrigan"></a>
+  <a href="/"><img class="logo-img" src="logopng.png" alt="Bayfall Morrigan"></a>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
-  <a class="back-link" href="index.html">← Return to Site</a>
+  <a class="back-link" href="/">← Return to Site</a>
 </header>
 
 <div class="mobile-menu" id="mobile-menu">
-  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="/" onclick="closeMenu()">Home</a>
   <a class="active" onclick="closeMenu()">My Account</a>
 </div>
 
@@ -466,19 +466,19 @@ header {
 // ── UID → client dashboard page mapping ──
 // Add each client's UID and their dashboard filename here
 const CLIENT_PAGES = {
-  'yNdpQ4uPxxZEWgE0rYndvlSwYX13': 'std.html',
-  'gLw4FvzTWkVLAi5J8B0rps0RDl02': 'abu.html',
-  '7QYYPj4C44ftgM1sCs6PrNYs23V2': 'std.html',
-  'Ij2X7nh6D0Mc8hssMqVVwTF4Csp1': 'abu.html',
-  'x96iaScGIPenKPbpKJcXsGyw2A32': 'std.html',
-  'Y1e1zfpHxDgGQh4anClEDD5cYbC2': 'std.html',
-  '7uxQMi394WYUwoO1rQXspRf6lYA3': 'abu.html',
-  'neguzjXHkbfbGLxNYtdAUtBDHRe2': 'abu.html',
-  '8HFDNH9lefgjTBFwAclaMJ2Pf0G3': 'abu.html',
-  'uPJyzOO2uXVUSf0pstejtH3SS0j2': 'std.html',
-  'IlFBLlKTawMpWnWk7CxZMbRKDgB3': 'abu.html',
-  '7th6PuuFZkXHkPUiX7GjoSc9Awh2': 'std.html',
-  'O3Zo45gveoV4lfQMGxUqNXSzeFw2': 'std.html',
+  'yNdpQ4uPxxZEWgE0rYndvlSwYX13': 'std',
+  'gLw4FvzTWkVLAi5J8B0rps0RDl02': 'abu',
+  '7QYYPj4C44ftgM1sCs6PrNYs23V2': 'std',
+  'Ij2X7nh6D0Mc8hssMqVVwTF4Csp1': 'abu',
+  'x96iaScGIPenKPbpKJcXsGyw2A32': 'std',
+  'Y1e1zfpHxDgGQh4anClEDD5cYbC2': 'std',
+  '7uxQMi394WYUwoO1rQXspRf6lYA3': 'abu',
+  'neguzjXHkbfbGLxNYtdAUtBDHRe2': 'abu',
+  '8HFDNH9lefgjTBFwAclaMJ2Pf0G3': 'abu',
+  'uPJyzOO2uXVUSf0pstejtH3SS0j2': 'std',
+  'IlFBLlKTawMpWnWk7CxZMbRKDgB3': 'abu',
+  '7th6PuuFZkXHkPUiX7GjoSc9Awh2': 'std',
+  'O3Zo45gveoV4lfQMGxUqNXSzeFw2': 'std',
 };
 
 async function handleLogin() {
