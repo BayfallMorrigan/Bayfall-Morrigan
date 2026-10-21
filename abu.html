@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Account Overview — Bayfall Morrigan</title>
+<meta name="robots" content="noindex, nofollow">
+<title>Account Overview | Bayfall Morrigan | Quantitative Proprietary Trading &amp; Market Microstructure Research</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -261,7 +262,7 @@ header {
 }
 
 /* ════════════════════════════════════════════════════════
-   CLIENT VIEW — redesigned, mobile-first presentation layer
+   CLIENT VIEW - redesigned, mobile-first presentation layer
    (math untouched; this only restyles what clients see)
    ════════════════════════════════════════════════════════ */
 
@@ -295,7 +296,7 @@ header {
 }
 .cv-hero-sub strong { color: var(--gold-lt); font-style: normal; font-weight: 400; }
 
-/* Progress timeline — "how far along am I" */
+/* Progress timeline - "how far along am I" */
 .cv-timeline {
   padding: 22px 20px 24px;
   border-bottom: 1px solid var(--rule);
@@ -582,7 +583,7 @@ header {
   .cv-chart-wrap { height: 300px; }
 }
 
-/* ── STAT GRID (legacy — retained, unused by client view) ── */
+/* ── STAT GRID (legacy - retained, unused by client view) ── */
 .stats-section {
   padding: 40px 64px;
   border-bottom: 1px solid var(--rule);
@@ -1426,19 +1427,19 @@ window.BMNotify = (function () {
 <body>
 
 <header>
-  <a href="https://www.bayfallmorrigan.com"><img class="logo-img" src="logopng.png" alt="Bayfall Morrigan"></a>
+  <a href="index.html"><img class="logo-img" src="logopng.png" alt="Bayfall Morrigan"></a>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
   <div class="header-right">
-    <a href="https://www.bayfallmorrigan.com">Home</a>
+    <a href="index.html">Home</a>
     <a class="active">My Account</a>
     <a class="logout-link" id="signOutBtn">Sign Out</a>
   </div>
 </header>
 
 <div class="mobile-menu" id="mobile-menu">
-  <a href="https://www.bayfallmorrigan.com" onclick="closeMenu()">Home</a>
+  <a href="index.html" onclick="closeMenu()">Home</a>
   <a onclick="closeMenu()">My Account</a>
   <a id="mobileSignOut" onclick="closeMenu()">Sign Out</a>
 </div>
@@ -1451,7 +1452,7 @@ window.BMNotify = (function () {
 // ── Helpers ──────────────────────────────────────────────
 const fmt = n => '$' + Number(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
 const fmtDate = s => {
-  if (!s) return '—';
+  if (!s) return '-';
   const d = new Date(s + 'T12:00:00');
   return d.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
 };
@@ -1575,7 +1576,7 @@ function buildInactiveDashboard(d, today) {
     </div>
 
     <div class="cv-chart-section">
-      <div class="cv-chart-title">Your Balance — Through Freeze</div>
+      <div class="cv-chart-title">Your Balance | Through Freeze</div>
       <div class="cv-chart-sub">Deposits and earnings up to the point the account was paused</div>
       <div class="cv-chart-wrap"><canvas id="frozenChart"></canvas></div>
     </div>
@@ -1676,7 +1677,7 @@ function renderInactiveCharts(d, frozenDate, frozenBalance, frozenYield, totalDe
   const depositTxns = allTxns.filter(t => !isYieldTxn(t) && String(t.type).toLowerCase() === 'credit');
   const yieldTxns   = allTxns.filter(isYieldTxn);
 
-  // Both lines are TRUE running totals straight off the ledger — no stored-field + delta
+  // Both lines are TRUE running totals straight off the ledger - no stored-field + delta
   // math, so nothing is ever double-counted and the curves always sum to the real deposited
   // ($750) and yield ($275.92) figures. A late correction simply steps up on its dated week.
   const cumTo = (txns, cutoff) =>
@@ -1742,7 +1743,7 @@ function renderInactiveCharts(d, frozenDate, frozenBalance, frozenYield, totalDe
       plugins: {
         legend: { display: false },
         tooltip: { ...TT, callbacks: {
-          title: ctx => ctx[0].dataIndex === freezeIdx ? `${ctx[0].label} — Frozen` : ctx[0].label,
+          title: ctx => ctx[0].dataIndex === freezeIdx ? `${ctx[0].label} | Frozen` : ctx[0].label,
           label: ctx => ctx.dataset.label === 'Target' ? null : ` Balance: $${(ctx.raw||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`
         } }
       },
@@ -1777,7 +1778,7 @@ function buildDashboard(d) {
   const p1Weeks      = d.phase1.weeksToTarget;
   const p1Progress   = inPhase1 ? Math.min(weeksElapsed / p1Weeks * 100, 100) : 100;
 
-  // Deposits so far — sum only "Weekly contribution" transactions up to today
+  // Deposits so far - sum only "Weekly contribution" transactions up to today
   const depositsToDate = (() => {
     if (!inPhase1) return d.phase1.totalDeposited;
     if (!d.transactions) return 0;
@@ -1797,7 +1798,7 @@ function buildDashboard(d) {
       : [];
     const p1StartDate = new Date(d.phase1.startDate + 'T12:00:00');
     return d.weeklyChartData.labels.map((_, i) => {
-      if (i === 0) return 0; // "Start" — no deposits yet
+      if (i === 0) return 0; // "Start" - no deposits yet
       const weekDate = new Date(p1StartDate);
       weekDate.setDate(weekDate.getDate() + (i - 1) * 7);
       const weekStr = weekDate.toISOString().split('T')[0];
@@ -1807,7 +1808,7 @@ function buildDashboard(d) {
     });
   })();
 
-  // Yield to date in phase 1 — interpolate from chart data
+  // Yield to date in phase 1 - interpolate from chart data
   let yieldToDate = 0;
   if (d.weeklyChartData && d.weeklyChartData.yieldLayer) {
     const yl = d.weeklyChartData.yieldLayer;
@@ -1819,7 +1820,7 @@ function buildDashboard(d) {
     ? depositsToDate + yieldToDate
     : d.phase1.finalBalance;
 
-  // Phase 2 lock yield — sum posted lock-yield transactions (date <= today), same as the ledger.
+  // Phase 2 lock yield - sum posted lock-yield transactions (date <= today), same as the ledger.
   // Lock-yield entries are yield transactions dated on/after the lock start; phase-1 build yields fall before it.
   let p2YieldToDate = 0;
   let p2Balance = d.phase1.finalBalance;
@@ -1855,14 +1856,14 @@ function buildDashboard(d) {
     : ((p2YieldToDate + d.phase1.buildYieldEarned) / totalInvested * 100);
 
   // ── Status badge ──
-  const statusText  = complete ? 'Complete' : inPhase1 ? 'Phase I — Active' : 'Phase II — Active';
+  const statusText  = complete ? 'Complete' : inPhase1 ? 'Phase I | Active' : 'Phase II | Active';
   const statusClass = inPhase2 ? 'status-badge phase2' : 'status-badge';
 
   // ── Phase tabs ──
   const p1TabClass = inPhase1 ? 'phase-tab active' : 'phase-tab complete';
   const p2TabClass = complete ? 'phase-tab complete' : inPhase2 ? 'phase-tab phase2-active' : 'phase-tab';
 
-  // ══ Display-scoped values (no new math — derived from figures above) ══
+  // ══ Display-scoped values (no new math - derived from figures above) ══
   // Timeline runs across the WHOLE program: Phase 1 start → Phase 2 maturity.
   const progStart = p1Start;
   const progEnd   = p2MatDate;
@@ -2031,14 +2032,14 @@ function renderGrowthChart(d, inPhase1, dynamicDep, weeksElapsed, today, progEnd
   const ctx = document.getElementById('growthChart').getContext('2d');
 
   // Build one balance series across the whole contract from the SAME source
-  // arrays the old charts used — Phase 1 weekly (deposits+build yield), then
+  // arrays the old charts used - Phase 1 weekly (deposits+build yield), then
   // Phase 2 monthly (deposits + build + lock). No values are recomputed.
   const p1Labels = d.weeklyChartData.labels;
   const p1Dep    = dynamicDep;
   const p1Build  = d.weeklyChartData.yieldLayer;
   const p1Bal    = p1Labels.map((_, i) => (p1Dep[i] || 0) + (p1Build[i] || 0));
 
-  // Phase 2 monthly totals (skip index 0 — duplicates P1 final)
+  // Phase 2 monthly totals (skip index 0 - duplicates P1 final)
   const p2Labels = d.barChartData.labels.slice(1);
   const p2Dep    = d.barChartData.depLayer.slice(1);
   const p2Build  = d.barChartData.buildLayer.slice(1);
@@ -2091,7 +2092,7 @@ function renderGrowthChart(d, inPhase1, dynamicDep, weeksElapsed, today, progEnd
       plugins: {
         legend: { display: false },
         tooltip: { ...TT, callbacks: {
-          title: items => items[0].dataIndex === hereIdx ? items[0].label + ' — Today' : items[0].label,
+          title: items => items[0].dataIndex === hereIdx ? items[0].label + ' | Today' : items[0].label,
           label: ctx => ctx.raw == null ? null : ' Balance: $' + Number(ctx.raw).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})
         } }
       },

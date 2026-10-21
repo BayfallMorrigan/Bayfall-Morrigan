@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Account Overview — Bayfall Morrigan</title>
+<meta name="robots" content="noindex, nofollow">
+<title>Account Overview | Bayfall Morrigan | Quantitative Proprietary Trading &amp; Market Microstructure Research</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -74,7 +75,7 @@ html, body {
   min-height: 100vh;
 }
 
-/* ── shared label / eyebrow style — one definition used everywhere ── */
+/* ── shared label / eyebrow style - one definition used everywhere ── */
 .eyebrow {
   font-family: var(--body);
   font-size: 10px;
@@ -285,7 +286,7 @@ header {
 }
 
 /* ── PROGRESS STRIP ──
-   Compact and centered on purpose — this is one number and one
+   Compact and centered on purpose - this is one number and one
    line, not a fourth stat card, so it doesn't get a stat-card's
    footprint. Label, bar, and percentage sit on one row, vertically
    centered against each other, with slack space removed. ── */
@@ -329,8 +330,8 @@ header {
 }
 
 /* ── CHARTS ──
-   Single chart-card component. Every chart on the page — live or
-   maturity, area or donut — uses this exact shell, label, and
+   Single chart-card component. Every chart on the page - live or
+   maturity, area or donut - uses this exact shell, label, and
    legend treatment, so no two charts on the page ever look like
    they came from different systems. ── */
 .charts-section {
@@ -551,7 +552,7 @@ footer {
 
 .logout-link:hover { color: var(--off); }
 
-/* MOBILE PROGRESS STRIP — stacked instead of inline, since the
+/* MOBILE PROGRESS STRIP - stacked instead of inline, since the
    label/bar/percentage row gets cramped in a narrow column, but
    still compact: one small label, the bar, one line of numbers. */
 .mobile-progress-strip {
@@ -580,7 +581,7 @@ footer {
 
 /* ── MATURITY SECTION ──
    Reuses .stat-cell and .chart-card exactly as the live sections
-   above do — same border, same padding, same label type — so the
+   above do - same border, same padding, same label type - so the
    two "similar graphs" the client flagged are now literally the
    same component with different data. The only distinct touch is
    a faint gold wash marking this as forward-looking contract data,
@@ -1130,19 +1131,19 @@ window.BMNotify = (function () {
 <body>
 
 <header>
-  <a href="https://www.bayfallmorrigan.com"><img class="logo-img" src="logopng.png" alt="Bayfall Morrigan"></a>
+  <a href="index.html"><img class="logo-img" src="logopng.png" alt="Bayfall Morrigan"></a>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
   <div class="header-right">
-    <a href="https://www.bayfallmorrigan.com">Home</a>
+    <a href="index.html">Home</a>
     <a class="active">My Account</a>
     <a class="logout-link" id="signOutBtn" style="cursor:pointer">Sign Out</a>
   </div>
 </header>
 
 <div class="mobile-menu" id="mobile-menu">
-  <a href="https://www.bayfallmorrigan.com" onclick="closeMenu()">Home</a>
+  <a href="index.html" onclick="closeMenu()">Home</a>
   <a onclick="closeMenu()">My Account</a>
   <a id="mobileSignOut" onclick="closeMenu()">Sign Out</a>
 </div>
@@ -1154,18 +1155,18 @@ window.BMNotify = (function () {
   <div class="acct-header">
     <div>
       <div class="acct-eyebrow">Private High-Yield Loan</div>
-      <div class="acct-name" id="clientName">—</div>
-      <div class="acct-meta" id="acctMeta">—</div>
+      <div class="acct-name" id="clientName">-</div>
+      <div class="acct-meta" id="acctMeta">-</div>
     </div>
     <div class="acct-status">
       <div class="status-badge" id="statusBadge">Active</div>
-      <div class="last-updated" id="lastUpdated">—</div>
+      <div class="last-updated" id="lastUpdated">-</div>
     </div>
   </div>
 
   <!-- STATS -->
   <div class="stats-section">
-    <div class="stats-section-label">Account Status — Today</div>
+    <div class="stats-section-label">Account Status | Today</div>
 
     <!-- MOBILE ONLY: Term Progress strip -->
     <div class="mobile-progress-strip">
@@ -1176,25 +1177,25 @@ window.BMNotify = (function () {
         <div class="progress-fill" id="progress-fill-mobile" style="width:0%"></div>
       </div>
       <div class="progress-bottom-row">
-        <div class="stat-sub" id="s-progress-sub-mobile">—</div>
-        <div class="progress-pct" id="pct-display-mobile">—</div>
+        <div class="stat-sub" id="s-progress-sub-mobile">-</div>
+        <div class="progress-pct" id="pct-display-mobile">-</div>
       </div>
     </div>
 
     <div class="stat-tier stat-tier-primary">
       <div class="stat-cell">
         <div class="stat-label">Current Balance</div>
-        <div class="stat-value green" id="s-live-balance">—</div>
-        <div class="stat-sub" id="s-live-balance-sub">—</div>
+        <div class="stat-value green" id="s-live-balance">-</div>
+        <div class="stat-sub" id="s-live-balance-sub">-</div>
       </div>
       <div class="stat-cell">
         <div class="stat-label">Yield Earned</div>
-        <div class="stat-value green" id="s-live-yield">—</div>
-        <div class="stat-sub" id="s-live-yield-sub">—</div>
+        <div class="stat-value green" id="s-live-yield">-</div>
+        <div class="stat-sub" id="s-live-yield-sub">-</div>
       </div>
       <div class="stat-cell">
         <div class="stat-label">Return to Date</div>
-        <div class="stat-value" id="s-live-return">—</div>
+        <div class="stat-value" id="s-live-return">-</div>
         <div class="stat-sub">on initial deposit</div>
       </div>
     </div>
@@ -1202,29 +1203,29 @@ window.BMNotify = (function () {
     <div class="progress-strip">
       <div class="progress-strip-label">
         <div class="stat-label">Term Progress</div>
-        <div class="stat-sub" id="s-progress-sub">—</div>
+        <div class="stat-sub" id="s-progress-sub">-</div>
       </div>
       <div class="progress-track">
         <div class="progress-fill" id="progress-fill" style="width:0%"></div>
       </div>
-      <div class="progress-pct" id="pct-display">—</div>
+      <div class="progress-pct" id="pct-display">-</div>
     </div>
 
     <div class="stat-tier stat-tier-secondary">
       <div class="stat-cell">
         <div class="stat-label">Starting Principal</div>
-        <div class="stat-value dim" id="s-principal">—</div>
-        <div class="stat-sub" id="s-fee-sub">—</div>
+        <div class="stat-value dim" id="s-principal">-</div>
+        <div class="stat-sub" id="s-fee-sub">-</div>
       </div>
       <div class="stat-cell">
         <div class="stat-label">Maturity Date</div>
-        <div class="stat-value dim" id="s-maturity">—</div>
-        <div class="stat-sub" id="s-maturity-sub">—</div>
+        <div class="stat-value dim" id="s-maturity">-</div>
+        <div class="stat-sub" id="s-maturity-sub">-</div>
       </div>
       <div class="stat-cell">
         <div class="stat-label">Maturity Value</div>
-        <div class="stat-value dim" id="s-maturity-val">—</div>
-        <div class="stat-sub" id="s-maturity-val-sub">—</div>
+        <div class="stat-value dim" id="s-maturity-val">-</div>
+        <div class="stat-sub" id="s-maturity-val-sub">-</div>
       </div>
     </div>
   </div>
@@ -1297,7 +1298,7 @@ window.BMNotify = (function () {
 const TT = { backgroundColor:'#161512', borderColor:'#2a2824', borderWidth:1, titleColor:'#7a7670', bodyColor:'#f0ede8', titleFont:{family:"'EB Garamond',serif",size:10}, bodyFont:{family:"'Cormorant Garamond',serif",size:14} };
 
 const fmt     = n => '$' + Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
-const fmtDate = s => { if(!s) return '—'; const d=new Date(s+'T12:00:00'); return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); };
+const fmtDate = s => { if(!s) return '-'; const d=new Date(s+'T12:00:00'); return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); };
 const daysBetween = (a,b) => Math.round((b-a)/86400000);
 
 // Sign out
@@ -1316,7 +1317,7 @@ function closeMenu() {
 
 document.getElementById('footerSignOutBtn').addEventListener('click', () => auth.signOut().then(()=>window.location.href='login.html'));
 
-// Auth guard — find client by UID
+// Auth guard - find client by UID
 auth.onAuthStateChanged(user => {
   if (!user) { window.location.href = 'login.html'; return; }
   db.ref('clients').orderByChild('uid').equalTo(user.uid).once('value').then(snap => {
@@ -1381,19 +1382,19 @@ function buildDashboard(d) {
   document.getElementById('lastUpdated').textContent = `As of ${today.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}`;
   document.getElementById('statusBadge').textContent = today >= matDate ? 'Matured' : 'Active';
 
-  // Live status stats — lead with today's numbers
+  // Live status stats - lead with today's numbers
   document.getElementById('s-live-balance').textContent     = fmt(liveBalance);
   document.getElementById('s-live-balance-sub').textContent = `principal + yield as of today`;
   document.getElementById('s-live-yield').textContent       = fmt(liveYield);
   document.getElementById('s-live-yield-sub').textContent   = `${monthsIn.toFixed(1)} months compounded`;
   document.getElementById('s-live-return').textContent      = liveReturn + '%';
 
-  // Contract facts — dimmed, supporting context
+  // Contract facts - dimmed, supporting context
   document.getElementById('pct-display').textContent        = progress.toFixed(1) + '%';
   document.getElementById('progress-fill').style.width      = progress + '%';
   document.getElementById('s-progress-sub').textContent     = monthsLeft + ' months remaining';
 
-  // Mobile progress strip — mirrors the same values
+  // Mobile progress strip - mirrors the same values
   document.getElementById('pct-display-mobile').textContent    = progress.toFixed(1) + '%';
   document.getElementById('progress-fill-mobile').style.width  = progress + '%';
   document.getElementById('s-progress-sub-mobile').textContent = monthsLeft + ' months remaining';
@@ -1405,7 +1406,7 @@ function buildDashboard(d) {
   document.getElementById('s-maturity-val-sub').textContent = 'principal + ' + d.annualYieldRate + '% annual yield';
   document.getElementById('donut-pct').textContent          = liveReturn + '%';
 
-  // Charts — slice to weeks elapsed so the area chart stops at today
+  // Charts - slice to weeks elapsed so the area chart stops at today
   const chartData  = rebuildChartData(d);
   const allLabels  = chartData.labels;
   const allPrinc   = chartData.principal;
@@ -1541,7 +1542,7 @@ function renderMaturitySection(d) {
 
       <div class="maturity-charts">
         <div class="chart-card">
-          <div class="chart-card-label">Balance at Maturity — Full Term</div>
+          <div class="chart-card-label">Balance at Maturity | Full Term</div>
           <div class="chart-card-sub">Principal floor with total yield accumulated over the full contract period</div>
           <div class="chart-wrap"><canvas id="matAreaChart"></canvas></div>
           <div class="legend">
@@ -1568,7 +1569,7 @@ function renderMaturitySection(d) {
     </div>
   `;
 
-  // Full-term area chart — rebuilt from override so maturity chart matches contract values
+  // Full-term area chart - rebuilt from override so maturity chart matches contract values
   const chartData = rebuildChartData(d);
   const labels   = chartData.labels;
   const princArr = chartData.principal;
