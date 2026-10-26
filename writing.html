@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing | Bayfall Morrigan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta name="description" content="Writing on structure-first quantitative research, mechanism-based model validation, and the limits of backtesting.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="Aidan Ronan">
+<link rel="canonical" href="https://bayfallmorrigan.com/writing">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bayfallmorrigan.com/writing">
+<meta property="og:title" content="Writing | Bayfall Morrigan">
+<meta property="og:description" content="Writing on structure-first quantitative research, mechanism-based model validation, and the limits of backtesting.">
+<meta property="og:site_name" content="Bayfall Morrigan">
+<meta property="og:image" content="https://bayfallmorrigan.com/share.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Bayfall Morrigan">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Writing | Bayfall Morrigan">
+<meta name="twitter:description" content="Writing on structure-first quantitative research, mechanism-based model validation, and the limits of backtesting.">
+<meta name="twitter:image" content="https://bayfallmorrigan.com/share.png">
+<meta name="twitter:image:alt" content="Bayfall Morrigan">
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://bayfallmorrigan.com/writing#webpage",
+      "url": "https://bayfallmorrigan.com/writing",
+      "name": "Writing | Bayfall Morrigan",
+      "description": "Writing on structure-first quantitative research, mechanism-based model validation, and the limits of backtesting.",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@id": "https://bayfallmorrigan.com/#website"
+      },
+      "about": {
+        "@id": "https://bayfallmorrigan.com/#organization"
+      },
+      "breadcrumb": {
+        "@id": "https://bayfallmorrigan.com/writing#breadcrumb"
+      },
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "url": "https://bayfallmorrigan.com/what-a-mechanism-owes-you",
+            "name": "What a Mechanism Owes You That an Artifact Never Will"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "url": "https://bayfallmorrigan.com/deploying-mcmc-outside-bayesian-frameworks",
+            "name": "Deploying MCMC Outside of Bayesian Frameworks"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "url": "https://bayfallmorrigan.com/you-cant-backtest-your-way-to-a-reason",
+            "name": "You Can't Backtest Your Way to a Reason."
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "url": "https://bayfallmorrigan.com/you-didnt-overfit",
+            "name": "You Didn't Overfit. You Just Never Understood Why The Pattern Was There."
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://bayfallmorrigan.com/#organization",
+      "name": "Bayfall Morrigan",
+      "url": "https://bayfallmorrigan.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://bayfallmorrigan.com/logopng.png"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://bayfallmorrigan.com/#website",
+      "url": "https://bayfallmorrigan.com/",
+      "name": "Bayfall Morrigan",
+      "publisher": {
+        "@id": "https://bayfallmorrigan.com/#organization"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://bayfallmorrigan.com/writing#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Bayfall Morrigan",
+          "item": "https://bayfallmorrigan.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Writing",
+          "item": "https://bayfallmorrigan.com/writing"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:   #080808;
+  --white:   #f0ede8;
+  --off:     #ffffff;
+  --mid:     #7a7670;
+  --rule:    #ccc9c2;
+  --rule-dk: #1a1a1a;
+  --rule2:   #2a2824;
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --body:    'EB Garamond', Georgia, serif;
+  --header-h: 72px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #ffffff;
+  color: var(--black);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ─── HEADER (matches homepage site header) ─── */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 64px;
+  height: var(--header-h);
+}
+
+.logo-img {
+  height: 56px;
+  width: auto;
+  display: block;
+  filter: invert(1) brightness(0.7);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.header-right a {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.25s, border-color 0.25s;
+}
+
+.header-right a:hover,
+.header-right a[aria-current="page"] {
+  color: rgba(255,255,255,0.85);
+  border-color: rgba(255,255,255,0.35);
+}
+
+/* Six nav items: tighten spacing on tablet widths so the nav fits beside the logo. */
+@media (min-width: 601px) and (max-width: 960px) {
+  .header-right { gap: 24px; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* FOOTER */
+footer {
+  background: var(--black);
+  border-top: 1px solid var(--rule-dk);
+  padding: 28px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-name {
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.22);
+  text-decoration: none;
+}
+
+.footer-disclaimer {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.22);
+  max-width: 520px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.footer-copy {
+  font-family: var(--body);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.14);
+}
+
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  z-index: 200;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: rgba(255,255,255,0.6);
+  transition: transform 0.3s, opacity 0.3s;
+  transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 64px;
+  left: 0; right: 0;
+  background: var(--black);
+  border-bottom: 1px solid var(--rule-dk);
+  flex-direction: column;
+  padding: 24px 20px 32px;
+  gap: 0;
+  z-index: 99;
+  transform: translateY(-8px);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.mobile-menu.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu a {
+  font-family: var(--body);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule-dk);
+  transition: color 0.2s;
+}
+
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: var(--white); }
+
+/* ─── PAGE BAND (dark title band under the header) ─── */
+.page-band {
+  background: var(--black);
+  color: var(--white);
+  padding: calc(var(--header-h) + 96px) 64px 72px;
+}
+
+.page-band-inner { max-width: 1000px; margin: 0 auto; }
+
+.page-label {
+  display: inline-block;
+  font-family: var(--body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.2s forwards;
+}
+
+a.page-label:hover { color: rgba(255,255,255,0.75); }
+
+.page-title {
+  font-family: var(--display);
+  font-size: clamp(34px, 4.2vw, 60px);
+  font-weight: 300;
+  line-height: 1.14;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  max-width: 920px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.45s forwards;
+}
+
+.page-sub {
+  margin-top: 28px;
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.95;
+  color: rgba(255,255,255,0.55);
+  max-width: 580px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.7s forwards;
+}
+
+.page-meta {
+  margin-top: 32px;
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  opacity: 0;
+  animation: fadeUp 1s ease 0.7s forwards;
+}
+
+/* ─── WRITING INDEX ─── */
+.entries {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: calc(var(--header-h) + 96px) 64px 120px;
+  box-sizing: content-box;
+}
+
+/* Section label and heading, same pattern as the homepage sections. */
+.entries-head {
+  padding-bottom: 44px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.section-label {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(8,8,8,0.4);
+  margin-bottom: 24px;
+}
+
+.entries-heading {
+  font-family: var(--display);
+  font-size: clamp(32px, 3.5vw, 52px);
+  font-weight: 300;
+  line-height: 1.18;
+  letter-spacing: 0.01em;
+  color: var(--black);
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 56px;
+  align-items: center;
+  padding: 56px 0;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  color: var(--black);
+}
+
+.entry:last-child { border-bottom: none; }
+
+.entry-media {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: #e9e7e3;
+}
+
+.entry-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.entry:hover .entry-media img { transform: scale(1.025); }
+
+.entry-date {
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(8,8,8,0.45);
+  margin-bottom: 18px;
+}
+
+.entry-title {
+  font-family: var(--display);
+  font-size: clamp(26px, 2.6vw, 36px);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: 0.01em;
+  margin-bottom: 18px;
+}
+
+.entry-excerpt {
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.9;
+  opacity: 0.75;
+}
+
+/* ─── TABLET ─── */
+@media (max-width: 960px) {
+  header { padding: 0 32px; }
+  .page-band { padding: calc(var(--header-h) + 72px) 32px 56px; }
+  .essay-hero { padding: calc(var(--header-h) + 56px) 32px 64px; }
+  .entries { padding: 24px 32px 96px; }
+  .entry { grid-template-columns: 1fr; gap: 28px; padding: 48px 0; }
+  footer { padding: 24px 32px; flex-direction: column; gap: 12px; text-align: center; }
+}
+
+/* ─── MOBILE ─── */
+@media (max-width: 600px) {
+  :root { --header-h: 64px; }
+  html, body { overflow-x: hidden; max-width: 100%; }
+
+  header { padding: 0 20px; }
+  .logo-img { height: 40px; }
+  .hamburger { display: flex; }
+  .header-right { display: none; }
+  .mobile-menu { display: flex; }
+
+  .page-band { padding: calc(var(--header-h) + 56px) 20px 44px; }
+  .page-title { font-size: clamp(30px, 8vw, 40px); line-height: 1.18; }
+  .page-meta { margin-top: 24px; font-size: 10px; letter-spacing: 0.18em; }
+  .page-sub { margin-top: 22px; font-size: 15px; }
+
+  .essay-hero { padding: calc(var(--header-h) + 48px) 20px 52px; }
+  .essay-body { padding: 48px 20px 88px; }
+  .essay-body p, .essay-body li { font-size: 17.5px; line-height: 1.8; }
+  .essay-body h2 { margin-top: 48px; padding-top: 32px; }
+  .essay-end { padding: 32px 20px 88px; }
+
+  .entries { padding: 16px 20px 80px; }
+  .entry { padding: 40px 0; gap: 22px; }
+
+  footer { padding: 20px; gap: 12px; }
+  .footer-disclaimer { font-size: 10px; }
+}
+
+@media (max-width: 960px) {
+  .entries { padding-top: calc(var(--header-h) + 72px); }
+}
+
+@media (max-width: 600px) {
+  .entries { padding-top: calc(var(--header-h) + 48px); }
+  .entries-head { padding-bottom: 32px; }
+  .entries-heading { font-size: clamp(28px, 8vw, 40px); }
+}
+</style>
+<script>
+/* Clean URLs. The live site shows addresses without ".html" (GitHub Pages serves /team from team.html).
+   In a local preview opened from disk, clean links are pointed back at the .html files so navigation still works. */
+(function () {
+  var local = location.protocol === 'file:' || /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  if (!local) {
+    if (/\.html$/.test(location.pathname)) {
+      var clean = location.pathname.replace(/index\.html$/, '').replace(/\.html$/, '');
+      history.replaceState(null, '', clean + location.search + location.hash);
+    }
+    return;
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      var h = a.getAttribute('href');
+      if (/^(https?:|mailto:|tel:|#)/i.test(h)) return;
+      var m = h.match(/^\/?([a-z0-9-]*)(#.*)?$/i);
+      if (m) a.setAttribute('href', (m[1] || 'index') + '.html' + (m[2] || ''));
+    });
+  });
+})();
+</script>
+</head>
+<body>
+
+<header>
+  <a href="/" style="display:flex;align-items:center;">
+    <img class="logo-img" src="logopng.png" alt="Bayfall Morrigan">
+  </a>
+  <nav class="header-right">
+    <a href="/method">Method</a>
+    <a href="/model-integrity">Model Integrity</a>
+    <a href="/systems">Systems</a>
+    <a href="team">Team</a>
+    <a href="writing" aria-current="page">Writing</a>
+    <a href="/contact">Contact</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="/method" onclick="closeMenu()">Method</a>
+  <a href="/model-integrity" onclick="closeMenu()">Model Integrity</a>
+  <a href="/systems" onclick="closeMenu()">Systems</a>
+  <a href="team" onclick="closeMenu()">Team</a>
+  <a href="writing" onclick="closeMenu()">Writing</a>
+  <a href="/contact" onclick="closeMenu()">Contact</a>
+</nav>
+
+<main>
+<section class="entries">
+  <div class="entries-head">
+    <p class="section-label">Writing</p>
+    <h1 class="entries-heading">On Structural Reasoning</h1>
+  </div>
+  <a class="entry" href="what-a-mechanism-owes-you">
+    <div class="entry-media"><img src="article33.jpg" alt="What a Mechanism Owes You That an Artifact Never Will" loading="lazy"></div>
+    <div class="entry-text">
+      <p class="entry-date"><time datetime="2026-07-28">July 28, 2026</time></p>
+      <h2 class="entry-title">What a Mechanism Owes You That an Artifact Never Will</h2>
+      <p class="entry-excerpt">Every instrument you trust to validate an edge reads the same thing: the returns. Deflated Sharpe, PBO, CPCV, walk-forward. Different tools, one input.</p>
+    </div>
+  </a>
+  <a class="entry" href="deploying-mcmc-outside-bayesian-frameworks">
+    <div class="entry-media"><img src="article2.jpg" alt="Deploying MCMC Outside of Bayesian Frameworks" loading="lazy"></div>
+    <div class="entry-text">
+      <p class="entry-date"><time datetime="2026-06-23">June 23, 2026</time></p>
+      <h2 class="entry-title">Deploying MCMC Outside of Bayesian Frameworks</h2>
+      <p class="entry-excerpt">The protection against overfitting is procedural. The sampler is allowed to propose relationships, but it is not allowed to justify them.</p>
+    </div>
+  </a>
+  <a class="entry" href="you-cant-backtest-your-way-to-a-reason">
+    <div class="entry-media"><img src="youcant.jpg" alt="You Can&#x27;t Backtest Your Way to a Reason." loading="lazy"></div>
+    <div class="entry-text">
+      <p class="entry-date"><time datetime="2026-05-28">May 28, 2026</time></p>
+      <h2 class="entry-title">You Can&#x27;t Backtest Your Way to a Reason.</h2>
+      <p class="entry-excerpt">Most models are discovered inside datasets. The structural ones are derived before the dataset is ever opened.</p>
+    </div>
+  </a>
+  <a class="entry" href="you-didnt-overfit">
+    <div class="entry-media"><img src="article3.png" alt="You Didn&#x27;t Overfit. You Just Never Understood Why The Pattern Was There." loading="lazy"></div>
+    <div class="entry-text">
+      <p class="entry-date"><time datetime="2026-04-26">April 26, 2026</time></p>
+      <h2 class="entry-title">You Didn&#x27;t Overfit. You Just Never Understood Why The Pattern Was There.</h2>
+      <p class="entry-excerpt">Most quantitative researchers are using machine learning the same way an eight year old uses laser eyes. Impressive until nobody tells him when to stop.</p>
+    </div>
+  </a>
+</section>
+</main>
+
+<footer>
+  <a href="/" class="footer-name">Bayfall Morrigan</a>
+  <p class="footer-disclaimer">This website is for informational purposes only. It does not constitute an offer, solicitation, or recommendation of any security or investment, and nothing on it should be construed as such.</p>
+  <p class="footer-copy">&copy; 2026 Bayfall Morrigan</p>
+</footer>
+
+<script>
+function toggleMenu() {
+  const btn = document.getElementById('hamburger');
+  const menu = document.getElementById('mobile-menu');
+  btn.classList.toggle('open');
+  menu.classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+</script>
+
+</body>
+</html>

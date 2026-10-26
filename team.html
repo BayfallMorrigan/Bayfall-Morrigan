@@ -223,6 +223,11 @@ header {
   border-color: rgba(255,255,255,0.35);
 }
 
+/* Six nav items: tighten spacing on tablet widths so the nav fits beside the logo. */
+@media (min-width: 601px) and (max-width: 960px) {
+  .header-right { gap: 24px; }
+}
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -668,11 +673,12 @@ footer {
     <img class="logo-img" src="logopng.png" alt="Bayfall Morrigan">
   </a>
   <nav class="header-right">
-    <a href="/#method">Method</a>
-    <a href="/#anchor">Model Integrity</a>
-    <a href="/#systems">Systems</a>
-    <a href="/#contact">Contact</a>
+    <a href="/method">Method</a>
+    <a href="/model-integrity">Model Integrity</a>
+    <a href="/systems">Systems</a>
     <a href="team" aria-current="page">Team</a>
+    <a href="writing">Writing</a>
+    <a href="/contact">Contact</a>
   </nav>
   <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
     <span></span><span></span><span></span>
@@ -680,11 +686,12 @@ footer {
 </header>
 
 <nav class="mobile-menu" id="mobile-menu">
-  <a href="/#method" onclick="closeMenu()">Method</a>
-  <a href="/#anchor" onclick="closeMenu()">Model Integrity</a>
-  <a href="/#systems" onclick="closeMenu()">Systems</a>
-  <a href="/#contact" onclick="closeMenu()">Contact</a>
+  <a href="/method" onclick="closeMenu()">Method</a>
+  <a href="/model-integrity" onclick="closeMenu()">Model Integrity</a>
+  <a href="/systems" onclick="closeMenu()">Systems</a>
   <a href="team" onclick="closeMenu()">Team</a>
+  <a href="writing" onclick="closeMenu()">Writing</a>
+  <a href="/contact" onclick="closeMenu()">Contact</a>
 </nav>
 
 <!-- TEAM HERO -->
