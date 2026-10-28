@@ -253,19 +253,20 @@ header {
   background-image: url('zippo.png');
   background-size: cover;
   background-position: center 55%;
-  filter: grayscale(1);
   z-index: 0;
+  opacity: 0.5;
 }
 
+/* Same treatment as the landing photo (Curves66): 50% opacity over black, light radial overlay. */
 .team-hero-bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(8,8,8,0.96) 0%,
-    rgba(8,8,8,0.72) 42%,
-    rgba(8,8,8,0.38) 100%
+  background: radial-gradient(
+    ellipse at center,
+    rgba(8,8,8,0.055) 0%,
+    rgba(8,8,8,0.088) 65%,
+    rgba(8,8,8,0.099) 100%
   );
 }
 
@@ -701,7 +702,7 @@ footer {
     <div>
       <h1 class="team-label">Team</h1>
       <p class="team-hero-headline">Bayfall Morrigan combines in-house quantitative research with an established structure of advisory relationships built over decades.</p>
-      <p class="team-hero-sub">Our senior advisor’s long career produced deep experience across law and finance, and that experience shapes how we approach relationships and agreements. Aaron Greyling manages the firm’s external relationships.</p>
+      <p class="team-hero-sub">Our senior advisor has spent five decades in corporate finance, real assets, and commodities, often alongside prominent principals. That experience shapes how we approach relationships and agreements. Aaron Greyling manages the firm’s external relationships.</p>
     </div>
   </div>
 </section>
